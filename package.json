@@ -1,0 +1,19 @@
+{
+    "name": "ces-project",
+    "private": true,
+    "packageManager": "pnpm@9.15.4",
+    "scripts": {
+      "dev": "next dev --turbopack -p 8080",
+      "build": "turbo build",
+      "lint": "turbo lint",
+      "type-check": "turbo type-check",
+      "clean": "turbo clean",
+      "deploy": "sst deploy --stage production",
+      "deploy:dev": "sst deploy --stage dev"
+    },
+    "devDependencies": {
+      "turbo": "^2.4.4",
+      "sst": "^3.6.2",
+      "typescript": "^5.7.3"
+    }
+  }

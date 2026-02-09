@@ -25,38 +25,18 @@
     }
   },
   "forwardPorts": [
-    // 3000,
-    // 5173,
-    // 5432,
-    // 54321,
-    // 54323
+    8080
   ],
   "portsAttributes": {
-    // "3000": {
-    //   "label": "API",
-    //   "onAutoForward": "notify"
-    // },
-    // "5173": {
-    //   "label": "Vite Dev",
-    //   "onAutoForward": "notify"
-    // }
-    // "5432": {
-    //   "label": "PostgreSQL",
-    //   "onAutoForward": "silent"
-    // },
-    // "54321": {
-    //   "label": "Supabase API",
-    //   "onAutoForward": "notify"
-    // },
-    // "54323": {
-    //   "label": "Supabase Studio",
-    //   "onAutoForward": "notify"
-    // }
+    "6000": {
+      "label": "Next.js Dev",
+      "onAutoForward": "notify"
+    }
   },
   "mounts": [
     "source=/mnt/c/git/agentic-central,target=/agentic-central,type=bind,consistency=cached"
   ],
-  "postCreateCommand": "npm install --loglevel verbose",
+  "postCreateCommand": "pnpm install",
   "postStartCommand": "sudo ln -sfn /agentic-central ${containerWorkspaceFolder}/.claude",
   "remoteUser": "vscode",
   "updateRemoteUserUID": true

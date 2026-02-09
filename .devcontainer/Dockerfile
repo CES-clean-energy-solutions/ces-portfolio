@@ -31,6 +31,8 @@ RUN npm install -g \
     prettier \
     eslint
 
+RUN npm install -g pnpm@9.15.4
+
 # Remove the default node user and create vscode user with same UID (1000)
 RUN userdel -r node && \
     useradd -ms /bin/bash -u 1000 vscode
