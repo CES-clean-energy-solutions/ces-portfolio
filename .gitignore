@@ -19,5 +19,8 @@ dist/
 .env.local
 .env.*.local
 
+# SST
+.sst/
+
 # Legacy
 package-lock.json
