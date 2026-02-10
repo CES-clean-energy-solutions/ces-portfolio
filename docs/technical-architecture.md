@@ -36,20 +36,20 @@ The `app/` directory maps folders to URL segments. Special filenames define beha
 
 ```
 app/
-layout.tsx          â†’ Root layout (wraps ALL pages, includes <html>, <body>)
-page.tsx            â†’ Homepage (/)
-about/page.tsx      â†’ /about
-projects/
-”€â”€ page.tsx        â†’ /projects (listing)
-”€â”€ [slug]/page.tsx â†’ /projects/:slug (dynamic)
-(marketing)/        â†’ Route Group (no URL segment, just organization)
-”€â”€ layout.tsx      â†’ Shared layout for marketing pages
-”€â”€ services/page.tsx â†’ /services
-loading.tsx         â†’ Suspense loading fallback
-error.tsx           â†’ Error boundary (must be "use client")
-not-found.tsx       â†’ Custom 404
-sitemap.ts          â†’ Auto-generated /sitemap.xml
-robots.ts           â†’ Auto-generated /robots.txt
+├── layout.tsx            → Root layout (wraps ALL pages, includes <html>, <body>)
+├── page.tsx              → Homepage (/)
+├── about/page.tsx        → /about
+├── projects/
+│   ├── page.tsx          → /projects (listing)
+│   └── [slug]/page.tsx   → /projects/:slug (dynamic)
+├── (marketing)/          → Route Group (no URL segment, just organization)
+│   ├── layout.tsx        → Shared layout for marketing pages
+│   └── services/page.tsx → /services
+├── loading.tsx           → Suspense loading fallback
+├── error.tsx             → Error boundary (must be "use client")
+├── not-found.tsx         → Custom 404
+├── sitemap.ts            → Auto-generated /sitemap.xml
+└── robots.ts             → Auto-generated /robots.txt
 ```
 
 **Layouts** (`layout.tsx`) persist across navigations -- the header and footer render once and never re-mount as users navigate. **Loading states** (`loading.tsx`) use React Suspense to show instant fallback UI while pages stream in. **Error boundaries** (`error.tsx`) catch runtime errors and offer a `reset()` function. Route Groups `(parentheses)` organize code without affecting URLs.
