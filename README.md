@@ -66,28 +66,11 @@ sst.config.ts  →  SST components  →  Pulumi engine  →  Terraform AWS provi
 
 ### State Management
 
-Pulumi Cloud (free tier) stores infrastructure state remotely — a JSON file tracking every AWS resource and its config. This is analogous to Terraform's `.tfstate`. It enables SST to compute diffs on subsequent deploys (only change what changed).
+SST stores infrastructure state in **AWS S3** (`home: "aws"` in `sst.config.ts`). This is a JSON file tracking every AWS resource and its config — analogous to Terraform's `.tfstate`. SST uses it to compute diffs on subsequent deploys (only change what changed). The S3 bucket is auto-created by SST's bootstrap process.
 
-### Switching the State Backend
+> **Note:** SST v3 only supports `"aws"` or `"cloudflare"` as state backends. It does **not** support Pulumi Cloud, despite using Pulumi's engine internally.
 
-The state backend is configured via `home` in `sst.config.ts`. Two options:
-
-| Backend | Config | Where state lives | Dashboard |
-|---------|--------|--------------------|-----------|
-| **Pulumi Cloud** (default) | `home: "pulumi"` | Pulumi's hosted service | [app.pulumi.com](https://app.pulumi.com) |
-| **AWS S3** | `home: "aws"` | S3 bucket + SSM in your AWS account | None (CLI only) |
-
-To switch, edit `sst.config.ts`:
-
-```ts
-// Pulumi Cloud (resource graphs, deploy history, diffs):
-home: "pulumi",
-
-// AWS S3 (no external dependency, state in your account):
-home: "aws",
-```
-
-> **Important:** Changing backends requires tearing down the existing stack first (`sst remove --stage <stage>`), then redeploying. State cannot be migrated between backends. If using Pulumi Cloud, set `PULUMI_ACCESS_TOKEN`. If using AWS, only AWS credentials are needed.
+To view your deployed resources, use the **SST Console** at [console.sst.dev](https://console.sst.dev). It reads from the S3 state and shows all resources, functions, and logs.
 
 ### Lambda Function URL Fix
 
@@ -100,7 +83,7 @@ Newer AWS accounts (created after mid-2024) block public Lambda Function URL acc
    cp .env.example .env
    ```
 2. **AWS credentials** — create an IAM user with `AdministratorAccess` at [console.aws.amazon.com/iam](https://console.aws.amazon.com/iam/). Add the access key and secret to `.env`.
-3. **Pulumi token** — create a free account at [app.pulumi.com](https://app.pulumi.com), generate an access token at [app.pulumi.com/account/tokens](https://app.pulumi.com/account/tokens), add to `.env`.
+3. ~~Pulumi token~~ — **not needed**. SST v3 stores state in S3, not Pulumi Cloud.
 
 The `.env` file is gitignored. Deploy scripts source it automatically.
 

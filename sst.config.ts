@@ -5,7 +5,7 @@ export default $config({
     return {
       name: "ces-web",
       removal: input?.stage === "production" ? "retain" : "remove",
-      home: "pulumi",
+      home: "aws",
       providers: {
         aws: {
           region: "eu-central-1",

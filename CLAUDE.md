@@ -47,9 +47,17 @@ pnpm --filter @ces/web build
 pnpm --filter @ces/web lint
 pnpm --filter @repo/ui build
 
-# Deployment (SST v3)
+# Deployment (SST v3) — requires .env with AWS credentials
 pnpm deploy:dev             # sst deploy --stage dev
 pnpm deploy                 # sst deploy --stage production
+pnpm diff:dev               # preview changes before deploying (like terraform plan)
+pnpm diff                   # preview production changes
+pnpm remove:dev             # tear down dev stage
+pnpm remove                 # tear down production stage
+pnpm refresh:dev            # sync local state with actual AWS resources
+pnpm sst:state              # export full state as JSON (see all resources)
+pnpm sst:secret             # list secrets for dev stage
+pnpm sst:unlock             # release stuck deployment lock
 
 # Clean
 pnpm clean                  # removes .next, dist, .turbo artifacts
@@ -112,12 +120,20 @@ SEO: Metadata API with title templates (`%s | CES`), `app/sitemap.ts` for auto-g
 
 ## Deployment Architecture (SST v3 → AWS)
 
-SST uses Pulumi engine + Terraform AWS providers under the hood. `sst.aws.Nextjs` component creates ~70 resources (CloudFront, S3, Lambda, DynamoDB, SQS, IAM, ACM). Config lives in `sst.config.ts` (not yet created).
+SST v3 uses Pulumi's engine + Terraform AWS providers under the hood. It does **NOT** use CloudFormation or Pulumi Cloud. State is stored in S3 (`home: "aws"` — the only valid option for AWS; `"pulumi"` is NOT supported). Resources are created directly via AWS APIs.
+
+`sst.aws.Nextjs` component creates ~70 resources (CloudFront, S3, Lambda, DynamoDB, SQS, IAM, ACM). Config lives in `sst.config.ts`.
 
 ```
 User → CloudFront (CDN) → S3 (static assets) or Lambda (SSR/API/image optimization)
 ISR cache → S3 + DynamoDB (tag-based revalidation) + SQS FIFO (stale-while-revalidate)
 ```
+
+**SST CLI** is installed as a devDependency — use `pnpm sst <command>` (no global install needed). Key commands: `deploy`, `remove`, `diff`, `refresh`, `state export`, `secret`, `unlock`.
+
+**Known issue:** Newer AWS accounts (post mid-2024) block public Lambda Function URL access by default. The `$transform` block in `sst.config.ts` adds the missing `lambda:InvokeFunction` permission. See SST #6397.
+
+**Domain:** `ic-ces.engineering` is registered in Route 53 but has `clientHold` status (needs email verification). Domain config is commented out in `sst.config.ts` — uncomment once the hold is lifted.
 
 Marimo notebooks: separate containerized Python service, proxied via Next.js `rewrites` under `/demos/*` or embedded via iframe.
 

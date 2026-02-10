@@ -11,7 +11,15 @@
       "deploy": "bash -c 'source .env && sst deploy --stage production'",
       "deploy:dev": "bash -c 'source .env && sst deploy --stage dev'",
       "remove": "bash -c 'source .env && sst remove --stage production'",
-      "remove:dev": "bash -c 'source .env && sst remove --stage dev'"
+      "remove:dev": "bash -c 'source .env && sst remove --stage dev'",
+      "diff": "bash -c 'source .env && sst diff --stage production'",
+      "diff:dev": "bash -c 'source .env && sst diff --stage dev'",
+      "refresh": "bash -c 'source .env && sst refresh --stage production'",
+      "refresh:dev": "bash -c 'source .env && sst refresh --stage dev'",
+      "sst:state": "bash -c 'source .env && sst state export --stage dev | npx tsx scripts/sst-state.ts'",
+      "sst:state:full": "bash -c 'source .env && sst state export --stage dev'",
+      "sst:secret": "bash -c 'source .env && sst secret list --stage dev'",
+      "sst:unlock": "bash -c 'source .env && sst unlock --stage dev'"
     },
     "devDependencies": {
       "turbo": "^2.4.4",
