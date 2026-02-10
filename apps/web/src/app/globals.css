@@ -3,25 +3,19 @@
 :root {
   --brand-gold: oklch(0.75 0.12 85);
   --brand-black: oklch(0 0 0);
+  --header-h: 64px;
 
-  /* shadcn/ui semantic tokens */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.1 0 0);
+  /* shadcn/ui semantic tokens — dark theme as default */
+  --background: oklch(0 0 0);
+  --foreground: oklch(1 0 0);
   --primary: oklch(0.75 0.12 85);
   --primary-foreground: oklch(0 0 0);
-  --secondary: oklch(0.96 0.01 85);
+  --secondary: oklch(0.15 0 0);
   --accent: oklch(0.75 0.12 85);
-  --muted: oklch(0.96 0.01 85);
-  --border: oklch(0.88 0.04 85);
+  --muted: oklch(0.6 0 0);
+  --border: oklch(0.25 0 0);
   --ring: oklch(0.75 0.12 85);
   --radius: 0.5rem;
-}
-
-.dark {
-  --background: oklch(0.12 0 0);
-  --foreground: oklch(0.95 0 0);
-  --primary: oklch(0.75 0.12 85);
-  --primary-foreground: oklch(0 0 0);
 }
 
 @theme inline {
@@ -31,4 +25,14 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
 }
