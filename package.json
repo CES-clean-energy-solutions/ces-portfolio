@@ -8,8 +8,8 @@
       "lint": "turbo lint",
       "type-check": "turbo type-check",
       "clean": "turbo clean",
-      "deploy": "source .env && sst deploy --stage production",
-      "deploy:dev": "source .env && sst deploy --stage dev"
+      "deploy": "bash -c 'source .env && sst deploy --stage production'",
+      "deploy:dev": "bash -c 'source .env && sst deploy --stage dev'"
     },
     "devDependencies": {
       "turbo": "^2.4.4",
