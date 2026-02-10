@@ -9,7 +9,9 @@
       "type-check": "turbo type-check",
       "clean": "turbo clean",
       "deploy": "bash -c 'source .env && sst deploy --stage production'",
-      "deploy:dev": "bash -c 'source .env && sst deploy --stage dev'"
+      "deploy:dev": "bash -c 'source .env && sst deploy --stage dev'",
+      "remove": "bash -c 'source .env && sst remove --stage production'",
+      "remove:dev": "bash -c 'source .env && sst remove --stage dev'"
     },
     "devDependencies": {
       "turbo": "^2.4.4",

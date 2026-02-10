@@ -68,6 +68,31 @@ sst.config.ts  →  SST components  →  Pulumi engine  →  Terraform AWS provi
 
 Pulumi Cloud (free tier) stores infrastructure state remotely — a JSON file tracking every AWS resource and its config. This is analogous to Terraform's `.tfstate`. It enables SST to compute diffs on subsequent deploys (only change what changed).
 
+### Switching the State Backend
+
+The state backend is configured via `home` in `sst.config.ts`. Two options:
+
+| Backend | Config | Where state lives | Dashboard |
+|---------|--------|--------------------|-----------|
+| **Pulumi Cloud** (default) | `home: "pulumi"` | Pulumi's hosted service | [app.pulumi.com](https://app.pulumi.com) |
+| **AWS S3** | `home: "aws"` | S3 bucket + SSM in your AWS account | None (CLI only) |
+
+To switch, edit `sst.config.ts`:
+
+```ts
+// Pulumi Cloud (resource graphs, deploy history, diffs):
+home: "pulumi",
+
+// AWS S3 (no external dependency, state in your account):
+home: "aws",
+```
+
+> **Important:** Changing backends requires tearing down the existing stack first (`sst remove --stage <stage>`), then redeploying. State cannot be migrated between backends. If using Pulumi Cloud, set `PULUMI_ACCESS_TOKEN`. If using AWS, only AWS credentials are needed.
+
+### Lambda Function URL Fix
+
+Newer AWS accounts (created after mid-2024) block public Lambda Function URL access by default. The `$transform` block in `sst.config.ts` adds the missing `lambda:InvokeFunction` permission to work around this. See [SST #6397](https://github.com/anomalyco/sst/issues/6397). This is safe to remove if AWS fixes the default or SST patches their component.
+
 ### Setup (One-Time)
 
 1. Copy the example env file and fill in your credentials:
