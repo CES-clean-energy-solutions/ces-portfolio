@@ -1,24 +1,20 @@
 # Video Encoding Guide
 
-This document provides ffmpeg commands for encoding hero background videos for the CES portfolio site.
 
-## Quick Start (Recommended)
+```
+# MP4
+ffmpeg -i veo3_pv_plant.mp4 -an -c:v libx264 -crf 28 -preset slow \
+  -vf "scale=1280:720" -movflags +faststart hero-bg.mp4
 
-Use the provided shell script to generate all three files at once:
+# WebM
+ffmpeg -i veo3_pv_plant.mp4 -an -c:v libvpx-vp9 -crf 35 -b:v 0 \
+  -vf "scale=1280:720" hero-bg.webm
 
-```bash
-# From project root
-./scripts/encode-hero-video.sh input.mp4 output-name
-
-# Example
-./scripts/encode-hero-video.sh veo3_pv_plant.mp4 hero-bg
-# -> Generates: hero-bg.mp4, hero-bg.webm, hero-bg-poster.jpg
-
-# Move to public directory
-mv hero-bg.* apps/web/public/video/
+# Poster
+ffmpeg -i hero-bg.mp4 -ss 00:00:02 -frames:v 1 -q:v 2 hero-poster.jpg
 ```
 
-The script is located at `scripts/encode-hero-video.sh` and handles all encoding steps automatically.
+This document provides ffmpeg commands for encoding hero background videos for the CES portfolio site.
 
 ## Target Specifications
 
@@ -109,22 +105,28 @@ If file sizes are too large or quality is poor, adjust CRF values:
 
 ## Batch Processing Multiple Videos
 
-The `scripts/encode-hero-video.sh` script handles batch processing. Process multiple videos in sequence:
-
 ```bash
-# Process multiple source files
-./scripts/encode-hero-video.sh video1.mp4 hero-bg-1
-./scripts/encode-hero-video.sh video2.mp4 hero-bg-2
-./scripts/encode-hero-video.sh video3.mp4 services-bg
+#!/bin/bash
+# encode-hero-video.sh
+INPUT=$1
+BASENAME=$(basename "$INPUT" .mp4)
 
-# Or loop through a directory
-for video in source-videos/*.mp4; do
-  basename=$(basename "$video" .mp4)
-  ./scripts/encode-hero-video.sh "$video" "$basename"
-done
+ffmpeg -i "$INPUT" -an -c:v libx264 -crf 28 -preset slow \
+  -vf "scale=1280:720" -movflags +faststart "${BASENAME}.mp4"
+
+ffmpeg -i "$INPUT" -an -c:v libvpx-vp9 -crf 35 -b:v 0 \
+  -vf "scale=1280:720" "${BASENAME}.webm"
+
+ffmpeg -i "${BASENAME}.mp4" -ss 00:00:02 -frames:v 1 -q:v 2 "${BASENAME}-poster.jpg"
+
+echo "✓ Generated: ${BASENAME}.mp4, ${BASENAME}.webm, ${BASENAME}-poster.jpg"
 ```
 
-The script source is available at `scripts/encode-hero-video.sh` and can be modified to adjust encoding parameters.
+Usage:
+```bash
+chmod +x encode-hero-video.sh
+./encode-hero-video.sh veo3_pv_plant.mp4
+```
 
 ## HeroVideo Component Usage
 

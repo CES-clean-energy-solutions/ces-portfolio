@@ -19,10 +19,6 @@ const ParticlesBackground = dynamic(
   { ssr: false }
 );
 
-const CursorRipple = dynamic(() => import("@/components/CursorRipple"), {
-  ssr: false,
-});
-
 const HEADLINE = "Connect with the future of sustainable engineering";
 
 export default function Hero() {
@@ -35,8 +31,6 @@ export default function Hero() {
         "(prefers-reduced-motion: reduce)"
       ).matches;
       if (prefersReducedMotion) return;
-
-      const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
 
       ScrollTrigger.matchMedia({
         // Desktop: full character-level SplitText reveal with staggered logo parts
@@ -160,22 +154,53 @@ export default function Hero() {
               { opacity: 0, duration: 0.3, ease: "power2.out" },
               "-=0.1"
             );
+
+          // Chevron pulse for tablet - shorter distance
+          const tabletPulse = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 1.5,
+            delay: tl.duration() + 0.5,
+          });
+          tabletPulse
+            .set(".hero-logo-chevron-pulse", { x: 0, opacity: 0.5 })
+            .to(".hero-logo-chevron-pulse", {
+              x: 300,
+              opacity: 0,
+              duration: 4.9,
+              ease: "power1.out",
+            });
         },
 
         // Mobile: simple fade for entire block (logo parts fade together)
         "(max-width: 767px)": function () {
-          gsap.from(".hero-content", {
+          const tl = gsap.timeline();
+
+          tl.from(".hero-content", {
             opacity: 0,
             duration: 0.6,
             ease: "power2.out",
           });
+
+          // Chevron pulse for mobile - shortest distance
+          const mobilePulse = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 1.5,
+            delay: tl.duration() + 0.5,
+          });
+          mobilePulse
+            .set(".hero-logo-chevron-pulse", { x: 0, opacity: 0.5 })
+            .to(".hero-logo-chevron-pulse", {
+              x: 150,
+              opacity: 0,
+              duration: 4.9,
+              ease: "power1.out",
+            });
         },
       });
 
       // Fade in particles after hero text animation finishes (~1.5s)
-      if (isDesktop) {
-        gsap.delayedCall(1.5, () => setShowParticles(true));
-      }
+      // Particles now work on all viewports with adaptive configs
+      gsap.delayedCall(1.5, () => setShowParticles(true));
     },
     { scope: container }
   );
@@ -202,13 +227,6 @@ export default function Hero() {
       {showParticles && (
         <div className="absolute inset-0 animate-[fadeIn_1s_ease-out_forwards]" style={{ zIndex: 20 }}>
           <ParticlesBackground />
-        </div>
-      )}
-
-      {/* Cursor water ripple (z-30) — above particles, below content */}
-      {showParticles && (
-        <div className="absolute inset-0 animate-[fadeIn_1s_ease-out_forwards]" style={{ zIndex: 30 }}>
-          <CursorRipple containerRef={container} />
         </div>
       )}
 
