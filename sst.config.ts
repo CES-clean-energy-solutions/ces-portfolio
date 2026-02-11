@@ -30,7 +30,7 @@ export default $config({
       path: "apps/web",
       domain: {
         name: "portfolio.ic-ces.engineering",
-        dns: sst.aws.dns({ zone: "ic-ces.engineering" }),
+        dns: sst.aws.dns({ zone: "Z07972313GVRF4SEMXLOL" }),
       },
     });
 

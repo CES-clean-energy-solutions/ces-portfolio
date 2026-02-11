@@ -11,7 +11,7 @@ CES Clean Energy Solutions — a scroll-driven marketing site for a Vienna-based
 - **Framework:** Next.js 16.1.6 (App Router, React 19, Turbopack as default bundler)
 - **Styling:** Tailwind CSS v4 (CSS-first config with `@theme` directive — no `tailwind.config.js`)
 - **Components:** shadcn/ui (Radix UI primitives, copy-paste pattern, `npx shadcn@latest add <component>`)
-- **Animation:** GSAP 3.12.7 + @gsap/react (scroll-driven timelines), Motion 12.4.7 (declarative React animations), Lenis 1.1.20 (smooth scroll, desktop-only)
+- **Animation:** GSAP 3.12.7 + @gsap/react (scroll-driven timelines), Motion 12.4.7 (declarative React animations), Lenis 1.1.20 (smooth scroll, desktop-only), tsparticles (ambient particle background, desktop-only, lazy-loaded)
 - **Analytics:** Plausible via next-plausible (GDPR-compliant, cookie-free, no consent banner needed)
 - **Monorepo:** Turborepo + pnpm workspaces
 - **Deployment:** SST v3 → AWS eu-central-1 (OpenNext adapter, ~70 AWS resources per site)
@@ -83,14 +83,21 @@ npx shadcn@latest add button card dialog navigation-menu sheet
 
 **Logo assets** in `packages/ui/src/assets/`:
 - `ces-logo-full.svg` — complete logo (text + gold chevron + subtitle)
-- `ces-text.svg` — "ces" letterforms only
-- `ces-subtitle.svg` — "CLEAN ENERGY SOLUTIONS" subtitle
-- `ces-chevron.svg` — gold chevron/arrow mark only
+- `ces-logo-full-white.svg` — complete logo, white text variant for dark backgrounds
+- `ces-text.svg` — "ces" letterforms only (dark teal `#1a2b25`)
+- `ces-text-white.svg` — "ces" letterforms, white (`#ffffff`), full viewBox for layered stacking
+- `ces-subtitle.svg` — "CLEAN ENERGY SOLUTIONS" subtitle (dark teal)
+- `ces-subtitle-white.svg` — subtitle, white, full viewBox for layered stacking
+- `ces-chevron.svg` — gold chevron/arrow mark only (full viewBox `0 0 275.52 219.84`)
 - `ces-logo-white-bg.jpg`, `ces-logo-grey-bg.jpg` — raster references
+
+The Hero section uses the three white/gold part SVGs layered absolutely in a container with matching `aspectRatio`. All three share viewBox `0 0 275.52 219.84` so they self-align when stacked. Import via `@repo/ui/assets/<filename>`.
 
 **Path alias:** `@/*` maps to `apps/web/src/*` (configured in tsconfig).
 
-**Fonts:** Self-hosted via `next/font` (zero external requests, GDPR-friendly). No Google Fonts CDN.
+**Fonts:** Self-hosted via `next/font` (zero external requests, GDPR-friendly). Config in `apps/web/src/app/fonts.ts`. No Google Fonts CDN.
+
+**Next.js output:** `output: "standalone"` in `apps/web/next.config.ts` — required for SST/Lambda deployment.
 
 ## Animation Architecture
 
@@ -146,7 +153,7 @@ ISR cache → S3 + DynamoDB (tag-based revalidation) + SQS FIFO (stale-while-rev
 
 **Known issue:** Newer AWS accounts (post mid-2024) block public Lambda Function URL access by default. The `$transform` block in `sst.config.ts` adds the missing `lambda:InvokeFunction` permission. See SST #6397.
 
-**Domain:** `ic-ces.engineering` is registered in Route 53 but has `clientHold` status (needs email verification). Domain config is commented out in `sst.config.ts` — uncomment once the hold is lifted.
+**Domain:** `portfolio.ic-ces.engineering` is live. The hosted zone ID (`Z07972313GVRF4SEMXLOL`) is hardcoded in `sst.config.ts` to bypass `ListHostedZonesByName` lookups. The deploy IAM user has programmatic-only access (keys in `.env`, no console).
 
 Marimo notebooks: separate containerized Python service, proxied via Next.js `rewrites` under `/demos/*` or embedded via iframe.
 
@@ -158,10 +165,32 @@ Large features follow a structured workflow using custom commands in `.claude/co
 2. `/generate-tasks` — converts a PRD into a numbered task list at `/tasks/tasks-prd-[name].md`
 3. `/process-task-list` — works through tasks one sub-task at a time, pausing for user approval between each
 
+## Component Organization
+
+```
+apps/web/src/components/              → standalone utilities
+  Header.tsx                          → site header/nav
+  SmoothScroll.tsx                    → Lenis wrapper (desktop-only)
+  ParticlesBackground.tsx             → tsparticles ambient effect (desktop-only)
+  CursorRipple.tsx                    → pointer-follow ripple (desktop-only)
+apps/web/src/components/sections/     → page sections (rendered in order on /)
+  Hero.tsx                            → hero with layered logo animation + particle bg
+  Services.tsx, Gallery.tsx, Stats.tsx, ContactCta.tsx
+```
+
+Desktop-only interactive components (`ParticlesBackground`, `CursorRipple`) are loaded via `next/dynamic` with `ssr: false` and fade in after the hero entrance animation completes.
+
+## Devcontainer
+
+`.devcontainer/` provides a ready-to-go dev environment: Node 22, pnpm 9.15.4, AWS CLI v2, `dig`/`nslookup`, ESLint, Prettier, Tailwind CSS IntelliSense, Claude Code extension. `postCreateCommand` runs `pnpm install`.
+
 ## Key Files
 
 - `docs/technical-architecture.md` — comprehensive 871-line tech brief covering all stack decisions, rendering strategies, animation patterns, deployment, and content management. **Read this first** when implementing new features.
 - `docs/BRAND.md` — brand colors (logo vs web palette), typography, logo anatomy and file inventory
 - `apps/web/src/app/globals.css` — design token source of truth (CSS custom properties + `@theme inline`)
 - `apps/web/src/app/layout.tsx` — root layout
+- `apps/web/next.config.ts` — Next.js config (`output: "standalone"` for Lambda)
+- `sst.config.ts` — infrastructure definition (domain, CDN, Lambda permissions)
 - `packages/ui/src/index.ts` — shared UI barrel export (currently empty, ready for components)
+- `packages/ui/src/assets/` — all logo SVGs (imported via `@repo/ui/assets/*`)

@@ -83,7 +83,7 @@ Newer AWS accounts (created after mid-2024) block public Lambda Function URL acc
    cp .env.example .env
    ```
 2. **AWS credentials** — create an IAM user with `AdministratorAccess` at [console.aws.amazon.com/iam](https://console.aws.amazon.com/iam/). Add the access key and secret to `.env`.
-3. ~~Pulumi token~~ — **not needed**. SST v3 stores state in S3, not Pulumi Cloud.
+3. SST v3 stores state in S3, not Pulumi Cloud — no Pulumi token needed.
 
 The `.env` file is gitignored. Deploy scripts source it automatically.
 
