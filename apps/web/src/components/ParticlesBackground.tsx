@@ -56,11 +56,11 @@ export default function ParticlesBackground() {
         move: {
           enable: true,
           direction: "none",
-          speed: { min: 0.2, max: 0.6 },
-          outModes: { default: "bounce" },
+          speed: { min: 0.3, max: 0.8 },
+          outModes: { default: "out" },
           spin: {
             enable: true,
-            acceleration: 1,
+            acceleration: 0,
           },
         },
         links: {
