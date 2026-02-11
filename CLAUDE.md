@@ -73,7 +73,20 @@ npx shadcn@latest add button card dialog navigation-menu sheet
 
 **Server Components are the default.** Only use `"use client"` for: menus (state toggle), forms (onChange), lightboxes (click), scroll animations (useGSAP/useEffect), carousels. Keep client components small and leaf-level.
 
-**Tailwind v4 tokens** are defined in `apps/web/src/app/globals.css` using CSS custom properties + `@theme inline` block. No separate tailwind config file exists. Brand colors: Gold `oklch(0.75 0.12 85)` / `#D4A843`, Black `#000000`. Colors use OKLCH color space.
+**Tailwind v4 tokens** are defined in `apps/web/src/app/globals.css` using CSS custom properties + `@theme inline` block. No separate tailwind config file exists. Colors use OKLCH color space.
+
+**Brand colors:**
+- Web Gold: `oklch(0.75 0.12 85)` / `#D4A843` (muted, for CTAs/accents on screen)
+- Logo Gold: `#f8c802` (bright saturated, for chevron mark in logo SVGs)
+- Logo Dark Teal: `#1a2b25` (letterforms and subtitle text in logo SVGs)
+- Black: `#000000` (backgrounds, body text)
+
+**Logo assets** in `packages/ui/src/assets/`:
+- `ces-logo-full.svg` — complete logo (text + gold chevron + subtitle)
+- `ces-text.svg` — "ces" letterforms only
+- `ces-subtitle.svg` — "CLEAN ENERGY SOLUTIONS" subtitle
+- `ces-chevron.svg` — gold chevron/arrow mark only
+- `ces-logo-white-bg.jpg`, `ces-logo-grey-bg.jpg` — raster references
 
 **Path alias:** `@/*` maps to `apps/web/src/*` (configured in tsconfig).
 
@@ -148,7 +161,7 @@ Large features follow a structured workflow using custom commands in `.claude/co
 ## Key Files
 
 - `docs/technical-architecture.md` — comprehensive 871-line tech brief covering all stack decisions, rendering strategies, animation patterns, deployment, and content management. **Read this first** when implementing new features.
-- `docs/BRAND.md` — brand colors, typography rules, logo location (`packages/ui/src/assets/ces-logo.svg`)
+- `docs/BRAND.md` — brand colors (logo vs web palette), typography, logo anatomy and file inventory
 - `apps/web/src/app/globals.css` — design token source of truth (CSS custom properties + `@theme inline`)
 - `apps/web/src/app/layout.tsx` — root layout
 - `packages/ui/src/index.ts` — shared UI barrel export (currently empty, ready for components)

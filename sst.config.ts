@@ -26,13 +26,12 @@ export default $config({
       });
     });
 
-    // TODO: Re-enable custom domain once clientHold is resolved on ic-ces.engineering
-    // domain: {
-    //   name: "portfolio.ic-ces.engineering",
-    //   dns: sst.aws.dns({ zone: "ic-ces.engineering" }),
-    // },
     const site = new sst.aws.Nextjs("CesWeb", {
       path: "apps/web",
+      domain: {
+        name: "portfolio.ic-ces.engineering",
+        dns: sst.aws.dns({ zone: "ic-ces.engineering" }),
+      },
     });
 
     return {
