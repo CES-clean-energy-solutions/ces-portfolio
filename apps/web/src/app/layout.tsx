@@ -16,6 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <link
+          rel="preload"
+          as="video"
+          href="/video/hero-bg.webm"
+          type="video/webm"
+        />
+      </head>
       <body>
         <SmoothScroll>{children}</SmoothScroll>
       </body>

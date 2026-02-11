@@ -10,6 +10,7 @@ import { SplitText } from "gsap/SplitText";
 import cesText from "@repo/ui/assets/ces-text-white.svg";
 import cesChevron from "@repo/ui/assets/ces-chevron.svg";
 import cesSubtitle from "@repo/ui/assets/ces-subtitle-white.svg";
+import HeroVideo from "@/components/HeroVideo";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
@@ -103,9 +104,9 @@ export default function Hero() {
           pulse
             .set(".hero-logo-chevron-pulse", { x: 0, opacity: 0.5 })
             .to(".hero-logo-chevron-pulse", {
-              x: 120,
+              x: 600,
               opacity: 0,
-              duration: 3.5,
+              duration: 4.9,
               ease: "power1.out",
             });
         },
@@ -184,39 +185,34 @@ export default function Hero() {
       ref={container}
       className="relative flex min-h-screen items-center justify-center bg-brand-black px-4 pt-[var(--header-h)] sm:px-6 lg:px-8"
     >
-      {/* Mobile/tablet fallback: subtle green radial gradient (zero JS) */}
+      {/* Background video (z-0) — looping ambient video or static poster */}
+      <HeroVideo />
+
+      {/* Dark overlay (z-10) — ensures text legibility over video */}
       <div
-        className="absolute inset-0 lg:hidden"
+        className="absolute inset-0"
         style={{
-          background:
-            "radial-gradient(ellipse at 50% 50%, oklch(0.15 0.05 150) 0%, oklch(0 0 0) 70%)",
+          zIndex: 10,
+          backgroundColor: "black",
+          opacity: "var(--video-overlay-opacity)",
         }}
       />
 
-      {/* Desktop: also show gradient as base, particles layer on top */}
-      <div
-        className="absolute inset-0 hidden lg:block"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 50%, oklch(0.15 0.05 150) 0%, oklch(0 0 0) 70%)",
-        }}
-      />
-
-      {/* Particles fade in over 1s after GSAP hero animation completes */}
+      {/* Particles fade in over 1s after GSAP hero animation completes (z-20) */}
       {showParticles && (
-        <div className="absolute inset-0 z-0 animate-[fadeIn_1s_ease-out_forwards]">
+        <div className="absolute inset-0 animate-[fadeIn_1s_ease-out_forwards]" style={{ zIndex: 20 }}>
           <ParticlesBackground />
         </div>
       )}
 
-      {/* Cursor water ripple — above particles, below content */}
+      {/* Cursor water ripple (z-30) — above particles, below content */}
       {showParticles && (
-        <div className="absolute inset-0 z-10 animate-[fadeIn_1s_ease-out_forwards]">
+        <div className="absolute inset-0 animate-[fadeIn_1s_ease-out_forwards]" style={{ zIndex: 30 }}>
           <CursorRipple containerRef={container} />
         </div>
       )}
 
-      <div className="hero-content relative z-20 max-w-4xl text-center">
+      <div className="hero-content relative max-w-4xl text-center" style={{ zIndex: 40 }}>
         {/* Layered logo: three SVG parts stacked absolutely, sharing the same viewBox */}
         <div
           className="hero-logo relative mx-auto mb-8 w-48 sm:w-56 md:w-64 lg:w-72"

@@ -33,11 +33,15 @@
       "onAutoForward": "notify"
     }
   },
+  "runArgs": [
+    "--env-file",
+    "/mnt/c/git/agentic-central/.env"
+  ],
   "mounts": [
     "source=/mnt/c/git/agentic-central,target=/agentic-central,type=bind,consistency=cached"
   ],
   "postCreateCommand": "pnpm install",
-  "postStartCommand": "sudo ln -sfn /agentic-central ${containerWorkspaceFolder}/.claude",
+  "postStartCommand": "sudo ln -sfn /agentic-central ${containerWorkspaceFolder}/.claude && cp /agentic-central/claude.json ~/.claude.json 2>/dev/null || true",
   "remoteUser": "vscode",
   "updateRemoteUserUID": true
 }

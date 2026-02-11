@@ -4,6 +4,7 @@
   --brand-gold: oklch(0.75 0.12 85);
   --brand-black: oklch(0 0 0);
   --header-h: 64px;
+  --video-overlay-opacity: 0.45;
 
   /* shadcn/ui semantic tokens — dark theme as default */
   --background: oklch(0 0 0);
