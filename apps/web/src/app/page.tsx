@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/sections/Hero";
-import Services from "@/components/sections/Services";
+import { ServicesSection } from "@/components/sections/ServicesSection";
 import Gallery from "@/components/sections/Gallery";
 import Stats from "@/components/sections/Stats";
 import ContactCta from "@/components/sections/ContactCta";
@@ -11,7 +11,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Services />
+        <ServicesSection />
         <Gallery />
         <Stats />
         <ContactCta />
