@@ -61,10 +61,10 @@ export const services: ServiceCategory[] = [
     },
     relatedProjectSlugs: [],
     video: {
-      webm: "/video/hero-bg.webm",
-      mp4: "/video/hero-bg.mp4",
-      mp4Mobile: "/video/hero-bg.mp4", // using desktop version for now (660KB)
-      poster: "/video/hero-poster.jpg",
+      webm: "/video/services/energy-efficiency-bg.webm",
+      mp4: "/video/services/energy-efficiency-bg.mp4",
+      mp4Mobile: "/video/services/energy-efficiency-bg-mobile.mp4",
+      poster: "/video/services/energy-efficiency-poster.jpg",
     },
   },
   {
