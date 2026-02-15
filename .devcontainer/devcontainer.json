@@ -20,6 +20,14 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.codeActionsOnSave": {
           "source.fixAll.eslint": "explicit"
+        },
+        "workbench.colorCustomizations": {
+          "titleBar.activeBackground": "#3178C6",
+          "titleBar.activeForeground": "#ffffff",
+          "activityBar.background": "#23587A",
+          "statusBar.background": "#000000",
+          "statusBar.foreground": "#3178C6",
+          "tab.activeBackground": "#3178C6"
         }
       }
     }
@@ -42,6 +50,7 @@
   ],
   "postCreateCommand": "pnpm install",
   "postStartCommand": "sudo ln -sfn /agentic-central ${containerWorkspaceFolder}/.claude && cp /agentic-central/claude.json ~/.claude.json 2>/dev/null || true",
+  "postAttachCommand": "claude --dangerously-skip-permissions",
   "remoteUser": "vscode",
   "updateRemoteUserUID": true
 }
