@@ -1,0 +1,48 @@
+{
+  "id": "innovative-building",
+  "slug": "innovative-building-technology",
+  "title": "Innovative Building Technology",
+  "titleDe": "Innovative Gebäudetechnik",
+  "icon": "innovative-building",
+  "cardSize": "standard",
+  "shortDescription": "Passive House design, autarch energy systems, advanced building management, and BIM coordination.",
+  "longDescription": "We push the boundaries of building performance through passive design principles, autonomous energy systems, intelligent automation, and digital modeling. Our BIM-centric approach ensures seamless coordination across disciplines while our focus on Passive House standards delivers buildings that consume 90% less energy than conventional construction.",
+  "subServices": [
+    {
+      "label": "Passive House",
+      "slug": "passive-house"
+    },
+    {
+      "label": "Autarch Energy Systems",
+      "slug": "autarch-energy"
+    },
+    {
+      "label": "Building Management Systems",
+      "slug": "bms"
+    },
+    {
+      "label": "BIM",
+      "slug": "bim"
+    }
+  ],
+  "stats": {
+    "metric": "180+",
+    "metricLabel": "certified Passive House projects",
+    "secondary": "15 kWh/m²/yr avg. consumption"
+  },
+  "relatedProjectSlugs": [],
+  "links": [
+    {
+      "label": "BIM Viewer Demo",
+      "href": "/demos/bim-viewer",
+      "external": false
+    }
+  ],
+  "video": {
+    "webm": "./bg.webm",
+    "mp4": "./bg.mp4",
+    "mp4Mobile": "./bg-mobile.mp4",
+    "poster": "./poster.jpg",
+    "placeholder": "./placeholder.jpg"
+  }
+}

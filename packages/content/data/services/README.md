@@ -1,96 +1,75 @@
-# Service Content Files
+# Service Content
 
-Each JSON file represents one service card on the CES portfolio website. Marketing and Engineering teams can edit these files directly.
+Each service has its own folder containing a `service.json` and any related assets (images, videos, posters).
 
-## File Structure
+## Folder Structure
 
 ```
 services/
-├── energy-efficiency.json
-├── renewable-energy.json
-├── plant-engineering.json
-├── innovative-building.json
-├── research-development.json
-└── green-finance.json
+├── energy-efficiency/
+│   ├── service.json          ← service data (required)
+│   ├── bg.webm               ← video background, desktop (drop here)
+│   ├── bg.mp4                ← video background, Safari fallback
+│   ├── bg-mobile.mp4         ← video background, mobile
+│   └── poster.jpg            ← video poster / fallback image
+├── renewable-energy/
+│   ├── service.json
+│   └── ...
+├── plant-engineering/
+│   └── service.json
+├── innovative-building/
+│   └── service.json
+├── research-development/
+│   └── service.json
+└── green-finance/
+    └── service.json
 ```
 
-## Field Reference
+## Adding a New Service
 
-| Field | Type | Description | Example |
-|-------|------|-------------|---------|
-| `id` | string | Unique identifier (kebab-case) | `"energy-efficiency"` |
-| `slug` | string | URL-friendly path segment | `"energy-efficiency-management"` |
-| `title` | string | English service name | `"Energy Efficiency & Management"` |
-| `titleDe` | string | German translation (for visual texture) | `"Energieeffizienz & Management"` |
-| `icon` | string | Icon component reference | `"energy-efficiency"` |
-| `cardSize` | string | Card visual prominence: `"standard"`, `"large"`, `"featured"` | `"standard"` |
-| `shortDescription` | string | 1 sentence summary (collapsed state) | `"Comprehensive energy audits..."` |
-| `longDescription` | string | 2-3 sentences (expanded state) | `"We analyze energy consumption..."` |
-| `subServices` | array | List of specialized offerings | `[{"label": "...", "slug": "..."}]` |
-| `stats.metric` | string | Primary metric value | `"120+"` |
-| `stats.metricLabel` | string | Metric description | `"projects completed"` |
-| `stats.secondary` | string | Supporting metric | `"40% avg. energy reduction"` |
-| `relatedProjectSlugs` | array | Links to portfolio case studies | `["project-slug-1", "project-slug-2"]` |
-| `links` | array (optional) | Related demos/pages | `[{"label": "...", "href": "...", "external": false}]` |
-| `video.webm` | string | WebM video path (desktop) | `"/video/services/name-bg.webm"` |
-| `video.mp4` | string | MP4 video path (desktop) | `"/video/services/name-bg.mp4"` |
-| `video.mp4Mobile` | string | MP4 video path (mobile) | `"/video/services/name-bg-mobile.mp4"` |
-| `video.poster` | string | Fallback poster image | `"/video/services/name-poster.jpg"` |
-| `video.placeholder` | string (optional) | Base64 blur-up data URI | `"data:image/jpeg;base64,..."` |
+1. Create a new folder: `services/my-new-service/`
+2. Add a `service.json` file (copy from an existing service as a template)
+3. Drop any assets (videos, images) into the same folder
+4. Reference assets with relative paths in the JSON: `"./bg.webm"`
+5. **That's it** — the loader auto-discovers all subfolders
 
-## Editing Guidelines
+## Asset Paths
 
-### Text Content
-- **`title`**: Keep under 40 characters (mobile display)
-- **`shortDescription`**: 1 sentence, 100-150 characters
-- **`longDescription`**: 2-3 sentences, 250-350 characters
-- Use active voice, present tense
-- Avoid jargon unless client-facing teams use it
+Use `./` relative paths in JSON to reference files in the same folder:
 
-### Card Sizes
-- **`"standard"`**: Default 1-column card (most services)
-- **`"large"`**: 2-column span (hero services like Renewable Energy)
-- **`"featured"`**: Reserved for promotional campaigns
-
-### Links
-Add optional links to demos, notebooks, or detail pages:
 ```json
-"links": [
-  {
-    "label": "Solar Calculator Demo",
-    "href": "/demos/solar-calculator",
-    "external": false
-  },
-  {
-    "label": "Urban AI Notebook",
-    "href": "https://marimo.ces.engineering/urban-ai",
-    "external": true
-  }
-]
+"video": {
+  "webm": "./bg.webm",
+  "mp4": "./bg.mp4",
+  "mp4Mobile": "./bg-mobile.mp4",
+  "poster": "./poster.jpg"
+}
 ```
 
-### Video Assets
-Place video files in `/public/video/services/`:
-- **WebM** (preferred for desktop, best compression)
-- **MP4** (fallback, required for Safari/iOS)
-- **MP4 Mobile** (optimized resolution/bitrate for mobile)
-- **Poster** (JPEG/PNG, visible before video loads)
+The loader resolves these to public URLs at build time:
+- `./bg.webm` → `/content/services/energy-efficiency/bg.webm`
 
-Video naming convention: `{service-id}-bg.{ext}`
-
-## Validation
-
-After editing, run type checking to ensure JSON structure is valid:
-
-```bash
-pnpm --filter @ces/content type-check
+**Important:** For assets to be served by the site, copy or symlink them into the Next.js public directory:
+```
+apps/web/public/content/services/{service-id}/
 ```
 
-TypeScript will report any missing fields or incorrect types.
+## JSON Field Reference
 
-## Questions?
-
-Contact the web engineering team if you need:
-- New fields added to the data model
-- Custom card layouts beyond standard/large/featured
-- Help with video optimization or encoding
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique identifier (must match folder name) |
+| `slug` | string | URL path segment |
+| `title` | string | English service name (< 40 chars) |
+| `titleDe` | string | German translation |
+| `icon` | string | Icon component ID |
+| `cardSize` | `"standard"` / `"large"` / `"featured"` | Card visual prominence |
+| `shortDescription` | string | 1 sentence (100-150 chars) |
+| `longDescription` | string | 2-3 sentences (250-350 chars) |
+| `subServices` | array | `[{"label": "...", "slug": "..."}]` |
+| `stats.metric` | string | e.g. `"120+"` |
+| `stats.metricLabel` | string | e.g. `"projects completed"` |
+| `stats.secondary` | string | e.g. `"40% avg. energy reduction"` |
+| `relatedProjectSlugs` | array | Links to portfolio case studies |
+| `links` | array (optional) | `[{"label": "...", "href": "...", "external": false}]` |
+| `video` | object | Video asset paths (relative or absolute) |

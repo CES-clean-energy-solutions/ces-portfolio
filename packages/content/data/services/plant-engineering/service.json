@@ -1,0 +1,45 @@
+{
+  "id": "plant-engineering",
+  "slug": "plant-engineering",
+  "title": "Plant Engineering",
+  "titleDe": "Anlagentechnik",
+  "icon": "plant-engineering",
+  "cardSize": "standard",
+  "shortDescription": "Integrated design of district heating/cooling, industrial facilities, utilities, cogeneration, and treatment plants.",
+  "longDescription": "We engineer complex energy and utility infrastructure from concept through commissioning. Our expertise spans district energy networks, industrial process facilities, combined heat and power systems, and water treatment plants — delivering integrated solutions that optimize resource efficiency and operational reliability.",
+  "subServices": [
+    {
+      "label": "District Heating & Cooling",
+      "slug": "district-heating"
+    },
+    {
+      "label": "Industrial Facilities",
+      "slug": "industrial"
+    },
+    {
+      "label": "Utilities Supply / Discharge",
+      "slug": "utilities"
+    },
+    {
+      "label": "Cogeneration / Trigeneration",
+      "slug": "cogeneration"
+    },
+    {
+      "label": "Sewage Treatment Plants",
+      "slug": "sewage-treatment"
+    }
+  ],
+  "stats": {
+    "metric": "2.5 GW",
+    "metricLabel": "thermal capacity engineered",
+    "secondary": "50+ cities served"
+  },
+  "relatedProjectSlugs": [],
+  "video": {
+    "webm": "./bg.webm",
+    "mp4": "./bg.mp4",
+    "mp4Mobile": "./bg-mobile.mp4",
+    "poster": "./poster.jpg",
+    "placeholder": "./placeholder.jpg"
+  }
+}

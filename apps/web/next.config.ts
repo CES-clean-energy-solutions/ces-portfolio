@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
 
+  // Turbopack config (Next.js 16 default bundler)
+  turbopack: {},
+
   // Exclude .claude symlink (owned by root) from file watching to prevent permission errors
   webpack: (config) => {
     if (config.watchOptions) {

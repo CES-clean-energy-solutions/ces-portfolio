@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 
 interface ServiceVideoProps {
   video: {
@@ -11,9 +11,13 @@ interface ServiceVideoProps {
   isActive: boolean;
 }
 
+/** Seconds to fade in at start and fade out before end */
+const FADE_DURATION = 1.5;
+
 export function ServiceVideo({ video, isActive }: ServiceVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [opacity, setOpacity] = useState(0);
 
   // Detect mobile viewport
   useEffect(() => {
@@ -24,17 +28,46 @@ export function ServiceVideo({ video, isActive }: ServiceVideoProps) {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
+  // Fade based on current playback position
+  const handleTimeUpdate = useCallback(() => {
+    const el = videoRef.current;
+    if (!el || !el.duration || !isFinite(el.duration)) return;
+
+    const t = el.currentTime;
+    const dur = el.duration;
+
+    if (t < FADE_DURATION) {
+      // Fade in
+      setOpacity(t / FADE_DURATION);
+    } else if (t > dur - FADE_DURATION) {
+      // Fade out
+      setOpacity((dur - t) / FADE_DURATION);
+    } else {
+      setOpacity(1);
+    }
+  }, []);
+
+  // Loop with crossfade: when video ends, reset and replay
+  const handleEnded = useCallback(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.currentTime = 0;
+    el.play().catch(() => {});
+  }, []);
+
   // Play/pause lifecycle
   useEffect(() => {
-    if (!videoRef.current) return;
+    const el = videoRef.current;
+    if (!el) return;
 
     if (isActive) {
-      videoRef.current.play().catch(() => {
-        // Autoplay failed, video will show poster
-      });
+      setOpacity(0);
+      el.currentTime = 0;
+      el.play().catch(() => {});
     } else {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
+      el.pause();
+      el.currentTime = 0;
+      setOpacity(0);
     }
   }, [isActive]);
 
@@ -53,22 +86,21 @@ export function ServiceVideo({ video, isActive }: ServiceVideoProps) {
     );
   }
 
-  // Video plays on all viewports - adaptive source selection
   return (
     <video
       ref={videoRef}
-      className="absolute inset-0 w-full h-full object-cover"
+      className="absolute inset-0 w-full h-full object-cover transition-none"
+      style={{ opacity }}
       muted
-      loop
       playsInline
       preload="none"
       poster={video.poster}
+      onTimeUpdate={handleTimeUpdate}
+      onEnded={handleEnded}
     >
       {isMobile ? (
-        // Phone: H.264 only (universal hardware decode, better battery)
         <source src={video.mp4Mobile} type="video/mp4" />
       ) : (
-        // Desktop/tablet: WebM primary, MP4 fallback
         <>
           <source src={video.webm} type="video/webm" />
           <source src={video.mp4} type="video/mp4" />
