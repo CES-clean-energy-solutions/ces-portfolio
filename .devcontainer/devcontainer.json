@@ -49,7 +49,7 @@
     "source=/mnt/c/git/agentic-central,target=/agentic-central,type=bind,consistency=cached"
   ],
   "postCreateCommand": "pnpm install",
-  "postStartCommand": "sudo ln -sfn /agentic-central ${containerWorkspaceFolder}/.claude && cp /agentic-central/claude.json ~/.claude.json 2>/dev/null || true",
+  "postStartCommand": "bash .devcontainer/post-start.sh ${containerWorkspaceFolder}",
   "postAttachCommand": "claude --dangerously-skip-permissions",
   "remoteUser": "vscode",
   "updateRemoteUserUID": true

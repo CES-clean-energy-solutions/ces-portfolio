@@ -22,11 +22,14 @@ CES Clean Energy Solutions — a scroll-driven marketing site for a Vienna-based
 ```
 apps/web/          → @ces/web — Next.js marketing site (port 4200)
 packages/ui/       → @repo/ui — shared component library and brand assets
+packages/content/  → @ces/content — portfolio data (projects, case studies)
 docs/              → technical-architecture.md (871-line tech brief), BRAND.md
 tasks/             → PRDs and task lists (generated via /prd command)
 ```
 
 Internal packages use `workspace:*` protocol (e.g., `"@repo/ui": "workspace:*"`).
+
+**Content package** (`@ces/content`) exports structured data via `@ces/content/data/*` path. Use for project metadata, case studies, and portfolio entries.
 
 Planned but not yet created: `apps/marimo/` (Python notebook server), `apps/dashboard/`, `packages/config/`, `packages/utils/`.
 
@@ -34,8 +37,9 @@ Planned but not yet created: `apps/marimo/` (Python notebook server), `apps/dash
 
 ```bash
 # Development
-pnpm dev                    # runs dev server on port 8080 (root, via next --turbopack)
-pnpm --filter @ces/web dev  # runs web app only on port 4200
+pnpm dev                    # runs web app on port 4200 (via --filter @ces/web)
+pnpm --filter @ces/web dev  # same as above (explicit)
+# Note: devcontainer forwards port 8080, but the app runs on 4200 internally
 
 # Build & quality
 pnpm build                  # turborepo build (all packages)
@@ -183,6 +187,20 @@ Desktop-only interactive components (`ParticlesBackground`, `CursorRipple`) are 
 ## Devcontainer
 
 `.devcontainer/` provides a ready-to-go dev environment: Node 22, pnpm 9.15.4, AWS CLI v2, `dig`/`nslookup`, ESLint, Prettier, Tailwind CSS IntelliSense, Claude Code extension. `postCreateCommand` runs `pnpm install`.
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in required values:
+
+```bash
+AWS_ACCESS_KEY_ID=        # IAM user with deploy permissions
+AWS_SECRET_ACCESS_KEY=    # IAM secret key
+AWS_REGION=eu-central-1   # Must match sst.config.ts region
+```
+
+**Note:** SST v3 stores state in S3 (not Pulumi Cloud). No Pulumi token needed. The `.env` file is sourced automatically by deployment scripts.
+
+**Security:** Never commit `.env` to git. The file is in `.gitignore`.
 
 ## Key Files
 
