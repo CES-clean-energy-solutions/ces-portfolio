@@ -1,0 +1,51 @@
+{
+  "id": "renewable-energy",
+  "slug": "renewable-energy",
+  "title": "Renewable Energy",
+  "titleDe": "Erneuerbare Energie",
+  "icon": "renewable-energy",
+  "cardSize": "large",
+  "shortDescription": "Design and integration of photovoltaic, solar thermal, geothermal, wind, hydro, and biomass energy systems.",
+  "longDescription": "From rooftop solar installations to large-scale wind farms, we provide end-to-end renewable energy solutions. Our multidisciplinary team handles feasibility studies, system design, grid integration, and performance monitoring to ensure optimal renewable energy deployment across diverse environments and scales.",
+  "subServices": [
+    {
+      "label": "Photovoltaics",
+      "slug": "photovoltaics"
+    },
+    {
+      "label": "Solar Thermal",
+      "slug": "solar-thermal"
+    },
+    {
+      "label": "Geothermal",
+      "slug": "geothermal"
+    },
+    {
+      "label": "Wind & Hydropower",
+      "slug": "wind-hydro"
+    },
+    {
+      "label": "Biogas / Biomass / Biofuel",
+      "slug": "biogas-biomass"
+    }
+  ],
+  "stats": {
+    "metric": "850 MW",
+    "metricLabel": "renewable capacity planned",
+    "secondary": "35+ countries"
+  },
+  "relatedProjectSlugs": [],
+  "links": [
+    {
+      "label": "Solar Calculator Demo",
+      "href": "/demos/solar-calculator",
+      "external": false
+    }
+  ],
+  "video": {
+    "webm": "/video/hero-bg.webm",
+    "mp4": "/video/hero-bg.mp4",
+    "mp4Mobile": "/video/hero-bg.mp4",
+    "poster": "/video/hero-poster.jpg"
+  }
+}

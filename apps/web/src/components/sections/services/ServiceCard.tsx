@@ -93,8 +93,12 @@ export function ServiceCard({
               {/* Dark overlay for text readability */}
               <div className="absolute inset-0 bg-black/60 z-1" />
 
-              {/* Content grid */}
-              <div className="relative z-2 px-6 pt-8 pb-6">
+              {/* Content grid — height varies by cardSize */}
+              <div className={`relative z-2 px-6 pb-6 ${
+                service.cardSize === "large" ? "pt-10 min-h-[400px]" :
+                service.cardSize === "featured" ? "pt-12 min-h-[500px]" :
+                "pt-8 min-h-[280px]"
+              }`}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                   {/* Column 1: Description */}
                   <div className="sm:col-span-2 lg:col-span-1">

@@ -50,7 +50,6 @@
   ],
   "postCreateCommand": "pnpm install",
   "postStartCommand": "bash .devcontainer/post-start.sh ${containerWorkspaceFolder}",
-  "postAttachCommand": "claude --dangerously-skip-permissions",
   "remoteUser": "vscode",
   "updateRemoteUserUID": true
 }

@@ -20,12 +20,6 @@ mkdir -p ~/.claude
 cp /agentic-central/claude.json ~/.claude.json 2>/dev/null || true
 cp /agentic-central/claude.home.settings.json ~/.claude/settings.json 2>/dev/null || true
 
-echo "Installing dependencies..."
-corepack enable
-if [ ! -d "node_modules" ]; then
-    pnpm install
-fi
-
 echo "Setting up environment..."
 for rc in ~/.bashrc ~/.profile; do
     grep -q "source /agentic-central/.env" "$rc" 2>/dev/null || \
@@ -34,7 +28,7 @@ for rc in ~/.bashrc ~/.profile; do
         echo 'export CLAUDE_TRUST_PROMPT=true' >> "$rc"
 done
 
-echo ""
-echo "Post-start setup complete."
-echo "  1. Run: pnpm dev"
-echo "  2. Open: http://localhost:4200"
+# echo ""
+# echo "Post-start setup complete."
+# echo "  1. Run: pnpm dev"
+# echo "  2. Open: http://localhost:4200"

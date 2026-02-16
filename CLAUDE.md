@@ -29,7 +29,9 @@ tasks/             → PRDs and task lists (generated via /prd command)
 
 Internal packages use `workspace:*` protocol (e.g., `"@repo/ui": "workspace:*"`).
 
-**Content package** (`@ces/content`) exports structured data via `@ces/content/data/*` path. Use for project metadata, case studies, and portfolio entries.
+**Content package** (`@ces/content`) exports structured data via `@ces/content/data/*` path:
+- `data/services.ts` — 6 service categories with comprehensive metadata (titles, descriptions, stats, video assets, sub-services, related links). Each `ServiceCategory` includes `video` object (webm/mp4/mp4Mobile/poster), `stats` (metric/label/secondary), `links` array (optional demos/detail pages), and `subServices` array. Import via `@ces/content/data/services`.
+- Future: project metadata, case studies, and portfolio entries.
 
 Planned but not yet created: `apps/marimo/` (Python notebook server), `apps/dashboard/`, `packages/config/`, `packages/utils/`.
 
