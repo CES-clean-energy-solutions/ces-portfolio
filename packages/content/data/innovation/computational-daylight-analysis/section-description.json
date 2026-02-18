@@ -3,19 +3,21 @@
   "slug": "computational-daylight-analysis",
   "order": 3,
   "title": "Computational Daylight Analysis",
-  "shortDescription": "CFD, FEA, thermal, and acoustic simulations for engineering precision.",
-  "longDescription": "Our simulation engineers run high-fidelity computational models — from airflow and structural stress to daylighting and acoustics — to predict performance before construction begins. Every simulation is calibrated against real-world measurements, giving clients confidence that the built outcome will match the design intent.",
+  "shortDescription": "Parametric daylight simulation for certification, comfort, and design optimization.",
+  "longDescription": "Our daylight simulation team delivers high-resolution illuminance and radiation analysis using Rhino, Grasshopper, and Honeybee — powered by a custom massively parallel job runner built on Prefect. We size sensor grids to any surface geometry and return daylight autonomy, average illuminance, and glare metrics calibrated to EN 17037, LEED, BREEAM, and DGNB requirements. Results feed directly into architectural optimization, building physics validation, occupant comfort studies, and biological plant selection for landscaping and interior greening.",
   "subItems": [
-    { "label": "CFD Airflow Analysis", "slug": "cfd-airflow" },
-    { "label": "Structural FEA", "slug": "structural-fea" },
-    { "label": "Thermal Dynamics Modeling", "slug": "thermal-dynamics" },
-    { "label": "Daylight & Solar Simulation", "slug": "daylight-solar" },
-    { "label": "Acoustic Simulation", "slug": "acoustic-simulation" }
+    { "label": "Daylight Autonomy (DA / sDA)", "slug": "daylight-autonomy" },
+    { "label": "Average Illuminance Mapping", "slug": "average-illuminance" },
+    { "label": "Glare Analysis (DGP)", "slug": "glare-analysis" },
+    { "label": "Annual Solar Exposure", "slug": "annual-solar-exposure" },
+    { "label": "EN 17037 Certification Support", "slug": "en-17037-certification" },
+    { "label": "Biological Light Requirement Analysis", "slug": "biological-light-requirements" },
+    { "label": "Parametric Design Optimization", "slug": "parametric-optimization" }
   ],
   "stats": {
-    "metric": "500+",
-    "metricLabel": "simulations completed",
-    "secondary": "avg. 30% efficiency improvement"
+    "metric": "1M+",
+    "metricLabel": "sensor points per run",
+    "secondary": "massively parallel via custom Prefect orchestration"
   },
   "links": [],
   "video": {
@@ -28,19 +30,19 @@
     {
       "src": "./001-sensor-grid.png",
       "alt": "3D sensor geometry placed across the urban massing for daylight measurement",
-      "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sensor grid resolution calibrated to EN 17037 occupancy zones.",
+      "caption": "Adaptive sensor grids mapped to floor plates and facade surfaces — resolution calibrated to EN 17037 occupancy zones and task areas.",
       "animated": false
     },
     {
       "src": "./002-grasshopper-component.png",
       "alt": "Grasshopper parametric definition with lux threshold categorisation",
-      "caption": "Parametric lux-threshold sorting component routes illuminance values into EN-standard colour bands for client-ready output.",
+      "caption": "Custom CES Grasshopper components chain Honeybee radiance recipes with lux-threshold categorisation, routing results into certification-ready colour bands.",
       "animated": false
     },
     {
       "src": "./003-daylight-result.png",
       "alt": "Voxel solar exposure heatmap showing annual direct radiation across building volumes",
-      "caption": "Annual solar exposure rendered on volumetric building blocks — blue zones indicate shaded corridors, red indicates peak direct radiation.",
+      "caption": "Spatial daylight autonomy results rendered per zone — green exceeds the 300 lx / 50% threshold for EN 17037 compliance, red flags underlit areas requiring design intervention.",
       "animated": false
     }
   ]
