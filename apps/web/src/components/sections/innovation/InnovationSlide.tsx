@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef, useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 import { ChevronNoPad } from "@/components/icons/ChevronIcon";
-import { InnovationMediaCard } from "./InnovationMediaCard";
+import { InnovationGallery } from "./InnovationGallery";
 import type {
   InnovationArea,
   InnovationSubItem,
@@ -227,14 +228,35 @@ export function InnovationSlide({ area, isActive }: InnovationSlideProps) {
             )}
           </div>
 
-          {/* Right column: media cards (desktop only, hidden on mobile) */}
+          {/* Right column: gallery (desktop) */}
           {visibleImages.length > 0 && (
             <div className="hidden items-center justify-center lg:flex">
-              <div className="grid w-full max-w-md gap-4">
-                {visibleImages.slice(0, 3).map((image, idx) => (
-                  <InnovationMediaCard key={idx} image={image} />
-                ))}
+              <div className="w-full max-w-md">
+                <InnovationGallery images={visibleImages} isActive={isActive} />
               </div>
+            </div>
+          )}
+
+          {/* Mobile: single hero image below text */}
+          {visibleImages.length > 0 && (
+            <div className="relative aspect-video overflow-hidden rounded-lg lg:hidden">
+              {visibleImages[0].animated ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={visibleImages[0].src}
+                  alt={visibleImages[0].alt}
+                  loading="eager"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={visibleImages[0].src}
+                  alt={visibleImages[0].alt}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
+              )}
             </div>
           )}
         </div>
