@@ -1,12 +1,12 @@
 // Innovation area data model for CES portfolio site
 //
-// Each area lives in its own folder: ./innovation/{id}/innovation.json
+// Each area lives in its own folder: ./innovation/{id}/section-description.json
 // Drop images, videos, and other assets alongside the JSON.
 // Relative paths (e.g. "./bg.webm") in JSON are resolved to
 // public-servable paths at load time: /content/innovation/{id}/bg.webm
 // Absolute paths (starting with "/") are left untouched.
 //
-// To add a new area: create a new folder with an innovation.json file.
+// To add a new area: create a new folder with an section-description.json file.
 // The loader auto-discovers all subfolders — no manual imports needed.
 // Display order is controlled by the `order` field in each JSON file.
 
@@ -31,6 +31,7 @@ export interface InnovationLink {
 export interface InnovationImage {
   src: string;
   alt: string;
+  caption?: string;
   /** true for animated GIFs — component uses <img> with loading="eager" */
   animated?: boolean;
 }
@@ -62,7 +63,7 @@ export interface InnovationArea {
 }
 
 // ---------------------------------------------------------------------------
-// Dynamic loader — scans ./innovation/ for subfolders, reads innovation.json
+// Dynamic loader — scans ./innovation/ for subfolders, reads section-description.json
 // ---------------------------------------------------------------------------
 
 /** Base path for serving innovation assets from Next.js public/ */

@@ -1,0 +1,47 @@
+{
+  "id": "computational-daylight-analysis",
+  "slug": "computational-daylight-analysis",
+  "order": 3,
+  "title": "Computational Daylight Analysis",
+  "shortDescription": "CFD, FEA, thermal, and acoustic simulations for engineering precision.",
+  "longDescription": "Our simulation engineers run high-fidelity computational models — from airflow and structural stress to daylighting and acoustics — to predict performance before construction begins. Every simulation is calibrated against real-world measurements, giving clients confidence that the built outcome will match the design intent.",
+  "subItems": [
+    { "label": "CFD Airflow Analysis", "slug": "cfd-airflow" },
+    { "label": "Structural FEA", "slug": "structural-fea" },
+    { "label": "Thermal Dynamics Modeling", "slug": "thermal-dynamics" },
+    { "label": "Daylight & Solar Simulation", "slug": "daylight-solar" },
+    { "label": "Acoustic Simulation", "slug": "acoustic-simulation" }
+  ],
+  "stats": {
+    "metric": "500+",
+    "metricLabel": "simulations completed",
+    "secondary": "avg. 30% efficiency improvement"
+  },
+  "links": [],
+  "video": {
+    "webm": "/content/services/research-development/research-development-video.webm",
+    "mp4": "",
+    "mp4Mobile": "",
+    "poster": ""
+  },
+  "images": [
+    {
+      "src": "./001-sensor-grid.png",
+      "alt": "3D sensor geometry placed across the urban massing for daylight measurement",
+      "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sensor grid resolution calibrated to EN 17037 occupancy zones.",
+      "animated": false
+    },
+    {
+      "src": "./002-grasshopper-component.png",
+      "alt": "Grasshopper parametric definition with lux threshold categorisation",
+      "caption": "Parametric lux-threshold sorting component routes illuminance values into EN-standard colour bands for client-ready output.",
+      "animated": false
+    },
+    {
+      "src": "./003-daylight-result.png",
+      "alt": "Voxel solar exposure heatmap showing annual direct radiation across building volumes",
+      "caption": "Annual solar exposure rendered on volumetric building blocks — blue zones indicate shaded corridors, red indicates peak direct radiation.",
+      "animated": false
+    }
+  ]
+}

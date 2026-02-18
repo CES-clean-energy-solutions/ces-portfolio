@@ -1,0 +1,47 @@
+{
+  "id": "building-information-modeling",
+  "slug": "building-information-modeling",
+  "order": 1,
+  "title": "Building Information Modeling",
+  "shortDescription": "BIM, digital twins, and parametric design for high-performance buildings.",
+  "longDescription": "We apply advanced Building Information Modeling and digital twin technology to optimize energy performance, construction sequencing, and façade systems from concept through operation. Our parametric workflows let engineers explore thousands of design variants and select the highest-performing solutions before a single beam is placed.",
+  "subItems": [
+    { "label": "BIM & Digital Twins", "slug": "bim-digital-twins" },
+    { "label": "Parametric Design", "slug": "parametric-design" },
+    { "label": "Energy Performance Simulation", "slug": "energy-performance-simulation" },
+    { "label": "Façade Optimization", "slug": "facade-optimization" },
+    { "label": "Construction Sequencing", "slug": "construction-sequencing" }
+  ],
+  "stats": {
+    "metric": "150+",
+    "metricLabel": "BIM models delivered",
+    "secondary": "€2B+ assets modeled"
+  },
+  "links": [],
+  "video": {
+    "webm": "/content/services/research-development/research-development-video.webm",
+    "mp4": "",
+    "mp4Mobile": "",
+    "poster": ""
+  },
+  "images": [
+    {
+      "src": "./001-wasserbaulabor.png",
+      "alt": "Federated BIM model of the Wasserbaulabor hydraulic research facility with full MEP coordination",
+      "caption": "Full federated BIM model of the Wasserbaulabor hydraulic research facility — structural steel, glazed envelope and MEP services resolved to LOD 400.",
+      "animated": false
+    },
+    {
+      "src": "./002-slxmep.jpeg",
+      "alt": "Clash-detected MEP coordination across twin high-rise towers",
+      "caption": "Clash-detected MEP coordination across twin high-rise towers, integrating mechanical, electrical and plumbing services prior to construction handover.",
+      "animated": false
+    },
+    {
+      "src": "./003-pbs.png",
+      "alt": "Integrated building services model for a mixed-use campus showing full systems coordination",
+      "caption": "Full building services model for a mixed-use campus — HVAC, fire protection, electrical and plumbing coordinated across both towers before site mobilisation.",
+      "animated": false
+    }
+  ]
+}

@@ -36,6 +36,11 @@ export function InnovationMediaCard({ image }: InnovationMediaCardProps) {
           sizes="(max-width: 1024px) 0px, 400px"
         />
       )}
+      {image.caption && (
+        <p className="px-3 py-2 text-xs text-white/60 leading-snug">
+          {image.caption}
+        </p>
+      )}
     </div>
   );
 }

@@ -1,0 +1,53 @@
+{
+  "id": "computational-fluid-dynamics",
+  "slug": "computational-fluid-dynamics",
+  "order": 4,
+  "title": "Computational Fluid Dynamics",
+  "shortDescription": "CFD, FEA, thermal, and acoustic simulations for engineering precision.",
+  "longDescription": "Our simulation engineers run high-fidelity computational models — from airflow and structural stress to daylighting and acoustics — to predict performance before construction begins. Every simulation is calibrated against real-world measurements, giving clients confidence that the built outcome will match the design intent.",
+  "subItems": [
+    { "label": "CFD Airflow Analysis", "slug": "cfd-airflow" },
+    { "label": "Structural FEA", "slug": "structural-fea" },
+    { "label": "Thermal Dynamics Modeling", "slug": "thermal-dynamics" },
+    { "label": "Daylight & Solar Simulation", "slug": "daylight-solar" },
+    { "label": "Acoustic Simulation", "slug": "acoustic-simulation" }
+  ],
+  "stats": {
+    "metric": "500+",
+    "metricLabel": "simulations completed",
+    "secondary": "avg. 30% efficiency improvement"
+  },
+  "links": [],
+  "video": {
+    "webm": "/content/services/research-development/research-development-video.webm",
+    "mp4": "",
+    "mp4Mobile": "",
+    "poster": ""
+  },
+  "images": [
+    {
+      "src": "./001-mesh.png",
+      "alt": "CFD surface mesh of a building geometry prepared for airflow simulation",
+      "caption": "High-resolution surface mesh generated for an external wind comfort study — fine-grained tessellation around façade edges ensures accurate boundary-layer capture in the CFD solver.",
+      "animated": false
+    },
+    {
+      "src": "./002-section-heatmap.png",
+      "alt": "Vertical section heatmap showing thermal stratification around a building",
+      "caption": "Cross-sectional temperature heatmap reveals thermal stratification zones around the envelope — used to optimise façade insulation specification and HVAC zoning strategies.",
+      "animated": false
+    },
+    {
+      "src": "./003-section-flow-velocity-ratio.png",
+      "alt": "Section view of normalised wind velocity ratios at pedestrian level",
+      "caption": "Normalised flow velocity ratio at pedestrian height — values above 1.0 flag wind-acceleration corridors, directly informing the placement of screen walls and canopies in the landscape design.",
+      "animated": false
+    },
+    {
+      "src": "./004-flow.png",
+      "alt": "Velocity-coloured streamline visualisation showing airflow deflection and wake vortices around a building cluster",
+      "caption": "LIC streamline plot coloured by velocity magnitude — high-speed approach flow (red) wraps around the primary tower while a large recirculating wake vortex (blue) develops in the sheltered courtyard, identifying wind comfort risks at ground level.",
+      "animated": false
+    }
+  ]
+}
