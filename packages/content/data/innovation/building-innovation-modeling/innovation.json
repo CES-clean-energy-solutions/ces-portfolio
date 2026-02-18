@@ -1,0 +1,30 @@
+{
+  "id": "building-innovation-modeling",
+  "slug": "building-innovation-modeling",
+  "order": 1,
+  "title": "Building Innovation Modeling",
+  "shortDescription": "BIM, digital twins, and parametric design for high-performance buildings.",
+  "longDescription": "We apply advanced Building Information Modeling and digital twin technology to optimize energy performance, construction sequencing, and façade systems from concept through operation. Our parametric workflows let engineers explore thousands of design variants and select the highest-performing solutions before a single beam is placed.",
+  "subItems": [
+    { "label": "BIM & Digital Twins", "slug": "bim-digital-twins" },
+    { "label": "Parametric Design", "slug": "parametric-design" },
+    { "label": "Energy Performance Simulation", "slug": "energy-performance-simulation" },
+    { "label": "Façade Optimization", "slug": "facade-optimization" },
+    { "label": "Construction Sequencing", "slug": "construction-sequencing" }
+  ],
+  "stats": {
+    "metric": "150+",
+    "metricLabel": "BIM models delivered",
+    "secondary": "€2B+ assets modeled"
+  },
+  "links": [],
+  "video": {
+    "webm": "/content/services/research-development/research-development-video.webm",
+    "mp4": "",
+    "mp4Mobile": "",
+    "poster": ""
+  },
+  "images": [
+    { "src": "", "alt": "Building model placeholder", "animated": false }
+  ]
+}

@@ -28,6 +28,13 @@ for rc in ~/.bashrc ~/.profile; do
         echo 'export CLAUDE_TRUST_PROMPT=true' >> "$rc"
 done
 
+echo "Mount screenshot folder"
+if [ -n "${WORKSPACE}" ]; then
+    ln -sfn /screenshots "${WORKSPACE}/.screenshots"
+else
+    echo "WARNING: WORKSPACE not set, skipping .screenshots symlink"
+fi
+
 # echo ""
 # echo "Post-start setup complete."
 # echo "  1. Run: pnpm dev"

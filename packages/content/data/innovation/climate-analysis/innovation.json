@@ -1,0 +1,30 @@
+{
+  "id": "climate-analysis",
+  "slug": "climate-analysis",
+  "order": 2,
+  "title": "Climate Analysis",
+  "shortDescription": "Urban heat, flood risk, and microclimate modeling for resilient cities.",
+  "longDescription": "Our climate analysis practice combines high-resolution meteorological data, satellite imagery, and simulation engines to model urban heat islands, extreme weather events, and long-term climate trajectories. We translate complex climate projections into actionable design guidance for buildings, districts, and infrastructure systems.",
+  "subItems": [
+    { "label": "Urban Heat Island Modeling", "slug": "urban-heat-island" },
+    { "label": "Climate Risk Assessment", "slug": "climate-risk" },
+    { "label": "Flood & Extreme Weather Simulation", "slug": "flood-simulation" },
+    { "label": "Carbon Footprint Mapping", "slug": "carbon-mapping" },
+    { "label": "Microclimate Studies", "slug": "microclimate" }
+  ],
+  "stats": {
+    "metric": "40+",
+    "metricLabel": "cities analyzed",
+    "secondary": "10M+ data points processed"
+  },
+  "links": [],
+  "video": {
+    "webm": "/content/services/research-development/research-development-video.webm",
+    "mp4": "",
+    "mp4Mobile": "",
+    "poster": ""
+  },
+  "images": [
+    { "src": "", "alt": "Climate analysis placeholder", "animated": false }
+  ]
+}

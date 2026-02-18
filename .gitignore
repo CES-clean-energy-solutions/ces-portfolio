@@ -7,6 +7,10 @@ node_modules/
 dist/
 .turbo/
 
+# Screenshots
+.screenshots
+.screenshots/
+
 # Claude Code
 .claude/
 .claude

@@ -1,0 +1,30 @@
+{
+  "id": "green-finance",
+  "slug": "green-finance",
+  "order": 4,
+  "title": "Green Finance",
+  "shortDescription": "ESG frameworks, green bonds, and EU taxonomy alignment for sustainable capital.",
+  "longDescription": "We bridge the gap between engineering outcomes and sustainable finance. Our green finance team structures ESG reporting frameworks, supports EU taxonomy compliance, and advises on green bond issuance — ensuring that the environmental performance of a project is credibly documented and financeable in today's capital markets.",
+  "subItems": [
+    { "label": "ESG Reporting & Frameworks", "slug": "esg-reporting" },
+    { "label": "EU Taxonomy Alignment", "slug": "eu-taxonomy" },
+    { "label": "Green Bond Advisory", "slug": "green-bond" },
+    { "label": "Carbon Credit Structuring", "slug": "carbon-credits" },
+    { "label": "Impact Investment Analysis", "slug": "impact-investment" }
+  ],
+  "stats": {
+    "metric": "€500M",
+    "metricLabel": "green bonds supported",
+    "secondary": "25+ ESG frameworks delivered"
+  },
+  "links": [],
+  "video": {
+    "webm": "/content/services/research-development/research-development-video.webm",
+    "mp4": "",
+    "mp4Mobile": "",
+    "poster": ""
+  },
+  "images": [
+    { "src": "", "alt": "Green finance placeholder", "animated": false }
+  ]
+}
