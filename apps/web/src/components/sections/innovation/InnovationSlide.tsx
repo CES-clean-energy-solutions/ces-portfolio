@@ -143,7 +143,7 @@ export function InnovationSlide({ area, isActive }: InnovationSlideProps) {
             Font size lives on h2 so h-[1em] on the SVG tracks it exactly. */}
         <h2 className="mb-8 flex flex-wrap items-center gap-x-2 gap-y-2 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
           <span>CES Innovation</span>
-          <ChevronNoPad className="h-[1em] w-[0.34em] flex-shrink-0" />
+          <ChevronNoPad className="h-[3.15rem] w-[1.5rem] sm:h-[4.2rem] sm:w-[2rem] lg:h-[5.25rem] lg:w-[2.5rem] flex-shrink-0" />
           <span>{area.title}</span>
         </h2>
 

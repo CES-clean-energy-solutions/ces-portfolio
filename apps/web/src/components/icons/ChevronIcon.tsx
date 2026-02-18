@@ -27,7 +27,7 @@ export function ChevronNoPad({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="200 0 75.52 219.84"
+      viewBox="200 0 75.52 160"
       className={className}
       fill="#f8c802"
     >
