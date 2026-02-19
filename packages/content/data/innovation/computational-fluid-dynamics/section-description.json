@@ -3,19 +3,22 @@
   "slug": "computational-fluid-dynamics",
   "order": 4,
   "title": "Computational Fluid Dynamics",
-  "shortDescription": "CFD, FEA, thermal, and acoustic simulations for engineering precision.",
-  "longDescription": "Our simulation engineers run high-fidelity computational models — from airflow and structural stress to daylighting and acoustics — to predict performance before construction begins. Every simulation is calibrated against real-world measurements, giving clients confidence that the built outcome will match the design intent.",
+  "shortDescription": "Multi-scale CFD simulation for urban wind comfort, interior climate, and coupled multi-physics analysis.",
+  "longDescription": "Our CFD engineers operate across macro, meso, and micro scales — from regional wind climate downscaling through urban district airflow to room-level interior comfort analysis. We use OpenFOAM with urbanMicroclimateFoam, the coupled multi-physics solver developed at the ETH Zurich Chair of Building Physics, to model turbulent airflow, heat and moisture transport, and radiation exchange simultaneously. Urban wind comfort is assessed against Lawson criteria with velocity ratio mapping and 3D streamline visualisation, while interior studies couple CFD results with energy simulation for holistic building performance evaluation.",
   "subItems": [
-    { "label": "CFD Airflow Analysis", "slug": "cfd-airflow" },
-    { "label": "Structural FEA", "slug": "structural-fea" },
-    { "label": "Thermal Dynamics Modeling", "slug": "thermal-dynamics" },
-    { "label": "Daylight & Solar Simulation", "slug": "daylight-solar" },
-    { "label": "Acoustic Simulation", "slug": "acoustic-simulation" }
+    { "label": "Macro-Scale Wind Climate Analysis", "slug": "macro-wind-climate" },
+    { "label": "Meso-Scale Urban Airflow", "slug": "meso-urban-airflow" },
+    { "label": "Micro-Scale Pedestrian Wind Comfort", "slug": "micro-pedestrian-comfort" },
+    { "label": "Lawson Criteria Assessment", "slug": "lawson-criteria" },
+    { "label": "Velocity Ratio Mapping", "slug": "velocity-ratio" },
+    { "label": "3D Meshing & Streamline Visualisation", "slug": "meshing-streamlines" },
+    { "label": "Interior Comfort Simulation", "slug": "interior-comfort" },
+    { "label": "Coupled Multi-Physics & Energy", "slug": "coupled-multi-physics" }
   ],
   "stats": {
-    "metric": "500+",
-    "metricLabel": "simulations completed",
-    "secondary": "avg. 30% efficiency improvement"
+    "metric": "3",
+    "metricLabel": "simulation scales — macro, meso, micro",
+    "secondary": "coupled multi-physics via OpenFOAM + urbanMicroclimateFoam (ETH Zurich)"
   },
   "links": [],
   "video": {

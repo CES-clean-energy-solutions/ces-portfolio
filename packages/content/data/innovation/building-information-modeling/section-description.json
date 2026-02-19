@@ -1,21 +1,24 @@
 {
-  "id": "building-information-modeling",
-  "slug": "building-information-modeling",
+  "id": "bim-mep-engineering",
+  "slug": "bim-mep-engineering",
   "order": 1,
-  "title": "Building Information Modeling",
-  "shortDescription": "BIM, digital twins, and parametric design for high-performance buildings.",
-  "longDescription": "We apply advanced Building Information Modeling and digital twin technology to optimize energy performance, construction sequencing, and façade systems from concept through operation. Our parametric workflows let engineers explore thousands of design variants and select the highest-performing solutions before a single beam is placed.",
+  "title": "BIM MEP Engineering",
+  "shortDescription": "Full-discipline MEP modeling with integrated digital workflows for energy, sustainability, and certification.",
+  "longDescription": "Our MEP engineering team delivers coordinated building services design through a fully digital BIM workflow — from IFC-based data exchange into Revit through to clash-free construction documentation. We integrate energy simulation, sustainability certification support, and building physics into every model stage, enabling truly integrated design across HVAC, electrical, plumbing, and fire protection disciplines. Our digital methods ensure that sustainability targets, regulatory compliance, and performance optimization are embedded in the model — not bolted on afterward.",
   "subItems": [
-    { "label": "BIM & Digital Twins", "slug": "bim-digital-twins" },
-    { "label": "Parametric Design", "slug": "parametric-design" },
-    { "label": "Energy Performance Simulation", "slug": "energy-performance-simulation" },
-    { "label": "Façade Optimization", "slug": "facade-optimization" },
-    { "label": "Construction Sequencing", "slug": "construction-sequencing" }
+    { "label": "MEP Coordination & Clash Detection", "slug": "mep-coordination" },
+    { "label": "IFC-Based Digital Workflow", "slug": "ifc-digital-workflow" },
+    { "label": "Integrated Energy Design", "slug": "integrated-energy-design" },
+    { "label": "Sustainability Certification Support", "slug": "sustainability-certification" },
+    { "label": "HVAC Systems Design", "slug": "hvac-systems-design" },
+    { "label": "Electrical Systems & Lighting", "slug": "electrical-systems" },
+    { "label": "Plumbing & Fire Protection", "slug": "plumbing-fire-protection" },
+    { "label": "Digital Methods & Automation", "slug": "digital-methods" }
   ],
   "stats": {
-    "metric": "150+",
-    "metricLabel": "BIM models delivered",
-    "secondary": "€2B+ assets modeled"
+    "metric": "4",
+    "metricLabel": "MEP disciplines fully integrated",
+    "secondary": "end-to-end IFC-to-Revit digital pipeline"
   },
   "links": [],
   "video": {
@@ -28,7 +31,7 @@
     {
       "src": "./001-wasserbaulabor.png",
       "alt": "Federated BIM model of the Wasserbaulabor hydraulic research facility with full MEP coordination",
-      "caption": "Full federated BIM model of the Wasserbaulabor hydraulic research facility — structural steel, glazed envelope and MEP services resolved to LOD 400.",
+      "caption": "Full federated BIM model of the Wasserbaulabor hydraulic research facility — structural steel, glazed envelope and MEP services coordinated.",
       "animated": false
     },
     {
