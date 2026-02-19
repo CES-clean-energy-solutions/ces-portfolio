@@ -10,14 +10,14 @@
     { "label": "Average Illuminance Mapping", "slug": "average-illuminance" },
     { "label": "Glare Analysis (DGP)", "slug": "glare-analysis" },
     { "label": "Annual Solar Exposure", "slug": "annual-solar-exposure" },
-    { "label": "EN 17037 Certification Support", "slug": "en-17037-certification" },
+    { "label": "EN 17037 LEED, BREEAM, etc. Certification Support", "slug": "en-17037-certification" },
     { "label": "Biological Light Requirement Analysis", "slug": "biological-light-requirements" },
     { "label": "Parametric Design Optimization", "slug": "parametric-optimization" }
   ],
   "stats": {
     "metric": "1M+",
     "metricLabel": "sensor points per run",
-    "secondary": "massively parallel via custom Prefect orchestration"
+    "secondary": "massively parallel via custom cloud orchestration platform"
   },
   "links": [],
   "video": {
@@ -29,7 +29,7 @@
   "images": [
     {
       "src": "./001-sensor-grid.png",
-      "alt": "3D sensor geometry placed across the urban massing for daylight measurement",
+      "alt": "3D sensor geometry placed across urban massing for daylight measurement",
       "caption": "Adaptive sensor grids mapped to floor plates and facade surfaces — resolution calibrated to EN 17037 occupancy zones and task areas.",
       "animated": false
     },

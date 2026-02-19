@@ -26,6 +26,9 @@ export interface InnovationLink {
   label: string;
   href: string;
   external?: boolean;
+  /** Optional thumbnail — supports ./ relative paths (resolved to public URL at load time) */
+  image?: string;
+  imageAlt?: string;
 }
 
 export interface InnovationImage {
@@ -102,6 +105,21 @@ function resolveAssetPaths(
           };
         }
         return img;
+      }
+    );
+  }
+
+  // Resolve links[].image fields
+  if (Array.isArray(resolved.links)) {
+    resolved.links = (resolved.links as Array<Record<string, unknown>>).map(
+      (link) => {
+        if (typeof link.image === "string" && link.image.startsWith("./")) {
+          return {
+            ...link,
+            image: `${PUBLIC_ASSET_BASE}/${areaId}/${link.image.slice(2)}`,
+          };
+        }
+        return link;
       }
     );
   }

@@ -3,8 +3,8 @@
   "slug": "climate-analysis",
   "order": 2,
   "title": "Climate Analysis",
-  "shortDescription": "Urban heat, flood risk, and microclimate modeling for resilient cities.",
-  "longDescription": "Our climate analysis practice combines high-resolution meteorological data, satellite imagery, and simulation engines to model urban heat islands, extreme weather events, and long-term climate trajectories. We translate complex climate projections into actionable design guidance for buildings, districts, and infrastructure systems.",
+  "shortDescription": "Urban heat, flood risk, and microclimate modeling for resilient cities, and energy efficient buildings.",
+  "longDescription": "Our climate analysis practice combines high-resolution meteorological data, satellite imagery, and simulation engines to model urban heat islands, extreme weather events, and long-term climate trajectories.For buildings and regions, as basis of design and for sustainability certification. We translate complex climate projections into actionable design guidance for buildings, districts, and infrastructure systems.",
   "subItems": [
     { "label": "Urban Heat Island Modeling", "slug": "urban-heat-island" },
     { "label": "Climate Risk Assessment", "slug": "climate-risk" },
@@ -14,10 +14,18 @@
   ],
   "stats": {
     "metric": "40+",
-    "metricLabel": "cities analyzed",
-    "secondary": "10M+ data points processed"
+    "metricLabel": "Analysis types",
+    "secondary": "Millions of real weather points"
   },
-  "links": [],
+  "links": [
+    {
+      "label": "Weather Analysis Tool",
+      "href": "https://climate-dev.ic-ces.engineering/tools/weather",
+      "external": true,
+      "image": "./weather-tool-thumbnail.png",
+      "imageAlt": "Screenshot of the CES Weather Analysis interactive tool"
+    }
+  ],
   "video": {
     "webm": "./climate-analysis-bg.webm",
     "mp4": "",

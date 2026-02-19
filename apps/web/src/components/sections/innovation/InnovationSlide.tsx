@@ -191,39 +191,77 @@ export function InnovationSlide({ area, isActive }: InnovationSlideProps) {
 
             {/* Links */}
             {area.links && area.links.length > 0 && (
-              <div className="flex flex-col gap-2">
-                {area.links.map((link: InnovationLink, idx: number) => (
-                  <a
-                    key={idx}
-                    href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                    className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${
-                      link.external
-                        ? "text-brand-gold hover:text-brand-gold/80"
-                        : "text-white hover:text-brand-gold"
-                    }`}
-                  >
-                    {link.label}
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+              <div className="flex flex-col gap-3">
+                {area.links.map((link: InnovationLink, idx: number) =>
+                  link.image ? (
+                    // Card thumbnail variant — image preview on the left
+                    <a
+                      key={idx}
+                      href={link.href}
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                      className="group flex items-center gap-3 overflow-hidden rounded-lg border border-white/10 bg-white/5 transition-colors hover:border-brand-gold/40 hover:bg-white/10"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d={
-                          link.external
-                            ? "M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                            : "M9 5l7 7-7 7"
-                        }
-                      />
-                    </svg>
-                  </a>
-                ))}
+                      <div className="relative h-[60px] w-[106px] flex-shrink-0 overflow-hidden">
+                        <Image
+                          src={link.image}
+                          alt={link.imageAlt ?? link.label}
+                          fill
+                          className="object-cover"
+                          sizes="106px"
+                        />
+                      </div>
+                      <span className="flex flex-1 items-center gap-2 pr-4 text-sm font-medium text-white transition-colors group-hover:text-brand-gold">
+                        {link.label}
+                        <svg
+                          className="h-4 w-4 flex-shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                      </span>
+                    </a>
+                  ) : (
+                    // Plain text link variant
+                    <a
+                      key={idx}
+                      href={link.href}
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                      className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${
+                        link.external
+                          ? "text-brand-gold hover:text-brand-gold/80"
+                          : "text-white hover:text-brand-gold"
+                      }`}
+                    >
+                      {link.label}
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d={
+                            link.external
+                              ? "M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                              : "M9 5l7 7-7 7"
+                          }
+                        />
+                      </svg>
+                    </a>
+                  )
+                )}
               </div>
             )}
           </div>

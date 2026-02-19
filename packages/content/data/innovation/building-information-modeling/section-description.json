@@ -17,7 +17,7 @@
   ],
   "stats": {
     "metric": "4",
-    "metricLabel": "MEP disciplines fully integrated",
+    "metricLabel": "MEP disciplines fully coordinated and integrated with clients",
     "secondary": "end-to-end IFC-to-Revit digital pipeline"
   },
   "links": [],
@@ -30,20 +30,20 @@
   "images": [
     {
       "src": "./001-wasserbaulabor.png",
-      "alt": "Federated BIM model of the Wasserbaulabor hydraulic research facility with full MEP coordination",
+      "alt": "Federated BIM model of the Wasserbaulabor hydraulic research facility with MEP coordination in a unique hydraulic application",
       "caption": "Full federated BIM model of the Wasserbaulabor hydraulic research facility — structural steel, glazed envelope and MEP services coordinated.",
       "animated": false
     },
     {
       "src": "./002-slxmep.jpeg",
-      "alt": "Clash-detected MEP coordination across twin high-rise towers",
-      "caption": "Clash-detected MEP coordination across twin high-rise towers, integrating mechanical, electrical and plumbing services prior to construction handover.",
+      "alt": "Clash-detected MEP coordination across twin office towers",
+      "caption": "Clash-detected MEP coordination across twin office towers, integrating mechanical, electrical and plumbing services.",
       "animated": false
     },
     {
       "src": "./003-pbs.png",
       "alt": "Integrated building services model for a mixed-use campus showing full systems coordination",
-      "caption": "Full building services model for a mixed-use campus — HVAC, fire protection, electrical and plumbing coordinated across both towers before site mobilisation.",
+      "caption": "Full building services model for a mixed-use campus — HVAC, fire protection, electrical and plumbing coordinated.",
       "animated": false
     }
   ]
