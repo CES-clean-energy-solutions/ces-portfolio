@@ -39,10 +39,10 @@
     }
   ],
   "video": {
-    "webm": "./bg.webm",
-    "mp4": "./bg.mp4",
-    "mp4Mobile": "./bg-mobile.mp4",
-    "poster": "./poster.jpg",
-    "placeholder": "./placeholder.jpg"
+    "webm": "./innovative-building-video.webm",
+    "mp4": "./innovative-building-video.mp4",
+    "mp4Mobile": "./innovative-building-video-mobile.mp4",
+    "poster": "./innovative-building-poster.jpg",
+    "placeholder": "./innovative-building-placeholder.jpg"
   }
 }

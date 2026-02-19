@@ -32,9 +32,9 @@
   },
   "relatedProjectSlugs": [],
   "video": {
-    "webm": "./bg.webm",
-    "mp4": "./bg.mp4",
-    "mp4Mobile": "./bg-mobile.mp4",
-    "poster": "./poster.jpg"
+    "webm": "./energy-efficiency-video.webm",
+    "mp4": "./energy-efficiency-video.mp4",
+    "mp4Mobile": "./energy-efficiency-video-mobile.mp4",
+    "poster": "./energy-efficiency-poster.jpg"
   }
 }

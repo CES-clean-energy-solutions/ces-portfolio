@@ -22,7 +22,7 @@
       "label": "Weather Analysis Tool",
       "href": "https://climate-dev.ic-ces.engineering/tools/weather",
       "external": true,
-      "image": "./weather-tool-thumbnail.png",
+      "image": "./weather-tool-histogram-thumbnail.png",
       "imageAlt": "Screenshot of the CES Weather Analysis interactive tool"
     }
   ],

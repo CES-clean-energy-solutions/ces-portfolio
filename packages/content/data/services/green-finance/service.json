@@ -36,10 +36,10 @@
   },
   "relatedProjectSlugs": [],
   "video": {
-    "webm": "./bg.webm",
-    "mp4": "./bg.mp4",
-    "mp4Mobile": "./bg-mobile.mp4",
-    "poster": "./poster.jpg",
-    "placeholder": "./placeholder.jpg"
+    "webm": "./green-finance-video.webm",
+    "mp4": "./green-finance-video.mp4",
+    "mp4Mobile": "./green-finance-video-mobile.mp4",
+    "poster": "./green-finance-poster.jpg",
+    "placeholder": "./green-finance-placeholder.jpg"
   }
 }

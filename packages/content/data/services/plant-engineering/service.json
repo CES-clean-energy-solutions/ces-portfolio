@@ -36,10 +36,10 @@
   },
   "relatedProjectSlugs": [],
   "video": {
-    "webm": "./bg.webm",
-    "mp4": "./bg.mp4",
-    "mp4Mobile": "./bg-mobile.mp4",
-    "poster": "./poster.jpg",
-    "placeholder": "./placeholder.jpg"
+    "webm": "./plant-engineering-video.webm",
+    "mp4": "./plant-engineering-video.mp4",
+    "mp4Mobile": "./plant-engineering-video-mobile.mp4",
+    "poster": "./plant-engineering-poster.jpg",
+    "placeholder": "./plant-engineering-placeholder.jpg"
   }
 }

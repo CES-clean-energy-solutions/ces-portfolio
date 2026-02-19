@@ -43,10 +43,10 @@
     }
   ],
   "video": {
-    "webm": "./bg.webm",
-    "mp4": "./bg.mp4",
-    "mp4Mobile": "./bg-mobile.mp4",
-    "poster": "./poster.jpg",
-    "placeholder": "./placeholder.jpg"
+    "webm": "./renewable-energy-video.webm",
+    "mp4": "./renewable-energy-video.mp4",
+    "mp4Mobile": "./renewable-energy-video-mobile.mp4",
+    "poster": "./renewable-energy-poster.jpg",
+    "placeholder": "./renewable-energy-placeholder.jpg"
   }
 }

@@ -43,10 +43,10 @@
     }
   ],
   "video": {
-    "webm": "./bg.webm",
-    "mp4": "./bg.mp4",
-    "mp4Mobile": "./bg-mobile.mp4",
-    "poster": "./poster.jpg",
-    "placeholder": "./placeholder.jpg"
+    "webm": "./research-development-video.webm",
+    "mp4": "./research-development-video.mp4",
+    "mp4Mobile": "./research-development-video-mobile.mp4",
+    "poster": "./research-development-poster.jpg",
+    "placeholder": "./research-development-placeholder.jpg"
   }
 }
