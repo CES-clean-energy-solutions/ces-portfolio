@@ -7,6 +7,9 @@ node_modules/
 dist/
 .turbo/
 
+# Generated content (copied by prebuild script)
+apps/web/public/content/
+
 # Screenshots
 .screenshots
 .screenshots/

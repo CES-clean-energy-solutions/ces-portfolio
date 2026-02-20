@@ -139,7 +139,6 @@ export function ServicesShowcase({ services }: ServicesShowcaseProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="relative min-h-screen"
           >
             <ServiceSlide service={service} isActive={true} />
           </motion.div>

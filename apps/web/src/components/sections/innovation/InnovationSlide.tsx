@@ -131,7 +131,7 @@ export function InnovationSlide({ area, isActive }: InnovationSlideProps) {
   const visibleImages = area.images.filter((img) => img.src !== "");
 
   return (
-    <div className="absolute inset-0 flex items-end pb-16 lg:items-center lg:pb-0">
+    <div className="relative flex min-h-screen items-start py-20 lg:absolute lg:inset-0 lg:items-center lg:py-0">
       {/* Video / gradient background */}
       <VideoBackground video={area.video} isActive={isActive} />
 

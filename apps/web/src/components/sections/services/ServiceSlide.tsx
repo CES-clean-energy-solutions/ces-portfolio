@@ -13,7 +13,7 @@ interface ServiceSlideProps {
 
 export function ServiceSlide({ service, isActive }: ServiceSlideProps) {
   return (
-    <div className="absolute inset-0 flex items-center">
+    <div className="relative flex min-h-screen items-start py-20 lg:absolute lg:inset-0 lg:items-center lg:py-0">
       {/* Video background */}
       <ServiceVideo video={service.video} isActive={isActive} />
 

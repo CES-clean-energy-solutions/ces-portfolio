@@ -125,7 +125,6 @@ export function InnovationShowcase({ innovations }: InnovationShowcaseProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="relative min-h-screen"
           >
             <InnovationSlide area={area} isActive={true} />
           </motion.div>
