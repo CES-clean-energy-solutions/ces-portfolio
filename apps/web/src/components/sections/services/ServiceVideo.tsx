@@ -97,6 +97,12 @@ export function ServiceVideo({ video, isActive }: ServiceVideoProps) {
       poster={video.poster}
       onTimeUpdate={handleTimeUpdate}
       onEnded={handleEnded}
+      // Slow playback to 50% speed for cinematic effect
+      onLoadedMetadata={() => {
+        if (videoRef.current) {
+          videoRef.current.playbackRate = 0.5;
+        }
+      }}
     >
       {isMobile ? (
         <source src={video.mp4Mobile} type="video/mp4" />

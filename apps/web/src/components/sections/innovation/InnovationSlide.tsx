@@ -108,6 +108,12 @@ function VideoBackground({ video, isActive }: VideoBackgroundProps) {
       poster={video.poster || undefined}
       onTimeUpdate={handleTimeUpdate}
       onEnded={handleEnded}
+      // Slow playback to 50% speed for cinematic effect
+      onLoadedMetadata={() => {
+        if (videoRef.current) {
+          videoRef.current.playbackRate = 0.5;
+        }
+      }}
     >
       {isMobile ? (
         video.mp4Mobile ? (
