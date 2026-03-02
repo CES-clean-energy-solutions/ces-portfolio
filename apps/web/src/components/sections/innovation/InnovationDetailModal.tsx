@@ -77,30 +77,20 @@ export function InnovationDetailModal({
 }: InnovationDetailModalProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Lock body scroll and stop Lenis when modal is open
+  // Stop Lenis and lock body scroll when modal is open
   useEffect(() => {
     if (!open) return;
+
+    // Stop Lenis smooth scroll entirely
+    const lenis = (window as unknown as Record<string, { stop: () => void; start: () => void }>).__lenis;
+    lenis?.stop();
 
     const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    // Stop wheel events from reaching Lenis by capturing them on the modal
-    const scrollEl = scrollContainerRef.current;
-    const stopPropagation = (e: WheelEvent) => {
-      e.stopPropagation();
-    };
-    // Use capture phase to intercept before Lenis sees it
-    scrollEl?.addEventListener("wheel", stopPropagation, { passive: false });
-    // Also block touch scrolling from propagating
-    const stopTouchPropagation = (e: TouchEvent) => {
-      e.stopPropagation();
-    };
-    scrollEl?.addEventListener("touchmove", stopTouchPropagation, { passive: false });
-
     return () => {
       document.body.style.overflow = original;
-      scrollEl?.removeEventListener("wheel", stopPropagation);
-      scrollEl?.removeEventListener("touchmove", stopTouchPropagation);
+      lenis?.start();
     };
   }, [open]);
 

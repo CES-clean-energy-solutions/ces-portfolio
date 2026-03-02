@@ -31,6 +31,9 @@ export default function SmoothScroll({
       const lenis = new Lenis();
       lenisRef.current = lenis;
 
+      // Expose globally so modals can call stop/start
+      (window as unknown as Record<string, unknown>).__lenis = lenis;
+
       // Sync Lenis scroll position with GSAP ScrollTrigger
       lenis.on("scroll", ScrollTrigger.update);
 
@@ -45,6 +48,7 @@ export default function SmoothScroll({
       if (lenisRef.current) {
         lenisRef.current.destroy();
         lenisRef.current = null;
+        delete (window as unknown as Record<string, unknown>).__lenis;
       }
     };
   }, []);
