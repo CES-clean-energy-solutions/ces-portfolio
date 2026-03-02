@@ -240,10 +240,10 @@ Management finds the current portfolio site too advanced and complicated for fie
   - [x] 5.2 Make phone number a clickable `tel:` link and email a clickable `mailto:` link with proper touch target sizes (44×44px min).
   - [x] 5.3 Keep simple fade-in animation on scroll (Motion `whileInView`).
 
-- [ ] 6.0 Wire up page.tsx and integrate
-  - [ ] 6.1 Update `apps/web/src/app/page.tsx`: import `InnovationsBento`, load innovation data, pass as props. Conditionally render based on `features.innovationsBento` flag.
-  - [ ] 6.2 Verify feature flag gating hides Services, Projects, and old Innovation sections.
-  - [ ] 6.3 Ensure scroll flow is smooth: Hero → Innovations Bento → Contact → Footer with no gaps or jarring transitions.
+- [x] 6.0 Wire up page.tsx and integrate
+  - [x] 6.1 Update `apps/web/src/app/page.tsx`: import `InnovationsBento`, load innovation data, pass as props. Conditionally render based on `features.innovationsBento` flag.
+  - [x] 6.2 Verify feature flag gating hides Services, Projects, and old Innovation sections.
+  - [x] 6.3 Ensure scroll flow is smooth: Hero → Innovations Bento → Contact → Footer with no gaps or jarring transitions.
 
 - [ ] 7.0 SST deployment configuration
   - [ ] 7.1 Update `sst.config.ts` to conditionally set domain based on stage: `innovation` stage → `innovation.ic-ces.engineering`, `production` stage → `portfolio.ic-ces.engineering`. Use the same hosted zone ID for both.
@@ -269,3 +269,4 @@ Management finds the current portfolio site too advanced and complicated for fie
 | 2026-03-02 | 3.0 | InnovationDetailModal created — Radix Dialog, fade+scale animation, gallery, stats, links |
 | 2026-03-02 | 4.0 | InnovationsBento container created — flexbox grid with centered partial row, staggered fade-in |
 | 2026-03-02 | 5.0 | ContactCta updated — Klaus Kogler contact card with tel: and mailto: links |
+| 2026-03-02 | 6.0 | page.tsx wired up — InnovationsBento integrated, feature flags verified |
