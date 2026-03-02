@@ -217,15 +217,15 @@ Management finds the current portfolio site too advanced and complicated for fie
   - [x] 2.5 Add `prefers-reduced-motion` support: no video, no scale, static poster only.
   - [x] 2.6 Add accessibility: `role="button"`, `tabIndex={0}`, `aria-label`, keyboard enter/space to open.
 
-- [ ] 3.0 Create InnovationDetailModal component
-  - [ ] 3.1 Create `apps/web/src/components/sections/innovation/InnovationDetailModal.tsx` using Radix Dialog (shadcn/ui).
-  - [ ] 3.2 Implement modal layout: full-screen overlay (`bg-black/80`), centered scrollable content card (`bg-neutral-950`, max-w ~1000px).
-  - [ ] 3.3 Render innovation title, long description, sub-items/capabilities list.
-  - [ ] 3.4 Render stats section (metric + label + secondary text).
-  - [ ] 3.5 Render links section (with thumbnails where available via `next/image`).
-  - [ ] 3.6 Render image gallery — horizontal scroll or grid of innovation images using `next/image`.
-  - [ ] 3.7 Add close button (X icon, top-right), Escape key close, backdrop click close (Radix handles these).
-  - [ ] 3.8 Add entrance/exit animations (Motion: fade + scale).
+- [x] 3.0 Create InnovationDetailModal component
+  - [x] 3.1 Create `apps/web/src/components/sections/innovation/InnovationDetailModal.tsx` using Radix Dialog (shadcn/ui).
+  - [x] 3.2 Implement modal layout: full-screen overlay (`bg-black/80`), centered scrollable content card (`bg-neutral-950`, max-w ~1000px).
+  - [x] 3.3 Render innovation title, long description, sub-items/capabilities list.
+  - [x] 3.4 Render stats section (metric + label + secondary text).
+  - [x] 3.5 Render links section (with thumbnails where available via `next/image`).
+  - [x] 3.6 Render image gallery — horizontal scroll or grid of innovation images using `next/image`.
+  - [x] 3.7 Add close button (X icon, top-right), Escape key close, backdrop click close (Radix handles these).
+  - [x] 3.8 Add entrance/exit animations (Motion: fade + scale).
 
 - [ ] 4.0 Create InnovationsBento container component
   - [ ] 4.1 Create `apps/web/src/components/sections/innovation/InnovationsBento.tsx` as a client component.
@@ -266,3 +266,4 @@ Management finds the current portfolio site too advanced and complicated for fie
 | 2026-03-02 | 1.2 | @radix-ui/react-dialog already in package.json — no install needed |
 | 2026-03-02 | 1.3 | Green Finance video reference fixed to local ./green-finance-video.webm |
 | 2026-03-02 | 2.0 | InnovationBentoCard created — video hover, poster fallback, a11y, reduced-motion |
+| 2026-03-02 | 3.0 | InnovationDetailModal created — Radix Dialog, fade+scale animation, gallery, stats, links |
