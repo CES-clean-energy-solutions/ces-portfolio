@@ -57,8 +57,8 @@ function ModalVideoHero({ area }: { area: InnovationArea }) {
       {/* Gradient fade at bottom — blends into page bg */}
       <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-neutral-950 to-transparent" />
 
-      {/* Title + subtitle overlaid at the top of the video */}
-      <div className="absolute inset-x-0 top-0 z-10 px-5 pt-5 sm:px-8 sm:pt-6 lg:px-10 lg:pt-8">
+      {/* Title + subtitle overlaid — pushed down from top */}
+      <div className="absolute inset-x-0 top-0 z-10 px-5 pt-10 sm:px-8 sm:pt-14 lg:px-10 lg:pt-16">
         <Dialog.Title className="pr-12 text-2xl font-bold text-white drop-shadow-lg sm:text-3xl lg:text-4xl">
           {area.title}
         </Dialog.Title>
@@ -140,8 +140,8 @@ export function InnovationDetailModal({
                       <ModalVideoHero area={area} />
                     </div>
 
-                    {/* Content body */}
-                    <div className="px-5 pb-8 sm:px-8 lg:px-10 lg:pb-10">
+                    {/* Content body — pulled up to close gap with video title */}
+                    <div className="-mt-4 px-5 pb-8 sm:px-8 lg:px-10 lg:pb-10">
                       {/* Long description */}
                       <Dialog.Description className="text-base leading-relaxed text-white/80 sm:text-lg">
                         {area.longDescription}
