@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from "react";
+import Image from "next/image";
+import cesChevron from "@repo/ui/assets/ces-chevron.svg";
 import type { InnovationArea } from "@ces/content/data/innovation";
 
 interface InnovationBentoCardProps {
@@ -90,12 +92,20 @@ export function InnovationBentoCard({ area, onClick }: InnovationBentoCardProps)
       {/* Gradient overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-      {/* Title */}
+      {/* Title with chevron */}
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-        <h3 className="text-lg font-bold text-white sm:text-xl lg:text-2xl">
-          {area.title}
-        </h3>
-        <p className="mt-1 line-clamp-2 text-sm text-white/70">
+        <div className="flex items-center gap-2">
+          <Image
+            src={cesChevron}
+            alt=""
+            aria-hidden="true"
+            className="h-4 w-4 sm:h-5 sm:w-5"
+          />
+          <h3 className="text-lg font-bold text-white sm:text-xl lg:text-2xl">
+            {area.title}
+          </h3>
+        </div>
+        <p className="mt-1 line-clamp-2 pl-6 text-sm text-white/70 sm:pl-7">
           {area.shortDescription}
         </p>
       </div>

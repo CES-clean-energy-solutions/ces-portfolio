@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --brand-gold: oklch(0.75 0.12 85);
+  --brand-gold: oklch(0.83 0.17 91);
   --brand-black: oklch(0 0 0);
   --header-h: 64px;
   --video-overlay-opacity: 0.45;
@@ -9,13 +9,13 @@
   /* shadcn/ui semantic tokens — dark theme as default */
   --background: oklch(0 0 0);
   --foreground: oklch(1 0 0);
-  --primary: oklch(0.75 0.12 85);
+  --primary: oklch(0.83 0.17 91);
   --primary-foreground: oklch(0 0 0);
   --secondary: oklch(0.15 0 0);
-  --accent: oklch(0.75 0.12 85);
+  --accent: oklch(0.83 0.17 91);
   --muted: oklch(0.6 0 0);
   --border: oklch(0.25 0 0);
-  --ring: oklch(0.75 0.12 85);
+  --ring: oklch(0.83 0.17 91);
   --radius: 0.5rem;
 }
 
