@@ -1,6 +1,6 @@
 # PRD: Simplified Three-Section Layout
 
-## Status: Draft
+## Status: In Progress
 ## Last Updated: 2026-03-02
 
 ## 1. Overview
@@ -204,10 +204,10 @@ Management finds the current portfolio site too advanced and complicated for fie
 
 ### Tasks
 
-- [ ] 1.0 Setup and feature flag configuration
-  - [ ] 1.1 Update `apps/web/src/config/features.ts`: set `servicesOverview: false`, `servicesShowcase: false`, `projectsPreview: false`, `innovationShowcase: false`. Add new flag `innovationsBento: true`.
-  - [ ] 1.2 Check if shadcn/ui `dialog` component exists in the project. If not, inform user to run `npx shadcn@latest add dialog` and wait for confirmation.
-  - [ ] 1.3 Fix `packages/content/data/innovation/green-finance/section-description.json` to reference `./green-finance-video.webm` instead of the shared research-development video.
+- [x] 1.0 Setup and feature flag configuration
+  - [x] 1.1 Update `apps/web/src/config/features.ts`: set `servicesOverview: false`, `servicesShowcase: false`, `projectsPreview: false`, `innovationShowcase: false`. Add new flag `innovationsBento: true`.
+  - [x] 1.2 Check if shadcn/ui `dialog` component exists in the project. If not, inform user to run `npx shadcn@latest add dialog` and wait for confirmation. **→ @radix-ui/react-dialog already installed.**
+  - [x] 1.3 Fix `packages/content/data/innovation/green-finance/section-description.json` to reference `./green-finance-video.webm` instead of the shared research-development video.
 
 - [ ] 2.0 Create InnovationBentoCard component
   - [ ] 2.1 Create `apps/web/src/components/sections/innovation/InnovationBentoCard.tsx` as a client component.
@@ -262,4 +262,6 @@ Management finds the current portfolio site too advanced and complicated for fie
 
 | Date | Task | Notes |
 |------|------|-------|
-|      |      |       |
+| 2026-03-02 | 1.1 | Feature flags updated — hid services/projects/old innovation, added innovationsBento |
+| 2026-03-02 | 1.2 | @radix-ui/react-dialog already in package.json — no install needed |
+| 2026-03-02 | 1.3 | Green Finance video reference fixed to local ./green-finance-video.webm |
