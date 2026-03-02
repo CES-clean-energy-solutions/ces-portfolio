@@ -51,14 +51,14 @@ function ModalVideoHero({ area }: { area: InnovationArea }) {
         </video>
       )}
 
-      {/* 30% dark overlay for text readability */}
-      <div className="absolute inset-0 bg-black/30" />
+      {/* Dark gradient from top for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent" />
 
       {/* Gradient fade at bottom — blends into page bg */}
       <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-neutral-950 to-transparent" />
 
-      {/* Title + subtitle overlaid on the video */}
-      <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-4 sm:px-8 lg:px-10">
+      {/* Title + subtitle overlaid at the top of the video */}
+      <div className="absolute inset-x-0 top-0 z-10 px-5 pt-5 sm:px-8 sm:pt-6 lg:px-10 lg:pt-8">
         <Dialog.Title className="pr-12 text-2xl font-bold text-white drop-shadow-lg sm:text-3xl lg:text-4xl">
           {area.title}
         </Dialog.Title>
