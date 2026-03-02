@@ -20,7 +20,6 @@ function ModalVideoHero({ area }: { area: InnovationArea }) {
     const video = videoRef.current;
     if (!video) return;
 
-    video.playbackRate = 0.5;
     video.play().catch(() => {});
 
     return () => {
