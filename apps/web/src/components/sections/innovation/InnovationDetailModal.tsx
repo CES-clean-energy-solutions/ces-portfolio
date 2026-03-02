@@ -50,16 +50,19 @@ export function InnovationDetailModal({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="fixed inset-0 z-50 overflow-y-auto"
+                className="fixed inset-0 z-50 overflow-y-auto overscroll-contain"
+                onClick={(e) => {
+                  if (e.target === e.currentTarget) onOpenChange(false);
+                }}
               >
-                {/* Click-outside wrapper */}
+                {/* Scroll container */}
                 <div
                   className="flex min-h-full items-start justify-center px-4 py-8 sm:py-12"
                   onClick={(e) => {
                     if (e.target === e.currentTarget) onOpenChange(false);
                   }}
                 >
-                  <div className="relative w-full max-w-4xl rounded-2xl border border-white/10 bg-neutral-950 p-6 shadow-2xl sm:p-8 lg:p-10">
+                  <div className="relative w-full max-w-3xl rounded-2xl border border-white/10 bg-neutral-950 p-6 shadow-2xl sm:p-8 lg:max-w-6xl lg:p-10">
                     {/* Close button */}
                     <Dialog.Close asChild>
                       <button
@@ -187,7 +190,7 @@ export function InnovationDetailModal({
                                     src={img.src}
                                     alt={img.alt}
                                     fill
-                                    sizes="(max-width: 640px) 100vw, 50vw"
+                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 550px"
                                     className="rounded-lg object-cover"
                                   />
                                 </div>
