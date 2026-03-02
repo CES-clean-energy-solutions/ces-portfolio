@@ -12,8 +12,9 @@ interface InnovationBentoCardProps {
 
 export function InnovationBentoCard({ area, onClick }: InnovationBentoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 1024);
@@ -22,21 +23,35 @@ export function InnovationBentoCard({ area, onClick }: InnovationBentoCardProps)
     );
   }, []);
 
-  // Find a usable poster image: first non-empty image from the images array
-  const posterSrc = area.images.find((img) => img.src)?.src ?? "";
+  const hasVideoSrc = !!area.video.webm;
+  // Play on hover only on desktop without reduced-motion
+  const canPlay = hasVideoSrc && !videoFailed && !isMobile && !prefersReducedMotion;
 
-  const hasVideo = !prefersReducedMotion && !isMobile && !!area.video.webm;
+  // Fallback poster: first non-empty image from the images array
+  const fallbackPosterSrc = area.images.find((img) => img.src)?.src ?? "";
+
+  const handleLoadedMetadata = useCallback(() => {
+    // Ensure frame 0 is rendered as the poster
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+    }
+  }, []);
+
+  const handleVideoError = useCallback(() => {
+    setVideoFailed(true);
+  }, []);
 
   const handleMouseEnter = useCallback(() => {
-    if (!hasVideo || !videoRef.current) return;
+    if (!canPlay || !videoRef.current) return;
     videoRef.current.play().catch(() => {
-      // Autoplay may be blocked — fail silently, poster remains visible
+      // Autoplay blocked — frame 0 stays visible, no flash
     });
-  }, [hasVideo]);
+  }, [canPlay]);
 
   const handleMouseLeave = useCallback(() => {
     if (!videoRef.current) return;
     videoRef.current.pause();
+    videoRef.current.currentTime = 0;
   }, []);
 
   const handleKeyDown = useCallback(
@@ -49,6 +64,9 @@ export function InnovationBentoCard({ area, onClick }: InnovationBentoCardProps)
     [onClick]
   );
 
+  // Show the video element (for frame 0) unless it failed or there's no source
+  const showVideo = hasVideoSrc && !videoFailed;
+
   return (
     <div
       role="button"
@@ -60,33 +78,35 @@ export function InnovationBentoCard({ area, onClick }: InnovationBentoCardProps)
       onMouseLeave={handleMouseLeave}
       className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl bg-neutral-900 outline-none ring-brand-gold focus-visible:ring-2 motion-safe:transition-transform motion-safe:duration-300 motion-safe:hover:scale-[1.02]"
     >
-      {/* Poster image background */}
-      {posterSrc && (
-        <img
-          src={posterSrc}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      )}
-
-      {/* Video background — desktop only, plays on hover */}
-      {hasVideo && (
+      {/* Video as primary background — shows frame 0 at rest, plays on hover */}
+      {showVideo && (
         <video
           ref={videoRef}
           muted
           playsInline
           loop
-          preload="none"
+          preload="metadata"
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          onLoadedMetadata={handleLoadedMetadata}
+          onError={handleVideoError}
+          className="absolute inset-0 h-full w-full object-cover"
         >
           <source src={area.video.webm} type="video/webm" />
           {area.video.mp4 && (
             <source src={area.video.mp4} type="video/mp4" />
           )}
         </video>
+      )}
+
+      {/* Fallback image — only shown if video fails or no video source */}
+      {!showVideo && fallbackPosterSrc && (
+        <img
+          src={fallbackPosterSrc}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
       )}
 
       {/* Gradient overlay for text readability */}
