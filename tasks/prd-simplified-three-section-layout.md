@@ -209,13 +209,13 @@ Management finds the current portfolio site too advanced and complicated for fie
   - [x] 1.2 Check if shadcn/ui `dialog` component exists in the project. If not, inform user to run `npx shadcn@latest add dialog` and wait for confirmation. **→ @radix-ui/react-dialog already installed.**
   - [x] 1.3 Fix `packages/content/data/innovation/green-finance/section-description.json` to reference `./green-finance-video.webm` instead of the shared research-development video.
 
-- [ ] 2.0 Create InnovationBentoCard component
-  - [ ] 2.1 Create `apps/web/src/components/sections/innovation/InnovationBentoCard.tsx` as a client component.
-  - [ ] 2.2 Implement card layout: relative container, video/poster background, gradient overlay, title text bottom-left.
-  - [ ] 2.3 Implement desktop hover behavior: play video on mouseenter, pause on mouseleave, scale-up transition.
-  - [ ] 2.4 Implement mobile behavior: use first image from innovation's `images` array as static poster (no video autoplay on mobile to save bandwidth).
-  - [ ] 2.5 Add `prefers-reduced-motion` support: no video, no scale, static poster only.
-  - [ ] 2.6 Add accessibility: `role="button"`, `tabIndex={0}`, `aria-label`, keyboard enter/space to open.
+- [x] 2.0 Create InnovationBentoCard component
+  - [x] 2.1 Create `apps/web/src/components/sections/innovation/InnovationBentoCard.tsx` as a client component.
+  - [x] 2.2 Implement card layout: relative container, video/poster background, gradient overlay, title text bottom-left.
+  - [x] 2.3 Implement desktop hover behavior: play video on mouseenter, pause on mouseleave, scale-up transition.
+  - [x] 2.4 Implement mobile behavior: use first image from innovation's `images` array as static poster (no video autoplay on mobile to save bandwidth).
+  - [x] 2.5 Add `prefers-reduced-motion` support: no video, no scale, static poster only.
+  - [x] 2.6 Add accessibility: `role="button"`, `tabIndex={0}`, `aria-label`, keyboard enter/space to open.
 
 - [ ] 3.0 Create InnovationDetailModal component
   - [ ] 3.1 Create `apps/web/src/components/sections/innovation/InnovationDetailModal.tsx` using Radix Dialog (shadcn/ui).
@@ -265,3 +265,4 @@ Management finds the current portfolio site too advanced and complicated for fie
 | 2026-03-02 | 1.1 | Feature flags updated — hid services/projects/old innovation, added innovationsBento |
 | 2026-03-02 | 1.2 | @radix-ui/react-dialog already in package.json — no install needed |
 | 2026-03-02 | 1.3 | Green Finance video reference fixed to local ./green-finance-video.webm |
+| 2026-03-02 | 2.0 | InnovationBentoCard created — video hover, poster fallback, a11y, reduced-motion |

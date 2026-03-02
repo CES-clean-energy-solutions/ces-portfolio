@@ -1,0 +1,104 @@
+"use client";
+
+import { useRef, useCallback, useState, useEffect } from "react";
+import type { InnovationArea } from "@ces/content/data/innovation";
+
+interface InnovationBentoCardProps {
+  area: InnovationArea;
+  onClick: () => void;
+}
+
+export function InnovationBentoCard({ area, onClick }: InnovationBentoCardProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 1024);
+    setPrefersReducedMotion(
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }, []);
+
+  // Find a usable poster image: first non-empty image from the images array
+  const posterSrc = area.images.find((img) => img.src)?.src ?? "";
+
+  const hasVideo = !prefersReducedMotion && !isMobile && !!area.video.webm;
+
+  const handleMouseEnter = useCallback(() => {
+    if (!hasVideo || !videoRef.current) return;
+    videoRef.current.play().catch(() => {
+      // Autoplay may be blocked — fail silently, poster remains visible
+    });
+  }, [hasVideo]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!videoRef.current) return;
+    videoRef.current.pause();
+  }, []);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onClick();
+      }
+    },
+    [onClick]
+  );
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      aria-label={`View details for ${area.title}`}
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl bg-neutral-900 outline-none ring-brand-gold focus-visible:ring-2 motion-safe:transition-transform motion-safe:duration-300 motion-safe:hover:scale-[1.02]"
+    >
+      {/* Poster image background */}
+      {posterSrc && (
+        <img
+          src={posterSrc}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      )}
+
+      {/* Video background — desktop only, plays on hover */}
+      {hasVideo && (
+        <video
+          ref={videoRef}
+          muted
+          playsInline
+          loop
+          preload="none"
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        >
+          <source src={area.video.webm} type="video/webm" />
+          {area.video.mp4 && (
+            <source src={area.video.mp4} type="video/mp4" />
+          )}
+        </video>
+      )}
+
+      {/* Gradient overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+      {/* Title */}
+      <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+        <h3 className="text-lg font-bold text-white sm:text-xl lg:text-2xl">
+          {area.title}
+        </h3>
+        <p className="mt-1 line-clamp-2 text-sm text-white/70">
+          {area.shortDescription}
+        </p>
+      </div>
+    </div>
+  );
+}
