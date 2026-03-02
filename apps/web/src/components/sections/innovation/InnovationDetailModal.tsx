@@ -108,14 +108,11 @@ export function InnovationDetailModal({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
-                className="fixed inset-0 z-50 overflow-y-auto overscroll-contain"
-                onClick={(e) => {
-                  if (e.target === e.currentTarget) onOpenChange(false);
-                }}
+                className="fixed inset-0 z-50"
               >
-                {/* Scroll + centering wrapper */}
+                {/* Scroll container — this is the element that scrolls */}
                 <div
-                  className="flex min-h-full items-start justify-center md:px-6 md:py-10 lg:px-8 lg:py-12"
+                  className="h-full overflow-y-auto overscroll-contain md:flex md:items-start md:justify-center md:px-6 md:py-10 lg:px-8 lg:py-12"
                   onClick={(e) => {
                     if (e.target === e.currentTarget) onOpenChange(false);
                   }}
@@ -124,7 +121,7 @@ export function InnovationDetailModal({
                     Mobile: full-screen sheet (no radius, no margin, edge-to-edge)
                     Desktop: centered card with rounded corners
                   */}
-                  <div className="relative min-h-screen w-full bg-neutral-950 md:min-h-0 md:max-w-4xl md:rounded-2xl md:border md:border-white/10 md:shadow-2xl lg:max-w-6xl">
+                  <div className="relative min-h-full w-full bg-neutral-950 md:min-h-0 md:max-w-4xl md:rounded-2xl md:border md:border-white/10 md:shadow-2xl lg:max-w-6xl">
                     {/* Close button */}
                     <Dialog.Close asChild>
                       <button
