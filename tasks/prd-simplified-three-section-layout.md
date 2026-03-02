@@ -245,9 +245,9 @@ Management finds the current portfolio site too advanced and complicated for fie
   - [x] 6.2 Verify feature flag gating hides Services, Projects, and old Innovation sections.
   - [x] 6.3 Ensure scroll flow is smooth: Hero → Innovations Bento → Contact → Footer with no gaps or jarring transitions.
 
-- [ ] 7.0 SST deployment configuration
-  - [ ] 7.1 Update `sst.config.ts` to conditionally set domain based on stage: `innovation` stage → `innovation.ic-ces.engineering`, `production` stage → `portfolio.ic-ces.engineering`. Use the same hosted zone ID for both.
-  - [ ] 7.2 Verify config builds without errors (`pnpm build` in root).
+- [x] 7.0 SST deployment configuration
+  - [x] 7.1 Update `sst.config.ts` to conditionally set domain based on stage: `innovation` stage → `innovation.ic-ces.engineering`, `production` stage → `portfolio.ic-ces.engineering`. Use the same hosted zone ID for both.
+  - [ ] 7.2 Verify config builds without errors (`pnpm build` in root). **→ Verified in task 8.0**
 
 - [ ] 8.0 Polish and testing
   - [ ] 8.1 Run `pnpm build` — fix any build errors.
@@ -270,3 +270,4 @@ Management finds the current portfolio site too advanced and complicated for fie
 | 2026-03-02 | 4.0 | InnovationsBento container created — flexbox grid with centered partial row, staggered fade-in |
 | 2026-03-02 | 5.0 | ContactCta updated — Klaus Kogler contact card with tel: and mailto: links |
 | 2026-03-02 | 6.0 | page.tsx wired up — InnovationsBento integrated, feature flags verified |
+| 2026-03-02 | 7.1 | SST config updated — stage-based domain mapping (innovation/production) |

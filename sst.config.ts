@@ -26,10 +26,17 @@ export default $config({
       });
     });
 
+    // Map SST stage to subdomain
+    const domainByStage: Record<string, string> = {
+      production: "portfolio.ic-ces.engineering",
+      innovation: "innovation.ic-ces.engineering",
+    };
+    const domainName = domainByStage[$app.stage] ?? `${$app.stage}.ic-ces.engineering`;
+
     const site = new sst.aws.Nextjs("CesWeb", {
       path: "apps/web",
       domain: {
-        name: "portfolio.ic-ces.engineering",
+        name: domainName,
         dns: sst.aws.dns({ zone: "Z07972313GVRF4SEMXLOL" }),
       },
     });
