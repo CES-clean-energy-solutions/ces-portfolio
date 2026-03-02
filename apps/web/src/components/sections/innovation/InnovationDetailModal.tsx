@@ -13,18 +13,15 @@ interface InnovationDetailModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-function ModalVideo({ area }: { area: InnovationArea }) {
+function ModalVideoHero({ area }: { area: InnovationArea }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Slow playback for cinematic feel
     video.playbackRate = 0.5;
-    video.play().catch(() => {
-      // Autoplay blocked — first frame still visible via preload=metadata
-    });
+    video.play().catch(() => {});
 
     return () => {
       video.pause();
@@ -32,28 +29,44 @@ function ModalVideo({ area }: { area: InnovationArea }) {
   }, []);
 
   const hasVideo = !!area.video.webm || !!area.video.mp4;
-  if (!hasVideo) return null;
 
   return (
-    <div className="relative h-48 w-full overflow-hidden sm:h-64 lg:h-80">
-      <video
-        ref={videoRef}
-        muted
-        playsInline
-        loop
-        preload="metadata"
-        aria-hidden="true"
-        className="h-full w-full object-cover"
-      >
-        {area.video.webm && (
-          <source src={area.video.webm} type="video/webm" />
-        )}
-        {area.video.mp4 && (
-          <source src={area.video.mp4} type="video/mp4" />
-        )}
-      </video>
-      {/* Gradient fade to page background */}
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-neutral-950 to-transparent" />
+    <div className="relative h-48 w-full overflow-hidden sm:h-64 lg:h-72">
+      {/* Video background */}
+      {hasVideo && (
+        <video
+          ref={videoRef}
+          muted
+          playsInline
+          loop
+          preload="metadata"
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          {area.video.webm && (
+            <source src={area.video.webm} type="video/webm" />
+          )}
+          {area.video.mp4 && (
+            <source src={area.video.mp4} type="video/mp4" />
+          )}
+        </video>
+      )}
+
+      {/* 30% dark overlay for text readability */}
+      <div className="absolute inset-0 bg-black/30" />
+
+      {/* Gradient fade at bottom — blends into page bg */}
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-neutral-950 to-transparent" />
+
+      {/* Title + subtitle overlaid on the video */}
+      <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-4 sm:px-8 lg:px-10">
+        <Dialog.Title className="pr-12 text-2xl font-bold text-white drop-shadow-lg sm:text-3xl lg:text-4xl">
+          {area.title}
+        </Dialog.Title>
+        <p className="mt-1 text-sm text-brand-gold drop-shadow-md sm:text-base">
+          {area.shortDescription}
+        </p>
+      </div>
     </div>
   );
 }
@@ -123,25 +136,15 @@ export function InnovationDetailModal({
                       </button>
                     </Dialog.Close>
 
-                    {/* Video hero with gradient fadeout */}
+                    {/* Video hero with overlaid title */}
                     <div className="overflow-hidden md:rounded-t-2xl">
-                      <ModalVideo area={area} />
+                      <ModalVideoHero area={area} />
                     </div>
 
                     {/* Content body */}
                     <div className="px-5 pb-8 sm:px-8 lg:px-10 lg:pb-10">
-                      {/* Title */}
-                      <Dialog.Title className="pr-12 text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
-                        {area.title}
-                      </Dialog.Title>
-
-                      {/* Short description as subtitle */}
-                      <p className="mt-2 text-sm text-brand-gold sm:text-base">
-                        {area.shortDescription}
-                      </p>
-
                       {/* Long description */}
-                      <Dialog.Description className="mt-6 text-base leading-relaxed text-white/80 sm:text-lg">
+                      <Dialog.Description className="text-base leading-relaxed text-white/80 sm:text-lg">
                         {area.longDescription}
                       </Dialog.Description>
 
