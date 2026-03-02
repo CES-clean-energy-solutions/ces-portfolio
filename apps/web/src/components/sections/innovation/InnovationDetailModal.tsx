@@ -75,13 +75,32 @@ export function InnovationDetailModal({
   open,
   onOpenChange,
 }: InnovationDetailModalProps) {
-  // Lock body scroll when modal is open
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Lock body scroll and stop Lenis when modal is open
   useEffect(() => {
     if (!open) return;
+
     const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
+    // Stop wheel events from reaching Lenis by capturing them on the modal
+    const scrollEl = scrollContainerRef.current;
+    const stopPropagation = (e: WheelEvent) => {
+      e.stopPropagation();
+    };
+    // Use capture phase to intercept before Lenis sees it
+    scrollEl?.addEventListener("wheel", stopPropagation, { passive: false });
+    // Also block touch scrolling from propagating
+    const stopTouchPropagation = (e: TouchEvent) => {
+      e.stopPropagation();
+    };
+    scrollEl?.addEventListener("touchmove", stopTouchPropagation, { passive: false });
+
     return () => {
       document.body.style.overflow = original;
+      scrollEl?.removeEventListener("wheel", stopPropagation);
+      scrollEl?.removeEventListener("touchmove", stopTouchPropagation);
     };
   }, [open]);
 
@@ -122,6 +141,7 @@ export function InnovationDetailModal({
               >
                 {/* Scroll container — this is the element that scrolls */}
                 <div
+                  ref={scrollContainerRef}
                   className="h-full overflow-y-auto overscroll-contain md:flex md:items-start md:justify-center md:px-6 md:py-10 lg:px-8 lg:py-12"
                   onClick={(e) => {
                     if (e.target === e.currentTarget) onOpenChange(false);
