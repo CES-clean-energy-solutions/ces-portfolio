@@ -51,14 +51,14 @@ function ModalVideoHero({ area }: { area: InnovationArea }) {
         </video>
       )}
 
-      {/* Dark gradient from top for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent" />
+      {/* Dark gradient — stronger at bottom where text sits */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
       {/* Gradient fade at bottom — blends into page bg */}
       <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-neutral-950 to-transparent" />
 
-      {/* Title + subtitle overlaid — pushed down from top */}
-      <div className="absolute inset-x-0 top-0 z-10 px-5 pt-10 sm:px-8 sm:pt-14 lg:px-10 lg:pt-16">
+      {/* Title + subtitle overlaid — anchored to bottom of video */}
+      <div className="absolute inset-x-0 bottom-0 z-10 px-5 pb-8 sm:px-8 sm:pb-10 lg:px-10 lg:pb-10">
         <Dialog.Title className="pr-12 text-2xl font-bold text-white drop-shadow-lg sm:text-3xl lg:text-4xl">
           {area.title}
         </Dialog.Title>
@@ -140,8 +140,8 @@ export function InnovationDetailModal({
                       <ModalVideoHero area={area} />
                     </div>
 
-                    {/* Content body — pulled up to close gap with video title */}
-                    <div className="-mt-4 px-5 pb-8 sm:px-8 lg:px-10 lg:pb-10">
+                    {/* Content body */}
+                    <div className="px-5 pb-8 pt-4 sm:px-8 sm:pt-5 lg:px-10 lg:pb-10 lg:pt-6">
                       {/* Long description */}
                       <Dialog.Description className="text-base leading-relaxed text-white/80 sm:text-lg">
                         {area.longDescription}
