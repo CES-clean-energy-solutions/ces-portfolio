@@ -75,6 +75,16 @@ export function InnovationDetailModal({
   open,
   onOpenChange,
 }: InnovationDetailModalProps) {
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (!open) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [open]);
+
   if (!area) return null;
 
   const validImages = area.images.filter((img) => img.src);
