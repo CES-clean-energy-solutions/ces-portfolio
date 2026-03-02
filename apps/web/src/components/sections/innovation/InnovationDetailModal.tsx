@@ -77,23 +77,6 @@ export function InnovationDetailModal({
 }: InnovationDetailModalProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Stop Lenis and lock body scroll when modal is open
-  useEffect(() => {
-    if (!open) return;
-
-    // Stop Lenis smooth scroll entirely
-    const lenis = (window as unknown as Record<string, { stop: () => void; start: () => void }>).__lenis;
-    lenis?.stop();
-
-    const original = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = original;
-      lenis?.start();
-    };
-  }, [open]);
-
   if (!area) return null;
 
   const validImages = area.images.filter((img) => img.src);
@@ -129,9 +112,10 @@ export function InnovationDetailModal({
                 transition={{ duration: 0.25, ease: "easeOut" }}
                 className="fixed inset-0 z-50"
               >
-                {/* Scroll container — this is the element that scrolls */}
+                {/* Scroll container — data-lenis-prevent stops Lenis from hijacking wheel events */}
                 <div
                   ref={scrollContainerRef}
+                  data-lenis-prevent
                   className="h-full overflow-y-auto overscroll-contain md:flex md:items-start md:justify-center md:px-6 md:py-10 lg:px-8 lg:py-12"
                   onClick={(e) => {
                     if (e.target === e.currentTarget) onOpenChange(false);
