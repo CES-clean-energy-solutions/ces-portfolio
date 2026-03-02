@@ -227,13 +227,13 @@ Management finds the current portfolio site too advanced and complicated for fie
   - [x] 3.7 Add close button (X icon, top-right), Escape key close, backdrop click close (Radix handles these).
   - [x] 3.8 Add entrance/exit animations (Motion: fade + scale).
 
-- [ ] 4.0 Create InnovationsBento container component
-  - [ ] 4.1 Create `apps/web/src/components/sections/innovation/InnovationsBento.tsx` as a client component.
-  - [ ] 4.2 Load innovation data using `loadAllInnovations()` from `@ces/content/data/innovation` (pass as props from page).
-  - [ ] 4.3 Implement equal grid layout with CSS Grid: 3-column desktop (all cards same size, bottom row centered), 2-column tablet, 1-column mobile.
-  - [ ] 4.4 Map each innovation to an `InnovationBentoCard`, manage selected state for modal open/close.
-  - [ ] 4.5 Add section-level scroll animation: fade-in cards with stagger using Motion `whileInView`.
-  - [ ] 4.6 Add section heading "Innovative Services at CES" above grid — style with Web Gold accent.
+- [x] 4.0 Create InnovationsBento container component
+  - [x] 4.1 Create `apps/web/src/components/sections/innovation/InnovationsBento.tsx` as a client component.
+  - [x] 4.2 Load innovation data using `loadAllInnovations()` from `@ces/content/data/innovation` (pass as props from page).
+  - [x] 4.3 Implement equal grid layout with flexbox: 3-column desktop (centered partial row), 2-column tablet, 1-column mobile.
+  - [x] 4.4 Map each innovation to an `InnovationBentoCard`, manage selected state for modal open/close.
+  - [x] 4.5 Add section-level scroll animation: fade-in cards with stagger using Motion `whileInView`.
+  - [x] 4.6 Add section heading "Innovative Services at CES" above grid — style with Web Gold accent.
 
 - [ ] 5.0 Update Contact section
   - [ ] 5.1 Update `apps/web/src/components/sections/ContactCta.tsx` with real content: heading "Your contact persons", contact card for Klaus Kogler (name, title, phone, email).
@@ -267,3 +267,4 @@ Management finds the current portfolio site too advanced and complicated for fie
 | 2026-03-02 | 1.3 | Green Finance video reference fixed to local ./green-finance-video.webm |
 | 2026-03-02 | 2.0 | InnovationBentoCard created — video hover, poster fallback, a11y, reduced-motion |
 | 2026-03-02 | 3.0 | InnovationDetailModal created — Radix Dialog, fade+scale animation, gallery, stats, links |
+| 2026-03-02 | 4.0 | InnovationsBento container created — flexbox grid with centered partial row, staggered fade-in |
