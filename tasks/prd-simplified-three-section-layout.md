@@ -235,10 +235,10 @@ Management finds the current portfolio site too advanced and complicated for fie
   - [x] 4.5 Add section-level scroll animation: fade-in cards with stagger using Motion `whileInView`.
   - [x] 4.6 Add section heading "Innovative Services at CES" above grid — style with Web Gold accent.
 
-- [ ] 5.0 Update Contact section
-  - [ ] 5.1 Update `apps/web/src/components/sections/ContactCta.tsx` with real content: heading "Your contact persons", contact card for Klaus Kogler (name, title, phone, email).
-  - [ ] 5.2 Make phone number a clickable `tel:` link and email a clickable `mailto:` link with proper touch target sizes (44×44px min).
-  - [ ] 5.3 Keep simple fade-in animation on scroll (Motion `whileInView`).
+- [x] 5.0 Update Contact section
+  - [x] 5.1 Update `apps/web/src/components/sections/ContactCta.tsx` with real content: heading "Your Contact Person", contact card for Klaus Kogler (name, title, phone, email).
+  - [x] 5.2 Make phone number a clickable `tel:` link and email a clickable `mailto:` link with proper touch target sizes (44×44px min).
+  - [x] 5.3 Keep simple fade-in animation on scroll (Motion `whileInView`).
 
 - [ ] 6.0 Wire up page.tsx and integrate
   - [ ] 6.1 Update `apps/web/src/app/page.tsx`: import `InnovationsBento`, load innovation data, pass as props. Conditionally render based on `features.innovationsBento` flag.
@@ -268,3 +268,4 @@ Management finds the current portfolio site too advanced and complicated for fie
 | 2026-03-02 | 2.0 | InnovationBentoCard created — video hover, poster fallback, a11y, reduced-motion |
 | 2026-03-02 | 3.0 | InnovationDetailModal created — Radix Dialog, fade+scale animation, gallery, stats, links |
 | 2026-03-02 | 4.0 | InnovationsBento container created — flexbox grid with centered partial row, staggered fade-in |
+| 2026-03-02 | 5.0 | ContactCta updated — Klaus Kogler contact card with tel: and mailto: links |

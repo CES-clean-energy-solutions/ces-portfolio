@@ -1,11 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-
-// PLACEHOLDER — replace with real content
-const HEADLINE = "Let's Build Something";
-const BODY =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+import { Phone, Mail } from "lucide-react";
 
 export default function ContactCta() {
   return (
@@ -21,29 +17,40 @@ export default function ContactCta() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-3xl font-bold text-white md:text-4xl lg:text-5xl"
         >
-          {HEADLINE}
+          Your Contact Person
         </motion.h2>
 
-        <motion.p
+        {/* Contact card */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-          className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted"
+          className="mx-auto mt-10 max-w-sm rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8"
         >
-          {BODY}
-        </motion.p>
+          <p className="text-xl font-bold text-white sm:text-2xl">
+            Dipl.-Ing. Klaus Kogler
+          </p>
+          <p className="mt-1 text-sm text-brand-gold">
+            Buildings and Urban Development
+          </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
-          className="mt-10"
-        >
-          <button className="min-h-11 min-w-11 rounded-md bg-brand-gold px-8 py-3 text-sm font-semibold text-brand-black transition-opacity hover:opacity-90">
-            Contact Us
-          </button>
+          <div className="mt-6 flex flex-col gap-3">
+            <a
+              href="tel:+4366460169232"
+              className="inline-flex min-h-11 items-center justify-center gap-3 rounded-lg bg-brand-gold px-5 py-3 text-sm font-semibold text-brand-black transition-opacity hover:opacity-90"
+            >
+              <Phone className="h-4 w-4" />
+              +43 664 601 692 32
+            </a>
+            <a
+              href="mailto:k.kogler@ic-ces.at"
+              className="inline-flex min-h-11 items-center justify-center gap-3 rounded-lg border border-brand-gold px-5 py-3 text-sm font-semibold text-brand-gold transition-colors hover:bg-brand-gold/10"
+            >
+              <Mail className="h-4 w-4" />
+              k.kogler@ic-ces.at
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
