@@ -15,7 +15,7 @@ export function ServicesBento({ innovations }: ServicesBentoProps) {
 
   return (
     <section
-      id="innovations"
+      id="services"
       className="bg-brand-black px-4 py-20 sm:px-6 md:py-28 lg:px-8 lg:py-36"
     >
       <div className="mx-auto max-w-6xl">

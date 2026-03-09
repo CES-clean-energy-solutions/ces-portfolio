@@ -244,13 +244,13 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
   - [x] 2.6 Repeat for `ServicesBento.tsx` if it uses video backgrounds
   - [x] 2.7 Update `packages/content/data/services.ts` type definitions: remove `video` prop, add `image` prop to ServiceCategory interface
 
-- [ ] **3.0 Simplify Header Navigation**
-  - [ ] 3.1 Open `apps/web/src/components/Header.tsx` and remove hamburger menu/sheet logic (if present)
-  - [ ] 3.2 Replace navigation with two simple anchor links: "Services" and "Contact"
-  - [ ] 3.3 Set `href="#services"` for Services link, `href="#contact"` for Contact link
-  - [ ] 3.4 Style links with hover states and focus indicators (maintain brand colors)
-  - [ ] 3.5 Ensure links are visible and readable on all breakpoints (no collapsing behavior)
-  - [ ] 3.6 Test smooth scroll behavior (Lenis should handle anchor link scrolling automatically)
+- [x] **3.0 Simplify Header Navigation**
+  - [x] 3.1 Open `apps/web/src/components/Header.tsx` and remove hamburger menu/sheet logic (if present)
+  - [x] 3.2 Replace navigation with two simple anchor links: "Services" and "Contact"
+  - [x] 3.3 Set `href="#services"` for Services link, `href="#contact"` for Contact link
+  - [x] 3.4 Style links with hover states and focus indicators (maintain brand colors)
+  - [x] 3.5 Ensure links are visible and readable on all breakpoints (no collapsing behavior)
+  - [x] 3.6 Test smooth scroll behavior (Lenis should handle anchor link scrolling automatically)
 
 - [ ] **4.0 Create Footer with Legal Links**
   - [ ] 4.1 Create new component `apps/web/src/components/Footer.tsx`
@@ -313,3 +313,4 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
 |------|------|-------|
 | 2026-03-09 | 1.0-1.5 | Renamed innovation/ directory to services-bento/, updated all component names and imports, updated feature flags |
 | 2026-03-09 | 2.1-2.7 | Replaced video backgrounds with static images in ServicesBentoCard and ServicesSlide components, added deprecation note to video field |
+| 2026-03-09 | 3.1-3.6 | Simplified header to only Services and Contact links, visible on all breakpoints with proper focus states |

@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 
-// PLACEHOLDER — replace with real nav links
-const NAV_LINKS = ["Services", "Projects", "About", "Contact"];
+const NAV_LINKS = [
+  { label: "Services", href: "#services" },
+  { label: "Contact", href: "#contact" },
+] as const;
 
 export default function Header() {
   const [hidden, setHidden] = useState(false);
@@ -32,15 +34,15 @@ export default function Header() {
           CES<span className="text-brand-gold">.</span>
         </span>
 
-        {/* Nav links — hidden below lg */}
-        <ul className="hidden gap-8 lg:flex">
+        {/* Nav links — visible on all breakpoints */}
+        <ul className="flex gap-6 sm:gap-8">
           {NAV_LINKS.map((link) => (
-            <li key={link}>
+            <li key={link.label}>
               <a
-                href={`#${link.toLowerCase()}`}
-                className="text-sm text-muted transition-colors hover:text-brand-gold"
+                href={link.href}
+                className="text-sm font-medium text-white/80 transition-colors hover:text-brand-gold focus-visible:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 focus-visible:ring-offset-brand-black"
               >
-                {link}
+                {link.label}
               </a>
             </li>
           ))}
