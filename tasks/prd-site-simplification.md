@@ -1,6 +1,7 @@
 # PRD: Site Simplification & Footer Legal Content
-## Status: In Progress
+## Status: Complete
 ## Last Updated: 2026-03-09
+## Completed: 2026-03-09
 
 ## 1. Overview
 
@@ -300,12 +301,12 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
   - [x] 9.7 Verify no console errors or warnings (TypeScript type checking passes)
   - [x] 9.8 Verify ParticlesBackground and CursorRipple still work on desktop (unchanged)
 
-- [ ] **10.0 Documentation and Handoff**
-  - [ ] 10.1 Update CLAUDE.md if any architectural decisions changed (e.g., video → image pattern)
-  - [ ] 10.2 Create a content guide in `docs/` explaining where to replace placeholder text (Footer modals, Contact section boxes)
-  - [ ] 10.3 Document where user should place service section images (e.g., `apps/web/public/images/services/[name].jpg`)
-  - [ ] 10.4 Note any known issues or future improvements (e.g., "Footer content is placeholder, update in Footer.tsx lines 15-60")
-  - [ ] 10.5 Mark PRD status as "Completed" and add completion date
+- [x] **10.0 Documentation and Handoff**
+  - [x] 10.1 Update CLAUDE.md if any architectural decisions changed (e.g., video → image pattern)
+  - [x] 10.2 Create a content guide in `docs/` explaining where to replace placeholder text (Footer modals, Contact section boxes)
+  - [x] 10.3 Document where user should place service section images (e.g., `apps/web/public/images/services/[name].jpg`)
+  - [x] 10.4 Note any known issues or future improvements (e.g., "Footer content is placeholder, update in Footer.tsx lines 15-60")
+  - [x] 10.5 Mark PRD status as "Completed" and add completion date
 
 ### Progress Log
 
@@ -319,3 +320,4 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
 | 2026-03-09 | 7.1-7.7 | Restructured ContactCta to three-box layout with Contact Us (full width), Who We Are and How We Work (50% each) |
 | 2026-03-09 | 8.1-8.5 | Added deprecation notice to encode-service-video.sh, verified asset copying script handles images, removed video code from ServicesDetailModal |
 | 2026-03-09 | 9.1-9.8 | Fixed TypeScript type errors, verified type-check passes. Manual browser testing recommended: test responsive layouts, smooth scroll, modal interactions |
+| 2026-03-09 | 10.1-10.5 | Created CONTENT-GUIDE.md, updated CLAUDE.md with architecture changes, documented component organization and known issues. Implementation complete. |

@@ -80,7 +80,8 @@ npx shadcn@latest add button card dialog navigation-menu sheet
 
 # Helper scripts (in scripts/ directory)
 bash scripts/encode-hero-video.sh       # encode videos for hero section
-bash scripts/encode-service-video.sh    # encode service showcase videos
+bash scripts/encode-service-video.sh    # ⚠️ DEPRECATED: video backgrounds replaced with static images
+bash scripts/copy-service-assets.sh     # copies images/assets from content package to public/ (runs automatically in prebuild)
 pnpm sst:state                          # export and parse SST state (requires deployed stack)
 ```
 
@@ -119,6 +120,16 @@ The Hero section uses the three white/gold part SVGs layered absolutely in a con
 **Fonts:** Self-hosted via `next/font` (zero external requests, GDPR-friendly). Config in `apps/web/src/app/fonts.ts`. No Google Fonts CDN.
 
 **Next.js output:** `output: "standalone"` in `apps/web/next.config.ts` — required for SST/Lambda deployment.
+
+## Recent Architecture Changes (2026-03-09)
+
+**Video backgrounds replaced with static images:** Service/innovation sections previously used video backgrounds with WebM/MP4 sources. These have been replaced with static images from the `images` array in the data files for improved mobile performance. The `video` field in `innovation.ts` is deprecated but retained for backwards compatibility. Components now use the first image from the `images` array, falling back to `/images/services/placeholder-[id].jpg`.
+
+**Navigation simplified:** Header now displays only two links (Services, Contact) visible on all breakpoints. No hamburger menu or collapsing behavior.
+
+**Footer with legal modals:** New Footer component (`Footer.tsx`) with five legal links (Impressum, Company Data, Data Protection, Compliance, Certifications) that open Radix Dialog modals. Placeholder content needs client replacement (see `docs/CONTENT-GUIDE.md`).
+
+**Contact section restructured:** Three-box layout with Contact Us (full width emphasized), Who We Are (50%), and How We Work (50%). All boxes stack vertically on mobile.
 
 ## Animation Architecture
 
@@ -196,14 +207,25 @@ Typical workflow: `/prd <feature>` → `/implement` or `/implement-all` → `/ch
 
 ```
 apps/web/src/components/              → standalone utilities
-  Header.tsx                          → site header/nav
+  Header.tsx                          → simplified header with Services/Contact links
+  Footer.tsx                          → legal footer with modal links (Impressum, etc.)
   SmoothScroll.tsx                    → Lenis wrapper (desktop-only)
   ParticlesBackground.tsx             → tsparticles ambient effect (desktop-only)
   CursorRipple.tsx                    → pointer-follow ripple (desktop-only)
+  modals/
+    LegalModal.tsx                    → Radix Dialog for footer legal content
 apps/web/src/components/sections/     → page sections (rendered in order on /)
   Hero.tsx                            → hero with layered logo animation + particle bg
-  Services.tsx, Gallery.tsx, Stats.tsx, ContactCta.tsx
+  services-bento/                     → services/innovations bento grid (renamed from innovation/)
+    ServicesBento.tsx                 → main bento grid layout (id="services")
+    ServicesBentoCard.tsx             → individual service card with static image
+    ServicesShowcase.tsx              → full-screen scroll showcase
+    ServicesSlide.tsx                 → individual slide with static image background
+    ServicesDetailModal.tsx           → modal with service details
+  ContactCta.tsx                      → three-box layout (Contact Us, Who We Are, How We Work)
 ```
+
+**Note:** Components in `services-bento/` use data from `@ces/content/data/innovation` (the data file is still named `innovation.ts` though components are renamed to "Services" for consistency). The `video` field in the data is deprecated; components now use static images from the `images` array.
 
 Desktop-only interactive components (`ParticlesBackground`, `CursorRipple`) are loaded via `next/dynamic` with `ssr: false` and fade in after the hero entrance animation completes.
 
@@ -231,11 +253,13 @@ AWS_REGION=eu-central-1   # Must match sst.config.ts region
 
 ## Key Files
 
-- `docs/technical-architecture.md` — comprehensive 871-line tech brief covering all stack decisions, rendering strategies, animation patterns, deployment, and content management. **Read this first** when implementing new features.
+- `docs/technical-architecture.md` — comprehensive 913-line tech brief covering all stack decisions, rendering strategies, animation patterns, deployment, and content management. **Read this first** when implementing new features.
 - `docs/BRAND.md` — brand colors (logo vs web palette), typography, logo anatomy and file inventory
+- `docs/CONTENT-GUIDE.md` — guide for replacing placeholder content (footer legal text, contact section text, service images). **User reference for content updates.**
 - `apps/web/src/app/globals.css` — design token source of truth (CSS custom properties + `@theme inline`)
 - `apps/web/src/app/layout.tsx` — root layout
 - `apps/web/next.config.ts` — Next.js config (`output: "standalone"` for Lambda)
 - `sst.config.ts` — infrastructure definition (domain, CDN, Lambda permissions)
 - `packages/ui/src/index.ts` — shared UI barrel export (currently empty, ready for components)
 - `packages/ui/src/assets/` — all logo SVGs (imported via `@repo/ui/assets/*`)
+- `packages/content/data/innovation.ts` — service/innovation data model and loader (note: `video` field is deprecated, use `images` array)
