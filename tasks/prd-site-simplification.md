@@ -274,14 +274,14 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
   - [x] 6.4 Add placeholder content for each legal section (e.g., "Impressum content will be provided by client. Lorem ipsum...")
   - [x] 6.5 Test opening and closing each modal, verify no state conflicts
 
-- [ ] **7.0 Restructure Contact Section to Three-Box Layout**
-  - [ ] 7.1 Open `apps/web/src/components/sections/ContactCta.tsx` and refactor layout
-  - [ ] 7.2 Create three distinct content boxes with headings: "Contact Us", "Who We Are", "How We Work"
-  - [ ] 7.3 Implement layout: Contact Us full width, Who We Are and How We Work each 50% width below (use CSS Grid: `grid-template-columns: 1fr 1fr` for md+)
-  - [ ] 7.4 On mobile (< md), stack all three boxes vertically with `grid-template-columns: 1fr`
-  - [ ] 7.5 Style boxes consistently with glass-morphism aesthetic (backdrop-blur, border, shadow)
-  - [ ] 7.6 Add placeholder text for "Who We Are" and "How We Work" (e.g., "Who We Are: Content will be provided by client. CES Clean Energy Solutions is a Vienna-based engineering consultancy...")
-  - [ ] 7.7 Ensure Contact Us box is visually emphasized (consider larger size, distinct background, or border)
+- [x] **7.0 Restructure Contact Section to Three-Box Layout**
+  - [x] 7.1 Open `apps/web/src/components/sections/ContactCta.tsx` and refactor layout
+  - [x] 7.2 Create three distinct content boxes with headings: "Contact Us", "Who We Are", "How We Work"
+  - [x] 7.3 Implement layout: Contact Us full width, Who We Are and How We Work each 50% width below (use CSS Grid: `grid-template-columns: 1fr 1fr` for md+)
+  - [x] 7.4 On mobile (< md), stack all three boxes vertically with `grid-template-columns: 1fr`
+  - [x] 7.5 Style boxes consistently with glass-morphism aesthetic (backdrop-blur, border, shadow)
+  - [x] 7.6 Add placeholder text for "Who We Are" and "How We Work" (e.g., "Who We Are: Content will be provided by client. CES Clean Energy Solutions is a Vienna-based engineering consultancy...")
+  - [x] 7.7 Ensure Contact Us box is visually emphasized (consider larger size, distinct background, or border)
 
 - [ ] **8.0 Update Feature Flags and Remove Deprecated Code**
   - [ ] 8.1 Verify feature flags in `config/features.ts` work correctly with renamed components
@@ -316,3 +316,4 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
 | 2026-03-09 | 3.1-3.6 | Simplified header to only Services and Contact links, visible on all breakpoints with proper focus states |
 | 2026-03-09 | 4.1-4.5 | Created Footer component with five legal links, added to page.tsx |
 | 2026-03-09 | 5.1-6.5 | Created LegalModal component with Radix Dialog, wired up footer links with placeholder content |
+| 2026-03-09 | 7.1-7.7 | Restructured ContactCta to three-box layout with Contact Us (full width), Who We Are and How We Work (50% each) |
