@@ -2,81 +2,84 @@
 
 This guide explains where to replace placeholder content with real text and images for the CES portfolio site.
 
+## ✅ Content Status
+
+**Completed:**
+- ✅ Impressum (Company Information)
+- ✅ Company Data
+- ✅ Compliance Policy
+- ✅ Certifications
+- ✅ Contact Section - Who We Are
+- ✅ Contact Section - How We Work
+
+**Pending:**
+- ⚠️ Data Protection Policy (partial content, needs completion)
+- 📷 Service section images (see section below)
+
+---
+
 ## Legal Footer Content
 
 **Location:** `apps/web/src/components/Footer.tsx`
 
-**Lines to update:** 21-72 (the `LEGAL_CONTENT` object)
+**Lines to update:** 21-140 (the `LEGAL_CONTENT` object)
 
-Replace the placeholder text for each of the five legal sections:
+### ⚠️ Data Protection Policy - NEEDS COMPLETION
 
-1. **Impressum** (lines 21-31)
-   - Company registration details
-   - Managing directors
-   - VAT ID
-   - Contact information
-   - Regulatory authority
+The Data Protection Policy section currently contains a placeholder note. It needs to be replaced with a comprehensive GDPR-compliant privacy policy that includes:
 
-2. **Company Data** (lines 32-42)
-   - Full legal name and address
-   - Registration numbers
-   - Bank details (if applicable)
-   - Insurance information
-   - Professional memberships
+- What personal data CES collects and how it's collected
+- Legal basis for processing personal data
+- How CES uses collected data
+- Your rights under GDPR (access, rectification, erasure, restriction, portability, objection)
+- Data retention periods
+- Data security measures implemented by CES
+- Third-party data processors (if any)
+- Cookie policy (if applicable)
+- Contact information for the Data Protection Officer
+- How to lodge a complaint with the Austrian supervisory authority (Datenschutzbehörde)
 
-3. **Data Protection Policy** (lines 43-55)
-   - Data collection practices
-   - Data usage
-   - GDPR rights
-   - Data protection officer contact
-   - Cookie policy
-   - Third-party processors
+**To update:** Edit `apps/web/src/components/Footer.tsx`, find the `"data-protection"` section (around line 70), and replace the placeholder content with your complete privacy policy.
 
-4. **Compliance** (lines 56-67)
-   - Industry standards adherence
-   - Quality management systems
-   - Environmental certifications
-   - Code of conduct
-   - Anti-corruption policies
-   - Health and safety standards
+---
 
-5. **Certifications** (lines 68-79)
-   - ISO certifications (9001, 14001, etc.)
-   - Industry-specific certifications
-   - Professional memberships
-   - Accreditations
-   - Awards and recognitions
+## ✅ Completed Sections
 
-## Contact Section Content
+The following sections have been updated with real content and do not need changes (unless you want to revise them):
+
+1. **✅ Impressum** - Company information, VAT ID, registration details, disclaimer, responsible person
+2. **✅ Company Data** - Full company registration and contact details
+3. **✅ Compliance Policy** - Complete CMS framework and policy statements
+4. **✅ Certifications** - ISO 9001, 14001, and 45001 certificates with descriptions
+5. **✅ Who We Are** - Company background, iC group affiliation, geographic reach, competences
+6. **✅ How We Work** - Methodology, principles, service lifecycle, project examples
+
+## ✅ Contact Section Content - COMPLETED
 
 **Location:** `apps/web/src/components/sections/ContactCta.tsx`
 
-### Contact Information (lines 21-31)
-Currently displays:
+### Contact Information
+Current contact details:
 - Name: `Dipl.-Ing. Klaus Kogler`
 - Title: `Buildings and Urban Development`
 - Phone: `+43 664 601 692 32`
 - Email: `k.kogler@ic-ces.at`
 
-Update these if needed.
+If you need to update the contact person or details, edit these values in `ContactCta.tsx` (lines 21-31).
 
-### Who We Are (lines 51-61)
-**Current placeholder:** "Who We Are content will be provided by client..."
+### ✅ Who We Are - Content Updated
+Real content has been added covering:
+- Company founding (2009) and core services
+- iC group affiliation and team size
+- Geographic reach and client partnerships
+- Five competence areas
 
-Replace with a 2-3 paragraph description of CES, including:
-- Company overview and specialization
-- Team expertise and qualifications
-- Project history and achievements
-- Geographic reach and recognition
-
-### How We Work (lines 71-81)
-**Current placeholder:** "How We Work content will be provided by client..."
-
-Replace with a 2-3 paragraph description of CES's process, including:
-- Collaborative approach and methodology
-- Tools and techniques used
-- Value proposition and differentiators
-- Project lifecycle involvement (concept → implementation)
+### ✅ How We Work - Content Updated
+Real content has been added covering:
+- "The better way" methodology
+- Three guiding principles (systemic solutions, staying ahead, delivering what works)
+- Full project lifecycle services
+- Real project examples (Vienna, Ukraine, Tbilisi)
 
 ## Service Section Images
 
