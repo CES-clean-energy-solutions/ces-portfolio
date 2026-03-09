@@ -15,7 +15,7 @@ import { features } from "@/config/features";
 export default function Home() {
   return (
     <>
-      <Header />
+      <Header innovations={innovations} />
       <main>
         {features.hero && <Hero />}
         {features.servicesBento && (

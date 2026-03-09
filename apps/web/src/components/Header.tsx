@@ -3,13 +3,18 @@
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { ExportPdfButton } from "./ExportPdfButton";
+import type { InnovationArea } from "@ces/content/data/innovation";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
   { label: "Contact", href: "#contact" },
 ] as const;
 
-export default function Header() {
+interface HeaderProps {
+  innovations: InnovationArea[];
+}
+
+export default function Header({ innovations }: HeaderProps) {
   const [hidden, setHidden] = useState(false);
   const { scrollY } = useScroll();
 
@@ -48,7 +53,7 @@ export default function Header() {
             </li>
           ))}
           <li>
-            <ExportPdfButton className="text-sm font-medium text-white/80" />
+            <ExportPdfButton innovations={innovations} className="text-sm font-medium text-white/80" />
           </li>
         </ul>
       </nav>

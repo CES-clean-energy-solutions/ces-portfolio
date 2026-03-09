@@ -2,7 +2,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { createElement } from "react";
 import { createRoot } from "react-dom/client";
-import { innovations } from "@ces/content/data/innovation";
+import type { InnovationArea } from "@ces/content/data/innovation";
 import { PdfCoverPage } from "@/components/pdf/PdfCoverPage";
 import { PdfSectionPage } from "@/components/pdf/PdfSectionPage";
 import { PdfContactPage } from "@/components/pdf/PdfContactPage";
@@ -114,7 +114,7 @@ function checkBrowserCompatibility(): boolean {
 /**
  * Main PDF generation function
  */
-export async function generatePortfolioPdf(): Promise<void> {
+export async function generatePortfolioPdf(innovations: InnovationArea[]): Promise<void> {
   const startTime = performance.now();
 
   // Check browser compatibility

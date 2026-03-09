@@ -334,3 +334,4 @@ None.
 | 2026-03-09 | 7.1-7.5 | Implemented image processing with base64 encoding and JPEG compression |
 | 2026-03-09 | 8.1-8.6 | Added error handling, browser compatibility checks, and logging |
 | 2026-03-09 | 10.1-10.4 | Verified all polish requirements: date/URL footers, Inter font, brand colors |
+| 2026-03-09 | bugfix | Fixed node:fs client-bundle error — moved innovations import out of pdf-generator.ts, passed as param through Header → ExportPdfButton |

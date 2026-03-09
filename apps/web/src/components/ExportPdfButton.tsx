@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { Download, Loader2 } from "lucide-react";
+import type { InnovationArea } from "@ces/content/data/innovation";
 
 interface ExportPdfButtonProps {
+  innovations: InnovationArea[];
   className?: string;
 }
 
-export function ExportPdfButton({ className = "" }: ExportPdfButtonProps) {
+export function ExportPdfButton({ innovations, className = "" }: ExportPdfButtonProps) {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleExport = async () => {
@@ -15,7 +17,7 @@ export function ExportPdfButton({ className = "" }: ExportPdfButtonProps) {
     try {
       // Import pdf generator dynamically to reduce initial bundle size
       const { generatePortfolioPdf } = await import("@/lib/pdf-generator");
-      await generatePortfolioPdf();
+      await generatePortfolioPdf(innovations);
 
       // Success toast will be shown by the generator
     } catch (error) {
