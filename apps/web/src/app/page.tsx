@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Hero from "@/components/sections/Hero";
 import { ServicesShowcase as ServicesBentoShowcase } from "@/components/sections/services-bento/ServicesShowcase";
 import { ServicesBento } from "@/components/sections/services-bento/ServicesBento";
@@ -29,9 +30,7 @@ export default function Home() {
         {features.servicesCards && <ServicesSection />}
         {features.contactCta && <ContactCta />}
       </main>
-      <footer className="border-t border-border bg-brand-black px-4 py-8 text-center text-sm text-muted">
-        &copy; {new Date().getFullYear()} CES Clean Energy Solutions
-      </footer>
+      <Footer />
     </>
   );
 }

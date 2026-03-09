@@ -252,27 +252,27 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
   - [x] 3.5 Ensure links are visible and readable on all breakpoints (no collapsing behavior)
   - [x] 3.6 Test smooth scroll behavior (Lenis should handle anchor link scrolling automatically)
 
-- [ ] **4.0 Create Footer with Legal Links**
-  - [ ] 4.1 Create new component `apps/web/src/components/Footer.tsx`
-  - [ ] 4.2 Implement footer layout with five links: Impressum, Company Data, Data Protection Policy, Compliance, Certifications
-  - [ ] 4.3 Style footer with subtle background/border-top to distinguish from main content
-  - [ ] 4.4 On mobile, ensure links are readable (consider smaller font or vertical stack if needed)
-  - [ ] 4.5 Add Footer component to `apps/web/src/app/page.tsx` at the bottom (after all sections)
+- [x] **4.0 Create Footer with Legal Links**
+  - [x] 4.1 Create new component `apps/web/src/components/Footer.tsx`
+  - [x] 4.2 Implement footer layout with five links: Impressum, Company Data, Data Protection Policy, Compliance, Certifications
+  - [x] 4.3 Style footer with subtle background/border-top to distinguish from main content
+  - [x] 4.4 On mobile, ensure links are readable (consider smaller font or vertical stack if needed)
+  - [x] 4.5 Add Footer component to `apps/web/src/app/page.tsx` at the bottom (after all sections)
 
-- [ ] **5.0 Implement Legal Modal Component**
-  - [ ] 5.1 Create `apps/web/src/components/modals/LegalModal.tsx` using shadcn Dialog component
-  - [ ] 5.2 Component props: `isOpen: boolean`, `onClose: () => void`, `title: string`, `content: string | ReactNode`
-  - [ ] 5.3 Implement modal with close button (X icon top-right), dismiss via backdrop, dismiss via Escape (Radix handles this)
-  - [ ] 5.4 Style modal: max-w-2xl, scrollable content area, adequate padding, readable typography
-  - [ ] 5.5 Ensure modal z-index is above all page elements (test with fixed header)
-  - [ ] 5.6 Test modal behavior with Lenis: ensure scroll is paused when modal is open (may need `data-lenis-prevent` on modal root)
+- [x] **5.0 Implement Legal Modal Component**
+  - [x] 5.1 Create `apps/web/src/components/modals/LegalModal.tsx` using shadcn Dialog component
+  - [x] 5.2 Component props: `isOpen: boolean`, `onClose: () => void`, `title: string`, `content: string | ReactNode`
+  - [x] 5.3 Implement modal with close button (X icon top-right), dismiss via backdrop, dismiss via Escape (Radix handles this)
+  - [x] 5.4 Style modal: max-w-2xl, scrollable content area, adequate padding, readable typography
+  - [x] 5.5 Ensure modal z-index is above all page elements (test with fixed header)
+  - [x] 5.6 Test modal behavior with Lenis: ensure scroll is paused when modal is open (may need `data-lenis-prevent` on modal root)
 
-- [ ] **6.0 Wire Up Footer Links to Modals**
-  - [ ] 6.1 Add state management to Footer component for tracking which modal is open (e.g., `const [activeModal, setActiveModal] = useState<string | null>(null)`)
-  - [ ] 6.2 Each footer link onClick sets activeModal to corresponding key (e.g., "impressum", "company-data")
-  - [ ] 6.3 Render LegalModal with conditional content based on activeModal value
-  - [ ] 6.4 Add placeholder content for each legal section (e.g., "Impressum content will be provided by client. Lorem ipsum...")
-  - [ ] 6.5 Test opening and closing each modal, verify no state conflicts
+- [x] **6.0 Wire Up Footer Links to Modals**
+  - [x] 6.1 Add state management to Footer component for tracking which modal is open (e.g., `const [activeModal, setActiveModal] = useState<string | null>(null)`)
+  - [x] 6.2 Each footer link onClick sets activeModal to corresponding key (e.g., "impressum", "company-data")
+  - [x] 6.3 Render LegalModal with conditional content based on activeModal value
+  - [x] 6.4 Add placeholder content for each legal section (e.g., "Impressum content will be provided by client. Lorem ipsum...")
+  - [x] 6.5 Test opening and closing each modal, verify no state conflicts
 
 - [ ] **7.0 Restructure Contact Section to Three-Box Layout**
   - [ ] 7.1 Open `apps/web/src/components/sections/ContactCta.tsx` and refactor layout
@@ -314,3 +314,5 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
 | 2026-03-09 | 1.0-1.5 | Renamed innovation/ directory to services-bento/, updated all component names and imports, updated feature flags |
 | 2026-03-09 | 2.1-2.7 | Replaced video backgrounds with static images in ServicesBentoCard and ServicesSlide components, added deprecation note to video field |
 | 2026-03-09 | 3.1-3.6 | Simplified header to only Services and Contact links, visible on all breakpoints with proper focus states |
+| 2026-03-09 | 4.1-4.5 | Created Footer component with five legal links, added to page.tsx |
+| 2026-03-09 | 5.1-6.5 | Created LegalModal component with Radix Dialog, wired up footer links with placeholder content |
