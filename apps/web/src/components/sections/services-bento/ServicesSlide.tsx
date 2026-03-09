@@ -4,13 +4,13 @@ import Image from "next/image";
 import { ChevronNoPad } from "@/components/icons/ChevronIcon";
 import { ServicesGallery } from "./ServicesGallery";
 import type {
-  ServicesArea,
-  ServicesSubItem,
-  ServicesLink,
+  InnovationArea,
+  InnovationSubItem,
+  InnovationLink,
 } from "@ces/content/data/innovation";
 
 interface ServicesSlideProps {
-  area: ServicesArea;
+  area: InnovationArea;
   isActive: boolean;
 }
 
@@ -79,7 +79,7 @@ export function ServicesSlide({ area, isActive }: ServicesSlideProps) {
                   Capabilities
                 </h3>
                 <ul className="space-y-2">
-                  {area.subItems.map((item: ServicesSubItem) => (
+                  {area.subItems.map((item: InnovationSubItem) => (
                     <li
                       key={item.slug}
                       className="flex items-start gap-2 text-sm text-white"
@@ -108,7 +108,7 @@ export function ServicesSlide({ area, isActive }: ServicesSlideProps) {
             {/* Links */}
             {area.links && area.links.length > 0 && (
               <div className="flex flex-col gap-3">
-                {area.links.map((link: ServicesLink, idx: number) =>
+                {area.links.map((link: InnovationLink, idx: number) =>
                   link.image ? (
                     // Card thumbnail variant — image preview on the left
                     <a

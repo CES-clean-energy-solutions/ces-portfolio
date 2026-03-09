@@ -5,15 +5,15 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { X, ExternalLink, ArrowRight } from "lucide-react";
-import type { ServicesArea } from "@ces/content/data/innovation";
+import type { InnovationArea } from "@ces/content/data/innovation";
 
 interface ServicesDetailModalProps {
-  area: ServicesArea | null;
+  area: InnovationArea | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-function ModalImageHero({ area }: { area: ServicesArea }) {
+function ModalImageHero({ area }: { area: InnovationArea }) {
   // Use first image from images array, or fallback to placeholder
   const imageSrc = area.images.find((img) => img.src)?.src ?? `/images/services/placeholder-${area.id}.jpg`;
 

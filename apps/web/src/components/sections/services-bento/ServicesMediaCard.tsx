@@ -1,8 +1,8 @@
 import Image from "next/image";
-import type { ServicesImage } from "@ces/content/data/innovation";
+import type { InnovationImage } from "@ces/content/data/innovation";
 
 interface ServicesMediaCardProps {
-  image: ServicesImage;
+  image: InnovationImage;
 }
 
 /**

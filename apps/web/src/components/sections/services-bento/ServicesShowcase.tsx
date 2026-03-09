@@ -6,12 +6,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "motion/react";
 import { ServicesSlide } from "./ServicesSlide";
-import type { ServicesArea } from "@ces/content/data/innovation";
+import type { InnovationArea } from "@ces/content/data/innovation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface ServicesShowcaseProps {
-  innovations: ServicesArea[];
+  innovations: InnovationArea[];
 }
 
 function ServicesProgressDots({

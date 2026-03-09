@@ -4,12 +4,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import * as Dialog from "@radix-ui/react-dialog";
-import type { ServicesImage } from "@ces/content/data/innovation";
+import type { InnovationImage } from "@ces/content/data/innovation";
 
 const AUTO_ADVANCE_MS = 8_000;
 
 interface ServicesGalleryProps {
-  images: ServicesImage[];
+  images: InnovationImage[];
   isActive: boolean;
 }
 
