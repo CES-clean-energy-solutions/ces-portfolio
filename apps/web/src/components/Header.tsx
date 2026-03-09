@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
+import { ExportPdfButton } from "./ExportPdfButton";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
@@ -35,7 +36,7 @@ export default function Header() {
         </span>
 
         {/* Nav links — visible on all breakpoints */}
-        <ul className="flex gap-6 sm:gap-8">
+        <ul className="flex items-center gap-6 sm:gap-8">
           {NAV_LINKS.map((link) => (
             <li key={link.label}>
               <a
@@ -46,6 +47,9 @@ export default function Header() {
               </a>
             </li>
           ))}
+          <li>
+            <ExportPdfButton className="text-sm font-medium text-white/80" />
+          </li>
         </ul>
       </nav>
     </motion.header>

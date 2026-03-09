@@ -23,6 +23,8 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gsap": "^3.12.7",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.2",
     "lenis": "^1.1.20",
     "lucide-react": "^0.475.0",
     "motion": "^12.4.7",
@@ -35,6 +37,7 @@
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.1.6",
     "@tailwindcss/postcss": "^4.0.6",
+    "@types/jspdf": "^2.0.0",
     "@types/node": "^22.13.4",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
