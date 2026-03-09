@@ -26,13 +26,15 @@ export default $config({
       });
     });
 
-    // Domain is fixed per branch/project — stage is the environment (dev/prod), not the subdomain
-    const domainName = "innovation.ic-ces.engineering";
+    // Primary domain + alias — both subdomains point to the same deployment
+    const primaryDomain = "portfolio.ic-ces.engineering";
+    const aliasDomain = "innovation.ic-ces.engineering";
 
     const site = new sst.aws.Nextjs("CesWeb", {
       path: "apps/web",
       domain: {
-        name: domainName,
+        name: primaryDomain,
+        aliases: [aliasDomain],
         dns: sst.aws.dns({ zone: "Z07972313GVRF4SEMXLOL" }),
       },
     });
