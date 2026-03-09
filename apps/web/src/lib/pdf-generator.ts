@@ -5,6 +5,8 @@ import { createRoot } from "react-dom/client";
 import type { InnovationArea } from "@ces/content/data/innovation";
 import { PdfCoverPage } from "@/components/pdf/PdfCoverPage";
 import { PdfSectionPage } from "@/components/pdf/PdfSectionPage";
+import { PdfGalleryPage } from "@/components/pdf/PdfGalleryPage";
+import type { GalleryImage } from "@/components/pdf/PdfGalleryPage";
 import { PdfContactPage } from "@/components/pdf/PdfContactPage";
 import { PdfImpressumPage } from "@/components/pdf/PdfImpressumPage";
 
@@ -65,19 +67,52 @@ async function renderComponent(
 }
 
 /**
+ * Inject a temporary <style> that replaces all OKLCH/lab CSS custom properties
+ * with hex equivalents. html2canvas doesn't support modern color functions and
+ * will throw if it encounters them in computed styles (e.g. body background).
+ * Returns the injected element so the caller can remove it after capture.
+ */
+function injectColorOverrides(): HTMLStyleElement {
+  const style = document.createElement("style");
+  style.id = "html2canvas-color-override";
+  style.textContent = `
+    :root {
+      --brand-gold: #D4A843 !important;
+      --brand-black: #000000 !important;
+      --background: #000000 !important;
+      --foreground: #ffffff !important;
+      --primary: #D4A843 !important;
+      --primary-foreground: #000000 !important;
+      --secondary: #262626 !important;
+      --accent: #D4A843 !important;
+      --muted: #999999 !important;
+      --border: #404040 !important;
+      --ring: #D4A843 !important;
+    }
+  `;
+  document.head.appendChild(style);
+  return style;
+}
+
+/**
  * Capture a DOM element as a canvas
  */
 async function captureAsCanvas(element: HTMLElement): Promise<HTMLCanvasElement> {
-  return html2canvas(element, {
-    scale: 2, // Higher quality for printing
-    useCORS: true,
-    allowTaint: false,
-    backgroundColor: null,
-    width: PAGE_WIDTH_PX,
-    height: PAGE_HEIGHT_PX,
-    windowWidth: PAGE_WIDTH_PX,
-    windowHeight: PAGE_HEIGHT_PX,
-  });
+  const override = injectColorOverrides();
+  try {
+    return await html2canvas(element, {
+      scale: 2, // Higher quality for printing
+      useCORS: true,
+      allowTaint: false,
+      backgroundColor: null,
+      width: PAGE_WIDTH_PX,
+      height: PAGE_HEIGHT_PX,
+      windowWidth: PAGE_WIDTH_PX,
+      windowHeight: PAGE_HEIGHT_PX,
+    });
+  } finally {
+    override.remove();
+  }
 }
 
 /**
@@ -165,21 +200,18 @@ export async function generatePortfolioPdf(innovations: InnovationArea[]): Promi
     pageCount++;
     console.log(`✓ Cover page added (${pageCount})`);
 
-    // 2. Innovation section pages
+    // 2. Innovation section pages + gallery pages
     for (const section of innovations) {
       console.log(`Generating section: ${section.title}...`);
 
       const sectionContainer = document.createElement("div");
       container.appendChild(sectionContainer);
 
-      // Load background image
+      // Load background image — use the resolved src path directly
       let backgroundImage: string | undefined;
       if (section.images.length > 0 && section.images[0].src) {
-        const imagePath = `/content/innovation/${section.id}/main-bg.${section.images[0].src.split(".").pop()}`;
-        const dataUri = await loadImageAsDataUri(imagePath);
-        if (dataUri) {
-          backgroundImage = dataUri;
-        }
+        const dataUri = await loadImageAsDataUri(section.images[0].src);
+        if (dataUri) backgroundImage = dataUri;
       }
 
       await renderComponent(
@@ -188,15 +220,42 @@ export async function generatePortfolioPdf(innovations: InnovationArea[]): Promi
       );
 
       const sectionCanvas = await captureAsCanvas(sectionContainer);
-      const sectionImage = sectionCanvas.toDataURL("image/jpeg", 0.85);
-
       pdf.addPage();
-      pdf.addImage(sectionImage, "JPEG", 0, 0, PDF_WIDTH, PDF_HEIGHT);
+      pdf.addImage(sectionCanvas.toDataURL("image/jpeg", 0.85), "JPEG", 0, 0, PDF_WIDTH, PDF_HEIGHT);
       pageCount++;
       console.log(`✓ Section page added: ${section.title} (${pageCount})`);
-
-      // Clean up section container
       sectionContainer.remove();
+
+      // Gallery page — up to 4 images from images[1..] (image[0] is the section background)
+      const gallerySourceImages = section.images.slice(1, 5); // max 4
+      if (gallerySourceImages.length > 0) {
+        console.log(`  Loading ${gallerySourceImages.length} gallery image(s) for ${section.title}...`);
+
+        const galleryImages: GalleryImage[] = [];
+        for (const img of gallerySourceImages) {
+          const dataUri = await loadImageAsDataUri(img.src);
+          if (dataUri) {
+            galleryImages.push({ dataUri, caption: img.caption, alt: img.alt });
+          }
+        }
+
+        if (galleryImages.length > 0) {
+          const galleryContainer = document.createElement("div");
+          container.appendChild(galleryContainer);
+
+          await renderComponent(
+            createElement(PdfGalleryPage, { section, images: galleryImages }),
+            galleryContainer
+          );
+
+          const galleryCanvas = await captureAsCanvas(galleryContainer);
+          pdf.addPage();
+          pdf.addImage(galleryCanvas.toDataURL("image/jpeg", 0.85), "JPEG", 0, 0, PDF_WIDTH, PDF_HEIGHT);
+          pageCount++;
+          console.log(`  ✓ Gallery page added (${galleryImages.length} images) (${pageCount})`);
+          galleryContainer.remove();
+        }
+      }
     }
 
     // 3. Contact page
