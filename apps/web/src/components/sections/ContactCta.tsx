@@ -65,13 +65,16 @@ export default function ContactCta() {
                 Who We Are
               </h3>
               <p className="mt-4 leading-relaxed text-white/80">
-                Who We Are content will be provided by client.
+                CES clean energy solutions is a Vienna-based engineering and consulting firm, founded in 2009. We deliver integrated solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering — from feasibility study through construction supervision and beyond.
                 <br />
                 <br />
-                CES Clean Energy Solutions is a Vienna-based engineering consultancy specializing in energy, environment, and sustainable urban development. Our team of experienced engineers provides cutting-edge solutions for complex infrastructure challenges.
+                As part of the iC group and its 850+ professionals across multiple disciplines, our clients get deep specialist knowledge in energy and environment backed by the full breadth of a multidisciplinary engineering organisation. One team, one point of responsibility.
                 <br />
                 <br />
-                Founded in [year], we have completed over [number] projects across Austria and Europe, earning recognition for our innovative approach to sustainable building and urban planning.
+                We work where the transition is happening. Our projects span Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, with further experience in the Caribbean and West Africa. We partner with international financial institutions like the EBRD and NEFCO, the European Union, governments at every level, and private industry.
+                <br />
+                <br />
+                Our competences cover five interconnected areas: Green Economy, Resource Efficiency & Circular Economy, Environmental & Social Compatibility, Sustainable Buildings, and Sustainable Energy & Plants.
               </p>
             </motion.div>
 
@@ -87,13 +90,16 @@ export default function ContactCta() {
                 How We Work
               </h3>
               <p className="mt-4 leading-relaxed text-white/80">
-                How We Work content will be provided by client.
+                Complex problems demand integrative thinking. We involve all stakeholders early, map every boundary condition, and work through alternatives systematically before committing to a path. Our approach follows what we call the better way — three principles that guide our delivery.
                 <br />
                 <br />
-                Our collaborative approach ensures that every project benefits from interdisciplinary expertise. We combine advanced simulation tools with practical engineering experience to deliver solutions that are both technically sound and economically viable.
+                We solve systemically: identifying root causes and structural problems rather than applying short-term fixes. We stay ahead: actively tracking and adopting innovations from research, regulation, and market developments. And we deliver what works: feasible processes, methods, and tools that ensure transparency and measurable gain.
                 <br />
                 <br />
-                From initial concept through detailed design and implementation support, we partner with clients, architects, and contractors to achieve optimal outcomes for sustainable, high-performance buildings.
+                Our services span the full project lifecycle — from R&D and project preparation through environmental and social assessment, detailed design, construction supervision, investment programme management, and sustainable urban certification.
+                <br />
+                <br />
+                Whether supervising large-scale heat pumps in Vienna, managing EU-funded infrastructure reconstruction in Ukraine, or certifying buildings to LEED standards in Tbilisi, the method stays consistent: rigorous engineering, honest assessment, integrated delivery.
               </p>
             </motion.div>
           </div>
