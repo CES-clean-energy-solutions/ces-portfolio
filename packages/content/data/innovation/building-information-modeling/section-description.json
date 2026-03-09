@@ -22,12 +22,18 @@
   },
   "links": [],
   "video": {
-    "webm": "/content/services/research-development/bg.webm",
+    "webm": "",
     "mp4": "",
     "mp4Mobile": "",
     "poster": ""
   },
   "images": [
+    {
+      "src": "./main-bg.png",
+      "alt": "BIM MEP Engineering - Coordinated building services design",
+      "caption": "Coordinated MEP design with integrated digital workflows for energy, sustainability, and certification.",
+      "animated": false
+    },
     {
       "src": "./001-wasserbaulabor.png",
       "alt": "Federated BIM model of the Wasserbaulabor hydraulic research facility with MEP coordination in a unique hydraulic application",
