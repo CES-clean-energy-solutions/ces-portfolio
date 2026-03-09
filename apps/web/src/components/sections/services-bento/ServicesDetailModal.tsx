@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { X, ExternalLink, ArrowRight } from "lucide-react";
 import type { InnovationArea } from "@ces/content/data/innovation";
+import { ImageLightbox } from "./ImageLightbox";
 
 interface ServicesDetailModalProps {
   area: InnovationArea | null;
@@ -54,6 +55,7 @@ export function ServicesDetailModal({
   onOpenChange,
 }: ServicesDetailModalProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   if (!area) return null;
 
@@ -213,23 +215,27 @@ export function ServicesDetailModal({
                           </h3>
                           <div className="mt-3 grid gap-4 sm:grid-cols-2">
                             {validImages.map((img, i) => (
-                              <figure key={i} className="overflow-hidden rounded-lg">
+                              <figure
+                                key={i}
+                                className="group/gallery cursor-pointer overflow-hidden rounded-lg transition-opacity hover:opacity-80"
+                                onClick={() => setLightboxIndex(i)}
+                              >
                                 {img.animated ? (
                                   // eslint-disable-next-line @next/next/no-img-element
                                   <img
                                     src={img.src}
                                     alt={img.alt}
                                     loading="eager"
-                                    className="w-full rounded-lg"
+                                    className="w-full rounded-lg transition-transform group-hover/gallery:scale-105"
                                   />
                                 ) : (
-                                  <div className="relative aspect-video">
+                                  <div className="relative aspect-video overflow-hidden">
                                     <Image
                                       src={img.src}
                                       alt={img.alt}
                                       fill
                                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 550px"
-                                      className="rounded-lg object-cover"
+                                      className="rounded-lg object-cover transition-transform group-hover/gallery:scale-105"
                                     />
                                   </div>
                                 )}
@@ -251,6 +257,14 @@ export function ServicesDetailModal({
           </Dialog.Portal>
         )}
       </AnimatePresence>
+
+      {/* Image Lightbox */}
+      <ImageLightbox
+        images={validImages}
+        currentIndex={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={setLightboxIndex}
+      />
     </Dialog.Root>
   );
 }

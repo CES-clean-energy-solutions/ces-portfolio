@@ -29,27 +29,27 @@
   },
   "images": [
     {
-      "src": "./main-bg.png",
-      "alt": "BIM MEP Engineering - Coordinated building services design",
-      "caption": "Coordinated MEP design with integrated digital workflows for energy, sustainability, and certification.",
+      "src": "./001-bim-plumbing.png",
+      "alt": "BIM plumbing model for a mixed-use development with detailed risers, horizontal distribution, and underground space",
+      "caption": "BIM plumbing model for a mixed‑use development — detailed risers, horizontal distribution, underground space",
       "animated": false
     },
     {
-      "src": "./001-wasserbaulabor.png",
-      "alt": "Federated BIM model of the Wasserbaulabor hydraulic research facility with MEP coordination in a unique hydraulic application",
-      "caption": "Full federated BIM model of the Wasserbaulabor hydraulic research facility — structural steel, glazed envelope and MEP services coordinated.",
+      "src": "./002-federated-bim.png",
+      "alt": "Federated BIM model of the Wasserbaulabor hydraulic research facility with structure, envelope and MEP",
+      "caption": "Federated BIM model of the Wasserbaulabor, modern hydraulic research facility, structure, envelope and MEP",
       "animated": false
     },
     {
-      "src": "./002-slxmep.jpeg",
-      "alt": "Clash-detected MEP coordination across twin office towers",
-      "caption": "Clash-detected MEP coordination across twin office towers, integrating mechanical, electrical and plumbing services.",
+      "src": "./003-full-building-services.png",
+      "alt": "Full building services model for a mixed-use campus showing HVAC, Fire, Electrical, and Plumbing coordination",
+      "caption": "Full building services model for a mixed-use campus, HVAC, Fire, Electrical, Plumbing",
       "animated": false
     },
     {
-      "src": "./003-pbs.png",
-      "alt": "Integrated building services model for a mixed-use campus showing full systems coordination",
-      "caption": "Full building services model for a mixed-use campus — HVAC, fire protection, electrical and plumbing coordinated.",
+      "src": "./004-multistorey-tower.png",
+      "alt": "Multi-storey BIM tower with floor plates, vertical conduits, and electrical technical areas",
+      "caption": "Multi-storey BIM tower with floor plates, vertical conduits, electrical technical areas at the base level",
       "animated": false
     }
   ]

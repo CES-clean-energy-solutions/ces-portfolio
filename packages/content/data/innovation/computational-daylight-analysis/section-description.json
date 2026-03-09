@@ -21,7 +21,7 @@
   },
   "links": [],
   "video": {
-    "webm": "/content/services/research-development/bg.webm",
+    "webm": "",
     "mp4": "",
     "mp4Mobile": "",
     "poster": ""
@@ -29,20 +29,20 @@
   "images": [
     {
       "src": "./001-sensor-grid.png",
-      "alt": "3D sensor geometry placed across urban massing for daylight measurement",
-      "caption": "Adaptive sensor grids mapped to floor plates and facade surfaces — resolution calibrated to EN 17037 occupancy zones and task areas.",
+      "alt": "1M+ point daylight sensor grid mesh for annual analysis",
+      "caption": "1M+ point daylight sensor grid mesh for annual analysis",
       "animated": false
     },
     {
-      "src": "./002-grasshopper-component.png",
-      "alt": "Grasshopper parametric definition with lux threshold categorisation",
-      "caption": "Custom CES Grasshopper components chain Honeybee radiance recipes with lux-threshold categorisation, routing results into certification-ready colour bands.",
+      "src": "./002-computational-pipeline.png",
+      "alt": "Computational pipeline for parallel parametric simulation runs",
+      "caption": "Computational pipeline for parallel parametric simulation runs",
       "animated": false
     },
     {
-      "src": "./003-daylight-result.png",
-      "alt": "Voxel solar exposure heatmap showing annual direct radiation across building volumes",
-      "caption": "Spatial daylight autonomy results rendered per zone — green exceeds the 300 lx / 50% threshold for EN 17037 compliance, red flags underlit areas requiring design intervention.",
+      "src": "./003-daylight-results.png",
+      "alt": "Computational Daylight Results with Daylight Autonomy and Average Illuminance",
+      "caption": "Computational Daylight Results with Daylight Autonomy, Average Illuminance, for a masterplan design",
       "animated": false
     }
   ]

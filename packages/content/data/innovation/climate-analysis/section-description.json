@@ -27,22 +27,28 @@
     }
   ],
   "video": {
-    "webm": "./climate-analysis-bg.webm",
+    "webm": "",
     "mp4": "",
     "mp4Mobile": "",
     "poster": ""
   },
   "images": [
     {
-      "src": "./001-wind-speed.png",
-      "alt": "Hourly wind speed time series comparing measured and simulated values across the summer period",
-      "caption": "Measured vs. simulated hourly wind speeds (m/s) across the summer period — validating the microclimate model against on-site meteorological station data.",
+      "src": "./001-spar-solar.png",
+      "alt": "Solar geometry analysis for Spar HQ project",
+      "caption": "Spar HQ Solar Geometry analysis",
       "animated": false
     },
     {
-      "src": "./002-solar-analysis.png",
-      "alt": "Annual solar radiation by cardinal orientation for the full year 2023",
-      "caption": "Annual solar radiation (W/m²) disaggregated by cardinal orientation for 2023 — informing façade solar gain calculations and PV yield estimates.",
+      "src": "./002-spar-microclimate.png",
+      "alt": "Microclimate dashboard showing real-time analysis",
+      "caption": "Spar HQ Microclimate dashboard",
+      "animated": false
+    },
+    {
+      "src": "./003-city-wind.png",
+      "alt": "Wind analysis for city-scale project",
+      "caption": "City project wind analysis",
       "animated": false
     }
   ]

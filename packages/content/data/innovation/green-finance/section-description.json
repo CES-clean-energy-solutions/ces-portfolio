@@ -19,12 +19,10 @@
   },
   "links": [],
   "video": {
-    "webm": "./green-finance-video.webm",
+    "webm": "",
     "mp4": "",
     "mp4Mobile": "",
     "poster": ""
   },
-  "images": [
-    { "src": "", "alt": "Green finance placeholder", "animated": false }
-  ]
+  "images": []
 }

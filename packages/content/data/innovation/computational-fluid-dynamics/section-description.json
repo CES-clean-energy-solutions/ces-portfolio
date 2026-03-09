@@ -22,34 +22,40 @@
   },
   "links": [],
   "video": {
-    "webm": "/content/services/research-development/bg.webm",
+    "webm": "",
     "mp4": "",
     "mp4Mobile": "",
     "poster": ""
   },
   "images": [
     {
-      "src": "./001-mesh.png",
-      "alt": "CFD surface mesh of a building geometry prepared for airflow simulation",
-      "caption": "High-resolution surface mesh generated for an external wind comfort study — fine-grained tessellation around façade edges ensures accurate boundary-layer capture in the CFD solver.",
+      "src": "./001-multiphysics-streamlines.png",
+      "alt": "Multiphysics streamlines over 24 hours of operation",
+      "caption": "Multiphysics streamlines over 24 hours of operation",
       "animated": false
     },
     {
-      "src": "./002-section-heatmap.png",
-      "alt": "Vertical section heatmap showing thermal stratification around a building",
-      "caption": "Cross-sectional temperature heatmap reveals thermal stratification zones around the envelope — used to optimise façade insulation specification and HVAC zoning strategies.",
+      "src": "./002-spar-wind-streamlines.png",
+      "alt": "Spar HQ design exercise showing wind streamlines",
+      "caption": "Spar HQ design exercise, wind stream lines",
       "animated": false
     },
     {
-      "src": "./003-section-flow-velocity-ratio.png",
-      "alt": "Section view of normalised wind velocity ratios at pedestrian level",
-      "caption": "Normalised flow velocity ratio at pedestrian height — values above 1.0 flag wind-acceleration corridors, directly informing the placement of screen walls and canopies in the landscape design.",
+      "src": "./003-spar-wind-contours.png",
+      "alt": "Spar HQ wind speed contours and pedestrian comfort analysis",
+      "caption": "Spar HQ design exercise, contours of wind speed and pedestrian comfort",
       "animated": false
     },
     {
-      "src": "./004-flow.png",
-      "alt": "Velocity-coloured streamline visualisation showing airflow deflection and wake vortices around a building cluster",
-      "caption": "LIC streamline plot coloured by velocity magnitude — high-speed approach flow (red) wraps around the primary tower while a large recirculating wake vortex (blue) develops in the sheltered courtyard, identifying wind comfort risks at ground level.",
+      "src": "./004-cfd-meshing.png",
+      "alt": "CFD meshing for a novel city concept",
+      "caption": "CFD Meshing for a novel city concept",
+      "animated": false
+    },
+    {
+      "src": "./005-cfd-tall-building.png",
+      "alt": "CFD contour lines over a 500 meters tall construction project",
+      "caption": "CFD contour lines over a 500 meters tall construction project",
       "animated": false
     }
   ]
