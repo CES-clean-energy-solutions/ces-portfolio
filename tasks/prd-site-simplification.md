@@ -235,14 +235,14 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
   - [x] 1.4 Update `apps/web/src/config/features.ts`: rename `innovationShowcase` → `servicesShowcase`, `innovationsBento` → `servicesBento`
   - [x] 1.5 Search codebase for remaining "innovation" references (grep -ri "innovation" apps/web/src/) and update to "services" where contextually appropriate (skip display text)
 
-- [ ] **2.0 Convert Service Sections from Video to Static Image**
-  - [ ] 2.1 Update `ServicesShowcase.tsx`: replace video background rendering with Next.js Image component
-  - [ ] 2.2 Update component props to accept `image` prop (string path) instead of `video` object
-  - [ ] 2.3 Add placeholder image path (e.g., `/images/services/placeholder-[name].jpg`) that user will replace
-  - [ ] 2.4 Ensure image fills container with `object-fit: cover` and maintains aspect ratio
-  - [ ] 2.5 Add `sizes` prop to Image component for responsive loading (e.g., `sizes="(max-width: 768px) 100vw, 50vw"`)
-  - [ ] 2.6 Repeat for `ServicesBento.tsx` if it uses video backgrounds
-  - [ ] 2.7 Update `packages/content/data/services.ts` type definitions: remove `video` prop, add `image` prop to ServiceCategory interface
+- [x] **2.0 Convert Service Sections from Video to Static Image**
+  - [x] 2.1 Update `ServicesShowcase.tsx`: replace video background rendering with Next.js Image component
+  - [x] 2.2 Update component props to accept `image` prop (string path) instead of `video` object
+  - [x] 2.3 Add placeholder image path (e.g., `/images/services/placeholder-[name].jpg`) that user will replace
+  - [x] 2.4 Ensure image fills container with `object-fit: cover` and maintains aspect ratio
+  - [x] 2.5 Add `sizes` prop to Image component for responsive loading (e.g., `sizes="(max-width: 768px) 100vw, 50vw"`)
+  - [x] 2.6 Repeat for `ServicesBento.tsx` if it uses video backgrounds
+  - [x] 2.7 Update `packages/content/data/services.ts` type definitions: remove `video` prop, add `image` prop to ServiceCategory interface
 
 - [ ] **3.0 Simplify Header Navigation**
   - [ ] 3.1 Open `apps/web/src/components/Header.tsx` and remove hamburger menu/sheet logic (if present)
@@ -312,3 +312,4 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
 | Date | Task | Notes |
 |------|------|-------|
 | 2026-03-09 | 1.0-1.5 | Renamed innovation/ directory to services-bento/, updated all component names and imports, updated feature flags |
+| 2026-03-09 | 2.1-2.7 | Replaced video backgrounds with static images in ServicesBentoCard and ServicesSlide components, added deprecation note to video field |

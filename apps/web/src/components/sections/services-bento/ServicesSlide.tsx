@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { ChevronNoPad } from "@/components/icons/ChevronIcon";
 import { ServicesGallery } from "./ServicesGallery";
@@ -16,116 +15,25 @@ interface ServicesSlideProps {
 }
 
 // ---------------------------------------------------------------------------
-// Video background — inline here (no shared component needed; same pattern
-// as ServiceVideo but simpler: no fade-out, just fade-in on active)
+// Static image background — replaces video for performance
 // ---------------------------------------------------------------------------
 
-interface VideoBackgroundProps {
-  video: ServicesArea["video"];
-  isActive: boolean;
+interface ImageBackgroundProps {
+  imageSrc: string;
+  alt?: string;
 }
 
-function VideoBackground({ video, isActive }: VideoBackgroundProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [opacity, setOpacity] = useState(0);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
-  const handleTimeUpdate = useCallback(() => {
-    const el = videoRef.current;
-    if (!el || !el.duration || !isFinite(el.duration)) return;
-    const FADE = 1.5;
-    const t = el.currentTime;
-    const dur = el.duration;
-    if (t < FADE) setOpacity(t / FADE);
-    else if (t > dur - FADE) setOpacity((dur - t) / FADE);
-    else setOpacity(1);
-  }, []);
-
-  const handleEnded = useCallback(() => {
-    const el = videoRef.current;
-    if (!el) return;
-    el.currentTime = 0;
-    el.play().catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
-    if (isActive) {
-      setOpacity(0);
-      el.currentTime = 0;
-      el.play().catch(() => {});
-    } else {
-      el.pause();
-      el.currentTime = 0;
-      setOpacity(0);
-    }
-  }, [isActive]);
-
-  // No video src — render dark gradient placeholder
-  const hasVideo = Boolean(video.webm || video.mp4);
-
-  if (!hasVideo) {
-    return (
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 to-zinc-800" />
-    );
-  }
-
-  // Respect reduced motion — show poster or gradient
-  if (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) {
-    return video.poster ? (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={video.poster}
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover"
-        loading="lazy"
-      />
-    ) : (
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 to-zinc-800" />
-    );
-  }
-
+function ImageBackground({ imageSrc, alt = "" }: ImageBackgroundProps) {
   return (
-    <video
-      ref={videoRef}
-      className="absolute inset-0 h-full w-full object-cover transition-none"
-      style={{ opacity }}
-      muted
-      playsInline
-      preload="none"
-      poster={video.poster || undefined}
-      onTimeUpdate={handleTimeUpdate}
-      onEnded={handleEnded}
-      // Slow playback to 50% speed for cinematic effect
-      onLoadedMetadata={() => {
-        if (videoRef.current) {
-          videoRef.current.playbackRate = 0.5;
-        }
-      }}
-    >
-      {isMobile ? (
-        video.mp4Mobile ? (
-          <source src={video.mp4Mobile} type="video/mp4" />
-        ) : null
-      ) : (
-        <>
-          {video.webm && <source src={video.webm} type="video/webm" />}
-          {video.mp4 && <source src={video.mp4} type="video/mp4" />}
-        </>
-      )}
-    </video>
+    <Image
+      src={imageSrc}
+      alt={alt}
+      fill
+      sizes="100vw"
+      className="object-cover"
+      priority={false}
+      quality={85}
+    />
   );
 }
 
@@ -135,11 +43,13 @@ function VideoBackground({ video, isActive }: VideoBackgroundProps) {
 
 export function ServicesSlide({ area, isActive }: ServicesSlideProps) {
   const visibleImages = area.images.filter((img) => img.src !== "");
+  // Use first image from images array, or fallback to placeholder
+  const backgroundImage = area.images.find((img) => img.src)?.src ?? `/images/services/placeholder-${area.id}.jpg`;
 
   return (
     <div className="relative flex min-h-screen items-start py-20 lg:absolute lg:inset-0 lg:items-center lg:py-0">
-      {/* Video / gradient background */}
-      <VideoBackground video={area.video} isActive={isActive} />
+      {/* Static image background */}
+      <ImageBackground imageSrc={backgroundImage} />
 
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/65" />

@@ -54,6 +54,7 @@ export interface InnovationArea {
     secondary: string;
   };
   links?: InnovationLink[];
+  /** @deprecated Video backgrounds replaced with static images for performance. Components now use the first image from the `images` array. This field is retained for backwards compatibility but is no longer rendered. */
   video: {
     webm: string;
     mp4: string;
@@ -61,7 +62,7 @@ export interface InnovationArea {
     poster: string;
     placeholder?: string;
   };
-  /** Supplementary images / animated GIFs shown as media cards inside the slide */
+  /** Images shown as backgrounds and media cards. First image is used as the main background. */
   images: InnovationImage[];
 }
 
