@@ -23,15 +23,21 @@ CES Clean Energy Solutions — a scroll-driven marketing site for a Vienna-based
 apps/web/          → @ces/web — Next.js marketing site (port 4200)
 packages/ui/       → @repo/ui — shared component library and brand assets
 packages/content/  → @ces/content — portfolio data (projects, case studies)
-docs/              → technical-architecture.md (871-line tech brief), BRAND.md
-tasks/             → PRDs and task lists (generated via /prd command)
+docs/              → technical-architecture.md (913-line tech brief), BRAND.md
+tasks/             → PRDs and task lists (generated via skills)
+scripts/           → helper scripts (video encoding, asset copying, state parsing)
 ```
 
 Internal packages use `workspace:*` protocol (e.g., `"@repo/ui": "workspace:*"`).
 
+**Turborepo configuration** (`turbo.json`): `build` task outputs are cached (`.next/**`, `dist/**`), `lint` and `type-check` depend on upstream builds, `dev` is persistent and never cached. Task dependencies ensure packages build before dependents.
+
 **Content package** (`@ces/content`) exports structured data via `@ces/content/data/*` path:
 - `data/services.ts` — 6 service categories with comprehensive metadata (titles, descriptions, stats, video assets, sub-services, related links). Each `ServiceCategory` includes `video` object (webm/mp4/mp4Mobile/poster), `stats` (metric/label/secondary), `links` array (optional demos/detail pages), and `subServices` array. Import via `@ces/content/data/services`.
+- `data/services/` — static assets (videos, images) that get copied to `apps/web/public/content/services/` via the `prebuild` script.
 - Future: project metadata, case studies, and portfolio entries.
+
+**Asset pipeline:** The `prebuild` script in `apps/web/package.json` runs `scripts/copy-service-assets.sh` before every build. This copies servable assets (videos, images) from the content package into Next.js's public directory. The script is necessary because SST's asset bundler can't follow symlinks. It skips JSON files and source materials, copying only web-ready assets.
 
 Planned but not yet created: `apps/marimo/` (Python notebook server), `apps/dashboard/`, `packages/config/`, `packages/utils/`.
 
@@ -71,13 +77,22 @@ pnpm clean                  # removes .next, dist, .turbo artifacts
 # shadcn/ui components
 npx shadcn@latest init      # initialize in apps/web
 npx shadcn@latest add button card dialog navigation-menu sheet
+
+# Helper scripts (in scripts/ directory)
+bash scripts/encode-hero-video.sh       # encode videos for hero section
+bash scripts/encode-service-video.sh    # encode service showcase videos
+pnpm sst:state                          # export and parse SST state (requires deployed stack)
 ```
+
+**Note:** No testing infrastructure is currently configured (no Jest/Vitest, no test scripts). Tests can be added in the future if needed.
 
 ## Architecture Decisions
 
 **Rendering strategy:** Almost everything is SSG (static). ISR via `"use cache"` directive for CMS-managed content only. SSR is avoided. CSR reserved for interactive widgets behind `"use client"`. Contact forms use SSG page + Server Action.
 
 **Server Components are the default.** Only use `"use client"` for: menus (state toggle), forms (onChange), lightboxes (click), scroll animations (useGSAP/useEffect), carousels. Keep client components small and leaf-level.
+
+**Feature flags:** `apps/web/src/config/features.ts` exports boolean flags controlling visibility of page sections (hero, servicesShowcase, projectsPreview, etc.). Toggle features by changing the config and redeploying. All environments share these flags. Import via `@/config/features`.
 
 **Tailwind v4 tokens** are defined in `apps/web/src/app/globals.css` using CSS custom properties + `@theme inline` block. No separate tailwind config file exists. Colors use OKLCH color space.
 
@@ -165,11 +180,17 @@ Marimo notebooks: separate containerized Python service, proxied via Next.js `re
 
 ## Workflow: PRDs and Task Lists
 
-Large features follow a structured workflow using custom commands in `.claude/commands/`:
+Large features follow a structured workflow using custom commands (skills) available via the Skill tool:
 
-1. `/prd <feature>` — generates a PRD with clarifying questions, saves to `/tasks/prd-[name].md`
-2. `/generate-tasks` — converts a PRD into a numbered task list at `/tasks/tasks-prd-[name].md`
-3. `/process-task-list` — works through tasks one sub-task at a time, pausing for user approval between each
+**Available skills:**
+- `prd` — Create a PRD with embedded task list for a feature or project
+- `implement` — Implement tasks from a PRD file, tracking progress in-place
+- `implement-all` — Implement ALL tasks from a PRD file without pausing, tracking progress in-place
+- `checkpoint` — Save a progress checkpoint (update PRD status and git commit)
+- `next-steps` — Analyze current state and propose logical next steps for development
+- `screenshot` — View and analyze the latest screenshot(s) from `.screenshots/` folder
+
+Typical workflow: `/prd <feature>` → `/implement` or `/implement-all` → `/checkpoint` after completing milestones
 
 ## Component Organization
 
@@ -189,6 +210,10 @@ Desktop-only interactive components (`ParticlesBackground`, `CursorRipple`) are 
 ## Devcontainer
 
 `.devcontainer/` provides a ready-to-go dev environment: Node 22, pnpm 9.15.4, AWS CLI v2, `dig`/`nslookup`, ESLint, Prettier, Tailwind CSS IntelliSense, Claude Code extension. `postCreateCommand` runs `pnpm install`.
+
+**Port forwarding:** The devcontainer forwards port 8080 to the host, but `pnpm dev` runs the Next.js dev server on port 4200 internally. Access the site at `http://localhost:8080` (forwarded) or `http://localhost:4200` (direct).
+
+**Claude settings:** `.claude/` is a symlink to `/agentic-central` (external persistent mount). Project settings (`settings.json`) and custom commands (`commands/`) live here and survive container rebuilds. User-specific settings can be placed in `claude.json` which gets copied to `~/.claude.json` on container start.
 
 ## Environment Variables
 

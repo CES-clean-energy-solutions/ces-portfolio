@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/sections/Hero";
-import { InnovationShowcase } from "@/components/sections/innovation/InnovationShowcase";
-import { InnovationsBento } from "@/components/sections/innovation/InnovationsBento";
+import { ServicesShowcase as ServicesBentoShowcase } from "@/components/sections/services-bento/ServicesShowcase";
+import { ServicesBento } from "@/components/sections/services-bento/ServicesBento";
 import { ServicesOverview } from "@/components/sections/ServicesOverview";
 import { ServicesShowcase } from "@/components/sections/services/ServicesShowcase";
 import { ProjectsPreview } from "@/components/sections/ProjectsPreview";
@@ -17,11 +17,11 @@ export default function Home() {
       <Header />
       <main>
         {features.hero && <Hero />}
-        {features.innovationsBento && (
-          <InnovationsBento innovations={innovations} />
+        {features.servicesBento && (
+          <ServicesBento innovations={innovations} />
         )}
-        {features.innovationShowcase && (
-          <InnovationShowcase innovations={innovations} />
+        {features.servicesBentoShowcase && (
+          <ServicesBentoShowcase innovations={innovations} />
         )}
         {features.servicesOverview && <ServicesOverview />}
         {features.servicesShowcase && <ServicesShowcase services={services} />}

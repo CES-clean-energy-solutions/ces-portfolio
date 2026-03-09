@@ -7,8 +7,8 @@
 
 interface Features {
   hero: boolean;
-  innovationShowcase: boolean;
-  innovationsBento: boolean;
+  servicesBentoShowcase: boolean;
+  servicesBento: boolean;
   servicesOverview: boolean;
   servicesShowcase: boolean;
   /** Legacy accordion card grid — disabled pending management sign-off */
@@ -19,8 +19,8 @@ interface Features {
 
 export const features: Features = {
   hero: true,
-  innovationShowcase: false,
-  innovationsBento: true,
+  servicesBentoShowcase: false,
+  servicesBento: true,
   servicesOverview: false,
   servicesShowcase: false,
   servicesCards: false,
