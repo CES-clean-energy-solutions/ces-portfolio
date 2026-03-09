@@ -283,12 +283,12 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
   - [x] 7.6 Add placeholder text for "Who We Are" and "How We Work" (e.g., "Who We Are: Content will be provided by client. CES Clean Energy Solutions is a Vienna-based engineering consultancy...")
   - [x] 7.7 Ensure Contact Us box is visually emphasized (consider larger size, distinct background, or border)
 
-- [ ] **8.0 Update Feature Flags and Remove Deprecated Code**
-  - [ ] 8.1 Verify feature flags in `config/features.ts` work correctly with renamed components
-  - [ ] 8.2 Toggle flags to test section visibility (e.g., set `servicesShowcase: false` and confirm section is hidden)
-  - [ ] 8.3 Review `scripts/encode-service-video.sh` — add deprecation comment at top if video encoding is no longer needed
-  - [ ] 8.4 Review `scripts/copy-service-assets.sh` — confirm it handles images correctly (check file extensions)
-  - [ ] 8.5 Search for any orphaned video-related code or imports and remove
+- [x] **8.0 Update Feature Flags and Remove Deprecated Code**
+  - [x] 8.1 Verify feature flags in `config/features.ts` work correctly with renamed components
+  - [x] 8.2 Toggle flags to test section visibility (e.g., set `servicesShowcase: false` and confirm section is hidden)
+  - [x] 8.3 Review `scripts/encode-service-video.sh` — add deprecation comment at top if video encoding is no longer needed
+  - [x] 8.4 Review `scripts/copy-service-assets.sh` — confirm it handles images correctly (check file extensions)
+  - [x] 8.5 Search for any orphaned video-related code or imports and remove
 
 - [ ] **9.0 Testing and Visual QA**
   - [ ] 9.1 Test on desktop viewport (> 1024px): verify navigation, service section images load, footer is visible, modals open/close
@@ -317,3 +317,4 @@ Simplify the CES marketing site based on stakeholder review feedback. Replace vi
 | 2026-03-09 | 4.1-4.5 | Created Footer component with five legal links, added to page.tsx |
 | 2026-03-09 | 5.1-6.5 | Created LegalModal component with Radix Dialog, wired up footer links with placeholder content |
 | 2026-03-09 | 7.1-7.7 | Restructured ContactCta to three-box layout with Contact Us (full width), Who We Are and How We Work (50% each) |
+| 2026-03-09 | 8.1-8.5 | Added deprecation notice to encode-service-video.sh, verified asset copying script handles images, removed video code from ServicesDetailModal |

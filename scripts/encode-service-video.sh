@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# ⚠️ DEPRECATED: Video backgrounds have been replaced with static images for performance.
+# Components now use the first image from the images array in innovation.ts/services.ts.
+# This script is retained for historical reference but is no longer used in the build process.
+#
 # encode-service-video.sh
 # Encodes service background videos with slow motion, multiple formats, and mobile variants.
 #

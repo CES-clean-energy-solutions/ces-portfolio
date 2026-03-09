@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
@@ -13,43 +13,21 @@ interface ServicesDetailModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-function ModalVideoHero({ area }: { area: ServicesArea }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.play().catch(() => {});
-
-    return () => {
-      video.pause();
-    };
-  }, []);
-
-  const hasVideo = !!area.video.webm || !!area.video.mp4;
+function ModalImageHero({ area }: { area: ServicesArea }) {
+  // Use first image from images array, or fallback to placeholder
+  const imageSrc = area.images.find((img) => img.src)?.src ?? `/images/services/placeholder-${area.id}.jpg`;
 
   return (
     <div className="relative h-48 w-full overflow-hidden sm:h-64 lg:h-72">
-      {/* Video background */}
-      {hasVideo && (
-        <video
-          ref={videoRef}
-          muted
-          playsInline
-          loop
-          preload="metadata"
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          {area.video.webm && (
-            <source src={area.video.webm} type="video/webm" />
-          )}
-          {area.video.mp4 && (
-            <source src={area.video.mp4} type="video/mp4" />
-          )}
-        </video>
-      )}
+      {/* Static image background */}
+      <Image
+        src={imageSrc}
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover"
+        priority
+      />
 
       {/* Dark gradient — stronger at bottom where text sits */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -138,7 +116,7 @@ export function ServicesDetailModal({
 
                     {/* Video hero with overlaid title */}
                     <div className="overflow-hidden md:rounded-t-2xl">
-                      <ModalVideoHero area={area} />
+                      <ModalImageHero area={area} />
                     </div>
 
                     {/* Content body */}
