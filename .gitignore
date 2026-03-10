@@ -14,6 +14,9 @@ apps/web/public/content/
 .screenshots
 .screenshots/
 
+# Mounted asset source (Windows host folder, bind-mounted in devcontainer)
+web-assets-link/
+
 # Claude Code
 .claude/
 .claude

@@ -47,7 +47,8 @@
   ],
   "mounts": [
     "source=/mnt/c/git/agentic-central,target=/agentic-central,type=bind,consistency=cached",
-    "source=/mnt/c/Users/m.jones/Pictures/Screenshots,target=/screenshots,type=bind,consistency=cached"
+    "source=/mnt/c/Users/m.jones/Pictures/Screenshots,target=/screenshots,type=bind,consistency=cached",
+    "source=/mnt/c/Users/m.jones/gocomp/Innovationsmanagement - General/11 Portfolio/03 Website assets,target=/workspaces/ces-portfolio/web-assets-link,type=bind,consistency=cached"
   ],
   "postCreateCommand": "pnpm install",
   "postStartCommand": "bash .devcontainer/post-start.sh ${containerWorkspaceFolder}",
