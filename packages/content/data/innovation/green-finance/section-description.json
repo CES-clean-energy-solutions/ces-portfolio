@@ -4,13 +4,13 @@
   "order": 4,
   "title": "Green Finance",
   "shortDescription": "ESG frameworks, green bonds, and EU taxonomy alignment for sustainable capital.",
-  "longDescription": "We bridge the gap between engineering outcomes and sustainable finance. Our green finance team structures ESG reporting frameworks, supports EU taxonomy compliance, and advises on green bond issuance — ensuring that the environmental performance of a project is credibly documented and financeable in today's capital markets.",
+  "longDescription": "Sustainable development, Green Economy and Circular Economy have never been more deliberately used terms than today.\n\nIf we have a look on the real estate market and its increasing demand on building certificates or if we are following the trends in smart city development and efficiency in the infrastructure and energy sector it is notable, that sustainability has become one of the key topic in all investments and also in our working environment.\n\nStandard engineering is not enough anymore to satisfy the Clients request for a socially compliant, environmental friendly and economically viable project development. Also the definition of economic viability in the frame of a sustainable development has strongly been changed. Life Cycle Costs and their optimisation, EU Taxonomy and ESG compliance are becoming key criteria for the economic viability of a development for most of our Clients.\n\nCES has specifically focused its activities on sustainable development in the building, industrial and infrastructure sector providing integrated design as well as social and economic assessments. A strong engagement in national and international research allows the experts of CES to consider newest developments and outstanding technologies in the integrated planning process.",
   "subItems": [
-    { "label": "ESG Reporting & Frameworks", "slug": "esg-reporting" },
-    { "label": "EU Taxonomy Alignment", "slug": "eu-taxonomy" },
-    { "label": "Green Bond Advisory", "slug": "green-bond" },
-    { "label": "Carbon Credit Structuring", "slug": "carbon-credits" },
-    { "label": "Impact Investment Analysis", "slug": "impact-investment" }
+    { "label": "Green Building Certification & EU Taxonomy/ESG Compliance", "slug": "green-building-certification-eu-taxonomy-esg-compliance" },
+    { "label": "EBRD Green Economy Financing Facilities (GEFF) — Facility Consultant", "slug": "ebrd-green-economy-financing-facilities-geff-facility-consultant" },
+    { "label": "Climate Action & Low-Carbon Infrastructure Advisory (EIB, FELICITY)", "slug": "climate-action-low-carbon-infrastructure-advisory-eib-felicity" },
+    { "label": "Energy Efficiency & Industrial Decarbonization", "slug": "energy-efficiency-industrial-decarbonization" },
+    { "label": "Renewable Energy Due Diligence, Sub-Project Screening & Gender Assessments", "slug": "renewable-energy-due-diligence-sub-project-screening-gender-assessments" }
   ],
   "stats": {
     "metric": "TBD",
@@ -24,5 +24,42 @@
     "mp4Mobile": "",
     "poster": ""
   },
-  "images": []
+  "images": [
+    {
+      "src": "./001.png",
+      "alt": "United Kingdom – EBRD Regional Support for higher performance technologies through supply chains (Green TFP)",
+      "caption": "United Kingdom – EBRD Regional Support for higher performance technologies through supply chains (Green TFP)",
+      "animated": false
+    },
+    {
+      "src": "./002.png",
+      "alt": "Ukraine – Higher Education – Sub-Project Screening & Evaluation (Phase II)",
+      "caption": "Ukraine – Higher Education – Sub-Project Screening & Evaluation (Phase II)",
+      "animated": false
+    },
+    {
+      "src": "./003.png",
+      "alt": "Georgia GEFF Georgia – Facility Consultant",
+      "caption": "Georgia GEFF Georgia – Facility Consultant",
+      "animated": false
+    },
+    {
+      "src": "./004.jpg",
+      "alt": "Ukraine – FELICITY II – Scoping & Project Proposal Development for Low-Carbon Infrastructure",
+      "caption": "Ukraine – FELICITY II – Scoping & Project Proposal Development for Low-Carbon Infrastructure",
+      "animated": false
+    },
+    {
+      "src": "./005.png",
+      "alt": "Kazakhstan – EBRD Pilot GEFF – Facility Consultant",
+      "caption": "Kazakhstan – EBRD Pilot GEFF – Facility Consultant",
+      "animated": false
+    },
+    {
+      "src": "./006.png",
+      "alt": "Western Balkans – Framework Agreement Support for EIB Financial Sector Operations – Lot 2 Climate Action Support",
+      "caption": "Western Balkans – Framework Agreement Support for EIB Financial Sector Operations – Lot 2 Climate Action Support",
+      "animated": false
+    }
+  ]
 }

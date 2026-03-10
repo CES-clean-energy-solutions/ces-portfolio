@@ -6,13 +6,13 @@
   "shortDescription": "Parametric daylight simulation for certification, comfort, and design optimization.",
   "longDescription": "Our daylight simulation team delivers high-resolution illuminance and radiation analysis using Rhino, Grasshopper, and Honeybee — powered by a custom massively parallel job runner built on Prefect. We size sensor grids to any surface geometry and return daylight autonomy, average illuminance, and glare metrics calibrated to EN 17037, LEED, BREEAM, and DGNB requirements. Results feed directly into architectural optimization, building physics validation, occupant comfort studies, and biological plant selection for landscaping and interior greening.",
   "subItems": [
-    { "label": "Daylight Autonomy (DA / sDA)", "slug": "daylight-autonomy" },
-    { "label": "Average Illuminance Mapping", "slug": "average-illuminance" },
-    { "label": "Glare Analysis (DGP)", "slug": "glare-analysis" },
+    { "label": "Daylight Autonomy (DA / sDA)", "slug": "daylight-autonomy-da-sda" },
+    { "label": "Average Illuminance Mapping", "slug": "average-illuminance-mapping" },
+    { "label": "Glare Analysis (DGP)", "slug": "glare-analysis-dgp" },
     { "label": "Annual Solar Exposure", "slug": "annual-solar-exposure" },
-    { "label": "EN 17037 LEED, BREEAM, etc. Certification Support", "slug": "en-17037-certification" },
-    { "label": "Biological Light Requirement Analysis", "slug": "biological-light-requirements" },
-    { "label": "Parametric Design Optimization", "slug": "parametric-optimization" }
+    { "label": "EN 17037 LEED, BREEAM, etc. Certification Support", "slug": "en-17037-leed-breeam-certification-support" },
+    { "label": "Biological Light Requirement Analysis", "slug": "biological-light-requirement-analysis" },
+    { "label": "Parametric Design Optimization", "slug": "parametric-design-optimization" }
   ],
   "stats": {
     "metric": "1M+",
@@ -28,22 +28,25 @@
   },
   "images": [
     {
-      "src": "./001-sensor-grid.png",
+      "src": "./001.png",
       "alt": "1M+ point daylight sensor grid mesh for annual analysis",
       "caption": "1M+ point daylight sensor grid mesh for annual analysis",
-      "animated": false
+      "animated": false,
+      "confidential": true
     },
     {
-      "src": "./002-computational-pipeline.png",
+      "src": "./002.png",
       "alt": "Computational pipeline for parallel parametric simulation runs",
       "caption": "Computational pipeline for parallel parametric simulation runs",
-      "animated": false
+      "animated": false,
+      "confidential": true
     },
     {
-      "src": "./003-daylight-results.png",
-      "alt": "Computational Daylight Results with Daylight Autonomy and Average Illuminance",
+      "src": "./003.png",
+      "alt": "Computational Daylight Results with Daylight Autonomy, Average Illuminance, for a masterplan design",
       "caption": "Computational Daylight Results with Daylight Autonomy, Average Illuminance, for a masterplan design",
-      "animated": false
+      "animated": false,
+      "confidential": true
     }
   ]
 }

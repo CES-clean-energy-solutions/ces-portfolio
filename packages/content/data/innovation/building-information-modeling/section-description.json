@@ -6,14 +6,14 @@
   "shortDescription": "Full-discipline MEP modeling with integrated digital workflows for energy, sustainability, and certification.",
   "longDescription": "Our MEP engineering team delivers coordinated building services design through a fully digital BIM workflow — from IFC-based data exchange into Revit through to clash-free construction documentation. We integrate energy simulation, sustainability certification support, and building physics into every model stage, enabling truly integrated design across HVAC, electrical, plumbing, and fire protection disciplines. Our digital methods ensure that sustainability targets, regulatory compliance, and performance optimization are embedded in the model — not bolted on afterward.",
   "subItems": [
-    { "label": "MEP Coordination & Clash Detection", "slug": "mep-coordination" },
-    { "label": "IFC-Based Digital Workflow", "slug": "ifc-digital-workflow" },
+    { "label": "MEP Coordination & Clash Detection", "slug": "mep-coordination-clash-detection" },
+    { "label": "IFC-Based Digital Workflow", "slug": "ifc-based-digital-workflow" },
     { "label": "Integrated Energy Design", "slug": "integrated-energy-design" },
-    { "label": "Sustainability Certification Support", "slug": "sustainability-certification" },
+    { "label": "Sustainability Certification Support", "slug": "sustainability-certification-support" },
     { "label": "HVAC Systems Design", "slug": "hvac-systems-design" },
-    { "label": "Electrical Systems & Lighting", "slug": "electrical-systems" },
+    { "label": "Electrical Systems & Lighting", "slug": "electrical-systems-lighting" },
     { "label": "Plumbing & Fire Protection", "slug": "plumbing-fire-protection" },
-    { "label": "Digital Methods & Automation", "slug": "digital-methods" }
+    { "label": "Digital Methods & Automation", "slug": "digital-methods-automation" }
   ],
   "stats": {
     "metric": "17",
@@ -29,26 +29,26 @@
   },
   "images": [
     {
-      "src": "./001-bim-plumbing.png",
-      "alt": "BIM plumbing model for a mixed-use development with detailed risers, horizontal distribution, and underground space",
+      "src": "./001.png",
+      "alt": "BIM plumbing model for a mixed‑use development — detailed risers, horizontal distribution, underground space",
       "caption": "BIM plumbing model for a mixed‑use development — detailed risers, horizontal distribution, underground space",
       "animated": false
     },
     {
-      "src": "./002-federated-bim.png",
-      "alt": "Federated BIM model of the Wasserbaulabor hydraulic research facility with structure, envelope and MEP",
+      "src": "./002.png",
+      "alt": "Federated BIM model of the Wasserbaulabor, modern hydraulic research facility, structure, envelope and MEP",
       "caption": "Federated BIM model of the Wasserbaulabor, modern hydraulic research facility, structure, envelope and MEP",
       "animated": false
     },
     {
-      "src": "./003-full-building-services.png",
-      "alt": "Full building services model for a mixed-use campus showing HVAC, Fire, Electrical, and Plumbing coordination",
+      "src": "./003.png",
+      "alt": "Full building services model for a mixed-use campus, HVAC, Fire, Electrical, Plumbing",
       "caption": "Full building services model for a mixed-use campus, HVAC, Fire, Electrical, Plumbing",
       "animated": false
     },
     {
-      "src": "./004-multistorey-tower.png",
-      "alt": "Multi-storey BIM tower with floor plates, vertical conduits, and electrical technical areas",
+      "src": "./004.png",
+      "alt": "Multi-storey BIM tower with floor plates, vertical conduits, electrical technical areas at the base level",
       "caption": "Multi-storey BIM tower with floor plates, vertical conduits, electrical technical areas at the base level",
       "animated": false
     }

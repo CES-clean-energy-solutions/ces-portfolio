@@ -6,14 +6,14 @@
   "shortDescription": "Multi-scale CFD simulation for urban wind comfort, interior climate, and coupled multi-physics analysis.",
   "longDescription": "Our CFD engineers operate across macro, meso, and micro scales — from regional wind climate downscaling through urban district airflow to room-level interior comfort analysis. We use OpenFOAM with urbanMicroclimateFoam, the coupled multi-physics solver developed at the ETH Zurich Chair of Building Physics, to model turbulent airflow, heat and moisture transport, and radiation exchange simultaneously. Urban wind comfort is assessed against Lawson criteria with velocity ratio mapping and 3D streamline visualisation, while interior studies couple CFD results with energy simulation for holistic building performance evaluation.",
   "subItems": [
-    { "label": "Macro-Scale Wind Climate Analysis", "slug": "macro-wind-climate" },
-    { "label": "Meso-Scale Urban Airflow", "slug": "meso-urban-airflow" },
-    { "label": "Micro-Scale Pedestrian Wind Comfort", "slug": "micro-pedestrian-comfort" },
-    { "label": "Lawson Criteria Assessment", "slug": "lawson-criteria" },
-    { "label": "Velocity Ratio Mapping", "slug": "velocity-ratio" },
-    { "label": "3D Meshing & Streamline Visualisation", "slug": "meshing-streamlines" },
-    { "label": "Interior Comfort Simulation", "slug": "interior-comfort" },
-    { "label": "Coupled Multi-Physics & Energy", "slug": "coupled-multi-physics" }
+    { "label": "Macro-Scale Wind Climate Analysis", "slug": "macro-scale-wind-climate-analysis" },
+    { "label": "Meso-Scale Urban Airflow", "slug": "meso-scale-urban-airflow" },
+    { "label": "Micro-Scale Pedestrian Wind Comfort", "slug": "micro-scale-pedestrian-wind-comfort" },
+    { "label": "Lawson Criteria Assessment", "slug": "lawson-criteria-assessment" },
+    { "label": "Velocity Ratio Mapping", "slug": "velocity-ratio-mapping" },
+    { "label": "3D Meshing & Streamline Visualisation", "slug": "3d-meshing-streamline-visualisation" },
+    { "label": "Interior Comfort Simulation", "slug": "interior-comfort-simulation" },
+    { "label": "Coupled Multi-Physics & Energy", "slug": "coupled-multi-physics-energy" }
   ],
   "stats": {
     "metric": "3",
@@ -29,34 +29,37 @@
   },
   "images": [
     {
-      "src": "./001-multiphysics-streamlines.png",
+      "src": "./001.png",
       "alt": "Multiphysics streamlines over 24 hours of operation",
       "caption": "Multiphysics streamlines over 24 hours of operation",
+      "animated": false,
+      "confidential": true
+    },
+    {
+      "src": "./002.png",
+      "alt": "Spar HQ design excercise, wind stream lines",
+      "caption": "Spar HQ design excercise, wind stream lines",
       "animated": false
     },
     {
-      "src": "./002-spar-wind-streamlines.png",
-      "alt": "Spar HQ design exercise showing wind streamlines",
-      "caption": "Spar HQ design exercise, wind stream lines",
+      "src": "./003.png",
+      "alt": "Spar HQ design excercise, contours of wind speed and pedestrian comfort",
+      "caption": "Spar HQ design excercise, contours of wind speed and pedestrian comfort",
       "animated": false
     },
     {
-      "src": "./003-spar-wind-contours.png",
-      "alt": "Spar HQ wind speed contours and pedestrian comfort analysis",
-      "caption": "Spar HQ design exercise, contours of wind speed and pedestrian comfort",
-      "animated": false
-    },
-    {
-      "src": "./004-cfd-meshing.png",
-      "alt": "CFD meshing for a novel city concept",
+      "src": "./004.png",
+      "alt": "CFD Meshing for a novel city concept",
       "caption": "CFD Meshing for a novel city concept",
-      "animated": false
+      "animated": false,
+      "confidential": true
     },
     {
-      "src": "./005-cfd-tall-building.png",
+      "src": "./005.png",
       "alt": "CFD contour lines over a 500 meters tall construction project",
       "caption": "CFD contour lines over a 500 meters tall construction project",
-      "animated": false
+      "animated": false,
+      "confidential": true
     }
   ]
 }

@@ -28,19 +28,19 @@
   },
   "images": [
     {
-      "src": "./001-waste-streams.png",
-      "alt": "Municipal waste streams and recycling balance analysis",
+      "src": "./001.png",
+      "alt": "Municipal design of waste streams and recycling balance",
       "caption": "Municipal design of waste streams and recycling balance",
       "animated": false
     },
     {
-      "src": "./002-energy-demand.png",
+      "src": "./002.png",
       "alt": "Energy demand analysis and optimization",
       "caption": "Energy demand analysis and optimization",
       "animated": false
     },
     {
-      "src": "./003-energy-use-intensity.png",
+      "src": "./003.png",
       "alt": "Energy Use Intensity for a novel city concept",
       "caption": "Energy Use Intensity for a novel city concept",
       "animated": false
