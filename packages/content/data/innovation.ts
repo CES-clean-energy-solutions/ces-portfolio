@@ -39,6 +39,8 @@ export interface InnovationImage {
   caption?: string;
   /** true for animated GIFs — component uses <img> with loading="eager" */
   animated?: boolean;
+  /** When true, image is hidden unless secret mode is active. Set by OFF entries in Section txt files. */
+  confidential?: boolean;
 }
 
 export interface InnovationArea {

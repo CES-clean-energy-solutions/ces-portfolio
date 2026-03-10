@@ -61,7 +61,10 @@ export function ServicesDetailModal({
 
   if (!area) return null;
 
-  const validImages = area.images.filter((img) => img.src);
+  // Exclude confidential images unless secret mode is active (mirrors link filtering)
+  const validImages = area.images.filter(
+    (img) => img.src && (isSecret || img.confidential !== true)
+  );
   const hasStats =
     area.stats.metric !== "TBD" && area.stats.metricLabel !== "TBD";
 
