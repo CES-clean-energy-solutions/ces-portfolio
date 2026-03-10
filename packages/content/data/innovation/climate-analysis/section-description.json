@@ -43,22 +43,19 @@
       "src": "./001.png",
       "alt": "Spar HQ Solar Geometry analysis",
       "caption": "Spar HQ Solar Geometry analysis",
-      "animated": false,
-      "confidential": true
+      "animated": false
     },
     {
       "src": "./002.png",
       "alt": "Spar HQ Microclimate dashboard",
       "caption": "Spar HQ Microclimate dashboard",
-      "animated": false,
-      "confidential": true
+      "animated": false
     },
     {
       "src": "./003.png",
       "alt": "City project wind analysis",
       "caption": "City project wind analysis",
-      "animated": false,
-      "confidential": true
+      "animated": false
     }
   ]
 }
