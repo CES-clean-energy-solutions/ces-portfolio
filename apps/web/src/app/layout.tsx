@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { inter } from "./fonts";
 import SmoothScroll from "@/components/SmoothScroll";
+import { SecretModeProvider } from "@/contexts/SecretModeContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -53,7 +54,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SecretModeProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </SecretModeProvider>
       </body>
     </html>
   );

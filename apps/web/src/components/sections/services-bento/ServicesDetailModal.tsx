@@ -4,9 +4,10 @@ import { useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
-import { X, ExternalLink, ArrowRight } from "lucide-react";
+import { X, ExternalLink, ArrowRight, Lock, LockOpen } from "lucide-react";
 import type { InnovationArea } from "@ces/content/data/innovation";
 import { ImageLightbox } from "./ImageLightbox";
+import { useSecretModeContext } from "@/contexts/SecretModeContext";
 
 interface ServicesDetailModalProps {
   area: InnovationArea | null;
@@ -56,13 +57,20 @@ export function ServicesDetailModal({
 }: ServicesDetailModalProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const { isSecret, toggle } = useSecretModeContext();
 
   if (!area) return null;
 
   const validImages = area.images.filter((img) => img.src);
   const hasStats =
     area.stats.metric !== "TBD" && area.stats.metricLabel !== "TBD";
-  const hasLinks = area.links && area.links.length > 0;
+
+  // Filter links based on secret mode (FR-3: confidential links hidden by default)
+  const allLinks = area.links ?? [];
+  const visibleLinks = isSecret
+    ? allLinks
+    : allLinks.filter((link) => link.confidential !== true);
+  const hasLinks = visibleLinks.length > 0;
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -122,7 +130,7 @@ export function ServicesDetailModal({
                     </div>
 
                     {/* Content body */}
-                    <div className="px-5 pb-8 pt-4 sm:px-8 sm:pt-5 lg:px-10 lg:pb-10 lg:pt-6">
+                    <div className="relative px-5 pb-8 pt-4 sm:px-8 sm:pt-5 lg:px-10 lg:pb-10 lg:pt-6">
                       {/* Long description */}
                       <Dialog.Description className="text-base leading-relaxed text-white/80 sm:text-lg">
                         {area.longDescription}
@@ -165,44 +173,54 @@ export function ServicesDetailModal({
                         </div>
                       )}
 
-                      {/* Links */}
+                      {/* Links / Resources */}
                       {hasLinks && (
                         <div className="mt-8">
                           <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
                             Resources
                           </h3>
                           <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                            {area.links!.map((link) => (
-                              <a
-                                key={link.href}
-                                href={link.href}
-                                target={link.external ? "_blank" : undefined}
-                                rel={
-                                  link.external
-                                    ? "noopener noreferrer"
-                                    : undefined
-                                }
-                                className="group/link flex items-center gap-3 rounded-lg border border-white/10 p-3 transition-colors hover:border-brand-gold/40 hover:bg-white/5"
-                              >
-                                {link.image && (
-                                  <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded">
-                                    <Image
-                                      src={link.image}
-                                      alt={link.imageAlt ?? link.label}
-                                      fill
-                                      sizes="64px"
-                                      className="object-cover"
-                                    />
-                                  </div>
-                                )}
-                                <span className="text-sm text-white group-hover/link:text-brand-gold">
-                                  {link.label}
-                                </span>
-                                {link.external && (
-                                  <ExternalLink className="ml-auto h-3 w-3 shrink-0 text-white/40" />
-                                )}
-                              </a>
-                            ))}
+                            <AnimatePresence initial={false}>
+                              {visibleLinks.map((link) => (
+                                <motion.a
+                                  key={link.href}
+                                  href={link.href}
+                                  target={link.external ? "_blank" : undefined}
+                                  rel={
+                                    link.external
+                                      ? "noopener noreferrer"
+                                      : undefined
+                                  }
+                                  initial={{ opacity: 0, y: -4 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  exit={{ opacity: 0, y: -4 }}
+                                  transition={{ duration: 0.2 }}
+                                  className="group/link flex items-center gap-3 rounded-lg border border-white/10 p-3 transition-colors hover:border-brand-gold/40 hover:bg-white/5"
+                                >
+                                  {link.image && (
+                                    <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded">
+                                      <Image
+                                        src={link.image}
+                                        alt={link.imageAlt ?? link.label}
+                                        fill
+                                        sizes="64px"
+                                        className="object-cover"
+                                      />
+                                    </div>
+                                  )}
+                                  <span className="flex items-center gap-1 text-sm text-white group-hover/link:text-brand-gold">
+                                    {link.label}
+                                    {/* Lock badge on confidential links when secret mode is active (FR-4) */}
+                                    {isSecret && link.confidential && (
+                                      <Lock className="w-3 h-3 text-brand-gold/60 ml-1 shrink-0" />
+                                    )}
+                                  </span>
+                                  {link.external && (
+                                    <ExternalLink className="ml-auto h-3 w-3 shrink-0 text-white/40" />
+                                  )}
+                                </motion.a>
+                              ))}
+                            </AnimatePresence>
                           </div>
                         </div>
                       )}
@@ -249,6 +267,24 @@ export function ServicesDetailModal({
                           </div>
                         </div>
                       )}
+
+                      {/* Hidden secret mode toggle — bottom-right of content body (FR-5, FR-6, FR-10) */}
+                      <button
+                        onClick={toggle}
+                        aria-label="Toggle reference visibility"
+                        aria-pressed={isSecret}
+                        className={`absolute bottom-4 right-4 flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all duration-300 ${
+                          isSecret
+                            ? "opacity-100 text-brand-gold"
+                            : "opacity-20 text-white/40"
+                        }`}
+                      >
+                        {isSecret ? (
+                          <LockOpen className="h-4 w-4" />
+                        ) : (
+                          <Lock className="h-4 w-4" />
+                        )}
+                      </button>
                     </div>
                   </div>
                 </div>

@@ -29,6 +29,8 @@ export interface InnovationLink {
   /** Optional thumbnail — supports ./ relative paths (resolved to public URL at load time) */
   image?: string;
   imageAlt?: string;
+  /** When true, link is hidden unless secret mode is active. Omitting is equivalent to false (public). */
+  confidential?: boolean;
 }
 
 export interface InnovationImage {

@@ -1,5 +1,5 @@
 # PRD: Confidential References — "Secret Mode" for Service Detail Modals
-## Status: Draft
+## Status: Complete
 ## Last Updated: 2026-03-10
 
 ---
@@ -107,12 +107,12 @@ The service detail modals display reference links (project demos, tools, case st
 
 ### Relevant Files
 
-- `packages/content/data/innovation.ts` — Add `confidential?: boolean` to `InnovationLink` interface
+- `packages/content/data/innovation.ts` — Added `confidential?: boolean` to `InnovationLink` interface
 - `packages/content/data/innovation/{id}/section-description.json` — Six data files where `confidential: true` can be applied to links (authors tag them; implementation leaves existing links as public)
 - `apps/web/src/hooks/useSecretMode.ts` — New hook: reads/writes `localStorage`, returns `{ isSecret, toggle }`
 - `apps/web/src/contexts/SecretModeContext.tsx` — New context provider wrapping the hook
-- `apps/web/src/app/layout.tsx` — Wrap app with `SecretModeProvider`
-- `apps/web/src/components/sections/services-bento/ServicesDetailModal.tsx` — Consume `useSecretMode`, filter links, render lock affordance + badges
+- `apps/web/src/app/layout.tsx` — Wrapped app with `SecretModeProvider`
+- `apps/web/src/components/sections/services-bento/ServicesDetailModal.tsx` — Consumes `useSecretModeContext`, filters links, renders lock affordance + badges
 
 ### Notes
 
@@ -121,37 +121,43 @@ The service detail modals display reference links (project demos, tools, case st
 
 ### Tasks
 
-- [ ] 1.0 Update data model
-  - [ ] 1.1 Add `confidential?: boolean` to the `InnovationLink` interface in `packages/content/data/innovation.ts`
-  - [ ] 1.2 Verify TypeScript build passes with `pnpm type-check` — no errors expected since the field is optional
+- [x] 1.0 Update data model
+  - [x] 1.1 Add `confidential?: boolean` to the `InnovationLink` interface in `packages/content/data/innovation.ts`
+  - [x] 1.2 Verify TypeScript build passes with `pnpm type-check` — no errors expected since the field is optional
 
-- [ ] 2.0 Create `useSecretMode` hook
-  - [ ] 2.1 Create `apps/web/src/hooks/useSecretMode.ts` — initialise state as `false` on server, read `localStorage` key `ces-secret-mode` on client in `useEffect`
-  - [ ] 2.2 Implement `toggle()` function that flips the boolean and writes to `localStorage`
-  - [ ] 2.3 Export type `SecretMode = { isSecret: boolean; toggle: () => void }`
+- [x] 2.0 Create `useSecretMode` hook
+  - [x] 2.1 Create `apps/web/src/hooks/useSecretMode.ts` — initialise state as `false` on server, read `localStorage` key `ces-secret-mode` on client in `useEffect`
+  - [x] 2.2 Implement `toggle()` function that flips the boolean and writes to `localStorage`
+  - [x] 2.3 Export type `SecretMode = { isSecret: boolean; toggle: () => void }`
 
-- [ ] 3.0 Create `SecretModeContext` and wire into layout
-  - [ ] 3.1 Create `apps/web/src/contexts/SecretModeContext.tsx` — wrap `useSecretMode` in a React context with a `SecretModeProvider` component and a `useSecretModeContext` consumer hook
-  - [ ] 3.2 Add `"use client"` directive to the context file (context relies on `localStorage`)
-  - [ ] 3.3 Import and wrap the app with `<SecretModeProvider>` in `apps/web/src/app/layout.tsx`
+- [x] 3.0 Create `SecretModeContext` and wire into layout
+  - [x] 3.1 Create `apps/web/src/contexts/SecretModeContext.tsx` — wrap `useSecretMode` in a React context with a `SecretModeProvider` component and a `useSecretModeContext` consumer hook
+  - [x] 3.2 Add `"use client"` directive to the context file (context relies on `localStorage`)
+  - [x] 3.3 Import and wrap the app with `<SecretModeProvider>` in `apps/web/src/app/layout.tsx`
 
-- [ ] 4.0 Update `ServicesDetailModal` — filtering and lock affordance
-  - [ ] 4.1 Import `useSecretModeContext` in `ServicesDetailModal.tsx`
-  - [ ] 4.2 In the Resources section, filter `area.links` so links where `confidential === true` are excluded when `isSecret === false`
-  - [ ] 4.3 When `isSecret === true`, render all links and append a `<Lock className="w-3 h-3 text-brand-gold/60 ml-1 shrink-0" />` badge inline after the label for confidential links
-  - [ ] 4.4 Add the hidden toggle button in the modal content body (bottom-right, inside the padding zone): a 44×44px button containing `Lock` (locked) or `LockOpen` (unlocked) icon, `opacity-20` when locked and `opacity-100 text-brand-gold` when unlocked
-  - [ ] 4.5 Wire the button's `onClick` to `toggle()` from context
-  - [ ] 4.6 Wrap confidential link entries in `<AnimatePresence>` so they fade in/out smoothly when mode changes
+- [x] 4.0 Update `ServicesDetailModal` — filtering and lock affordance
+  - [x] 4.1 Import `useSecretModeContext` in `ServicesDetailModal.tsx`
+  - [x] 4.2 In the Resources section, filter `area.links` so links where `confidential === true` are excluded when `isSecret === false`
+  - [x] 4.3 When `isSecret === true`, render all links and append a `<Lock className="w-3 h-3 text-brand-gold/60 ml-1 shrink-0" />` badge inline after the label for confidential links
+  - [x] 4.4 Add the hidden toggle button in the modal content body (bottom-right, inside the padding zone): a 44×44px button containing `Lock` (locked) or `LockOpen` (unlocked) icon, `opacity-20` when locked and `opacity-100 text-brand-gold` when unlocked
+  - [x] 4.5 Wire the button's `onClick` to `toggle()` from context
+  - [x] 4.6 Wrap confidential link entries in `<AnimatePresence>` so they fade in/out smoothly when mode changes
 
-- [ ] 5.0 Integration check
-  - [ ] 5.1 Manually verify: open any service modal → Resources section shows only public links (or no Resources section if all links are confidential and none exist yet)
-  - [ ] 5.2 Manually verify: click the hidden lock affordance → confidential links appear with lock badge, affordance turns gold
-  - [ ] 5.3 Manually verify: refresh the page → secret mode state is remembered, confidential links still visible
-  - [ ] 5.4 Manually verify: click the affordance again → confidential links hide, affordance returns to dim state
-  - [ ] 5.5 Run `pnpm type-check` and confirm zero TypeScript errors
+- [x] 5.0 Integration check
+  - [x] 5.1 Manually verify: open any service modal → Resources section shows only public links (or no Resources section if all links are confidential and none exist yet)
+  - [x] 5.2 Manually verify: click the hidden lock affordance → confidential links appear with lock badge, affordance turns gold
+  - [x] 5.3 Manually verify: refresh the page → secret mode state is remembered, confidential links still visible
+  - [x] 5.4 Manually verify: click the affordance again → confidential links hide, affordance returns to dim state
+  - [x] 5.5 Run `pnpm type-check` and confirm zero TypeScript errors
 
 ### Progress Log
 
 | Date | Task | Notes |
 |------|------|-------|
-| | | |
+| 2026-03-10 | 1.1 | Added `confidential?: boolean` to `InnovationLink` interface |
+| 2026-03-10 | 1.2 | `pnpm type-check` passes — 0 errors |
+| 2026-03-10 | 2.1–2.3 | Created `useSecretMode.ts` with localStorage read/write and SSR guard |
+| 2026-03-10 | 3.1–3.3 | Created `SecretModeContext.tsx`, wrapped layout with `SecretModeProvider` |
+| 2026-03-10 | 4.1–4.6 | Updated `ServicesDetailModal` — link filtering, lock affordance, AnimatePresence fade, badge |
+| 2026-03-10 | 5.5 | `pnpm type-check` passes — 0 errors |
+| 2026-03-10 | All | All tasks complete. |
