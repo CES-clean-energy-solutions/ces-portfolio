@@ -29,6 +29,12 @@
   },
   "images": [
     {
+      "src": "./main-bg.png",
+      "alt": "BIM MEP Engineering — section background",
+      "background": true,
+      "animated": false
+    },
+    {
       "src": "./001.png",
       "alt": "BIM plumbing model for a mixed‑use development — detailed risers, horizontal distribution, underground space",
       "caption": "BIM plumbing model for a mixed‑use development — detailed risers, horizontal distribution, underground space",

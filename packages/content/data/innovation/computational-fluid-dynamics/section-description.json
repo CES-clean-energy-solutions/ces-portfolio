@@ -29,6 +29,12 @@
   },
   "images": [
     {
+      "src": "./main-bg.png",
+      "alt": "Computational Fluid Dynamics — section background",
+      "background": true,
+      "animated": false
+    },
+    {
       "src": "./001.png",
       "alt": "Multiphysics streamlines over 24 hours of operation",
       "caption": "Multiphysics streamlines over 24 hours of operation",

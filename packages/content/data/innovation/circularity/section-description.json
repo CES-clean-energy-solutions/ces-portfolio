@@ -28,6 +28,12 @@
   },
   "images": [
     {
+      "src": "./main-bg.png",
+      "alt": "Circularity — section background",
+      "background": true,
+      "animated": false
+    },
+    {
       "src": "./001.png",
       "alt": "Municipal design of waste streams and recycling balance",
       "caption": "Municipal design of waste streams and recycling balance",

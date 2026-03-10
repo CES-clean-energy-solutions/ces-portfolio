@@ -42,9 +42,12 @@ function ImageBackground({ imageSrc, alt = "" }: ImageBackgroundProps) {
 // ---------------------------------------------------------------------------
 
 export function ServicesSlide({ area, isActive }: ServicesSlideProps) {
-  const visibleImages = area.images.filter((img) => img.src !== "");
-  // Use first image from images array, or fallback to placeholder
-  const backgroundImage = area.images.find((img) => img.src)?.src ?? `/images/services/placeholder-${area.id}.jpg`;
+  const visibleImages = area.images.filter((img) => img.src && !img.background);
+  // Prefer dedicated background image; fall back to first non-confidential gallery image
+  const backgroundImage =
+    area.images.find((img) => img.background)?.src ??
+    area.images.find((img) => img.src && !img.confidential)?.src ??
+    `/images/services/placeholder-${area.id}.jpg`;
 
   return (
     <div className="relative flex min-h-screen items-start py-20 lg:absolute lg:inset-0 lg:items-center lg:py-0">

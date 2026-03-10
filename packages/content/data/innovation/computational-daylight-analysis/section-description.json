@@ -28,6 +28,12 @@
   },
   "images": [
     {
+      "src": "./main-bg.png",
+      "alt": "Computational Daylight Analysis — section background",
+      "background": true,
+      "animated": false
+    },
+    {
       "src": "./001.png",
       "alt": "1M+ point daylight sensor grid mesh for annual analysis",
       "caption": "1M+ point daylight sensor grid mesh for annual analysis",

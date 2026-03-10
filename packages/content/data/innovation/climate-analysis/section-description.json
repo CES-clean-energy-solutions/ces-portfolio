@@ -34,6 +34,12 @@
   },
   "images": [
     {
+      "src": "./main-bg.jpg",
+      "alt": "Climate Analysis — section background",
+      "background": true,
+      "animated": false
+    },
+    {
       "src": "./001.png",
       "alt": "Spar HQ Solar Geometry analysis",
       "caption": "Spar HQ Solar Geometry analysis",

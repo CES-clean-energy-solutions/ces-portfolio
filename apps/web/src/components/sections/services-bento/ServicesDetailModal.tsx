@@ -17,7 +17,10 @@ interface ServicesDetailModalProps {
 
 function ModalImageHero({ area }: { area: InnovationArea }) {
   // Use first image from images array, or fallback to placeholder
-  const imageSrc = area.images.find((img) => img.src)?.src ?? `/images/services/placeholder-${area.id}.jpg`;
+  const imageSrc =
+    area.images.find((img) => img.background)?.src ??
+    area.images.find((img) => img.src)?.src ??
+    `/images/services/placeholder-${area.id}.jpg`;
 
   return (
     <div className="relative h-48 w-full overflow-hidden sm:h-64 lg:h-72">
@@ -63,7 +66,7 @@ export function ServicesDetailModal({
 
   // Exclude confidential images unless secret mode is active (mirrors link filtering)
   const validImages = area.images.filter(
-    (img) => img.src && (isSecret || img.confidential !== true)
+    (img) => img.src && !img.background && (isSecret || img.confidential !== true)
   );
   const hasStats =
     area.stats.metric !== "TBD" && area.stats.metricLabel !== "TBD";
