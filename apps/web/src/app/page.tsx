@@ -10,19 +10,23 @@ import { ServicesSection } from "@/components/sections/ServicesSection";
 import ContactCta from "@/components/sections/ContactCta";
 import { services } from "@ces/content/data/services";
 import { innovations } from "@ces/content/data/innovation";
-import { features } from "@/config/features";
+import { features, serviceFlags } from "@/config/features";
+
+const visibleInnovations = innovations.filter(
+  (a) => serviceFlags[a.id as keyof typeof serviceFlags] !== false
+);
 
 export default function Home() {
   return (
     <>
-      <Header innovations={innovations} />
+      <Header innovations={visibleInnovations} />
       <main>
         {features.hero && <Hero />}
         {features.servicesBento && (
-          <ServicesBento innovations={innovations} />
+          <ServicesBento innovations={visibleInnovations} />
         )}
         {features.servicesBentoShowcase && (
-          <ServicesBentoShowcase innovations={innovations} />
+          <ServicesBentoShowcase innovations={visibleInnovations} />
         )}
         {features.servicesOverview && <ServicesOverview />}
         {features.servicesShowcase && <ServicesShowcase services={services} />}

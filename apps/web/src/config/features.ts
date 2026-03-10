@@ -27,3 +27,26 @@ export const features: Features = {
   projectsPreview: false,
   contactCta: true,
 } as const;
+
+/**
+ * Per-service visibility flags.
+ *
+ * Each key matches an innovation area `id` from packages/content/data/innovation/.
+ * Set to `false` to hide a service card from the bento grid and header navigation.
+ */
+export type ServiceId =
+  | "building-information-modeling"
+  | "circularity"
+  | "climate-analysis"
+  | "computational-daylight-analysis"
+  | "computational-fluid-dynamics"
+  | "green-finance";
+
+export const serviceFlags: Record<ServiceId, boolean> = {
+  "building-information-modeling": true,
+  "circularity": true,
+  "climate-analysis": true,
+  "computational-daylight-analysis": true,
+  "computational-fluid-dynamics": true,
+  "green-finance": true,
+};
