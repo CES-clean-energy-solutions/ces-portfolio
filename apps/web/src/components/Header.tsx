@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
+import Image from "next/image";
 import { ExportPdfButton } from "./ExportPdfButton";
 import type { InnovationArea } from "@ces/content/data/innovation";
+import cesText from "@repo/ui/assets/ces-text-white.svg";
+import cesChevron from "@repo/ui/assets/ces-chevron.svg";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
@@ -35,10 +38,10 @@ export default function Header({ innovations }: HeaderProps) {
       className="fixed top-0 left-0 right-0 z-50 h-[var(--header-h)] border-b border-border/50 bg-brand-black/80 backdrop-blur-md"
     >
       <nav className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* PLACEHOLDER — replace with logo component */}
-        <span className="text-lg font-bold tracking-tight text-white">
-          CES<span className="text-brand-gold">.</span>
-        </span>
+        <a href="#" aria-label="CES Clean Energy Solutions — home" className="relative block" style={{ height: 28, aspectRatio: "275.52 / 219.84" }}>
+          <Image src={cesText} alt="" fill className="object-contain" priority />
+          <Image src={cesChevron} alt="" fill className="object-contain" />
+        </a>
 
         {/* Nav links — visible on all breakpoints */}
         <ul className="flex items-center gap-6 sm:gap-8">

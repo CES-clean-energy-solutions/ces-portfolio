@@ -53,6 +53,18 @@
       "caption": "Computational Daylight Results with Daylight Autonomy, Average Illuminance, for a masterplan design",
       "animated": false,
       "confidential": true
+    },
+    {
+      "src": "./004.png",
+      "alt": "Competition submission Seestadt Wien",
+      "caption": "Competition submission Seestadt Wien",
+      "animated": false
+    },
+    {
+      "src": "./005.png",
+      "alt": "Competition submission Hauptzollamt Hamburg",
+      "caption": "Competition submission Hauptzollamt Hamburg",
+      "animated": false
     }
   ]
 }

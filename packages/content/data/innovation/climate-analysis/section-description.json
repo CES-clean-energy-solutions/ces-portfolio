@@ -4,7 +4,7 @@
   "order": 2,
   "title": "Climate Analysis",
   "shortDescription": "Urban heat, flood risk, and microclimate modeling for resilient cities, and energy efficient buildings.",
-  "longDescription": "Our climate analysis practice combines high-resolution meteorological data, satellite imagery, and simulation engines to model urban heat islands, extreme weather events, and long-term climate trajectories.For buildings and regions, as basis of design and for sustainability certification. We translate complex climate projections into actionable design guidance for buildings, districts, and infrastructure systems.",
+  "longDescription": "Our climate analysis practice combines high-resolution meteorological data, satellite imagery, and simulation engines to model urban heat islands, extreme weather events, and long-term climate trajectories. For buildings and regions, as basis of design and for sustainability certification. We translate complex climate projections into actionable design guidance for buildings, districts, and infrastructure systems.",
   "subItems": [
     { "label": "Urban Heat Island Modeling", "slug": "urban-heat-island-modeling" },
     { "label": "Climate Risk Assessment", "slug": "climate-risk-assessment" },
@@ -55,6 +55,12 @@
       "src": "./003.png",
       "alt": "City project wind analysis",
       "caption": "City project wind analysis",
+      "animated": false
+    },
+    {
+      "src": "./004.png",
+      "alt": "Climate analysis with tree transpiration and shade, using Envimet",
+      "caption": "Climate analysis with tree transpiration and shade, using Envimet",
       "animated": false
     }
   ]

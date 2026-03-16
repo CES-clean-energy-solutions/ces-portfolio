@@ -11,14 +11,12 @@ export function useSecretMode(): SecretMode {
   const [isSecret, setIsSecret] = useState(false);
 
   useEffect(() => {
+    // Always reset to off on page load — confidential images hidden by default
     if (typeof window === "undefined") return;
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored !== null) {
-        setIsSecret(JSON.parse(stored) === true);
-      }
+      localStorage.removeItem(STORAGE_KEY);
     } catch {
-      // localStorage unavailable (private mode, etc.) — stay false
+      // ignore
     }
   }, []);
 

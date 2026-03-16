@@ -56,7 +56,8 @@
       "src": "./004.png",
       "alt": "Multi-storey BIM tower with floor plates, vertical conduits, electrical technical areas at the base level",
       "caption": "Multi-storey BIM tower with floor plates, vertical conduits, electrical technical areas at the base level",
-      "animated": false
+      "animated": false,
+      "confidential": true
     }
   ]
 }
