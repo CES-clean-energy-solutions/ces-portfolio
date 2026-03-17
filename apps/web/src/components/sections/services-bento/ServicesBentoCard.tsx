@@ -11,10 +11,9 @@ interface ServicesBentoCardProps {
 }
 
 export function ServicesBentoCard({ area, onClick }: ServicesBentoCardProps) {
-  // Use first image from images array, or fallback to placeholder
+  // images[0] is always the title/card image by convention
   const imageSrc =
-    area.images.find((img) => img.background)?.src ??
-    area.images.find((img) => img.src && !img.confidential)?.src ??
+    area.images[0]?.src ??
     `/images/services/placeholder-${area.id}.jpg`;
 
   const handleKeyDown = useCallback(

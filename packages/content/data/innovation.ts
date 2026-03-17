@@ -41,7 +41,7 @@ export interface InnovationImage {
   animated?: boolean;
   /** When true, image is hidden unless secret mode is active. Set by OFF entries in Section txt files. */
   confidential?: boolean;
-  /** When true, this is the section background/hero image. Excluded from gallery display. */
+  /** @deprecated Use images[0] as the title/card/hero image by convention. This flag is no longer read by any component. */
   background?: boolean;
 }
 

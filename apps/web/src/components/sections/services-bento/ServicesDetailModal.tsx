@@ -16,10 +16,9 @@ interface ServicesDetailModalProps {
 }
 
 function ModalImageHero({ area }: { area: InnovationArea }) {
-  // Use first image from images array, or fallback to placeholder
+  // images[0] is always the title/hero image by convention
   const imageSrc =
-    area.images.find((img) => img.background)?.src ??
-    area.images.find((img) => img.src)?.src ??
+    area.images[0]?.src ??
     `/images/services/placeholder-${area.id}.jpg`;
 
   return (
@@ -64,10 +63,10 @@ export function ServicesDetailModal({
 
   if (!area) return null;
 
-  // Exclude confidential images unless secret mode is active (mirrors link filtering)
-  const validImages = area.images.filter(
-    (img) => img.src && !img.background && (isSecret || img.confidential !== true)
-  );
+  // images[0] is the title/hero image — gallery shows images[1+] only
+  const validImages = area.images
+    .slice(1)
+    .filter((img) => img.src && (isSecret || img.confidential !== true));
   const hasStats =
     area.stats.metric !== "TBD" && area.stats.metricLabel !== "TBD";
 
@@ -135,47 +134,48 @@ export function ServicesDetailModal({
                       <ModalImageHero area={area} />
                     </div>
 
-                    {/* Content body */}
+                    {/* Content body — order: gallery → resources → capabilities → stats → long description */}
                     <div className="relative px-5 pb-8 pt-4 sm:px-8 sm:pt-5 lg:px-10 lg:pb-10 lg:pt-6">
-                      {/* Long description */}
-                      <Dialog.Description className="text-base leading-relaxed text-white/80 sm:text-lg">
-                        {area.longDescription}
-                      </Dialog.Description>
-
-                      {/* Capabilities / Sub-items */}
-                      {area.subItems.length > 0 && (
-                        <div className="mt-8">
+                      {/* Image gallery (images[1+] — title image excluded) */}
+                      {validImages.length > 0 && (
+                        <div className="mt-4">
                           <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
-                            Capabilities
+                            Gallery
                           </h3>
-                          <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                            {area.subItems.map((item) => (
-                              <li
-                                key={item.slug}
-                                className="flex items-center gap-2 text-sm text-white/70"
+                          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                            {validImages.map((img, i) => (
+                              <figure
+                                key={i}
+                                className="group/gallery cursor-pointer overflow-hidden rounded-lg transition-opacity hover:opacity-80"
+                                onClick={() => setLightboxIndex(i)}
                               >
-                                <ArrowRight className="h-3 w-3 shrink-0 text-brand-gold" />
-                                {item.label}
-                              </li>
+                                {img.animated ? (
+                                  // eslint-disable-next-line @next/next/no-img-element
+                                  <img
+                                    src={img.src}
+                                    alt={img.alt}
+                                    loading="eager"
+                                    className="w-full rounded-lg transition-transform group-hover/gallery:scale-105"
+                                  />
+                                ) : (
+                                  <div className="relative aspect-video overflow-hidden">
+                                    <Image
+                                      src={img.src}
+                                      alt={img.alt}
+                                      fill
+                                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 550px"
+                                      className="rounded-lg object-cover transition-transform group-hover/gallery:scale-105"
+                                    />
+                                  </div>
+                                )}
+                                {img.caption && (
+                                  <figcaption className="mt-2 text-xs text-white/50">
+                                    {img.caption}
+                                  </figcaption>
+                                )}
+                              </figure>
                             ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {/* Stats */}
-                      {hasStats && (
-                        <div className="mt-8 rounded-xl bg-white/5 p-5">
-                          <div className="text-3xl font-bold text-brand-gold sm:text-4xl">
-                            {area.stats.metric}
                           </div>
-                          <div className="mt-1 text-sm font-medium text-white">
-                            {area.stats.metricLabel}
-                          </div>
-                          {area.stats.secondary && (
-                            <div className="mt-1 text-xs text-white/50">
-                              {area.stats.secondary}
-                            </div>
-                          )}
                         </div>
                       )}
 
@@ -231,48 +231,47 @@ export function ServicesDetailModal({
                         </div>
                       )}
 
-                      {/* Image gallery */}
-                      {validImages.length > 0 && (
+                      {/* Capabilities / Sub-items */}
+                      {area.subItems.length > 0 && (
                         <div className="mt-8">
                           <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
-                            Gallery
+                            Capabilities
                           </h3>
-                          <div className="mt-3 grid gap-4 sm:grid-cols-2">
-                            {validImages.map((img, i) => (
-                              <figure
-                                key={i}
-                                className="group/gallery cursor-pointer overflow-hidden rounded-lg transition-opacity hover:opacity-80"
-                                onClick={() => setLightboxIndex(i)}
+                          <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                            {area.subItems.map((item) => (
+                              <li
+                                key={item.slug}
+                                className="flex items-center gap-2 text-sm text-white/70"
                               >
-                                {img.animated ? (
-                                  // eslint-disable-next-line @next/next/no-img-element
-                                  <img
-                                    src={img.src}
-                                    alt={img.alt}
-                                    loading="eager"
-                                    className="w-full rounded-lg transition-transform group-hover/gallery:scale-105"
-                                  />
-                                ) : (
-                                  <div className="relative aspect-video overflow-hidden">
-                                    <Image
-                                      src={img.src}
-                                      alt={img.alt}
-                                      fill
-                                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 550px"
-                                      className="rounded-lg object-cover transition-transform group-hover/gallery:scale-105"
-                                    />
-                                  </div>
-                                )}
-                                {img.caption && (
-                                  <figcaption className="mt-2 text-xs text-white/50">
-                                    {img.caption}
-                                  </figcaption>
-                                )}
-                              </figure>
+                                <ArrowRight className="h-3 w-3 shrink-0 text-brand-gold" />
+                                {item.label}
+                              </li>
                             ))}
-                          </div>
+                          </ul>
                         </div>
                       )}
+
+                      {/* Stats */}
+                      {hasStats && (
+                        <div className="mt-8 rounded-xl bg-white/5 p-5">
+                          <div className="text-3xl font-bold text-brand-gold sm:text-4xl">
+                            {area.stats.metric}
+                          </div>
+                          <div className="mt-1 text-sm font-medium text-white">
+                            {area.stats.metricLabel}
+                          </div>
+                          {area.stats.secondary && (
+                            <div className="mt-1 text-xs text-white/50">
+                              {area.stats.secondary}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Long description — at the end so visuals land first */}
+                      <Dialog.Description className="mt-8 text-base leading-relaxed text-white/80 sm:text-lg">
+                        {area.longDescription}
+                      </Dialog.Description>
 
                       {/* Hidden secret mode toggle — bottom-right of content body (FR-5, FR-6, FR-10) */}
                       <button
