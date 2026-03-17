@@ -32,20 +32,20 @@
   "images": [
     {
       "src": "./000.png",
+      "alt": "Green trade finance",
+      "caption": "Green trade finance",
+      "animated": false
+    },
+    {
+      "src": "./001.png",
       "alt": "Transaction detail dark",
       "caption": "Transaction detail dark",
       "animated": false
     },
     {
-      "src": "./001.png",
-      "alt": "Trade finance dashboard for managers",
-      "caption": "Trade finance dashboard for managers",
-      "animated": false
-    },
-    {
       "src": "./002.png",
-      "alt": "Trade transaction card, with AI support",
-      "caption": "Trade transaction card, with AI support",
+      "alt": "Transaction overview dark",
+      "caption": "Transaction overview dark",
       "animated": false
     }
   ]
