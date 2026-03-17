@@ -5,8 +5,6 @@ import { createRoot } from "react-dom/client";
 import type { InnovationArea } from "@ces/content/data/innovation";
 import { PdfCoverPage } from "@/components/pdf/PdfCoverPage";
 import { PdfSectionPage } from "@/components/pdf/PdfSectionPage";
-import { PdfGalleryPage } from "@/components/pdf/PdfGalleryPage";
-import type { GalleryImage } from "@/components/pdf/PdfGalleryPage";
 import { PdfContactPage } from "@/components/pdf/PdfContactPage";
 import { PdfImpressumPage } from "@/components/pdf/PdfImpressumPage";
 
@@ -200,22 +198,32 @@ export async function generatePortfolioPdf(innovations: InnovationArea[]): Promi
     pageCount++;
     console.log(`✓ Cover page added (${pageCount})`);
 
-    // 2. Innovation section pages + gallery pages
+    // 2. Innovation section pages — one page per service
     for (const section of innovations) {
       console.log(`Generating section: ${section.title}...`);
 
       const sectionContainer = document.createElement("div");
       container.appendChild(sectionContainer);
 
-      // Load background image — use the resolved src path directly
-      let backgroundImage: string | undefined;
-      if (section.images.length > 0 && section.images[0].src) {
-        const dataUri = await loadImageAsDataUri(section.images[0].src);
-        if (dataUri) backgroundImage = dataUri;
-      }
+      // Load images[1] and images[2] — images[0] is the card/hero image, not shown in PDF
+      const img1DataUri = section.images[1]
+        ? await loadImageAsDataUri(section.images[1].src)
+        : null;
+      const img1Caption = section.images[1]?.caption ?? "";
+
+      const img2DataUri = section.images[2]
+        ? await loadImageAsDataUri(section.images[2].src)
+        : null;
+      const img2Caption = section.images[2]?.caption ?? "";
 
       await renderComponent(
-        createElement(PdfSectionPage, { section, backgroundImage }),
+        createElement(PdfSectionPage, {
+          section,
+          img1DataUri,
+          img1Caption,
+          img2DataUri,
+          img2Caption,
+        }),
         sectionContainer
       );
 
@@ -225,37 +233,6 @@ export async function generatePortfolioPdf(innovations: InnovationArea[]): Promi
       pageCount++;
       console.log(`✓ Section page added: ${section.title} (${pageCount})`);
       sectionContainer.remove();
-
-      // Gallery page — up to 4 images from images[1..] (image[0] is the section background)
-      const gallerySourceImages = section.images.slice(1, 5); // max 4
-      if (gallerySourceImages.length > 0) {
-        console.log(`  Loading ${gallerySourceImages.length} gallery image(s) for ${section.title}...`);
-
-        const galleryImages: GalleryImage[] = [];
-        for (const img of gallerySourceImages) {
-          const dataUri = await loadImageAsDataUri(img.src);
-          if (dataUri) {
-            galleryImages.push({ dataUri, caption: img.caption, alt: img.alt });
-          }
-        }
-
-        if (galleryImages.length > 0) {
-          const galleryContainer = document.createElement("div");
-          container.appendChild(galleryContainer);
-
-          await renderComponent(
-            createElement(PdfGalleryPage, { section, images: galleryImages }),
-            galleryContainer
-          );
-
-          const galleryCanvas = await captureAsCanvas(galleryContainer);
-          pdf.addPage();
-          pdf.addImage(galleryCanvas.toDataURL("image/jpeg", 0.85), "JPEG", 0, 0, PDF_WIDTH, PDF_HEIGHT);
-          pageCount++;
-          console.log(`  ✓ Gallery page added (${galleryImages.length} images) (${pageCount})`);
-          galleryContainer.remove();
-        }
-      }
     }
 
     // 3. Contact page
