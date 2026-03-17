@@ -32,8 +32,7 @@
   "images": [
     {
       "src": "./000.png",
-      "alt": "Green trade finance",
-      "caption": "Green trade finance",
+      "alt": "",
       "animated": false
     },
     {

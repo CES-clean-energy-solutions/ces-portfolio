@@ -22,14 +22,13 @@
   "images": [
     {
       "src": "./000.jpg",
-      "alt": "title card.jpg",
-      "caption": "title card.jpg",
+      "alt": "",
       "animated": false
     },
     {
       "src": "./001.png",
-      "alt": "socioeconomic pathways.png Shared Socioeconomic Pathways (SSPs) for the year 2050",
-      "caption": "socioeconomic pathways.png Shared Socioeconomic Pathways (SSPs) for the year 2050",
+      "alt": "Shared Socioeconomic Pathways (SSPs) for the year 2050",
+      "caption": "Shared Socioeconomic Pathways (SSPs) for the year 2050",
       "animated": false
     }
   ]

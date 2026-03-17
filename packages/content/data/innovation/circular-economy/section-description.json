@@ -16,20 +16,19 @@
   "images": [
     {
       "src": "./000.png",
-      "alt": "title card.png",
-      "caption": "title card.png",
+      "alt": "",
       "animated": false
     },
     {
       "src": "./001.png",
-      "alt": "Energy demand.png Energy demand analysis and optimization",
-      "caption": "Energy demand.png Energy demand analysis and optimization",
+      "alt": "Energy demand analysis and optimization",
+      "caption": "Energy demand analysis and optimization",
       "animated": false
     },
     {
       "src": "./002.png",
-      "alt": "Energy Use.png Energy Use Intensity for a novel city concept",
-      "caption": "Energy Use.png Energy Use Intensity for a novel city concept",
+      "alt": "Energy Use Intensity for a novel city concept",
+      "caption": "Energy Use Intensity for a novel city concept",
       "animated": false
     }
   ]
