@@ -1,0 +1,46 @@
+{
+  "id": "ai-finance-platform",
+  "slug": "ai-finance-platform",
+  "order": 1,
+  "title": "AI driven platform for finance assessment",
+  "shortDescription": "Intelligent trade finance automation. Faster decisions, consistent compliance, full portfolio visibility. From commodities, to green technologies.",
+  "longDescription": "As green compliance requirements intensify, banks face an unsustainable bottleneck: thousands of transactions assessed against evolving environmental criteria, handled manually by overstretched teams. This platform brings AI-powered automation to the full lifecycle of green trade finance — from document ingestion and transaction triage through eligibility classification, CO2 impact quantification, and compliance verification. Every decision is auditable, every metric traceable to source, and a real-time pipeline dashboard delivers instant portfolio visibility by geography, risk tier, and approval status.\n\nThe vision: shift expert attention from data entry to judgment, deliver consistent (green) loan assessments at volume, and provide banks a modern foundation for the next generation of trade finance.",
+  "subItems": [
+    { "label": "AI data extraction", "slug": "ai-data-extraction" },
+    { "label": "Green eligibility assessment", "slug": "green-eligibility-assessment" },
+    { "label": "AI transaction triage", "slug": "ai-transaction-triage" },
+    { "label": "CO2 impact calculation", "slug": "co2-impact-calculation" },
+    { "label": "Compliance automation", "slug": "compliance-automation" },
+    { "label": "Portfolio dashboard", "slug": "portfolio-dashboard" },
+    { "label": "Country-risk thresholds", "slug": "country-risk-thresholds" },
+    { "label": "Multi-entity scalable", "slug": "multi-entity-scalable" },
+    { "label": "EU cloud-native", "slug": "eu-cloud-native" }
+  ],
+  "stats": {
+    "metric": "TBD",
+    "metricLabel": "TBD",
+    "secondary": "TBD"
+  },
+  "links": [
+    {
+      "label": "Green Trade Finance Demo tool",
+      "href": "https://green-tfp-demo.ic-ces.engineering/",
+      "external": true
+    }
+  ],
+  "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },
+  "images": [
+    {
+      "src": "./001.png",
+      "alt": "Trade finance dashboard for managers",
+      "caption": "Trade finance dashboard for managers",
+      "animated": false
+    },
+    {
+      "src": "./002.png",
+      "alt": "Trade transaction card, with AI support",
+      "caption": "Trade transaction card, with AI support",
+      "animated": false
+    }
+  ]
+}

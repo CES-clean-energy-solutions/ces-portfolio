@@ -1,0 +1,17 @@
+{
+  "id": "climate-resilience",
+  "slug": "climate-resilience",
+  "order": 3,
+  "title": "Digital Support for Climate Resilience",
+  "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "longDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  "subItems": [],
+  "stats": {
+    "metric": "TBD",
+    "metricLabel": "TBD",
+    "secondary": "TBD"
+  },
+  "links": [],
+  "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },
+  "images": []
+}
