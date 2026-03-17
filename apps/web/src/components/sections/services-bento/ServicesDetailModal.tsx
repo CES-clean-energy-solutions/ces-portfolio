@@ -44,7 +44,7 @@ function ModalImageHero({ area }: { area: InnovationArea }) {
         <Dialog.Title className="pr-12 text-2xl font-bold text-white drop-shadow-lg sm:text-3xl lg:text-4xl">
           {area.title}
         </Dialog.Title>
-        <p className="mt-1 text-sm text-brand-gold drop-shadow-md sm:text-base">
+        <p className="mt-1 hidden text-sm font-bold text-brand-gold drop-shadow-md sm:block sm:text-base">
           {area.shortDescription}
         </p>
       </div>
@@ -136,6 +136,11 @@ export function ServicesDetailModal({
 
                     {/* Content body — order: capabilities → gallery → resources → stats → long description */}
                     <div className="relative px-5 pb-8 pt-4 sm:px-8 sm:pt-5 lg:px-10 lg:pb-10 lg:pt-6">
+                      {/* Tagline — mobile only (hidden in hero overlay on small screens) */}
+                      <p className="text-sm font-bold leading-relaxed text-brand-gold sm:hidden">
+                        {area.shortDescription}
+                      </p>
+
                       {/* Capabilities / Sub-items — right after short description in hero */}
                       {area.subItems.length > 0 && (
                         <div className="mt-4">
@@ -146,7 +151,7 @@ export function ServicesDetailModal({
                             {area.subItems.map((item) => (
                               <li
                                 key={item.slug}
-                                className="flex items-center gap-2 text-sm text-white/70"
+                                className="flex items-center gap-2 text-base text-white/70"
                               >
                                 <ArrowRight className="h-3 w-3 shrink-0 text-brand-gold" />
                                 {item.label}
@@ -160,7 +165,7 @@ export function ServicesDetailModal({
                       {validImages.length > 0 && (
                         <div className="mt-8">
                           <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
-                            Gallery
+                            Intro
                           </h3>
                           <div className="mt-3 grid gap-4 sm:grid-cols-2">
                             {validImages.map((img, i) => (

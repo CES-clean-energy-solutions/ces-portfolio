@@ -10,9 +10,9 @@
     { "label": "Average illuminance mapping", "slug": "average-illuminance-mapping" },
     { "label": "Glare analysis (DGP)", "slug": "glare-analysis-dgp" },
     { "label": "Annual solar exposure", "slug": "annual-solar-exposure" },
-    { "label": "EN 17037 LEED, BREEAM, etc. certification support", "slug": "en-17037-leed-breeam-etc-certification-support" },
     { "label": "Biological light requirement analysis", "slug": "biological-light-requirement-analysis" },
     { "label": "Parametric design optimization", "slug": "parametric-design-optimization" },
+    { "label": "EN 17037, LEED, BREEAM, etc. certification support", "slug": "en-17037-leed-breeam-etc-certification-support" },
     { "label": "Automated analysis of large-volume simulation data", "slug": "automated-analysis-of-large-volume-simulation-data" }
   ],
   "stats": {
@@ -25,6 +25,6 @@
   "images": [
     { "src": "./000.png", "alt": "", "animated": false },
     { "src": "./001.png", "alt": "Solar geometry analysis for a corporate headquarters project", "caption": "Solar geometry analysis for a corporate headquarters project", "animated": false },
-    { "src": "./002.png", "alt": "Annual solar radiation study for a security center in Vienna", "caption": "Annual solar radiation study for a security center in Vienna", "animated": false }
+    { "src": "./002.png", "alt": "Annual solar radiation study for an administrative building in Vienna", "caption": "Annual solar radiation study for an administrative building in Vienna", "animated": false }
   ]
 }

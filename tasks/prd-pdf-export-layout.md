@@ -1,5 +1,5 @@
 # PRD: PDF Export Layout Redesign
-## Status: In Progress
+## Status: Complete (manual smoke-test pending)
 ## Last Updated: 2026-03-17
 
 ---
@@ -213,8 +213,8 @@ No new environment variables required.
 
 - [ ] 4.0 Type-check and smoke-test
   - [x] 4.1 Run `pnpm type-check` — resolve any TypeScript errors from prop changes
-  - [ ] 4.2 Run the dev server (`pnpm dev`) and trigger Export PDF — confirm no runtime errors in console
-  - [ ] 4.3 Open the downloaded PDF and verify: correct page count, two-column layout on service pages, images visible with captions, no gallery pages
+  - [ ] 4.2 Run the dev server (`pnpm dev`) and trigger Export PDF — confirm no runtime errors in console (manual)
+  - [ ] 4.3 Open the downloaded PDF and verify: correct page count, two-column layout on service pages, images visible with captions, no gallery pages (manual)
 
 ### Progress Log
 

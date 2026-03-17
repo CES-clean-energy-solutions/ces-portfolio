@@ -18,25 +18,19 @@
     "metricLabel": "TBD",
     "secondary": "TBD"
   },
-  "links": [],
+  "links": [
+    {
+      "image": "./resource-logo.jpg",
+      "imageAlt": "CES Services",
+      "label": "CES Services",
+      "href": "https://ic-ces.at/our_services/project-development-project-preparation/",
+      "external": true
+    }
+  ],
   "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },
   "images": [
-    {
-      "src": "./000.png",
-      "alt": "",
-      "animated": false
-    },
-    {
-      "src": "./001.png",
-      "alt": "Energy demand analysis and optimization",
-      "caption": "Energy demand analysis and optimization",
-      "animated": false
-    },
-    {
-      "src": "./002.png",
-      "alt": "Energy Use Intensity for a novel city concept",
-      "caption": "Energy Use Intensity for a novel city concept",
-      "animated": false
-    }
+    { "src": "./000.png", "alt": "", "animated": false },
+    { "src": "./001.png", "alt": "Advanced hydraulic modelling using STANET and bottleneck analysis ensured robust performance under various development scenarios. Masterplan outlines a clear and transparent framework for sustainable network growth.", "caption": "Advanced hydraulic modelling using STANET and bottleneck analysis ensured robust performance under various development scenarios. Masterplan outlines a clear and transparent framework for sustainable network growth.", "animated": false },
+    { "src": "./002.png", "alt": "Comparison of the Global Warming Potential (one of the LCA indicators for LEED) by building element for all designs performed.", "caption": "Comparison of the Global Warming Potential (one of the LCA indicators for LEED) by building element for all designs performed.", "animated": false }
   ]
 }

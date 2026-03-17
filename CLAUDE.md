@@ -33,9 +33,17 @@ Internal packages use `workspace:*` protocol (e.g., `"@repo/ui": "workspace:*"`)
 **Turborepo configuration** (`turbo.json`): `build` task outputs are cached (`.next/**`, `dist/**`), `lint` and `type-check` depend on upstream builds, `dev` is persistent and never cached. Task dependencies ensure packages build before dependents.
 
 **Content package** (`@ces/content`) exports structured data via `@ces/content/data/*` path:
-- `data/services.ts` — 6 service categories with comprehensive metadata (titles, descriptions, stats, video assets, sub-services, related links). Each `ServiceCategory` includes `video` object (webm/mp4/mp4Mobile/poster), `stats` (metric/label/secondary), `links` array (optional demos/detail pages), and `subServices` array. Import via `@ces/content/data/services`.
-- `data/services/` — static assets (videos, images) that get copied to `apps/web/public/content/services/` via the `prebuild` script.
-- Future: project metadata, case studies, and portfolio entries.
+- `data/innovation.ts` — primary data model for service/innovation entries. Auto-discovers `section-description.json` files under `data/innovation/{id}/` (any filename works, not just that one). Relative paths (`./`) in JSON are resolved to `/content/innovation/{id}/` public URLs at load time.
+- `data/innovation/{id}/` — per-service asset folders. Each has a `section-description.json` with title, description, images, links, stats, and sub-services.
+- `data/services.ts` — legacy service categories (some overlap with innovation data). The `video` field is deprecated; use `images` array instead.
+- `data/services/` — static assets copied to `apps/web/public/content/services/` via the `prebuild` script.
+
+**Innovation data schema** (key fields not obvious from the type):
+- `images[0]` — **always the title/card image** by convention. Displayed as hero in modal, card background in bento, background in showcase slide. Gallery shows only `images[1+]`.
+- `InnovationImage.confidential?: boolean` — hidden unless Secret Mode is active
+- `InnovationImage.animated?: boolean` — renders as `<img>` with `loading="eager"` (supports animated GIFs; `next/image` strips animation)
+- `InnovationLink.confidential?: boolean` — hides resource links in modal unless Secret Mode active
+- `InnovationLink.external?: boolean` — opens in new tab
 
 **Asset pipeline:** The `prebuild` script in `apps/web/package.json` runs `scripts/copy-service-assets.sh` before every build. This copies servable assets (videos, images) from the content package into Next.js's public directory. The script is necessary because SST's asset bundler can't follow symlinks. It skips JSON files and source materials, copying only web-ready assets.
 
@@ -93,7 +101,11 @@ pnpm sst:state                          # export and parse SST state (requires d
 
 **Server Components are the default.** Only use `"use client"` for: menus (state toggle), forms (onChange), lightboxes (click), scroll animations (useGSAP/useEffect), carousels. Keep client components small and leaf-level.
 
-**Feature flags:** `apps/web/src/config/features.ts` exports boolean flags controlling visibility of page sections (hero, servicesShowcase, projectsPreview, etc.). Toggle features by changing the config and redeploying. All environments share these flags. Import via `@/config/features`.
+**Feature flags:** `apps/web/src/config/features.ts` exports two objects:
+- `features` — boolean flags for page sections (hero, servicesShowcase, projectsPreview, etc.)
+- `serviceFlags` — per-service visibility map (`{ [serviceId]: boolean }`) used in `page.tsx` to filter which innovations appear in the bento grid and header nav
+
+Toggle by changing the config and redeploying. All environments share these flags. Import via `@/config/features`.
 
 **Tailwind v4 tokens** are defined in `apps/web/src/app/globals.css` using CSS custom properties + `@theme inline` block. No separate tailwind config file exists. Colors use OKLCH color space.
 
@@ -125,7 +137,7 @@ The Hero section uses the three white/gold part SVGs layered absolutely in a con
 
 **Video backgrounds replaced with static images:** Service/innovation sections previously used video backgrounds with WebM/MP4 sources. These have been replaced with static images from the `images` array in the data files for improved mobile performance. The `video` field in `innovation.ts` is deprecated but retained for backwards compatibility. Components now use the first image from the `images` array, falling back to `/images/services/placeholder-[id].jpg`.
 
-**Navigation simplified:** Header now displays only two links (Services, Contact) visible on all breakpoints. No hamburger menu or collapsing behavior.
+**Navigation simplified:** Header now displays only two links (Services, Contact) visible on all breakpoints. No hamburger menu or collapsing behavior. Header also includes `ExportPdfButton` and auto-hides when scrolling down >64px (Motion `useScroll` + `useMotionValueEvent`), re-appears on scroll up.
 
 **Footer with legal modals:** New Footer component (`Footer.tsx`) with five legal links (Impressum, Company Data, Data Protection, Compliance, Certifications) that open Radix Dialog modals. Placeholder content needs client replacement (see `docs/CONTENT-GUIDE.md`).
 
@@ -207,25 +219,43 @@ Typical workflow: `/prd <feature>` → `/implement` or `/implement-all` → `/ch
 
 ```
 apps/web/src/components/              → standalone utilities
-  Header.tsx                          → simplified header with Services/Contact links
+  Header.tsx                          → auto-hide header; Services/Contact links + ExportPdfButton
   Footer.tsx                          → legal footer with modal links (Impressum, etc.)
+  ExportPdfButton.tsx                 → triggers multi-page PDF export (jspdf + html2canvas)
   SmoothScroll.tsx                    → Lenis wrapper (desktop-only)
   ParticlesBackground.tsx             → tsparticles ambient effect (desktop-only)
   CursorRipple.tsx                    → pointer-follow ripple (desktop-only)
   modals/
     LegalModal.tsx                    → Radix Dialog for footer legal content
+  pdf/                                → React components rendered for PDF capture
+    PdfCoverPage.tsx                  → cover page (logo + date)
+    PdfSectionPage.tsx                → per-service section page
+    PdfGalleryPage.tsx                → image gallery page
+    PdfContactPage.tsx                → contact/company info page
+    PdfImpressumPage.tsx              → legal/impressum page
 apps/web/src/components/sections/     → page sections (rendered in order on /)
   Hero.tsx                            → hero with layered logo animation + particle bg
-  services-bento/                     → services/innovations bento grid (renamed from innovation/)
+  services-bento/                     → services/innovations bento grid
     ServicesBento.tsx                 → main bento grid layout (id="services")
-    ServicesBentoCard.tsx             → individual service card with static image
+    ServicesBentoCard.tsx             → individual service card (uses images[0] as background)
     ServicesShowcase.tsx              → full-screen scroll showcase
     ServicesSlide.tsx                 → individual slide with static image background
-    ServicesDetailModal.tsx           → modal with service details
+    ServicesDetailModal.tsx           → modal: hero image, gallery carousel, resource links
+    ServicesGallery.tsx               → hero image + auto-advancing thumbnail strip (8s interval, progress bar)
+    ImageLightbox.tsx                 → full-screen lightbox with keyboard nav (←/→/Esc)
   ContactCta.tsx                      → three-box layout (Contact Us, Who We Are, How We Work)
+  Gallery.tsx                         → placeholder section (not integrated into page.tsx)
+apps/web/src/contexts/
+  SecretModeContext.tsx               → React context for confidential content visibility
+apps/web/src/hooks/
+  useSecretMode.ts                    → localStorage-backed toggle; always resets to false on load
 ```
 
-**Note:** Components in `services-bento/` use data from `@ces/content/data/innovation` (the data file is still named `innovation.ts` though components are renamed to "Services" for consistency). The `video` field in the data is deprecated; components now use static images from the `images` array.
+**Secret Mode:** A lock/unlock toggle in `ServicesDetailModal` controls visibility of content marked `confidential: true` in the data. Default is locked (hidden). State is stored in localStorage but resets to `false` on every page load — intentional for safe client presentations. Access via `useSecretModeContext()`.
+
+**PDF Export:** `ExportPdfButton` dynamically imports `lib/pdf-generator.ts` (lazy, reduces initial bundle). Generator renders `pdf/` components off-screen, captures them with `html2canvas`, and stitches pages into a landscape A4 PDF via `jspdf`. OKLCH colors are overridden with hex equivalents before capture (html2canvas limitation). Uses `jspdf` + `html2canvas` packages.
+
+**Note:** Components in `services-bento/` consume `@ces/content/data/innovation`. The `video` field in the data is deprecated; components use static images from the `images` array. `images[0]` is the title/hero image by convention.
 
 Desktop-only interactive components (`ParticlesBackground`, `CursorRipple`) are loaded via `next/dynamic` with `ssr: false` and fade in after the hero entrance animation completes.
 
@@ -262,4 +292,6 @@ AWS_REGION=eu-central-1   # Must match sst.config.ts region
 - `sst.config.ts` — infrastructure definition (domain, CDN, Lambda permissions)
 - `packages/ui/src/index.ts` — shared UI barrel export (currently empty, ready for components)
 - `packages/ui/src/assets/` — all logo SVGs (imported via `@repo/ui/assets/*`)
-- `packages/content/data/innovation.ts` — service/innovation data model and loader (note: `video` field is deprecated, use `images` array)
+- `packages/content/data/innovation.ts` — service/innovation data model and auto-discovery loader (`images[0]` convention, `confidential` flags, `animated` flag for GIFs)
+- `apps/web/src/contexts/SecretModeContext.tsx` — Secret Mode provider (confidential content gating)
+- `apps/web/src/lib/pdf-generator.ts` — PDF export logic (html2canvas + jspdf, color space overrides)
