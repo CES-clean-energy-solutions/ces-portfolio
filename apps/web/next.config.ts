@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "standalone",
 
+  // Disable image optimization in dev — no caching, images served as-is
+  images: {
+    unoptimized: process.env.NODE_ENV === "development",
+  },
+
   // Turbopack config (Next.js 16 default bundler)
   turbopack: {},
 
