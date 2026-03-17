@@ -2,10 +2,19 @@
   "id": "daylight-analysis",
   "slug": "daylight-analysis",
   "order": 4,
-  "title": "Scalable Computational Daylight Analysis",
-  "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "longDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  "subItems": [],
+  "title": "Scalable computational daylight analysis",
+  "shortDescription": "Large-scale, high-resolution simulations and automated in-depth result analysis — cutting turnaround from weeks to hours with scalable computing power.",
+  "longDescription": "Our daylight simulation team delivers scalable high-resolution illuminance and radiation analysis using Rhino, Grasshopper, Honeybee, and Radiance, powered by a custom massively parallel job runner built on Prefect, processing over 1 million sensor points per run across any surface geometry. Large-volume simulation datasets are automatically processed and analysed in a fraction of the time conventional workflows require, enabling rapid iteration and informed design decisions at any project stage.\n\nResults cover daylight autonomy, average illuminance, and glare metrics calibrated to EN 17037, LEED, BREEAM, and DGNB requirements, feeding directly into architectural optimisation, building physics validation, occupant comfort studies, and biological plant selection for landscaping and interior greening.",
+  "subItems": [
+    { "label": "Daylight autonomy (DA / sDA)", "slug": "daylight-autonomy-da-sda" },
+    { "label": "Average illuminance mapping", "slug": "average-illuminance-mapping" },
+    { "label": "Glare analysis (DGP)", "slug": "glare-analysis-dgp" },
+    { "label": "Annual solar exposure", "slug": "annual-solar-exposure" },
+    { "label": "EN 17037 LEED, BREEAM, etc. certification support", "slug": "en-17037-leed-breeam-etc-certification-support" },
+    { "label": "Biological light requirement analysis", "slug": "biological-light-requirement-analysis" },
+    { "label": "Parametric design optimization", "slug": "parametric-design-optimization" },
+    { "label": "Automated analysis of large-volume simulation data", "slug": "automated-analysis-of-large-volume-simulation-data" }
+  ],
   "stats": {
     "metric": "TBD",
     "metricLabel": "TBD",
@@ -13,5 +22,9 @@
   },
   "links": [],
   "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },
-  "images": []
+  "images": [
+    { "src": "./000.png", "alt": "", "animated": false },
+    { "src": "./001.png", "alt": "Solar geometry analysis for a corporate headquarters project", "caption": "Solar geometry analysis for a corporate headquarters project", "animated": false },
+    { "src": "./002.png", "alt": "Annual solar radiation study for a security center in Vienna", "caption": "Annual solar radiation study for a security center in Vienna", "animated": false }
+  ]
 }

@@ -5,7 +5,17 @@
   "title": "Digital Support for Climate Resilience",
   "shortDescription": "High-resolution climate modeling for designers and planners. Urban heat island, flood risk, and microclimate analysis for buildings, districts, infrastructure, for today's and future demands.",
   "longDescription": "Our climate resilience practice delivers comprehensive, data-driven risk assessments through a combination of proprietary tools and high-resolution climate modeling. We integrate urban heat island mapping, extreme weather analysis, and model geometry assessment to evaluate climate exposure at building, district, and city scale. At the core of our workflow is a weather analysis tool developed in-house, purpose-built to process and interpret meteorological data with the precision and flexibility that off-the-shelf solutions cannot match. AI agents connect and orchestrate these services, automating data flows between climate models, geospatial analysis, and reporting to ensure consistency and speed across every assessment.\n\nOur approach goes beyond standard risk reporting. We translate climate projections and site-specific conditions into actionable design guidance and embed it early in the design process, not added as a compliance exercise at the end. From heat stress and flood vulnerability to microclimate optimization, our assessments support both resilient design decisions and sustainability certification requirements.",
-  "subItems": [],
+  "subItems": [
+    { "label": "Data-driven risk assessment", "slug": "data-driven-risk-assessment" },
+    { "label": "Urban heat island mapping", "slug": "urban-heat-island-mapping" },
+    { "label": "Resilience planning", "slug": "resilience-planning" },
+    { "label": "Flooding and erosion risks", "slug": "flooding-and-erosion-risks" },
+    { "label": "Extreme weather events", "slug": "extreme-weather-events" },
+    { "label": "Infrastructure resilience", "slug": "infrastructure-resilience" },
+    { "label": "Weather analysis tool", "slug": "weather-analysis-tool" },
+    { "label": "City evaluation scorecards", "slug": "city-evaluation-scorecards" },
+    { "label": "Architectural optimization", "slug": "architectural-optimization" }
+  ],
   "stats": {
     "metric": "TBD",
     "metricLabel": "TBD",
@@ -13,6 +23,8 @@
   },
   "links": [
     {
+      "image": "./resource-climatevis.png",
+      "imageAlt": "Weather Analysis Tool",
       "label": "Weather Analysis Tool",
       "href": "https://climate-dev.ic-ces.engineering/tools/weather",
       "external": true
@@ -20,16 +32,8 @@
   ],
   "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },
   "images": [
-    {
-      "src": "./000.jpg",
-      "alt": "",
-      "animated": false
-    },
-    {
-      "src": "./001.png",
-      "alt": "Shared Socioeconomic Pathways (SSPs) for the year 2050",
-      "caption": "Shared Socioeconomic Pathways (SSPs) for the year 2050",
-      "animated": false
-    }
+    { "src": "./000.jpg", "alt": "", "animated": false },
+    { "src": "./001.png", "alt": "Shared Socioeconomic Pathways (SSPs) for the year 2050", "caption": "Shared Socioeconomic Pathways (SSPs) for the year 2050", "animated": false },
+    { "src": "./002.jpg", "alt": "Psychrometric analysis for equipment sizing, building physics, and thermal comfort", "caption": "Psychrometric analysis for equipment sizing, building physics, and thermal comfort", "animated": false }
   ]
 }

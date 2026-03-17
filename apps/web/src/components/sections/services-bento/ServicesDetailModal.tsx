@@ -224,13 +224,13 @@ export function ServicesDetailModal({
                                   className="group/link flex items-center gap-3 rounded-lg border border-white/10 p-3 transition-colors hover:border-brand-gold/40 hover:bg-white/5"
                                 >
                                   {link.image && (
-                                    <div className="relative h-12 w-16 shrink-0 overflow-hidden rounded">
+                                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded">
                                       <Image
                                         src={link.image}
                                         alt={link.imageAlt ?? link.label}
                                         fill
-                                        sizes="64px"
-                                        className="object-cover"
+                                        sizes="48px"
+                                        className="object-contain"
                                       />
                                     </div>
                                   )}

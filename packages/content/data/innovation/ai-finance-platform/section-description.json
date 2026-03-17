@@ -23,7 +23,7 @@
   },
   "links": [
     {
-      "image": "./resource-demo-tool-png.png",
+      "image": "./resource-demo-tool-logo.png",
       "imageAlt": "Green Trade Finance Demo tool",
       "label": "Green Trade Finance Demo tool",
       "href": "https://green-tfp-demo.ic-ces.engineering/",
@@ -32,22 +32,8 @@
   ],
   "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },
   "images": [
-    {
-      "src": "./000.png",
-      "alt": "",
-      "animated": false
-    },
-    {
-      "src": "./001.png",
-      "alt": "Transaction detail dark",
-      "caption": "Transaction detail dark",
-      "animated": false
-    },
-    {
-      "src": "./002.png",
-      "alt": "Transaction overview dark",
-      "caption": "Transaction overview dark",
-      "animated": false
-    }
+    { "src": "./000.png", "alt": "", "animated": false },
+    { "src": "./001.png", "alt": "Trade finance dashboard for managers", "caption": "Trade finance dashboard for managers", "animated": false },
+    { "src": "./002.png", "alt": "Trade transaction card, with AI support", "caption": "Trade transaction card, with AI support", "animated": false }
   ]
 }

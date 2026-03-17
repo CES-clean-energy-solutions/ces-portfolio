@@ -2,10 +2,19 @@
   "id": "microclimate-assessment",
   "slug": "microclimate-assessment",
   "order": 5,
-  "title": "Multi-Scale Microclimate and Multi-Physics Assessment",
-  "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "longDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  "subItems": [],
+  "title": "Multi-scale microclimate and multi-physics assessment",
+  "shortDescription": "Risk-aware investment pressure is driving architects, investors, and engineers to adopt new assessment criteria, covering wind, microclimate, thermal comfort, technical system performance, as an innovative part of project delivery.",
+  "longDescription": "Our CFD engineers operate across macro, meso, and micro scales, from regional wind climate downscaling through urban district airflow to room-level interior comfort analysis. We use tools such as ENVI-met, and OpenFOAM with urbanMicroclimateFoam, the coupled multi-physics solver developed at the ETH Zurich Chair of Building Physics. We simultaneously model turbulent airflow, heat and moisture transport, radiation exchange, and vegetation-atmosphere interaction.\n\nUrban wind comfort is assessed against Lawson criteria, supported by velocity ratio mapping, exceedance probability analysis, and 3D streamline visualisation across seasonal wind scenarios. Interior studies couple CFD results with dynamic energy simulation, enabling holistic evaluation of natural ventilation potential, urban heat island exposure, and envelope-system interaction under real climatic boundary conditions. Simulations are scalable using your local compute cluster and cloud platform.",
+  "subItems": [
+    { "label": "Macro-Scale Wind Climate Analysis", "slug": "macro-scale-wind-climate-analysis" },
+    { "label": "Meso-Scale Urban Airflow", "slug": "meso-scale-urban-airflow" },
+    { "label": "Micro-Scale Pedestrian Wind Comfort", "slug": "micro-scale-pedestrian-wind-comfort" },
+    { "label": "Lawson Criteria Assessment", "slug": "lawson-criteria-assessment" },
+    { "label": "Velocity Ratio Mapping", "slug": "velocity-ratio-mapping" },
+    { "label": "3D Meshing & Streamline Visualisation", "slug": "3d-meshing-streamline-visualisation" },
+    { "label": "Interior Comfort Simulation", "slug": "interior-comfort-simulation" },
+    { "label": "Coupled Multi-Physics & Energy", "slug": "coupled-multi-physics-energy" }
+  ],
   "stats": {
     "metric": "TBD",
     "metricLabel": "TBD",
@@ -13,5 +22,9 @@
   },
   "links": [],
   "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },
-  "images": []
+  "images": [
+    { "src": "./000.png", "alt": "", "animated": false },
+    { "src": "./001.png", "alt": "Corporate headquarters design excercise, wind stream lines", "caption": "Corporate headquarters design excercise, wind stream lines", "animated": false },
+    { "src": "./002.png", "alt": "Corporate headquarters design, contours of wind speed and pedestrian comfort", "caption": "Corporate headquarters design, contours of wind speed and pedestrian comfort", "animated": false }
+  ]
 }
