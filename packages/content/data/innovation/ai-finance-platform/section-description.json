@@ -31,6 +31,12 @@
   "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },
   "images": [
     {
+      "src": "./000.png",
+      "alt": "Transaction detail dark",
+      "caption": "Transaction detail dark",
+      "animated": false
+    },
+    {
       "src": "./001.png",
       "alt": "Trade finance dashboard for managers",
       "caption": "Trade finance dashboard for managers",

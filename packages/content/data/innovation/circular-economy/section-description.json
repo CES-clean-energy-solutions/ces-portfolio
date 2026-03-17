@@ -3,8 +3,8 @@
   "slug": "circular-economy",
   "order": 6,
   "title": "Global Engineering Services in Circular Economy",
-  "shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "longDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  "shortDescription": "Guidance through transition from linear economy model to circular economy, with expert-led assessments, ISO-aligned frameworks, and structured action plans from planning stages to implementation.",
+  "longDescription": "Experience across the full built environment spectrum: from sensitive restoration of historic monuments to large-scale urban and infrastructure planning. Support in construction and renovation projects involving complex material recovery challenges, including hazardous material remediation such as asbestos removal from building facades, where circular principles must be balanced with strict regulatory requirements.\n\nTailored action plans and checklists, grounded in global circularity frameworks and international standards that translate high-level guidelines into practical, project-specific steps, ensuring that circular economy principles are embedded at every stage, from early design through to end-of-life material flows.",
   "subItems": [],
   "stats": {
     "metric": "TBD",
@@ -13,5 +13,24 @@
   },
   "links": [],
   "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },
-  "images": []
+  "images": [
+    {
+      "src": "./000.png",
+      "alt": "title card.png",
+      "caption": "title card.png",
+      "animated": false
+    },
+    {
+      "src": "./001.png",
+      "alt": "Energy demand.png Energy demand analysis and optimization",
+      "caption": "Energy demand.png Energy demand analysis and optimization",
+      "animated": false
+    },
+    {
+      "src": "./002.png",
+      "alt": "Energy Use.png Energy Use Intensity for a novel city concept",
+      "caption": "Energy Use.png Energy Use Intensity for a novel city concept",
+      "animated": false
+    }
+  ]
 }
