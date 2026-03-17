@@ -134,11 +134,31 @@ export function ServicesDetailModal({
                       <ModalImageHero area={area} />
                     </div>
 
-                    {/* Content body — order: gallery → resources → capabilities → stats → long description */}
+                    {/* Content body — order: capabilities → gallery → resources → stats → long description */}
                     <div className="relative px-5 pb-8 pt-4 sm:px-8 sm:pt-5 lg:px-10 lg:pb-10 lg:pt-6">
+                      {/* Capabilities / Sub-items — right after short description in hero */}
+                      {area.subItems.length > 0 && (
+                        <div className="mt-4">
+                          <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
+                            Capabilities
+                          </h3>
+                          <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                            {area.subItems.map((item) => (
+                              <li
+                                key={item.slug}
+                                className="flex items-center gap-2 text-sm text-white/70"
+                              >
+                                <ArrowRight className="h-3 w-3 shrink-0 text-brand-gold" />
+                                {item.label}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
                       {/* Image gallery (images[1+] — title image excluded) */}
                       {validImages.length > 0 && (
-                        <div className="mt-4">
+                        <div className="mt-8">
                           <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
                             Gallery
                           </h3>
@@ -228,26 +248,6 @@ export function ServicesDetailModal({
                               ))}
                             </AnimatePresence>
                           </div>
-                        </div>
-                      )}
-
-                      {/* Capabilities / Sub-items */}
-                      {area.subItems.length > 0 && (
-                        <div className="mt-8">
-                          <h3 className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
-                            Capabilities
-                          </h3>
-                          <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                            {area.subItems.map((item) => (
-                              <li
-                                key={item.slug}
-                                className="flex items-center gap-2 text-sm text-white/70"
-                              >
-                                <ArrowRight className="h-3 w-3 shrink-0 text-brand-gold" />
-                                {item.label}
-                              </li>
-                            ))}
-                          </ul>
                         </div>
                       )}
 
