@@ -93,20 +93,12 @@ Sales engineers present CES innovation demos to clients, but management doesn't 
 ### Tasks
 - [x] 1.0 Data model update
   - [x] 1.1 Add `manual?: boolean` field to `InnovationLink` interface in `packages/content/data/innovation.ts` with JSDoc comment explaining its purpose
-- [ ] 2.0 Update sync command documentation
-  - [ ] 2.1 Add `Resources - MANUAL:` section header to the "Section Text File Format" canonical structure example
-  - [ ] 2.2 Add parsing rules for `Resources - MANUAL:` — same CSV format as `Resources:`, but output JSON includes `"manual": true` on each link entry
-  - [ ] 2.3 Update the field order documentation to show `Resources` → `Resources - MANUAL:` → `Description` (both optional, either or both can appear)
-  - [ ] 2.4 Add a worked example showing a section with both types, e.g.:
-    ```
-    Resources:
-    logo.jpg, CES Services, https://ic-ces.at/our_services/project-development-project-preparation/
-
-    Resources - MANUAL:
-    ce_tool_logo.png, Circular economy assessment tool, https://dev-ce.ic-ces.at/en
-    ```
-    Resulting JSON merges both into `links[]` — regular entry has no `manual` field, MANUAL entry has `"manual": true`
-  - [ ] 2.5 Update the "JSON resource entry" template to show the `manual` variant
+- [x] 2.0 Update sync command documentation
+  - [x] 2.1 Add `Resources - MANUAL:` section header to the "Section Text File Format" canonical structure example
+  - [x] 2.2 Add parsing rules for `Resources - MANUAL:` — same CSV format as `Resources:`, but output JSON includes `"manual": true` on each link entry
+  - [x] 2.3 Update the field order documentation to show `Resources` → `Resources - MANUAL:` → `Description` (both optional, either or both can appear)
+  - [x] 2.4 Add a worked example showing a section with both types
+  - [x] 2.5 Update the "JSON resource entry" template to show the `manual` variant
 - [ ] 3.0 Create ManualResourceModal component
   - [ ] 3.1 Create `apps/web/src/components/sections/services-bento/ManualResourceModal.tsx` — a Radix Dialog overlay with: resource icon (next/image, if available), tool name, "Coming soon — ask for early access" CTA text
   - [ ] 3.2 Style as a compact centered card (~max-w-xs) with dark glass-morphism (`bg-neutral-950/90 backdrop-blur-xl border border-white/10 rounded-xl`)
@@ -129,3 +121,4 @@ Sales engineers present CES innovation demos to clients, but management doesn't 
 | Date | Task | Notes |
 |------|------|-------|
 | 2026-03-18 | 1.1 | Added `manual?: boolean` to `InnovationLink` interface |
+| 2026-03-18 | 2.1–2.5 | Updated sync command with Resources - MANUAL parsing rules, field order, worked example |
