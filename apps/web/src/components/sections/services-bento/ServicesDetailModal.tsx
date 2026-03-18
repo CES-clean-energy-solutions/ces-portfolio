@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
@@ -13,6 +13,9 @@ interface ServicesDetailModalProps {
   area: InnovationArea | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  lightboxOpen: boolean;
+  onLightboxOpen: () => void;
+  onLightboxClose: () => void;
 }
 
 function ModalImageHero({ area }: { area: InnovationArea }) {
@@ -56,10 +59,18 @@ export function ServicesDetailModal({
   area,
   open,
   onOpenChange,
+  lightboxOpen,
+  onLightboxOpen,
+  onLightboxClose,
 }: ServicesDetailModalProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const { isSecret, toggle } = useSecretModeContext();
+
+  // Sync: when back button closes lightbox (lightboxOpen → false), clear local index
+  useEffect(() => {
+    if (!lightboxOpen) setLightboxIndex(null);
+  }, [lightboxOpen]);
 
   if (!area) return null;
 
@@ -172,7 +183,10 @@ export function ServicesDetailModal({
                               <figure
                                 key={i}
                                 className="group/gallery cursor-pointer overflow-hidden rounded-lg transition-opacity hover:opacity-80"
-                                onClick={() => setLightboxIndex(i)}
+                                onClick={() => {
+                                  onLightboxOpen();
+                                  setLightboxIndex(i);
+                                }}
                               >
                                 {img.animated ? (
                                   // eslint-disable-next-line @next/next/no-img-element
@@ -308,7 +322,10 @@ export function ServicesDetailModal({
       <ImageLightbox
         images={validImages}
         currentIndex={lightboxIndex}
-        onClose={() => setLightboxIndex(null)}
+        onClose={() => {
+          onLightboxClose();
+          setLightboxIndex(null);
+        }}
         onNavigate={setLightboxIndex}
       />
     </Dialog.Root>

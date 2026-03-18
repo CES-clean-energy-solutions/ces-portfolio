@@ -1,17 +1,24 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "motion/react";
 import type { InnovationArea } from "@ces/content/data/innovation";
 import { ServicesBentoCard } from "./ServicesBentoCard";
 import { ServicesDetailModal } from "./ServicesDetailModal";
+import { useModalHistory } from "@/hooks/useModalHistory";
 
 interface ServicesBentoProps {
   innovations: InnovationArea[];
 }
 
 export function ServicesBento({ innovations }: ServicesBentoProps) {
-  const [selectedArea, setSelectedArea] = useState<InnovationArea | null>(null);
+  const {
+    selectedArea,
+    openModal,
+    closeModal,
+    lightboxOpen,
+    openLightbox,
+    closeLightbox,
+  } = useModalHistory(innovations);
 
   return (
     <section
@@ -50,7 +57,7 @@ export function ServicesBento({ innovations }: ServicesBentoProps) {
             >
               <ServicesBentoCard
                 area={area}
-                onClick={() => setSelectedArea(area)}
+                onClick={() => openModal(area)}
               />
             </motion.div>
           ))}
@@ -62,8 +69,11 @@ export function ServicesBento({ innovations }: ServicesBentoProps) {
         area={selectedArea}
         open={selectedArea !== null}
         onOpenChange={(open) => {
-          if (!open) setSelectedArea(null);
+          if (!open) closeModal();
         }}
+        lightboxOpen={lightboxOpen}
+        onLightboxOpen={openLightbox}
+        onLightboxClose={closeLightbox}
       />
     </section>
   );

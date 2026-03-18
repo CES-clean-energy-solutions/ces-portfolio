@@ -109,20 +109,20 @@ None.
   - [x] 1.7 Add mount-time hash parsing: on initial render, if hash matches a known service ID, set that area as selected (deep-link support, FR-6)
   - [x] 1.8 Ensure cleanup: remove `popstate` listener on unmount
 
-- [ ] 2.0 Integrate hook into `ServicesBento`
-  - [ ] 2.1 Replace `useState<InnovationArea | null>` with `useModalHistory(innovations)` hook
-  - [ ] 2.2 Pass `openModal` to `ServicesBentoCard` `onClick` handlers
-  - [ ] 2.3 Pass `closeModal` to `ServicesDetailModal`'s `onOpenChange` callback
-  - [ ] 2.4 Pass `lightboxOpen`, `openLightbox`, `closeLightbox` down to `ServicesDetailModal`
+- [x] 2.0 Integrate hook into `ServicesBento`
+  - [x] 2.1 Replace `useState<InnovationArea | null>` with `useModalHistory(innovations)` hook
+  - [x] 2.2 Pass `openModal` to `ServicesBentoCard` `onClick` handlers
+  - [x] 2.3 Pass `closeModal` to `ServicesDetailModal`'s `onOpenChange` callback
+  - [x] 2.4 Pass `lightboxOpen`, `openLightbox`, `closeLightbox` down to `ServicesDetailModal`
 
-- [ ] 3.0 Update `ServicesDetailModal` for lightbox history
-  - [ ] 3.1 Accept new props for lightbox history callbacks (`lightboxOpen`, `openLightbox`, `closeLightbox`)
-  - [ ] 3.2 Replace internal `lightboxIndex` state management: when user clicks a gallery image, call `openLightbox()` then set index; when lightbox closes, call `closeLightbox()`
-  - [ ] 3.3 Ensure X button and backdrop click call `closeModal` (which handles hash cleanup) instead of just `onOpenChange(false)`
+- [x] 3.0 Update `ServicesDetailModal` for lightbox history
+  - [x] 3.1 Accept new props for lightbox history callbacks (`lightboxOpen`, `openLightbox`, `closeLightbox`)
+  - [x] 3.2 Replace internal `lightboxIndex` state management: when user clicks a gallery image, call `openLightbox()` then set index; when lightbox closes, call `closeLightbox()`
+  - [x] 3.3 Ensure X button and backdrop click call `closeModal` (which handles hash cleanup) instead of just `onOpenChange(false)`
 
-- [ ] 4.0 Update `ImageLightbox` for history integration
-  - [ ] 4.1 Ensure `onClose` callback (provided by modal) triggers `closeLightbox()` which pops the lightbox history entry
-  - [ ] 4.2 Verify Escape key and overlay click still work correctly with the new close flow
+- [x] 4.0 Update `ImageLightbox` for history integration
+  - [x] 4.1 Ensure `onClose` callback (provided by modal) triggers `closeLightbox()` which pops the lightbox history entry
+  - [x] 4.2 Verify Escape key and overlay click still work correctly with the new close flow
 
 - [ ] 5.0 Handle edge cases
   - [ ] 5.1 Handle unknown/stale hash on page load (hash doesn't match any service ID) — silently ignore, clear hash
@@ -141,3 +141,4 @@ None.
 | Date | Task | Notes |
 |------|------|-------|
 | 2026-03-18 | 1.0 | Created useModalHistory hook with full history/hash management, popstate listener, deep-link support |
+| 2026-03-18 | 2.0–4.0 | Integrated hook into ServicesBento, ServicesDetailModal, and ImageLightbox |
