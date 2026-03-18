@@ -99,13 +99,13 @@ Sales engineers present CES innovation demos to clients, but management doesn't 
   - [x] 2.3 Update the field order documentation to show `Resources` → `Resources - MANUAL:` → `Description` (both optional, either or both can appear)
   - [x] 2.4 Add a worked example showing a section with both types
   - [x] 2.5 Update the "JSON resource entry" template to show the `manual` variant
-- [ ] 3.0 Create ManualResourceModal component
-  - [ ] 3.1 Create `apps/web/src/components/sections/services-bento/ManualResourceModal.tsx` — a Radix Dialog overlay with: resource icon (next/image, if available), tool name, "Coming soon — ask for early access" CTA text
-  - [ ] 3.2 Style as a compact centered card (~max-w-xs) with dark glass-morphism (`bg-neutral-950/90 backdrop-blur-xl border border-white/10 rounded-xl`)
-  - [ ] 3.3 Implement clipboard copy on CTA text click: `navigator.clipboard.writeText(href)`, show inline "Copied!" confirmation replacing the CTA text briefly
-  - [ ] 3.4 Implement auto-dismiss: close the overlay ~1.5s after successful copy
-  - [ ] 3.5 Implement manual dismiss: click outside (backdrop) or X button closes the overlay
-  - [ ] 3.6 Add Motion entrance/exit animation (opacity + scale, ~200ms)
+- [x] 3.0 Create ManualResourceModal component
+  - [x] 3.1 Create `apps/web/src/components/sections/services-bento/ManualResourceModal.tsx` — a Radix Dialog overlay with: resource icon (next/image, if available), tool name, "Coming soon — ask for early access" CTA text
+  - [x] 3.2 Style as a compact centered card (~max-w-xs) with dark glass-morphism (`bg-neutral-950/90 backdrop-blur-xl border border-white/10 rounded-xl`)
+  - [x] 3.3 Implement clipboard copy on CTA text click: `navigator.clipboard.writeText(href)`, show inline "Copied!" confirmation replacing the CTA text briefly
+  - [x] 3.4 Implement auto-dismiss: close the overlay ~1.5s after successful copy
+  - [x] 3.5 Implement manual dismiss: click outside (backdrop) or X button closes the overlay
+  - [x] 3.6 Add Motion entrance/exit animation (opacity + scale, ~200ms)
 - [ ] 4.0 Integrate into ServicesDetailModal
   - [ ] 4.1 In the links rendering section of `ServicesDetailModal.tsx`, render `manual: true` links as `<button>` elements (not `<a>`) that open `ManualResourceModal` instead of navigating
   - [ ] 4.2 Style manual link buttons identically to regular link anchors (same border, padding, icon layout) so they're visually consistent in the grid
@@ -122,3 +122,4 @@ Sales engineers present CES innovation demos to clients, but management doesn't 
 |------|------|-------|
 | 2026-03-18 | 1.1 | Added `manual?: boolean` to `InnovationLink` interface |
 | 2026-03-18 | 2.1–2.5 | Updated sync command with Resources - MANUAL parsing rules, field order, worked example |
+| 2026-03-18 | 3.1–3.6 | Created ManualResourceModal component with glass-morphism card, clipboard copy, auto-dismiss |
