@@ -106,11 +106,11 @@ Sales engineers present CES innovation demos to clients, but management doesn't 
   - [x] 3.4 Implement auto-dismiss: close the overlay ~1.5s after successful copy
   - [x] 3.5 Implement manual dismiss: click outside (backdrop) or X button closes the overlay
   - [x] 3.6 Add Motion entrance/exit animation (opacity + scale, ~200ms)
-- [ ] 4.0 Integrate into ServicesDetailModal
-  - [ ] 4.1 In the links rendering section of `ServicesDetailModal.tsx`, render `manual: true` links as `<button>` elements (not `<a>`) that open `ManualResourceModal` instead of navigating
-  - [ ] 4.2 Style manual link buttons identically to regular link anchors (same border, padding, icon layout) so they're visually consistent in the grid
-  - [ ] 4.3 Add state management for which manual link is currently open (`useState<InnovationLink | null>`)
-  - [ ] 4.4 Ensure manual links respect the same `confidential` / secret-mode filtering as regular links
+- [x] 4.0 Integrate into ServicesDetailModal
+  - [x] 4.1 In the links rendering section of `ServicesDetailModal.tsx`, render `manual: true` links as `<button>` elements (not `<a>`) that open `ManualResourceModal` instead of navigating
+  - [x] 4.2 Style manual link buttons identically to regular link anchors (same border, padding, icon layout) so they're visually consistent in the grid
+  - [x] 4.3 Add state management for which manual link is currently open (`useState<InnovationLink | null>`)
+  - [x] 4.4 Ensure manual links respect the same `confidential` / secret-mode filtering as regular links
 - [ ] 5.0 Validation and cleanup
   - [ ] 5.1 Verify that a section-description.json with `"manual": true` links renders correctly — manual links open overlay, regular links navigate normally
   - [ ] 5.2 Verify clipboard copy works and "Copied!" feedback displays, then overlay auto-dismisses
@@ -123,3 +123,4 @@ Sales engineers present CES innovation demos to clients, but management doesn't 
 | 2026-03-18 | 1.1 | Added `manual?: boolean` to `InnovationLink` interface |
 | 2026-03-18 | 2.1–2.5 | Updated sync command with Resources - MANUAL parsing rules, field order, worked example |
 | 2026-03-18 | 3.1–3.6 | Created ManualResourceModal component with glass-morphism card, clipboard copy, auto-dismiss |
+| 2026-03-18 | 4.1–4.4 | Integrated ManualResourceModal into ServicesDetailModal — manual links render as buttons, shared styling, state management |

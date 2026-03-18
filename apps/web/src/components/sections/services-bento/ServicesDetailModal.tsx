@@ -5,8 +5,9 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { X, ExternalLink, ArrowRight, Lock, LockOpen } from "lucide-react";
-import type { InnovationArea } from "@ces/content/data/innovation";
+import type { InnovationArea, InnovationLink } from "@ces/content/data/innovation";
 import { ImageLightbox } from "./ImageLightbox";
+import { ManualResourceModal } from "./ManualResourceModal";
 import { useSecretModeContext } from "@/contexts/SecretModeContext";
 
 interface ServicesDetailModalProps {
@@ -65,6 +66,7 @@ export function ServicesDetailModal({
 }: ServicesDetailModalProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [manualLink, setManualLink] = useState<InnovationLink | null>(null);
   const { isSecret, toggle } = useSecretModeContext();
 
   // Sync: when back button closes lightbox (lightboxOpen → false), clear local index
@@ -226,45 +228,64 @@ export function ServicesDetailModal({
                           </h3>
                           <div className="mt-3 grid gap-3 sm:grid-cols-2">
                             <AnimatePresence initial={false}>
-                              {visibleLinks.map((link) => (
-                                <motion.a
-                                  key={link.href}
-                                  href={link.href}
-                                  target={link.external ? "_blank" : undefined}
-                                  rel={
-                                    link.external
-                                      ? "noopener noreferrer"
-                                      : undefined
-                                  }
-                                  initial={{ opacity: 0, y: -4 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  exit={{ opacity: 0, y: -4 }}
-                                  transition={{ duration: 0.2 }}
-                                  className="group/link flex items-center gap-3 rounded-lg border border-white/10 p-3 transition-colors hover:border-brand-gold/40 hover:bg-white/5"
-                                >
-                                  {link.image && (
-                                    <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded">
-                                      <Image
-                                        src={link.image}
-                                        alt={link.imageAlt ?? link.label}
-                                        fill
-                                        sizes="48px"
-                                        className="object-contain"
-                                      />
-                                    </div>
-                                  )}
-                                  <span className="flex items-center gap-1 text-sm text-white group-hover/link:text-brand-gold">
-                                    {link.label}
-                                    {/* Lock badge on confidential links when secret mode is active (FR-4) */}
-                                    {isSecret && link.confidential && (
-                                      <Lock className="w-3 h-3 text-brand-gold/60 ml-1 shrink-0" />
+                              {visibleLinks.map((link) => {
+                                const linkContent = (
+                                  <>
+                                    {link.image && (
+                                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded">
+                                        <Image
+                                          src={link.image}
+                                          alt={link.imageAlt ?? link.label}
+                                          fill
+                                          sizes="48px"
+                                          className="object-contain"
+                                        />
+                                      </div>
                                     )}
-                                  </span>
-                                  {link.external && (
-                                    <ExternalLink className="ml-auto h-3 w-3 shrink-0 text-white/40" />
-                                  )}
-                                </motion.a>
-                              ))}
+                                    <span className="flex items-center gap-1 text-sm text-white group-hover/link:text-brand-gold">
+                                      {link.label}
+                                      {isSecret && link.confidential && (
+                                        <Lock className="w-3 h-3 text-brand-gold/60 ml-1 shrink-0" />
+                                      )}
+                                    </span>
+                                    {link.external && (
+                                      <ExternalLink className="ml-auto h-3 w-3 shrink-0 text-white/40" />
+                                    )}
+                                  </>
+                                );
+
+                                return link.manual ? (
+                                  <motion.button
+                                    key={link.href}
+                                    onClick={() => setManualLink(link)}
+                                    initial={{ opacity: 0, y: -4 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -4 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="group/link flex items-center gap-3 rounded-lg border border-white/10 p-3 text-left transition-colors hover:border-brand-gold/40 hover:bg-white/5"
+                                  >
+                                    {linkContent}
+                                  </motion.button>
+                                ) : (
+                                  <motion.a
+                                    key={link.href}
+                                    href={link.href}
+                                    target={link.external ? "_blank" : undefined}
+                                    rel={
+                                      link.external
+                                        ? "noopener noreferrer"
+                                        : undefined
+                                    }
+                                    initial={{ opacity: 0, y: -4 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -4 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="group/link flex items-center gap-3 rounded-lg border border-white/10 p-3 transition-colors hover:border-brand-gold/40 hover:bg-white/5"
+                                  >
+                                    {linkContent}
+                                  </motion.a>
+                                );
+                              })}
                             </AnimatePresence>
                           </div>
                         </div>
@@ -327,6 +348,15 @@ export function ServicesDetailModal({
           setLightboxIndex(null);
         }}
         onNavigate={setLightboxIndex}
+      />
+
+      {/* Manual Resource "Coming Soon" Overlay */}
+      <ManualResourceModal
+        link={manualLink}
+        open={manualLink !== null}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) setManualLink(null);
+        }}
       />
     </Dialog.Root>
   );
