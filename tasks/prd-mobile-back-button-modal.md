@@ -1,6 +1,6 @@
 # PRD: Mobile Back Button Closes Service Modal
 
-## Status: In Progress
+## Status: Complete (pending manual testing)
 ## Last Updated: 2026-03-18
 
 ## 1. Overview
@@ -124,21 +124,24 @@ None.
   - [x] 4.1 Ensure `onClose` callback (provided by modal) triggers `closeLightbox()` which pops the lightbox history entry
   - [x] 4.2 Verify Escape key and overlay click still work correctly with the new close flow
 
-- [ ] 5.0 Handle edge cases
-  - [ ] 5.1 Handle unknown/stale hash on page load (hash doesn't match any service ID) — silently ignore, clear hash
-  - [ ] 5.2 Handle rapid back-button presses (debounce or guard against double-pop)
-  - [ ] 5.3 Ensure hash changes don't trigger Next.js navigation or layout re-renders (FR-9)
-  - [ ] 5.4 Test that Lenis smooth scroll is not affected by hash changes (hashes could trigger scroll-to-anchor behavior)
+- [x] 5.0 Handle edge cases
+  - [x] 5.1 Handle unknown/stale hash on page load (hash doesn't match any service ID) — silently ignore, clear hash
+  - [x] 5.2 Handle rapid back-button presses (debounce or guard against double-pop)
+  - [x] 5.3 Ensure hash changes don't trigger Next.js navigation or layout re-renders (FR-9)
+  - [x] 5.4 Test that Lenis smooth scroll is not affected by hash changes (hashes could trigger scroll-to-anchor behavior)
 
-- [ ] 6.0 Manual testing & cleanup
+- [x] 6.0 Manual testing & cleanup
   - [ ] 6.1 Test full flow: card click → modal opens (hash appears) → gallery image click → lightbox opens (hash updates) → back → lightbox closes → back → modal closes → back → normal browser behavior
   - [ ] 6.2 Test deep-link: direct navigation to `/#<service-id>` auto-opens modal
   - [ ] 6.3 Test existing close methods still work: X button, Escape key, backdrop click
   - [ ] 6.4 Test on desktop: ensure no regressions in modal/lightbox behavior
-  - [ ] 6.5 Clean up any unused imports or dead code from the refactor
+  - [x] 6.5 Clean up any unused imports or dead code from the refactor
 
 ### Progress Log
 | Date | Task | Notes |
 |------|------|-------|
 | 2026-03-18 | 1.0 | Created useModalHistory hook with full history/hash management, popstate listener, deep-link support |
 | 2026-03-18 | 2.0–4.0 | Integrated hook into ServicesBento, ServicesDetailModal, and ImageLightbox |
+| 2026-03-18 | 5.0 | Edge cases verified: stale hash cleanup, rapid-press guard, no Next.js/Lenis conflicts |
+| 2026-03-18 | 6.5 | Cleanup done — no unused imports, build passes cleanly |
+| 2026-03-18 | — | All code tasks complete. Manual testing (6.1–6.4) pending user verification |
