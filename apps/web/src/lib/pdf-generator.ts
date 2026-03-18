@@ -350,17 +350,15 @@ function renderServicePage(
     const imgHeightMm = W * (heroImg.height / heroImg.width);
     pdf.addImage(heroImg.dataUri, "JPEG", 0, 0, W, imgHeightMm);
 
-    // Gradient mask in two zones:
-    // Zone 1: header → 75% of image height — gentle 20% → 50%
-    // Zone 2: 75% of image height → image bottom — ramp 50% → 100% (smooth blend out)
-    const imgBottom = Math.min(imgHeightMm, H); // cap to page height
-    const blendStart = HEADER_H;
+    // Mask: uniform 40% over top 75%, then ramp 40% → 100% in bottom 25%
+    const imgBottom = Math.min(imgHeightMm, H);
     const blendBreak = HEADER_H + (imgBottom - HEADER_H) * 0.75;
-    const zone1H = blendBreak - blendStart;
     const zone2H = imgBottom - blendBreak;
 
-    gradientOverlay(pdf, 0, blendStart, W, zone1H, DARK_TEAL, 0.2, 0.5);
-    gradientOverlay(pdf, 0, blendBreak, W, zone2H, DARK_TEAL, 0.5, 1.0);
+    // Flat 40% mask from header to 75% mark
+    darkOverlay(pdf, 0, HEADER_H, W, blendBreak - HEADER_H, 0.4);
+    // Ramp 40% → 100% in bottom quarter
+    gradientOverlay(pdf, 0, blendBreak, W, zone2H, DARK_TEAL, 0.4, 1.0);
   }
 
   // 3. Header bar — fully opaque mask for clean logo/title area
