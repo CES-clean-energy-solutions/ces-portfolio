@@ -94,3 +94,16 @@ if [ -d "$INNO_SOURCE" ]; then
 else
   echo "No innovation source directory found (skipping)"
 fi
+
+# ---------------------------------------------------------------
+# Brand assets (logo for PDF export)
+# ---------------------------------------------------------------
+
+LOGO_SRC="${REPO_ROOT}/packages/ui/src/assets/ces-logo-white-bg.jpg"
+CONTENT_DEST="${REPO_ROOT}/apps/web/public/content"
+
+if [ -f "$LOGO_SRC" ]; then
+  mkdir -p "$CONTENT_DEST"
+  cp "$LOGO_SRC" "$CONTENT_DEST/ces-logo-white-bg.jpg"
+  echo "Copied logo to $CONTENT_DEST/ces-logo-white-bg.jpg"
+fi

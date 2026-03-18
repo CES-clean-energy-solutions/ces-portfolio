@@ -20,11 +20,20 @@ const IMG_BLOCK_H  = (BODY_H - IMG_GAP) / 2;  // 82mm per block
 const IMG_H        = 74;                       // mm — rendered image height (≈ 16:9 for 132mm width)
 const CAPTION_OFFSET = 3;                      // mm — gap between image bottom and caption baseline
 
-// ─── Brand colours ───────────────────────────────────────────────────────────
-const GOLD  = "#D4A843";
-const WHITE = "#ffffff";
-const NEAR_WHITE: [number, number, number] = [230, 230, 230];
-const GRAY  = "#aaaaaa";
+// ─── Image compression tiers ────────────────────────────────────────────────
+const TITLE_IMG_MAX_W  = 1600; // px — title bar spans full page width
+const COLUMN_IMG_MAX_W = 1000; // px — column images are 132mm wide
+const JPEG_QUALITY     = 0.80;
+
+// ─── CES Brand colours ─────────────────────────────────────────────────────
+const GOLD      = "#f8c802";   // CES brand gold (logo chevron)
+const DARK_TEAL = "#1b2e2a";   // CES brand black / dark teal
+const WHITE     = "#ffffff";
+const NEAR_WHITE: [number, number, number] = [235, 235, 235];
+const GRAY      = "#999999";   // lighter gray for contrast on dark teal
+
+// ─── Logo path (relative to public/) ────────────────────────────────────────
+const LOGO_SRC = "/content/ces-logo-white-bg.jpg";
 
 // ─── Static copy ─────────────────────────────────────────────────────────────
 const CONTACT = {
@@ -71,32 +80,66 @@ const LEGAL = {
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 /**
- * Fetch an image URL and return it as a base64 data URI.
- * Returns null if the fetch fails (e.g. missing file).
+ * Downscale and JPEG-compress an image via off-screen canvas.
+ * If the image is already smaller than maxWidth, it's still re-encoded as JPEG.
  */
-async function loadImageAsDataUri(src: string): Promise<string | null> {
+function compressImage(
+  img: HTMLImageElement,
+  maxWidth: number,
+  quality: number
+): string {
+  let w = img.naturalWidth;
+  let h = img.naturalHeight;
+
+  if (w > maxWidth) {
+    h = Math.round(h * (maxWidth / w));
+    w = maxWidth;
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d")!;
+  ctx.drawImage(img, 0, 0, w, h);
+
+  return canvas.toDataURL("image/jpeg", quality);
+}
+
+/**
+ * Fetch an image URL, downscale it, and return as a compressed JPEG data URI.
+ * Returns null if the fetch or decode fails.
+ */
+async function loadImageAsDataUri(
+  src: string,
+  maxWidth: number = COLUMN_IMG_MAX_W,
+  quality: number = JPEG_QUALITY
+): Promise<string | null> {
   try {
     const res = await fetch(src);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const blob = await res.blob();
-    return await new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result as string);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
+    const originalKB = (blob.size / 1024).toFixed(0);
+
+    // Decode via HTMLImageElement (works in all browsers)
+    const blobUrl = URL.createObjectURL(blob);
+    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const el = new Image();
+      el.onload = () => resolve(el);
+      el.onerror = reject;
+      el.src = blobUrl;
     });
+
+    const dataUri = compressImage(img, maxWidth, quality);
+    URL.revokeObjectURL(blobUrl);
+
+    const compressedKB = (dataUri.length * 0.75 / 1024).toFixed(0); // base64 → bytes approx
+    console.log(`PDF: ${src} — ${originalKB} KB → ~${compressedKB} KB (${img.naturalWidth}×${img.naturalHeight} → max ${maxWidth}px)`);
+
+    return dataUri;
   } catch (err) {
     console.warn(`PDF: could not load image ${src}:`, err);
     return null;
   }
-}
-
-/** Detect image format from data URI prefix. */
-function imgFormat(dataUri: string): string {
-  if (dataUri.startsWith("data:image/png"))  return "PNG";
-  if (dataUri.startsWith("data:image/webp")) return "WEBP";
-  if (dataUri.startsWith("data:image/gif"))  return "GIF";
-  return "JPEG";
 }
 
 /**
@@ -130,67 +173,72 @@ function fillRect(
 }
 
 /**
- * Draw a dark semi-transparent overlay on the current page
- * (used to darken title-bar background images for text legibility).
+ * Draw a dark semi-transparent overlay (brand dark teal) on the current page.
  * Falls back to a solid dark fill on browsers that don't support GState.
  */
 function darkOverlay(pdf: jsPDF, x: number, y: number, w: number, h: number, opacity = 0.65) {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pdf.setGState((pdf as any).GState({ opacity }));
-    fillRect(pdf, x, y, w, h, "#000000");
+    fillRect(pdf, x, y, w, h, DARK_TEAL);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pdf.setGState((pdf as any).GState({ opacity: 1.0 }));
   } catch {
-    // GState unavailable — draw a slightly lighter solid fallback
-    fillRect(pdf, x, y, w, h, "#1a1a1a");
+    fillRect(pdf, x, y, w, h, "#1a2b25");
   }
 }
 
 // ─── Page renderers ──────────────────────────────────────────────────────────
 
-function renderCoverPage(pdf: jsPDF, date: string) {
-  fillRect(pdf, 0, 0, W, H, "#000000");
+function renderCoverPage(pdf: jsPDF, date: string, logoDataUri: string | null) {
+  fillRect(pdf, 0, 0, W, H, DARK_TEAL);
+
+  // Logo image (if available)
+  if (logoDataUri) {
+    // Logo JPG is roughly 4:3 aspect. Render ~80mm wide in the upper-left area.
+    const logoW = 80;
+    const logoH = 60;
+    pdf.addImage(logoDataUri, "JPEG", PAD_X + 7, 30, logoW, logoH);
+  } else {
+    // Fallback: text-only wordmark
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(72);
+    pdf.setTextColor(GOLD);
+    pdf.text("CES", PAD_X + 7, 70);
+
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(12);
+    pdf.setTextColor(WHITE);
+    pdf.setCharSpace(3.5);
+    pdf.text("CLEAN ENERGY SOLUTIONS", PAD_X + 7, 84);
+    pdf.setCharSpace(0);
+  }
 
   // Vertical gold rule
   pdf.setFillColor(GOLD);
   pdf.rect(PAD_X, 28, 0.4, 154, "F");
 
-  // "CES" wordmark
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(72);
-  pdf.setTextColor(GOLD);
-  pdf.text("CES", PAD_X + 7, 88);
-
-  // Subtitle with letter-spacing approximated via character tracking
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(12);
-  pdf.setTextColor(WHITE);
-  pdf.setCharSpace(3.5);
-  pdf.text("CLEAN ENERGY SOLUTIONS", PAD_X + 7, 102);
-  pdf.setCharSpace(0);
-
-  // "Portfolio" label
+  // "Portfolio" label — positioned below logo
   pdf.setFont("helvetica", "italic");
   pdf.setFontSize(26);
   pdf.setTextColor(160, 160, 160);
-  pdf.text("Portfolio", PAD_X + 7, 120);
+  pdf.text("Portfolio", PAD_X + 7, 108);
 
   // Gold rule
   pdf.setDrawColor(GOLD);
   pdf.setLineWidth(0.35);
-  pdf.line(PAD_X + 7, 128, PAD_X + 110, 128);
+  pdf.line(PAD_X + 7, 116, PAD_X + 110, 116);
 
   // Tagline
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(9);
   pdf.setTextColor(GRAY);
-  pdf.text("Engineering for a sustainable future", PAD_X + 7, 136);
+  pdf.text("Engineering for a sustainable future", PAD_X + 7, 124);
 
   // Date
   pdf.setFontSize(8);
   pdf.setTextColor(GRAY);
-  pdf.text(`Generated: ${date}`, PAD_X + 7, 143);
+  pdf.text(`Generated: ${date}`, PAD_X + 7, 131);
 
   // Bottom-right URL
   pdf.setFontSize(8);
@@ -208,11 +256,11 @@ function renderServicePage(
   img2Caption: string
 ) {
   // Page background
-  fillRect(pdf, 0, 0, W, H, "#0a0a0a");
+  fillRect(pdf, 0, 0, W, H, DARK_TEAL);
 
   // ── Title bar ──────────────────────────────────────────────────────────────
   if (img0DataUri) {
-    pdf.addImage(img0DataUri, imgFormat(img0DataUri), 0, 0, W, TITLE_H);
+    pdf.addImage(img0DataUri, "JPEG", 0, 0, W, TITLE_H);
     darkOverlay(pdf, 0, 0, W, TITLE_H, 0.68);
   } else {
     fillRect(pdf, 0, 0, W, TITLE_H, "#111111");
@@ -290,7 +338,7 @@ function renderServicePage(
     imgY: number
   ) {
     if (dataUri) {
-      pdf.addImage(dataUri, imgFormat(dataUri), rightX, imgY, RIGHT_COL_W, IMG_H);
+      pdf.addImage(dataUri, "JPEG", rightX, imgY, RIGHT_COL_W, IMG_H);
     } else {
       fillRect(pdf, rightX, imgY, RIGHT_COL_W, IMG_H, "#1a1a1a");
     }
@@ -298,7 +346,6 @@ function renderServicePage(
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(7);
       pdf.setTextColor(GRAY);
-      // Allow up to 2 lines of caption
       addText(pdf, caption, rightX, imgY + IMG_H + CAPTION_OFFSET + 3.5, RIGHT_COL_W, 3.8, 2);
     }
   }
@@ -313,7 +360,7 @@ function renderContactPage(pdf: jsPDF) {
   // Header
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(22);
-  pdf.setTextColor("#000000");
+  pdf.setTextColor(DARK_TEAL);
   pdf.text("Get In Touch", PAD_X, 28);
 
   pdf.setDrawColor(GOLD);
@@ -334,7 +381,7 @@ function renderContactPage(pdf: jsPDF) {
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(9);
-  pdf.setTextColor("#222222");
+  pdf.setTextColor(DARK_TEAL);
   pdf.text(CONTACT.email,    PAD_X, bodyStart);
   pdf.text(CONTACT.phone,    PAD_X, bodyStart + 6);
   pdf.text(CONTACT.location, PAD_X, bodyStart + 12);
@@ -348,7 +395,7 @@ function renderContactPage(pdf: jsPDF) {
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(9);
-  pdf.setTextColor("#222222");
+  pdf.setTextColor(DARK_TEAL);
   addText(pdf, CONTACT.whoWeAre, col2X, bodyStart, colW, 5);
 
   // Col 3 — How We Work
@@ -359,7 +406,7 @@ function renderContactPage(pdf: jsPDF) {
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(9);
-  pdf.setTextColor("#222222");
+  pdf.setTextColor(DARK_TEAL);
   addText(pdf, CONTACT.howWeWork, col3X, bodyStart, colW, 5);
 
   // Footer
@@ -375,7 +422,7 @@ function renderImpressumPage(pdf: jsPDF, date: string) {
   // Header
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(20);
-  pdf.setTextColor("#000000");
+  pdf.setTextColor(DARK_TEAL);
   pdf.text("Legal Information", PAD_X, 28);
 
   pdf.setDrawColor(GOLD);
@@ -434,8 +481,11 @@ export async function generatePortfolioPdf(innovations: InnovationArea[]): Promi
     year: "numeric", month: "long", day: "numeric",
   });
 
+  // Pre-fetch the logo for the cover page
+  const logoDataUri = await loadImageAsDataUri(LOGO_SRC, 400, JPEG_QUALITY);
+
   // 1. Cover
-  renderCoverPage(pdf, date);
+  renderCoverPage(pdf, date, logoDataUri);
   console.log("PDF: cover ✓");
 
   // 2. One page per service
@@ -443,9 +493,9 @@ export async function generatePortfolioPdf(innovations: InnovationArea[]): Promi
     pdf.addPage();
 
     const [img0, img1, img2] = await Promise.all([
-      section.images[0]?.src ? loadImageAsDataUri(section.images[0].src) : null,
-      section.images[1]?.src ? loadImageAsDataUri(section.images[1].src) : null,
-      section.images[2]?.src ? loadImageAsDataUri(section.images[2].src) : null,
+      section.images[0]?.src ? loadImageAsDataUri(section.images[0].src, TITLE_IMG_MAX_W, JPEG_QUALITY) : null,
+      section.images[1]?.src ? loadImageAsDataUri(section.images[1].src, COLUMN_IMG_MAX_W, JPEG_QUALITY) : null,
+      section.images[2]?.src ? loadImageAsDataUri(section.images[2].src, COLUMN_IMG_MAX_W, JPEG_QUALITY) : null,
     ]);
 
     renderServicePage(
