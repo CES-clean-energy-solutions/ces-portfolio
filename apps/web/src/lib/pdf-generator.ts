@@ -350,6 +350,8 @@ function renderServicePage(
     pdf.addImage(heroImg.dataUri, "JPEG", 0, 0, W, imgHeightMm);
     // Gradient fade: transparent at top → DARK_TEAL at H/2
     gradientOverlay(pdf, 0, 0, W, H / 2, DARK_TEAL);
+    // Solid fill below gradient to fully cover any remaining image
+    fillRect(pdf, 0, H / 2, W, H / 2, DARK_TEAL);
   }
 
   // 3. Header bar — semi-transparent overlay for text legibility
