@@ -348,10 +348,19 @@ function renderServicePage(
   // 2. Hero image — fill width, maintain aspect ratio, positioned from top
   if (heroImg) {
     const imgHeightMm = W * (heroImg.height / heroImg.width);
-    // Draw image from top, full width, at correct aspect ratio
     pdf.addImage(heroImg.dataUri, "JPEG", 0, 0, W, imgHeightMm);
-    // Loose gradient below header: 20% mask at top → 50% mask at bottom
-    gradientOverlay(pdf, 0, HEADER_H, W, H - HEADER_H, DARK_TEAL, 0.2, 0.5);
+
+    // Gradient mask in two zones:
+    // Zone 1: header → 75% of image height — gentle 20% → 50%
+    // Zone 2: 75% of image height → image bottom — ramp 50% → 100% (smooth blend out)
+    const imgBottom = Math.min(imgHeightMm, H); // cap to page height
+    const blendStart = HEADER_H;
+    const blendBreak = HEADER_H + (imgBottom - HEADER_H) * 0.75;
+    const zone1H = blendBreak - blendStart;
+    const zone2H = imgBottom - blendBreak;
+
+    gradientOverlay(pdf, 0, blendStart, W, zone1H, DARK_TEAL, 0.2, 0.5);
+    gradientOverlay(pdf, 0, blendBreak, W, zone2H, DARK_TEAL, 0.5, 1.0);
   }
 
   // 3. Header bar — fully opaque mask for clean logo/title area
