@@ -230,8 +230,7 @@ function fillRect(
 
 /**
  * Simulate a vertical gradient overlay by drawing horizontal strips
- * with increasing opacity. Goes from fully transparent at `y` to
- * fully opaque `color` at `y + totalH`.
+ * with opacity interpolating from `startOpacity` to `endOpacity`.
  */
 function gradientOverlay(
   pdf: jsPDF,
@@ -240,12 +239,15 @@ function gradientOverlay(
   w: number,
   totalH: number,
   color: string,
+  startOpacity: number = 0,
+  endOpacity: number = 1,
   steps: number = GRADIENT_STEPS
 ) {
   const stripH = totalH / steps;
   try {
     for (let i = 0; i < steps; i++) {
-      const opacity = i / (steps - 1);
+      const t = i / (steps - 1);
+      const opacity = startOpacity + t * (endOpacity - startOpacity);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       pdf.setGState((pdf as any).GState({ opacity }));
       fillRect(pdf, x, y + i * stripH, w, stripH + 0.2, color); // +0.2 overlap to avoid gaps
@@ -253,8 +255,8 @@ function gradientOverlay(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pdf.setGState((pdf as any).GState({ opacity: 1.0 }));
   } catch {
-    // GState unavailable — solid fallback from halfway
-    fillRect(pdf, x, y + totalH * 0.3, w, totalH * 0.7, color);
+    // GState unavailable — solid fallback
+    fillRect(pdf, x, y, w, totalH, color);
   }
 }
 
@@ -348,14 +350,12 @@ function renderServicePage(
     const imgHeightMm = W * (heroImg.height / heroImg.width);
     // Draw image from top, full width, at correct aspect ratio
     pdf.addImage(heroImg.dataUri, "JPEG", 0, 0, W, imgHeightMm);
-    // Gradient fade: transparent at top → DARK_TEAL at H/2
-    gradientOverlay(pdf, 0, 0, W, H / 2, DARK_TEAL);
-    // Solid fill below gradient to fully cover any remaining image
-    fillRect(pdf, 0, H / 2, W, H / 2, DARK_TEAL);
+    // Loose gradient below header: 20% mask at top → 50% mask at bottom
+    gradientOverlay(pdf, 0, HEADER_H, W, H - HEADER_H, DARK_TEAL, 0.2, 0.5);
   }
 
-  // 3. Header bar — semi-transparent overlay for text legibility
-  darkOverlay(pdf, 0, 0, W, HEADER_H, 0.6);
+  // 3. Header bar — fully opaque mask for clean logo/title area
+  fillRect(pdf, 0, 0, W, HEADER_H, DARK_TEAL);
 
   // 4. Title text (left)
   pdf.setFont("helvetica", "bold");
