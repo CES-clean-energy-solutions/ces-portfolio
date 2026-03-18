@@ -5,25 +5,27 @@ import type { InnovationArea } from "@ces/content/data/innovation";
 const W = 297;        // mm — page width
 const H = 210;        // mm — page height
 
-const TITLE_H = 28;   // mm — service page title bar height
-const PAD_X   = 10;   // mm — horizontal page margin
-const PAD_Y   = 6;    // mm — vertical body padding (top & bottom)
-const COL_GAP = 7;    // mm — gap between left and right columns
+const HEADER_H = 20;  // mm — service page header bar height (logo + title)
+const PAD_X    = 10;  // mm — horizontal page margin
+const PAD_Y    = 6;   // mm — vertical body padding (top & bottom)
+const COL_GAP  = 7;   // mm — gap between left and right columns
 
 const RIGHT_COL_W = 132;                                  // mm — image column width
 const LEFT_COL_W  = W - PAD_X * 2 - COL_GAP - RIGHT_COL_W; // mm — text column width (~138)
 
 // Right-column image sizing — two images stacked with equal height
-const BODY_H       = H - TITLE_H - PAD_Y * 2; // 170mm
+const BODY_TOP     = HEADER_H + PAD_Y;
+const BODY_H       = H - HEADER_H - PAD_Y * 2;
 const IMG_GAP      = 6;                        // mm — gap between the two image blocks
-const IMG_BLOCK_H  = (BODY_H - IMG_GAP) / 2;  // 82mm per block
+const IMG_BLOCK_H  = (BODY_H - IMG_GAP) / 2;
 const IMG_H        = 74;                       // mm — rendered image height (≈ 16:9 for 132mm width)
 const CAPTION_OFFSET = 3;                      // mm — gap between image bottom and caption baseline
 
 // ─── Image compression tiers ────────────────────────────────────────────────
-const TITLE_IMG_MAX_W  = 1600; // px — title bar spans full page width
+const TITLE_IMG_MAX_W  = 1600; // px — hero image spans full page width
 const COLUMN_IMG_MAX_W = 1000; // px — column images are 132mm wide
 const JPEG_QUALITY     = 0.80;
+const GRADIENT_STEPS   = 24;   // number of strips for gradient fade simulation
 
 // ─── CES Brand colours ─────────────────────────────────────────────────────
 const GOLD      = "#f8c802";   // CES brand gold (logo chevron)
@@ -32,8 +34,8 @@ const WHITE     = "#ffffff";
 const NEAR_WHITE: [number, number, number] = [235, 235, 235];
 const GRAY      = "#999999";   // lighter gray for contrast on dark teal
 
-// ─── Logo path (relative to public/) ────────────────────────────────────────
-const LOGO_SRC = "/content/ces-logo-white-bg.jpg";
+// ─── Logo paths (relative to public/) ───────────────────────────────────────
+const LOGO_SVG_WHITE = "/content/ces-logo-full-white.svg";
 
 // ─── Static copy ─────────────────────────────────────────────────────────────
 const CONTACT = {
@@ -77,17 +79,25 @@ const LEGAL = {
   ],
 };
 
+// ─── Types ──────────────────────────────────────────────────────────────────
+
+interface PdfImage {
+  dataUri: string;
+  width: number;   // px after compression
+  height: number;  // px after compression
+}
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 /**
  * Downscale and JPEG-compress an image via off-screen canvas.
- * If the image is already smaller than maxWidth, it's still re-encoded as JPEG.
+ * Returns the data URI plus the output pixel dimensions.
  */
 function compressImage(
   img: HTMLImageElement,
   maxWidth: number,
   quality: number
-): string {
+): PdfImage {
   let w = img.naturalWidth;
   let h = img.naturalHeight;
 
@@ -102,25 +112,28 @@ function compressImage(
   const ctx = canvas.getContext("2d")!;
   ctx.drawImage(img, 0, 0, w, h);
 
-  return canvas.toDataURL("image/jpeg", quality);
+  return {
+    dataUri: canvas.toDataURL("image/jpeg", quality),
+    width: w,
+    height: h,
+  };
 }
 
 /**
- * Fetch an image URL, downscale it, and return as a compressed JPEG data URI.
- * Returns null if the fetch or decode fails.
+ * Fetch an image URL, downscale it, and return as a compressed JPEG data URI
+ * plus pixel dimensions for aspect-ratio calculations.
  */
 async function loadImageAsDataUri(
   src: string,
   maxWidth: number = COLUMN_IMG_MAX_W,
   quality: number = JPEG_QUALITY
-): Promise<string | null> {
+): Promise<PdfImage | null> {
   try {
     const res = await fetch(src);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const blob = await res.blob();
     const originalKB = (blob.size / 1024).toFixed(0);
 
-    // Decode via HTMLImageElement (works in all browsers)
     const blobUrl = URL.createObjectURL(blob);
     const img = await new Promise<HTMLImageElement>((resolve, reject) => {
       const el = new Image();
@@ -129,15 +142,58 @@ async function loadImageAsDataUri(
       el.src = blobUrl;
     });
 
-    const dataUri = compressImage(img, maxWidth, quality);
+    const result = compressImage(img, maxWidth, quality);
     URL.revokeObjectURL(blobUrl);
 
-    const compressedKB = (dataUri.length * 0.75 / 1024).toFixed(0); // base64 → bytes approx
-    console.log(`PDF: ${src} — ${originalKB} KB → ~${compressedKB} KB (${img.naturalWidth}×${img.naturalHeight} → max ${maxWidth}px)`);
+    const compressedKB = (result.dataUri.length * 0.75 / 1024).toFixed(0);
+    console.log(`PDF: ${src} — ${originalKB} KB → ~${compressedKB} KB (${img.naturalWidth}×${img.naturalHeight} → ${result.width}×${result.height})`);
 
-    return dataUri;
+    return result;
   } catch (err) {
     console.warn(`PDF: could not load image ${src}:`, err);
+    return null;
+  }
+}
+
+/**
+ * Rasterize an SVG file to a high-resolution PNG data URI via canvas.
+ * renderWidth controls the output resolution (higher = crisper in PDF).
+ */
+async function loadSvgAsDataUri(
+  svgSrc: string,
+  renderWidth: number = 800
+): Promise<PdfImage | null> {
+  try {
+    const res = await fetch(svgSrc);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const svgText = await res.text();
+
+    const svgBlob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+    const url = URL.createObjectURL(svgBlob);
+
+    const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const el = new Image();
+      el.onload = () => resolve(el);
+      el.onerror = reject;
+      el.src = url;
+    });
+
+    const aspectRatio = img.naturalWidth / img.naturalHeight;
+    const renderHeight = Math.round(renderWidth / aspectRatio);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = renderWidth;
+    canvas.height = renderHeight;
+    const ctx = canvas.getContext("2d")!;
+    ctx.drawImage(img, 0, 0, renderWidth, renderHeight);
+    URL.revokeObjectURL(url);
+
+    const dataUri = canvas.toDataURL("image/png");
+    console.log(`PDF: SVG ${svgSrc} → ${renderWidth}×${renderHeight}px PNG`);
+
+    return { dataUri, width: renderWidth, height: renderHeight };
+  } catch (err) {
+    console.warn(`PDF: could not load SVG ${svgSrc}:`, err);
     return null;
   }
 }
@@ -173,10 +229,39 @@ function fillRect(
 }
 
 /**
- * Draw a dark semi-transparent overlay (brand dark teal) on the current page.
- * Falls back to a solid dark fill on browsers that don't support GState.
+ * Simulate a vertical gradient overlay by drawing horizontal strips
+ * with increasing opacity. Goes from fully transparent at `y` to
+ * fully opaque `color` at `y + totalH`.
  */
-function darkOverlay(pdf: jsPDF, x: number, y: number, w: number, h: number, opacity = 0.65) {
+function gradientOverlay(
+  pdf: jsPDF,
+  x: number,
+  y: number,
+  w: number,
+  totalH: number,
+  color: string,
+  steps: number = GRADIENT_STEPS
+) {
+  const stripH = totalH / steps;
+  try {
+    for (let i = 0; i < steps; i++) {
+      const opacity = i / (steps - 1);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      pdf.setGState((pdf as any).GState({ opacity }));
+      fillRect(pdf, x, y + i * stripH, w, stripH + 0.2, color); // +0.2 overlap to avoid gaps
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    pdf.setGState((pdf as any).GState({ opacity: 1.0 }));
+  } catch {
+    // GState unavailable — solid fallback from halfway
+    fillRect(pdf, x, y + totalH * 0.3, w, totalH * 0.7, color);
+  }
+}
+
+/**
+ * Draw a dark semi-transparent overlay (uniform opacity).
+ */
+function darkOverlay(pdf: jsPDF, x: number, y: number, w: number, h: number, opacity = 0.55) {
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pdf.setGState((pdf as any).GState({ opacity }));
@@ -190,15 +275,18 @@ function darkOverlay(pdf: jsPDF, x: number, y: number, w: number, h: number, opa
 
 // ─── Page renderers ──────────────────────────────────────────────────────────
 
-function renderCoverPage(pdf: jsPDF, date: string, logoDataUri: string | null) {
+function renderCoverPage(pdf: jsPDF, date: string, logo: PdfImage | null) {
   fillRect(pdf, 0, 0, W, H, DARK_TEAL);
 
-  // Logo image (if available)
-  if (logoDataUri) {
-    // Logo JPG is roughly 4:3 aspect. Render ~80mm wide in the upper-left area.
-    const logoW = 80;
-    const logoH = 60;
-    pdf.addImage(logoDataUri, "JPEG", PAD_X + 7, 30, logoW, logoH);
+  // Vertical gold rule
+  pdf.setFillColor(GOLD);
+  pdf.rect(PAD_X, 28, 0.5, 154, "F");
+
+  // Logo (SVG-rasterized, high-res)
+  if (logo) {
+    const logoW = 90;
+    const logoH = logoW * (logo.height / logo.width);
+    pdf.addImage(logo.dataUri, "PNG", PAD_X + 7, 32, logoW, logoH);
   } else {
     // Fallback: text-only wordmark
     pdf.setFont("helvetica", "bold");
@@ -208,77 +296,85 @@ function renderCoverPage(pdf: jsPDF, date: string, logoDataUri: string | null) {
 
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(12);
-    pdf.setTextColor(WHITE);
+    pdf.setTextColor(GOLD);
     pdf.setCharSpace(3.5);
     pdf.text("CLEAN ENERGY SOLUTIONS", PAD_X + 7, 84);
     pdf.setCharSpace(0);
   }
 
-  // Vertical gold rule
-  pdf.setFillColor(GOLD);
-  pdf.rect(PAD_X, 28, 0.4, 154, "F");
-
-  // "Portfolio" label — positioned below logo
+  // Title — "Innovative Services Portfolio"
   pdf.setFont("helvetica", "italic");
   pdf.setFontSize(26);
-  pdf.setTextColor(160, 160, 160);
-  pdf.text("Portfolio", PAD_X + 7, 108);
+  pdf.setTextColor(GOLD);
+  pdf.text("Innovative Services Portfolio", PAD_X + 7, 115);
 
   // Gold rule
   pdf.setDrawColor(GOLD);
   pdf.setLineWidth(0.35);
-  pdf.line(PAD_X + 7, 116, PAD_X + 110, 116);
+  pdf.line(PAD_X + 7, 122, PAD_X + 160, 122);
 
   // Tagline
   pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(9);
-  pdf.setTextColor(GRAY);
-  pdf.text("Engineering for a sustainable future", PAD_X + 7, 124);
+  pdf.setFontSize(10);
+  pdf.setTextColor(GOLD);
+  pdf.text("Engineering for a sustainable future", PAD_X + 7, 132);
 
   // Date
   pdf.setFontSize(8);
-  pdf.setTextColor(GRAY);
-  pdf.text(`Generated: ${date}`, PAD_X + 7, 131);
+  pdf.setTextColor(GOLD);
+  pdf.text(`Generated: ${date}`, PAD_X + 7, 140);
 
   // Bottom-right URL
   pdf.setFontSize(8);
-  pdf.setTextColor(GRAY);
+  pdf.setTextColor(GOLD);
   pdf.text("portfolio.ic-ces.engineering", W - PAD_X, H - 8, { align: "right" });
 }
 
 function renderServicePage(
   pdf: jsPDF,
   section: InnovationArea,
-  img0DataUri: string | null,
-  img1DataUri: string | null,
+  heroImg: PdfImage | null,
+  img1: PdfImage | null,
   img1Caption: string,
-  img2DataUri: string | null,
-  img2Caption: string
+  img2: PdfImage | null,
+  img2Caption: string,
+  logo: PdfImage | null
 ) {
-  // Page background
+  // 1. Fill entire page with dark teal background
   fillRect(pdf, 0, 0, W, H, DARK_TEAL);
 
-  // ── Title bar ──────────────────────────────────────────────────────────────
-  if (img0DataUri) {
-    pdf.addImage(img0DataUri, "JPEG", 0, 0, W, TITLE_H);
-    darkOverlay(pdf, 0, 0, W, TITLE_H, 0.68);
-  } else {
-    fillRect(pdf, 0, 0, W, TITLE_H, "#111111");
+  // 2. Hero image — fill width, maintain aspect ratio, positioned from top
+  if (heroImg) {
+    const imgHeightMm = W * (heroImg.height / heroImg.width);
+    // Draw image from top, full width, at correct aspect ratio
+    pdf.addImage(heroImg.dataUri, "JPEG", 0, 0, W, imgHeightMm);
+    // Gradient fade: transparent at top → DARK_TEAL at H/2
+    gradientOverlay(pdf, 0, 0, W, H / 2, DARK_TEAL);
   }
 
-  // Title text
+  // 3. Header bar — semi-transparent overlay for text legibility
+  darkOverlay(pdf, 0, 0, W, HEADER_H, 0.6);
+
+  // 4. Title text (left)
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(20);
+  pdf.setFontSize(16);
   pdf.setTextColor(GOLD);
-  pdf.text(section.title, PAD_X, TITLE_H / 2 + 3.5);
+  pdf.text(section.title, PAD_X, HEADER_H / 2 + 3);
+
+  // 5. Logo (top-right)
+  if (logo) {
+    const logoH = HEADER_H - 4; // 16mm tall, fits in header
+    const logoW = logoH * (logo.width / logo.height);
+    pdf.addImage(logo.dataUri, "PNG", W - PAD_X - logoW, 2, logoW, logoH);
+  }
 
   // Thin separator line
-  pdf.setDrawColor("#2a2a2a");
-  pdf.setLineWidth(0.2);
-  pdf.line(0, TITLE_H, W, TITLE_H);
+  pdf.setDrawColor(GOLD);
+  pdf.setLineWidth(0.3);
+  pdf.line(0, HEADER_H, W, HEADER_H);
 
   // ── Body layout ────────────────────────────────────────────────────────────
-  const bodyY   = TITLE_H + PAD_Y;
+  const bodyY   = BODY_TOP;
   const leftX   = PAD_X;
   const rightX  = PAD_X + LEFT_COL_W + COL_GAP;
   let   curY    = bodyY;
@@ -319,7 +415,7 @@ function renderServicePage(
     pdf.setFontSize(9);
 
     for (const item of section.subItems) {
-      if (curY > H - PAD_Y - 4) break;   // guard against page overflow
+      if (curY > H - PAD_Y - 4) break;
       pdf.setTextColor(GOLD);
       pdf.text("›", leftX, curY);
       pdf.setTextColor(...NEAR_WHITE);
@@ -333,12 +429,12 @@ function renderServicePage(
   const img2Y = bodyY + IMG_BLOCK_H + IMG_GAP;
 
   function drawImageBlock(
-    dataUri: string | null,
+    image: PdfImage | null,
     caption: string,
     imgY: number
   ) {
-    if (dataUri) {
-      pdf.addImage(dataUri, "JPEG", rightX, imgY, RIGHT_COL_W, IMG_H);
+    if (image) {
+      pdf.addImage(image.dataUri, "JPEG", rightX, imgY, RIGHT_COL_W, IMG_H);
     } else {
       fillRect(pdf, rightX, imgY, RIGHT_COL_W, IMG_H, "#1a1a1a");
     }
@@ -350,8 +446,8 @@ function renderServicePage(
     }
   }
 
-  drawImageBlock(img1DataUri, img1Caption, img1Y);
-  drawImageBlock(img2DataUri, img2Caption, img2Y);
+  drawImageBlock(img1, img1Caption, img1Y);
+  drawImageBlock(img2, img2Caption, img2Y);
 }
 
 function renderContactPage(pdf: jsPDF) {
@@ -481,18 +577,18 @@ export async function generatePortfolioPdf(innovations: InnovationArea[]): Promi
     year: "numeric", month: "long", day: "numeric",
   });
 
-  // Pre-fetch the logo for the cover page
-  const logoDataUri = await loadImageAsDataUri(LOGO_SRC, 400, JPEG_QUALITY);
+  // Pre-fetch the SVG logo (rasterized at high resolution for crisp rendering)
+  const logo = await loadSvgAsDataUri(LOGO_SVG_WHITE, 800);
 
   // 1. Cover
-  renderCoverPage(pdf, date, logoDataUri);
+  renderCoverPage(pdf, date, logo);
   console.log("PDF: cover ✓");
 
   // 2. One page per service
   for (const section of innovations) {
     pdf.addPage();
 
-    const [img0, img1, img2] = await Promise.all([
+    const [heroImg, img1, img2] = await Promise.all([
       section.images[0]?.src ? loadImageAsDataUri(section.images[0].src, TITLE_IMG_MAX_W, JPEG_QUALITY) : null,
       section.images[1]?.src ? loadImageAsDataUri(section.images[1].src, COLUMN_IMG_MAX_W, JPEG_QUALITY) : null,
       section.images[2]?.src ? loadImageAsDataUri(section.images[2].src, COLUMN_IMG_MAX_W, JPEG_QUALITY) : null,
@@ -500,9 +596,10 @@ export async function generatePortfolioPdf(innovations: InnovationArea[]): Promi
 
     renderServicePage(
       pdf, section,
-      img0,
+      heroImg,
       img1, section.images[1]?.caption ?? "",
-      img2, section.images[2]?.caption ?? ""
+      img2, section.images[2]?.caption ?? "",
+      logo
     );
     console.log(`PDF: ${section.title} ✓`);
   }

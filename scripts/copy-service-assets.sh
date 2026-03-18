@@ -96,14 +96,14 @@ else
 fi
 
 # ---------------------------------------------------------------
-# Brand assets (logo for PDF export)
+# Brand assets (SVG logo for PDF export)
 # ---------------------------------------------------------------
 
-LOGO_SRC="${REPO_ROOT}/packages/ui/src/assets/ces-logo-white-bg.jpg"
 CONTENT_DEST="${REPO_ROOT}/apps/web/public/content"
+mkdir -p "$CONTENT_DEST"
 
-if [ -f "$LOGO_SRC" ]; then
-  mkdir -p "$CONTENT_DEST"
-  cp "$LOGO_SRC" "$CONTENT_DEST/ces-logo-white-bg.jpg"
-  echo "Copied logo to $CONTENT_DEST/ces-logo-white-bg.jpg"
+LOGO_SVG="${REPO_ROOT}/packages/ui/src/assets/ces-logo-full-white.svg"
+if [ -f "$LOGO_SVG" ]; then
+  cp "$LOGO_SVG" "$CONTENT_DEST/ces-logo-full-white.svg"
+  echo "Copied SVG logo to $CONTENT_DEST/"
 fi
