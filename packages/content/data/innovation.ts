@@ -31,6 +31,8 @@ export interface InnovationLink {
   imageAlt?: string;
   /** When true, link is hidden unless secret mode is active. Omitting is equivalent to false (public). */
   confidential?: boolean;
+  /** When true, clicking the link opens a "Coming soon" overlay instead of navigating. The real URL is copy-able by sales engineers via the overlay CTA. */
+  manual?: boolean;
 }
 
 export interface InnovationImage {
