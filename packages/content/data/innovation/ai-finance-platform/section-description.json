@@ -27,7 +27,8 @@
       "imageAlt": "Green Trade Finance Demo tool",
       "label": "Green Trade Finance Demo tool",
       "href": "https://green-tfp-demo.ic-ces.engineering/",
-      "external": true
+      "external": true,
+      "manual": true
     }
   ],
   "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },

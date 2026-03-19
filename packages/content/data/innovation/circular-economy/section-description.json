@@ -25,6 +25,14 @@
       "label": "CES Services",
       "href": "https://ic-ces.at/our_services/project-development-project-preparation/",
       "external": true
+    },
+    {
+      "image": "./resource-ce-tool-logo.png",
+      "imageAlt": "Circular economy assessment tool",
+      "label": "Circular economy assessment tool",
+      "href": "https://dev-ce.ic-ces.at/en",
+      "external": true,
+      "manual": true
     }
   ],
   "video": { "webm": "", "mp4": "", "mp4Mobile": "", "poster": "" },

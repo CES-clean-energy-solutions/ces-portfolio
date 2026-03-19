@@ -26,10 +26,13 @@ export default function ContactCta() {
 
             <div className="mx-auto mt-8 max-w-2xl text-center">
               <p className="text-xl font-bold text-white sm:text-2xl">
-                Dipl.-Ing. Klaus Kogler
+                Klaus Kogler, DI (FH), MSc
               </p>
               <p className="mt-1 text-sm text-brand-gold">
-                Buildings and Urban Development
+                Head of Unit, LEED AP, Estidama PQP
+              </p>
+              <p className="mt-0.5 text-sm text-white/70">
+                Innovative Building Services Engineering and RTD Services
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">

@@ -71,6 +71,9 @@ export function ManualResourceModal({
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 className="fixed inset-0 z-[60] flex items-center justify-center p-6"
+                onClick={(e) => {
+                  if (e.target === e.currentTarget) onOpenChange(false);
+                }}
               >
                 <div className="relative w-full max-w-xs rounded-xl border border-white/10 bg-neutral-950/90 p-6 shadow-2xl backdrop-blur-xl">
                   {/* Close button */}
@@ -98,24 +101,20 @@ export function ManualResourceModal({
                     </div>
                   )}
 
-                  {/* Tool name */}
-                  <Dialog.Title className="text-center text-base font-semibold text-white">
-                    {link.label}
+                  {/* Tool name — click to secretly copy URL */}
+                  <Dialog.Title asChild>
+                    <button
+                      onClick={handleCopy}
+                      className="w-full cursor-pointer text-center text-base font-semibold text-white transition-colors hover:text-brand-gold"
+                    >
+                      {link.label}
+                    </button>
                   </Dialog.Title>
 
-                  {/* CTA — click to copy URL */}
-                  <button
-                    onClick={handleCopy}
-                    className={`mt-3 w-full text-center text-sm transition-colors ${
-                      copied
-                        ? "text-brand-gold font-medium"
-                        : "text-white/50 hover:text-brand-gold cursor-pointer"
-                    }`}
-                  >
-                    {copied
-                      ? "Copied!"
-                      : "Coming soon — ask for early access"}
-                  </button>
+                  {/* Static CTA text */}
+                  <p className="mt-3 w-full text-center text-sm text-white/50">
+                    Coming soon — ask for early access
+                  </p>
                 </div>
               </motion.div>
             </Dialog.Content>

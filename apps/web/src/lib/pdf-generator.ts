@@ -29,22 +29,22 @@ const GRADIENT_STEPS   = 24;   // number of strips for gradient fade simulation
 
 // ─── CES Brand colours ─────────────────────────────────────────────────────
 const GOLD      = "#f8c802";   // CES brand gold (logo chevron)
-const DARK_TEAL = "#1b2e2a";   // CES brand black / dark teal
+const BLACK     = "#000000";   // PDF background
 const WHITE     = "#ffffff";
 const NEAR_WHITE: [number, number, number] = [235, 235, 235];
-const GRAY      = "#999999";   // lighter gray for contrast on dark teal
+const GRAY      = "#999999";   // lighter gray for captions/footers
 
 // ─── Logo paths (relative to public/) ───────────────────────────────────────
 const LOGO_SVG_WHITE = "/content/ces-logo-full-white.svg";
 
 // ─── Static copy ─────────────────────────────────────────────────────────────
 const CONTACT = {
-  email:    "office@ic-ces.engineering",
-  phone:    "+43 (0) 1234 5678",
-  location: "Vienna, Austria",
-  website:  "portfolio.ic-ces.engineering",
-  whoWeAre: `CES Clean Energy Solutions is a Vienna-based engineering consultancy specialising in sustainable urban development, energy efficiency, and environmental engineering. Our multidisciplinary team combines deep technical expertise with innovative digital methods to deliver integrated solutions for the built environment.`,
-  howWeWork: `We operate at the intersection of engineering and technology, leveraging BIM, computational simulation, and data-driven design to optimise building performance. Our collaborative approach ensures seamless integration with architectural teams, contractors, and stakeholders throughout project lifecycles.`,
+  name:     "Klaus Kogler, DI (FH), MSc",
+  role:     "Head of Unit, LEED AP, Estidama PQP",
+  phone:    "+43 664 601 692 32",
+  email:    "k.kogler@ic-ces.at",
+  whoWeAre: `CES clean energy solutions is a Vienna-based engineering and consulting firm, founded in 2009. We deliver integrated solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering — from feasibility study through construction supervision and beyond.\n\nWorking with partners within the iC group of companies spanning 850+ professionals across multiple disciplines, our clients get deep specialist knowledge in energy and environment backed by the full breadth of a multidisciplinary engineering organisation. One team, one point of responsibility.\n\nWe work where the transition is happening. Our projects span Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, with further experience in the Caribbean and West Africa. We partner with international financial institutions like the EBRD and NEFCO, the European Union, governments at every level, and private industry.\n\nOur competences cover five interconnected areas: Green Economy, Resource Efficiency & Circular Economy, Environmental & Social Compatibility, Sustainable Buildings, and Sustainable Energy & Plants.`,
+  howWeWork: `Complex problems demand integrative thinking. We involve all stakeholders early, map every boundary condition, and work through alternatives systematically before committing to a path. Our approach follows what we call the better way — three principles that guide our delivery.\n\nWe solve systemically: identifying root causes and structural problems rather than applying short-term fixes. We stay ahead: actively tracking and adopting innovations from research, regulation, and market developments. And we deliver what works: feasible processes, methods, and tools that ensure transparency and measurable gain.\n\nOur services span the full project lifecycle — from R&D and project preparation through environmental and social assessment, detailed design, construction supervision, investment programme management, and sustainable urban certification.\n\nWhether supervising large-scale heat pumps in Vienna, managing EU-funded infrastructure reconstruction in Ukraine, or certifying buildings to LEED standards in Tbilisi, the method stays consistent: rigorous engineering, honest assessment, integrated delivery.`,
 };
 
 const LEGAL = {
@@ -267,18 +267,18 @@ function darkOverlay(pdf: jsPDF, x: number, y: number, w: number, h: number, opa
   try {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pdf.setGState((pdf as any).GState({ opacity }));
-    fillRect(pdf, x, y, w, h, DARK_TEAL);
+    fillRect(pdf, x, y, w, h, BLACK);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     pdf.setGState((pdf as any).GState({ opacity: 1.0 }));
   } catch {
-    fillRect(pdf, x, y, w, h, "#1a2b25");
+    fillRect(pdf, x, y, w, h, BLACK);
   }
 }
 
 // ─── Page renderers ──────────────────────────────────────────────────────────
 
 function renderCoverPage(pdf: jsPDF, date: string, logo: PdfImage | null) {
-  fillRect(pdf, 0, 0, W, H, DARK_TEAL);
+  fillRect(pdf, 0, 0, W, H, BLACK);
 
   // Vertical gold rule
   pdf.setFillColor(GOLD);
@@ -292,43 +292,43 @@ function renderCoverPage(pdf: jsPDF, date: string, logo: PdfImage | null) {
   } else {
     // Fallback: text-only wordmark
     pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(72);
+    pdf.setFontSize(48);
     pdf.setTextColor(GOLD);
-    pdf.text("CES", PAD_X + 7, 70);
+    pdf.text("CES", PAD_X + 7, 65);
 
     pdf.setFont("helvetica", "normal");
-    pdf.setFontSize(12);
+    pdf.setFontSize(11);
     pdf.setTextColor(GOLD);
     pdf.setCharSpace(3.5);
-    pdf.text("CLEAN ENERGY SOLUTIONS", PAD_X + 7, 84);
+    pdf.text("CLEAN ENERGY SOLUTIONS", PAD_X + 7, 78);
     pdf.setCharSpace(0);
   }
 
   // Title — "Innovative Services Portfolio"
-  pdf.setFont("helvetica", "italic");
-  pdf.setFontSize(26);
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(18);
   pdf.setTextColor(GOLD);
   pdf.text("Innovative Services Portfolio", PAD_X + 7, 115);
 
   // Gold rule
   pdf.setDrawColor(GOLD);
   pdf.setLineWidth(0.35);
-  pdf.line(PAD_X + 7, 122, PAD_X + 160, 122);
+  pdf.line(PAD_X + 7, 120, PAD_X + 160, 120);
 
   // Tagline
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(10);
   pdf.setTextColor(GOLD);
-  pdf.text("Engineering for a sustainable future", PAD_X + 7, 132);
+  pdf.text("Connect with the future of sustainable engineering", PAD_X + 7, 129);
 
   // Date
-  pdf.setFontSize(8);
-  pdf.setTextColor(GOLD);
-  pdf.text(`Generated: ${date}`, PAD_X + 7, 140);
+  pdf.setFontSize(9);
+  pdf.setTextColor(GRAY);
+  pdf.text(`Generated: ${date}`, PAD_X + 7, 138);
 
   // Bottom-right URL
-  pdf.setFontSize(8);
-  pdf.setTextColor(GOLD);
+  pdf.setFontSize(9);
+  pdf.setTextColor(GRAY);
   pdf.text("portfolio.ic-ces.engineering", W - PAD_X, H - 8, { align: "right" });
 }
 
@@ -342,8 +342,8 @@ function renderServicePage(
   img2Caption: string,
   logo: PdfImage | null
 ) {
-  // 1. Fill entire page with dark teal background
-  fillRect(pdf, 0, 0, W, H, DARK_TEAL);
+  // 1. Fill entire page with black background
+  fillRect(pdf, 0, 0, W, H, BLACK);
 
   // 2. Hero image — fill width, maintain aspect ratio, positioned from top
   if (heroImg) {
@@ -358,11 +358,11 @@ function renderServicePage(
     // Flat 40% mask from header to 75% mark
     darkOverlay(pdf, 0, HEADER_H, W, blendBreak - HEADER_H, 0.4);
     // Ramp 40% → 100% in bottom quarter
-    gradientOverlay(pdf, 0, blendBreak, W, zone2H, DARK_TEAL, 0.4, 1.0);
+    gradientOverlay(pdf, 0, blendBreak, W, zone2H, BLACK, 0.4, 1.0);
   }
 
   // 3. Header bar — fully opaque mask for clean logo/title area
-  fillRect(pdf, 0, 0, W, HEADER_H, DARK_TEAL);
+  fillRect(pdf, 0, 0, W, HEADER_H, BLACK);
 
   // 4. Title text (left)
   pdf.setFont("helvetica", "bold");
@@ -405,7 +405,7 @@ function renderServicePage(
   curY += 5;
 
   // Divider
-  pdf.setDrawColor("#2a2a2a");
+  pdf.setDrawColor("#333333");
   pdf.setLineWidth(0.2);
   pdf.line(leftX, curY, leftX + LEFT_COL_W, curY);
   curY += 5;
@@ -460,74 +460,97 @@ function renderServicePage(
 }
 
 function renderContactPage(pdf: jsPDF) {
-  fillRect(pdf, 0, 0, W, H, WHITE);
+  fillRect(pdf, 0, 0, W, H, BLACK);
 
-  // Header
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(22);
-  pdf.setTextColor(DARK_TEAL);
-  pdf.text("Get In Touch", PAD_X, 28);
+  // ── Contact Us box (full width, top) ────────────────────────────────────────
+  const boxX = PAD_X;
+  const boxW = W - PAD_X * 2;
+  const boxY = 12;
+  const boxH = 42;
 
+  // Border
   pdf.setDrawColor(GOLD);
   pdf.setLineWidth(0.5);
-  pdf.line(PAD_X, 31.5, PAD_X + 58, 31.5);
+  pdf.roundedRect(boxX, boxY, boxW, boxH, 2, 2, "S");
 
-  const colW  = (W - PAD_X * 2 - COL_GAP * 2) / 3;
-  const col2X = PAD_X + colW + COL_GAP;
-  const col3X = PAD_X + colW * 2 + COL_GAP * 2;
-  const hdrY  = 46;
-  const bodyStart = 54;
-
-  // Col 1 — Contact details
+  // "Contact Us" heading
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(10);
+  pdf.setFontSize(16);
+  pdf.setTextColor(WHITE);
+  pdf.text("Contact Us", W / 2, boxY + 12, { align: "center" });
+
+  // Name
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(11);
+  pdf.setTextColor(WHITE);
+  pdf.text(CONTACT.name, W / 2, boxY + 20, { align: "center" });
+
+  // Role
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(8);
   pdf.setTextColor(GOLD);
-  pdf.text("Contact Us", PAD_X, hdrY);
+  pdf.text(CONTACT.role, W / 2, boxY + 25, { align: "center" });
+
+  // Department
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(8);
+  pdf.setTextColor(...NEAR_WHITE);
+  pdf.text("Innovative Building Services Engineering and RTD Services", W / 2, boxY + 30, { align: "center" });
+
+  // Phone + Email side by side
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(9);
+  pdf.setTextColor(GOLD);
+  pdf.text(CONTACT.phone, W / 2 - 5, boxY + 37, { align: "right" });
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(9);
-  pdf.setTextColor(DARK_TEAL);
-  pdf.text(CONTACT.email,    PAD_X, bodyStart);
-  pdf.text(CONTACT.phone,    PAD_X, bodyStart + 6);
-  pdf.text(CONTACT.location, PAD_X, bodyStart + 12);
-  pdf.text(CONTACT.website,  PAD_X, bodyStart + 18);
-
-  // Col 2 — Who We Are
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(10);
   pdf.setTextColor(GOLD);
-  pdf.text("Who We Are", col2X, hdrY);
+  pdf.text(CONTACT.email, W / 2 + 5, boxY + 37, { align: "left" });
+
+  // ── Two-column: Who We Are + How We Work ────────────────────────────────────
+  const colGap = COL_GAP;
+  const colW   = (boxW - colGap) / 2;
+  const col1X  = PAD_X;
+  const col2X  = PAD_X + colW + colGap;
+  const colTop = boxY + boxH + 8;
+
+  // Who We Are
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(12);
+  pdf.setTextColor(WHITE);
+  pdf.text("Who We Are", col1X, colTop);
 
   pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(9);
-  pdf.setTextColor(DARK_TEAL);
-  addText(pdf, CONTACT.whoWeAre, col2X, bodyStart, colW, 5);
+  pdf.setFontSize(7.5);
+  pdf.setTextColor(...NEAR_WHITE);
+  addText(pdf, CONTACT.whoWeAre, col1X, colTop + 6, colW, 3.6);
 
-  // Col 3 — How We Work
+  // How We Work
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(10);
-  pdf.setTextColor(GOLD);
-  pdf.text("How We Work", col3X, hdrY);
+  pdf.setFontSize(12);
+  pdf.setTextColor(WHITE);
+  pdf.text("How We Work", col2X, colTop);
 
   pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(9);
-  pdf.setTextColor(DARK_TEAL);
-  addText(pdf, CONTACT.howWeWork, col3X, bodyStart, colW, 5);
+  pdf.setFontSize(7.5);
+  pdf.setTextColor(...NEAR_WHITE);
+  addText(pdf, CONTACT.howWeWork, col2X, colTop + 6, colW, 3.6);
 
   // Footer
   pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(8);
+  pdf.setFontSize(9);
   pdf.setTextColor(GRAY);
   pdf.text("portfolio.ic-ces.engineering", W - PAD_X, H - 8, { align: "right" });
 }
 
 function renderImpressumPage(pdf: jsPDF, date: string) {
-  fillRect(pdf, 0, 0, W, H, WHITE);
+  fillRect(pdf, 0, 0, W, H, BLACK);
 
   // Header
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(20);
-  pdf.setTextColor(DARK_TEAL);
+  pdf.setTextColor(GOLD);
   pdf.text("Legal Information", PAD_X, 28);
 
   pdf.setDrawColor(GOLD);
@@ -548,7 +571,7 @@ function renderImpressumPage(pdf: jsPDF, date: string) {
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(8.5);
-  pdf.setTextColor("#333333");
+  pdf.setTextColor(...NEAR_WHITE);
   LEGAL.companyData.forEach((line, i) => {
     pdf.text(line, PAD_X, bodyStart + i * lineH);
   });
@@ -561,7 +584,7 @@ function renderImpressumPage(pdf: jsPDF, date: string) {
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(8.5);
-  pdf.setTextColor("#333333");
+  pdf.setTextColor(...NEAR_WHITE);
   LEGAL.impressum.forEach((line, i) => {
     pdf.text(line, col2X, bodyStart + i * lineH);
   });
