@@ -68,16 +68,16 @@ export default function ContactCta() {
                 Who We Are
               </h3>
               <p className="mt-4 leading-relaxed text-white/80">
-                CES clean energy solutions is a Vienna-based engineering and consulting firm, founded in 2009. We deliver integrated solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering — from feasibility study through construction supervision and beyond.
+                CES clean energy solutions is a Vienna-based engineering and consulting firm, founded in 2008. We deliver integrated solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering — from feasibility study through construction supervision and beyond.
                 <br />
                 <br />
                 Working with partners within the iC group of companies spanning 850+ professionals across multiple disciplines, our clients get deep specialist knowledge in energy and environment backed by the full breadth of a multidisciplinary engineering organisation. One team, one point of responsibility.
                 <br />
                 <br />
-                We work where the transition is happening. Our projects span Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, with further experience in the Caribbean and West Africa. We partner with international financial institutions like the EBRD and NEFCO, the European Union, governments at every level, and private industry.
+                We work where the transition is happening. Our projects span Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, with further experience in the Caribbean and West Africa. We work with international financial institutions like the World Bank, IFC, EBRD, KfW, the European Union, governments at every level, and private industry.
                 <br />
                 <br />
-                Our competences cover five interconnected areas: Green Economy, Resource Efficiency & Circular Economy, Environmental & Social Compatibility, Sustainable Buildings, and Sustainable Energy & Plants.
+                Within the Frame of Green Economy Transition our competences cover four interconnected areas: Resource Efficiency & Circular Economy, Environmental & Social Compatibility, Sustainable Buildings, and Sustainable Energy & Plants.
               </p>
             </motion.div>
 

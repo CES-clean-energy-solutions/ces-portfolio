@@ -7,6 +7,7 @@ import { ServicesOverview } from "@/components/sections/ServicesOverview";
 import { ServicesShowcase } from "@/components/sections/services/ServicesShowcase";
 import { ProjectsPreview } from "@/components/sections/ProjectsPreview";
 import { ServicesSection } from "@/components/sections/ServicesSection";
+import TaglineSection from "@/components/sections/TaglineSection";
 import ContactCta from "@/components/sections/ContactCta";
 import { services } from "@ces/content/data/services";
 import { innovations } from "@ces/content/data/innovation";
@@ -32,6 +33,7 @@ export default function Home() {
         {features.servicesShowcase && <ServicesShowcase services={services} />}
         {features.projectsPreview && <ProjectsPreview />}
         {features.servicesCards && <ServicesSection />}
+        <TaglineSection />
         {features.contactCta && <ContactCta />}
       </main>
       <Footer />

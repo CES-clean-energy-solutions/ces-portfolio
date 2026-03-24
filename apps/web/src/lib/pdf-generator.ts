@@ -22,10 +22,8 @@ const IMG_H        = 74;                       // mm — rendered image height (
 const CAPTION_OFFSET = 3;                      // mm — gap between image bottom and caption baseline
 
 // ─── Image compression tiers ────────────────────────────────────────────────
-const TITLE_IMG_MAX_W  = 1600; // px — hero image spans full page width
 const COLUMN_IMG_MAX_W = 1000; // px — column images are 132mm wide
 const JPEG_QUALITY     = 0.80;
-const GRADIENT_STEPS   = 24;   // number of strips for gradient fade simulation
 
 // ─── CES Brand colours ─────────────────────────────────────────────────────
 const GOLD      = "#f8c802";   // CES brand gold (logo chevron)
@@ -43,39 +41,42 @@ const CONTACT = {
   role:     "Head of Unit, LEED AP, Estidama PQP",
   phone:    "+43 664 601 692 32",
   email:    "k.kogler@ic-ces.at",
-  whoWeAre: `CES clean energy solutions is a Vienna-based engineering and consulting firm, founded in 2009. We deliver integrated solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering — from feasibility study through construction supervision and beyond.\n\nWorking with partners within the iC group of companies spanning 850+ professionals across multiple disciplines, our clients get deep specialist knowledge in energy and environment backed by the full breadth of a multidisciplinary engineering organisation. One team, one point of responsibility.\n\nWe work where the transition is happening. Our projects span Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, with further experience in the Caribbean and West Africa. We partner with international financial institutions like the EBRD and NEFCO, the European Union, governments at every level, and private industry.\n\nOur competences cover five interconnected areas: Green Economy, Resource Efficiency & Circular Economy, Environmental & Social Compatibility, Sustainable Buildings, and Sustainable Energy & Plants.`,
+  whoWeAre: `CES clean energy solutions is a Vienna-based engineering and consulting firm, founded in 2008. We deliver integrated solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering — from feasibility study through construction supervision and beyond.\n\nWorking with partners within the iC group of companies spanning 850+ professionals across multiple disciplines, our clients get deep specialist knowledge in energy and environment backed by the full breadth of a multidisciplinary engineering organisation. One team, one point of responsibility.\n\nWe work where the transition is happening. Our projects span Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, with further experience in the Caribbean and West Africa. We work with international financial institutions like the World Bank, IFC, EBRD, KfW, the European Union, governments at every level, and private industry.\n\nWithin the Frame of Green Economy Transition our competences cover four interconnected areas: Resource Efficiency & Circular Economy, Environmental & Social Compatibility, Sustainable Buildings, and Sustainable Energy & Plants.`,
   howWeWork: `Complex problems demand integrative thinking. We involve all stakeholders early, map every boundary condition, and work through alternatives systematically before committing to a path. Our approach follows what we call the better way — three principles that guide our delivery.\n\nWe solve systemically: identifying root causes and structural problems rather than applying short-term fixes. We stay ahead: actively tracking and adopting innovations from research, regulation, and market developments. And we deliver what works: feasible processes, methods, and tools that ensure transparency and measurable gain.\n\nOur services span the full project lifecycle — from R&D and project preparation through environmental and social assessment, detailed design, construction supervision, investment programme management, and sustainable urban certification.\n\nWhether supervising large-scale heat pumps in Vienna, managing EU-funded infrastructure reconstruction in Ukraine, or certifying buildings to LEED standards in Tbilisi, the method stays consistent: rigorous engineering, honest assessment, integrated delivery.`,
 };
 
 const LEGAL = {
   companyData: [
-    "CES Clean Energy Solutions GmbH",
-    "Commercial Register: FN 12345x",
-    "UID: ATU12345678",
-    "Vienna Commercial Court",
+    "CES clean energy solutions GesmbH",
+    "Schönbrunner Straße 297, 1120 Vienna, Austria",
     "",
-    "Managing Director: [Name]",
-    "Registered Office: Vienna, Austria",
+    "Company Register: FN 320442p",
+    "Company Register Court: Handelsgericht Wien",
+    "VAT ID: ATU 64715133",
     "",
-    "Contact:",
-    "Email: office@ic-ces.engineering",
-    "Phone: +43 (0) 1234 5678",
-    "Web: portfolio.ic-ces.engineering",
+    "Managing Directors:",
+    "Ing. Andreas Helbl",
+    "Dipl.-Ing. Felix Eckert",
+    "Dipl.-Ing. Michael Reidlinger",
+    "",
+    "Email: office@ic-ces.at",
+    "Web: ic-ces.at",
   ],
   impressum: [
     "Content Responsibility:",
-    "CES Clean Energy Solutions GmbH",
+    "Ing. Andreas Helbl",
+    "CES clean energy solutions GesmbH",
     "",
     "Disclaimer:",
     "All information provided is for general informational purposes only.",
     "We make no warranties about completeness, reliability, or suitability.",
     "",
     "Copyright:",
-    "© 2026 CES Clean Energy Solutions GmbH. All rights reserved.",
+    `© ${new Date().getFullYear()} CES clean energy solutions GesmbH. All rights reserved.`,
     "",
     "Data Protection:",
     "We process personal data in accordance with GDPR.",
-    "See our privacy policy at portfolio.ic-ces.engineering",
+    "See our privacy policy at ic-ces.at",
   ],
 };
 
@@ -228,53 +229,6 @@ function fillRect(
   pdf.rect(x, y, w, h, "F");
 }
 
-/**
- * Simulate a vertical gradient overlay by drawing horizontal strips
- * with opacity interpolating from `startOpacity` to `endOpacity`.
- */
-function gradientOverlay(
-  pdf: jsPDF,
-  x: number,
-  y: number,
-  w: number,
-  totalH: number,
-  color: string,
-  startOpacity: number = 0,
-  endOpacity: number = 1,
-  steps: number = GRADIENT_STEPS
-) {
-  const stripH = totalH / steps;
-  try {
-    for (let i = 0; i < steps; i++) {
-      const t = i / (steps - 1);
-      const opacity = startOpacity + t * (endOpacity - startOpacity);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      pdf.setGState((pdf as any).GState({ opacity }));
-      fillRect(pdf, x, y + i * stripH, w, stripH + 0.2, color); // +0.2 overlap to avoid gaps
-    }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    pdf.setGState((pdf as any).GState({ opacity: 1.0 }));
-  } catch {
-    // GState unavailable — solid fallback
-    fillRect(pdf, x, y, w, totalH, color);
-  }
-}
-
-/**
- * Draw a dark semi-transparent overlay (uniform opacity).
- */
-function darkOverlay(pdf: jsPDF, x: number, y: number, w: number, h: number, opacity = 0.55) {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    pdf.setGState((pdf as any).GState({ opacity }));
-    fillRect(pdf, x, y, w, h, BLACK);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    pdf.setGState((pdf as any).GState({ opacity: 1.0 }));
-  } catch {
-    fillRect(pdf, x, y, w, h, BLACK);
-  }
-}
-
 // ─── Page renderers ──────────────────────────────────────────────────────────
 
 function renderCoverPage(pdf: jsPDF, date: string, logo: PdfImage | null) {
@@ -335,34 +289,14 @@ function renderCoverPage(pdf: jsPDF, date: string, logo: PdfImage | null) {
 function renderServicePage(
   pdf: jsPDF,
   section: InnovationArea,
-  heroImg: PdfImage | null,
   img1: PdfImage | null,
   img1Caption: string,
   img2: PdfImage | null,
   img2Caption: string,
   logo: PdfImage | null
 ) {
-  // 1. Fill entire page with black background
+  // Black background
   fillRect(pdf, 0, 0, W, H, BLACK);
-
-  // 2. Hero image — fill width, maintain aspect ratio, positioned from top
-  if (heroImg) {
-    const imgHeightMm = W * (heroImg.height / heroImg.width);
-    pdf.addImage(heroImg.dataUri, "JPEG", 0, 0, W, imgHeightMm);
-
-    // Mask: uniform 40% over top 75%, then ramp 40% → 100% in bottom 25%
-    const imgBottom = Math.min(imgHeightMm, H);
-    const blendBreak = HEADER_H + (imgBottom - HEADER_H) * 0.75;
-    const zone2H = imgBottom - blendBreak;
-
-    // Flat 40% mask from header to 75% mark
-    darkOverlay(pdf, 0, HEADER_H, W, blendBreak - HEADER_H, 0.4);
-    // Ramp 40% → 100% in bottom quarter
-    gradientOverlay(pdf, 0, blendBreak, W, zone2H, BLACK, 0.4, 1.0);
-  }
-
-  // 3. Header bar — fully opaque mask for clean logo/title area
-  fillRect(pdf, 0, 0, W, HEADER_H, BLACK);
 
   // 4. Title text (left)
   pdf.setFont("helvetica", "bold");
@@ -580,7 +514,7 @@ function renderImpressumPage(pdf: jsPDF, date: string) {
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(10);
   pdf.setTextColor(GOLD);
-  pdf.text("Impressum", col2X, hdrY);
+  pdf.text("Legal Notice", col2X, hdrY);
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(8.5);
@@ -620,15 +554,13 @@ export async function generatePortfolioPdf(innovations: InnovationArea[]): Promi
   for (const section of innovations) {
     pdf.addPage();
 
-    const [heroImg, img1, img2] = await Promise.all([
-      section.images[0]?.src ? loadImageAsDataUri(section.images[0].src, TITLE_IMG_MAX_W, JPEG_QUALITY) : null,
+    const [img1, img2] = await Promise.all([
       section.images[1]?.src ? loadImageAsDataUri(section.images[1].src, COLUMN_IMG_MAX_W, JPEG_QUALITY) : null,
       section.images[2]?.src ? loadImageAsDataUri(section.images[2].src, COLUMN_IMG_MAX_W, JPEG_QUALITY) : null,
     ]);
 
     renderServicePage(
       pdf, section,
-      heroImg,
       img1, section.images[1]?.caption ?? "",
       img2, section.images[2]?.caption ?? "",
       logo

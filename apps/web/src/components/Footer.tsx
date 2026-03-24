@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { LegalModal } from "./modals/LegalModal";
 
 const LEGAL_LINKS = [
-  { id: "impressum", label: "Impressum" },
+  { id: "impressum", label: "Legal Notice" },
   { id: "company-data", label: "Company Data" },
-  { id: "data-protection", label: "Datenschutz" },
+  { id: "data-protection", label: "Privacy Policy" },
   { id: "compliance", label: "Compliance" },
   { id: "certifications", label: "Certifications" },
 ] as const;
@@ -367,7 +367,7 @@ function DataProtectionContent() {
 
 const LEGAL_CONTENT: Record<LegalLinkId, LegalContent> = {
   impressum: {
-    title: "Impressum",
+    title: "Legal Notice",
     content: <ImpressumContent />,
   },
   "company-data": {
@@ -390,7 +390,7 @@ Web: ic-ces.at
 This information is provided in accordance with Austrian e-Commerce and media laws and the Austrian Trade Act.`,
   },
   "data-protection": {
-    title: "Datenschutzerklärung / Privacy Policy",
+    title: "Privacy Policy",
     content: <DataProtectionContent />,
   },
   compliance: {
