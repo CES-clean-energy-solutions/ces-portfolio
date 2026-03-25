@@ -100,6 +100,17 @@ Dev stages use `removal: "remove"` — resources are fully deleted on teardown. 
 
 Dev stage: **< $1/month** (mostly AWS free tier). Static site with minimal Lambda invocations.
 
+## Hero Animation
+
+The hero section has a GSAP entrance animation (staggered logo reveal, character-level headline cascade, repeating chevron pulse) that is currently **disabled**. To re-enable, set `heroAnimation` to `true` in the feature flags config:
+
+```ts
+// apps/web/src/config/features.ts
+heroAnimation: true,
+```
+
+The animation is breakpoint-adaptive: full SplitText chars on desktop, word-level on tablet, simple fade on mobile. It also gates the particles background — when disabled, particles show immediately.
+
 ## Key Files
 
 | File | Purpose |

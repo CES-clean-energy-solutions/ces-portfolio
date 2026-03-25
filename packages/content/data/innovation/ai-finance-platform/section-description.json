@@ -2,7 +2,7 @@
   "id": "ai-finance-platform",
   "slug": "ai-finance-platform",
   "order": 1,
-  "title": "AI driven platform for finance assessment",
+  "title": "Finance Assessment",
   "shortDescription": "Intelligent trade finance automation. Faster decisions, consistent compliance, full portfolio visibility. From commodities, to green technologies.",
   "longDescription": "As green compliance requirements intensify, banks face an unsustainable bottleneck: thousands of transactions assessed against evolving environmental criteria, handled manually by overstretched teams. This platform brings AI-powered automation to the full lifecycle of green trade finance — from document ingestion and transaction triage through eligibility classification, CO2 impact quantification, and compliance verification. Every decision is auditable, every metric traceable to source, and a real-time pipeline dashboard delivers instant portfolio visibility by geography, risk tier, and approval status.\n\nThe vision: shift expert attention from data entry to judgment, deliver consistent (green) loan assessments at volume, and provide banks a modern foundation for the next generation of trade finance.",
   "subItems": [

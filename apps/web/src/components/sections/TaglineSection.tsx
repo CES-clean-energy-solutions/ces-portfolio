@@ -16,13 +16,10 @@ export default function TaglineSection() {
       >
         <div className="text-center text-xl font-light text-white lg:text-2xl">
           <p className="leading-relaxed">
-            <span className="font-semibold text-brand-gold">CES</span> is turning engineering expertise into custom software. Decades of domain knowledge into tools that work fast.
+            Transforming Engineering Expertise into Tailored Software Solutions.
           </p>
           <p className="mt-3 leading-relaxed">
-            Besides the engineering and consultancy services, we are ready to support your business leveraging via cutting-edge software delivery.
-          </p>
-          <p className="mt-3 leading-relaxed">
-            Stay tuned to this site for new developments.{" "}
+            Keeping pace with the latest software advancements!{" "}
             <Image
               src={cesChevron}
               alt=""

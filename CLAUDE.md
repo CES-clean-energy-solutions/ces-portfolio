@@ -224,17 +224,12 @@ apps/web/src/components/              → standalone utilities
   ExportPdfButton.tsx                 → triggers multi-page PDF export (jspdf + html2canvas)
   SmoothScroll.tsx                    → Lenis wrapper (desktop-only)
   ParticlesBackground.tsx             → tsparticles ambient effect (desktop-only)
-  CursorRipple.tsx                    → pointer-follow ripple (desktop-only)
+  HeroVideo.tsx                       → hero background video component
   modals/
     LegalModal.tsx                    → Radix Dialog for footer legal content
-  pdf/                                → React components rendered for PDF capture
-    PdfCoverPage.tsx                  → cover page (logo + date)
-    PdfSectionPage.tsx                → per-service section page
-    PdfGalleryPage.tsx                → image gallery page
-    PdfContactPage.tsx                → contact/company info page
-    PdfImpressumPage.tsx              → legal/impressum page
 apps/web/src/components/sections/     → page sections (rendered in order on /)
   Hero.tsx                            → hero with layered logo animation + particle bg
+  TaglineSection.tsx                  → CES tagline/mission statement with chevron
   services-bento/                     → services/innovations bento grid
     ServicesBento.tsx                 → main bento grid layout (id="services")
     ServicesBentoCard.tsx             → individual service card (uses images[0] as background)
@@ -242,6 +237,8 @@ apps/web/src/components/sections/     → page sections (rendered in order on /)
     ServicesSlide.tsx                 → individual slide with static image background
     ServicesDetailModal.tsx           → modal: hero image, gallery carousel, resource links
     ServicesGallery.tsx               → hero image + auto-advancing thumbnail strip (8s interval, progress bar)
+    ServicesMediaCard.tsx             → media card within services detail view
+    ManualResourceModal.tsx           → modal for manually adding resource links
     ImageLightbox.tsx                 → full-screen lightbox with keyboard nav (←/→/Esc)
   ContactCta.tsx                      → three-box layout (Contact Us, Who We Are, How We Work)
   Gallery.tsx                         → placeholder section (not integrated into page.tsx)
@@ -253,11 +250,11 @@ apps/web/src/hooks/
 
 **Secret Mode:** A lock/unlock toggle in `ServicesDetailModal` controls visibility of content marked `confidential: true` in the data. Default is locked (hidden). State is stored in localStorage but resets to `false` on every page load — intentional for safe client presentations. Access via `useSecretModeContext()`.
 
-**PDF Export:** `ExportPdfButton` dynamically imports `lib/pdf-generator.ts` (lazy, reduces initial bundle). Generator renders `pdf/` components off-screen, captures them with `html2canvas`, and stitches pages into a landscape A4 PDF via `jspdf`. OKLCH colors are overridden with hex equivalents before capture (html2canvas limitation). Uses `jspdf` + `html2canvas` packages.
+**PDF Export:** `ExportPdfButton` dynamically imports `lib/pdf-generator.ts` (lazy, reduces initial bundle). Generator captures pages with `html2canvas` and stitches them into a landscape A4 PDF via `jspdf`. OKLCH colors are overridden with hex equivalents before capture (html2canvas limitation).
 
 **Note:** Components in `services-bento/` consume `@ces/content/data/innovation`. The `video` field in the data is deprecated; components use static images from the `images` array. `images[0]` is the title/hero image by convention.
 
-Desktop-only interactive components (`ParticlesBackground`, `CursorRipple`) are loaded via `next/dynamic` with `ssr: false` and fade in after the hero entrance animation completes.
+Desktop-only interactive components (`ParticlesBackground`) are loaded via `next/dynamic` with `ssr: false` and fade in after the hero entrance animation completes.
 
 ## Devcontainer
 

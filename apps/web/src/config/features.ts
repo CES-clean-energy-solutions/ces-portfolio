@@ -7,6 +7,10 @@
 
 interface Features {
   hero: boolean;
+  /** GSAP entrance animation on hero SVG logo + headline. See README for details. */
+  heroAnimation: boolean;
+  /** tsparticles ambient dots/lines background on hero section */
+  heroParticles: boolean;
   servicesBentoShowcase: boolean;
   servicesBento: boolean;
   servicesOverview: boolean;
@@ -19,6 +23,8 @@ interface Features {
 
 export const features: Features = {
   hero: true,
+  heroAnimation: false,
+  heroParticles: false,
   servicesBentoShowcase: false,
   servicesBento: true,
   servicesOverview: false,

@@ -10,7 +10,7 @@ import { SplitText } from "gsap/SplitText";
 import cesText from "@repo/ui/assets/ces-text-white.svg";
 import cesChevron from "@repo/ui/assets/ces-chevron.svg";
 import cesSubtitle from "@repo/ui/assets/ces-subtitle-white.svg";
-import HeroVideo from "@/components/HeroVideo";
+import { features } from "@/config/features";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
@@ -19,14 +19,18 @@ const ParticlesBackground = dynamic(
   { ssr: false }
 );
 
-const HEADLINE = "Connect with the future of sustainable engineering";
+const HEADLINE = "Explore the Future of Sustainable Engineering Solutions Today";
 
 export default function Hero() {
   const container = useRef<HTMLElement>(null);
-  const [showParticles, setShowParticles] = useState(false);
+  const [showParticles, setShowParticles] = useState(
+    features.heroParticles && !features.heroAnimation
+  );
 
   useGSAP(
     () => {
+      if (!features.heroAnimation) return;
+
       const prefersReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
@@ -200,7 +204,9 @@ export default function Hero() {
 
       // Fade in particles after hero text animation finishes (~1.5s)
       // Particles now work on all viewports with adaptive configs
-      gsap.delayedCall(1.5, () => setShowParticles(true));
+      if (features.heroParticles) {
+        gsap.delayedCall(1.5, () => setShowParticles(true));
+      }
     },
     { scope: container }
   );
@@ -210,10 +216,19 @@ export default function Hero() {
       ref={container}
       className="relative flex min-h-screen items-center justify-center bg-brand-black px-4 pt-[var(--header-h)] sm:px-6 lg:px-8"
     >
-      {/* Background video (z-0) — looping ambient video or static poster */}
-      <HeroVideo />
+      {/* Background still image (z-0) */}
+      <Image
+        src="/video/hero-poster.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+        style={{ zIndex: 0 }}
+        aria-hidden
+      />
 
-      {/* Dark overlay (z-10) — ensures text legibility over video */}
+      {/* Dark overlay (z-10) — ensures text legibility over background */}
       <div
         className="absolute inset-0"
         style={{

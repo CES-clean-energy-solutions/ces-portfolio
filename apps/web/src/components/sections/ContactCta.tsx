@@ -1,62 +1,57 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "motion/react";
-import { Phone, Mail } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 
 export default function ContactCta() {
+  const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
+  const [message, setMessage] = useState("");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Inquiry from ${company} about Innovative Services at CES`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nCompany: ${company}\n\n${message}`
+    );
+    window.location.href = `mailto:office@ic-ces.at?subject=${subject}&body=${body}`;
+  }
+
   return (
     <section
-      id="contact"
       className="bg-brand-black px-4 py-24 sm:px-6 md:py-32 lg:px-8 lg:py-40"
     >
       <div className="mx-auto max-w-7xl">
-        {/* Three-box layout: Contact Us (full width), Who We Are + How We Work (50% each) */}
         <div className="grid grid-cols-1 gap-8 md:gap-10">
-          {/* Contact Us Box (Full Width) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="rounded-2xl border-2 border-brand-gold/30 bg-gradient-to-br from-white/10 to-white/5 p-8 shadow-2xl backdrop-blur-sm md:p-10 lg:p-12"
-          >
-            <h2 className="text-center text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-              Contact Us
-            </h2>
-
-            <div className="mx-auto mt-8 max-w-2xl text-center">
-              <p className="text-xl font-bold text-white sm:text-2xl">
-                Klaus Kogler, DI (FH), MSc
-              </p>
-              <p className="mt-1 text-sm text-brand-gold">
-                Head of Unit, LEED AP, Estidama PQP
-              </p>
-              <p className="mt-0.5 text-sm text-white/70">
-                Innovative Building Services Engineering and RTD Services
-              </p>
-
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <a
-                  href="tel:+4366460169232"
-                  className="inline-flex min-h-11 items-center justify-center gap-3 rounded-lg bg-brand-gold px-6 py-3 text-sm font-semibold text-brand-black transition-opacity hover:opacity-90"
-                >
-                  <Phone className="h-4 w-4" />
-                  +43 664 601 692 32
-                </a>
-                <a
-                  href="mailto:k.kogler@ic-ces.at"
-                  className="inline-flex min-h-11 items-center justify-center gap-3 rounded-lg border border-brand-gold px-6 py-3 text-sm font-semibold text-brand-gold transition-colors hover:bg-brand-gold/10"
-                >
-                  <Mail className="h-4 w-4" />
-                  k.kogler@ic-ces.at
-                </a>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Two-column grid for Who We Are and How We Work */}
+          {/* Who We Are + How We Work (above contact) */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
-            {/* Who We Are Box (Half Width on Desktop) */}
+            {/* Who We Are */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8"
+            >
+              <h3 className="text-2xl font-bold text-white md:text-3xl">
+                Who We Are
+              </h3>
+              <p className="mt-4 leading-relaxed text-white/80">
+                CES clean energy solutions is a Vienna-based company for technical consulting and engineering solutions, founded in 2008. We deliver integrated advanced solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering.
+                <br />
+                <br />
+                Being a strong partner within the international network the iC group of companies – well-known for spanning more than 850+ professionals across multiple disciplines, allows our clients to get access to a broad specialist knowledge backed by the full breadth of a multidisciplinary engineering organisation. One team, one point of responsibility.
+                <br />
+                <br />
+                We work on a global scale by having international project presence in Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, as well as experience in the Caribbean and West Africa. Financial institutions like the World Bank, IFC, EBRD, KfW, the European Union, governments at every level, and private industry belong to our long-term international clients.
+                <br />
+                <br />
+                Within the frame of Green Economy Transition our engineering competences cover four interconnected areas: [1] Resource Efficiency &amp; Circular Economy [2] Environmental &amp; Social Compatibility [3] Sustainable Buildings, and [4] Energy &amp; Plants.
+              </p>
+            </motion.div>
+
+            {/* How We Work */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -65,47 +60,104 @@ export default function ContactCta() {
               className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8"
             >
               <h3 className="text-2xl font-bold text-white md:text-3xl">
-                Who We Are
-              </h3>
-              <p className="mt-4 leading-relaxed text-white/80">
-                CES clean energy solutions is a Vienna-based engineering and consulting firm, founded in 2008. We deliver integrated solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering — from feasibility study through construction supervision and beyond.
-                <br />
-                <br />
-                Working with partners within the iC group of companies spanning 850+ professionals across multiple disciplines, our clients get deep specialist knowledge in energy and environment backed by the full breadth of a multidisciplinary engineering organisation. One team, one point of responsibility.
-                <br />
-                <br />
-                We work where the transition is happening. Our projects span Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, with further experience in the Caribbean and West Africa. We work with international financial institutions like the World Bank, IFC, EBRD, KfW, the European Union, governments at every level, and private industry.
-                <br />
-                <br />
-                Within the Frame of Green Economy Transition our competences cover four interconnected areas: Resource Efficiency & Circular Economy, Environmental & Social Compatibility, Sustainable Buildings, and Sustainable Energy & Plants.
-              </p>
-            </motion.div>
-
-            {/* How We Work Box (Half Width on Desktop) */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm sm:p-8"
-            >
-              <h3 className="text-2xl font-bold text-white md:text-3xl">
                 How We Work
               </h3>
               <p className="mt-4 leading-relaxed text-white/80">
-                Complex problems demand integrative thinking. We involve all stakeholders early, map every boundary condition, and work through alternatives systematically before committing to a path. Our approach follows what we call the better way — three principles that guide our delivery.
+                Complex topics demand an integrative thinking above all. We involve all relevant stakeholders from the beginning, consider every boundary condition, and work systematically through all possible alternatives, before committing to the right path.
                 <br />
                 <br />
-                We solve systemically: identifying root causes and structural problems rather than applying short-term fixes. We stay ahead: actively tracking and adopting innovations from research, regulation, and market developments. And we deliver what works: feasible processes, methods, and tools that ensure transparency and measurable gain.
+                <strong className="text-white">We work systemically</strong>: by identifying root causes and structural problems rather than just applying short-term fixes. We stay ahead: actively tracking and adopting innovations from research, applying regulations, and current market developments.
                 <br />
                 <br />
-                Our services span the full project lifecycle — from R&D and project preparation through environmental and social assessment, detailed design, construction supervision, investment programme management, and sustainable urban certification.
+                <strong className="text-white">Our services span the full project lifecycle</strong>: from R&amp;D and project preparation through environmental and social assessment, detailed design, construction supervision, investment programme management, and sustainable urban certifications.
                 <br />
                 <br />
-                Whether supervising large-scale heat pumps in Vienna, managing EU-funded infrastructure reconstruction in Ukraine, or certifying buildings to LEED standards in Tbilisi, the method stays consistent: rigorous engineering, honest assessment, integrated delivery.
+                Regardless of the project size, we deliver professional and integrated solutions.
               </p>
             </motion.div>
           </div>
+
+          {/* Contact Us Box (Full Width, now last) */}
+          <motion.div
+            id="contact"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="scroll-mt-24 rounded-2xl border-2 border-brand-gold/30 bg-gradient-to-br from-white/10 to-white/5 p-8 shadow-2xl backdrop-blur-sm md:p-10 lg:p-12"
+          >
+            <h2 className="text-center text-3xl font-bold text-white md:text-4xl lg:text-5xl">
+              Contact Us
+            </h2>
+
+            <div className="mx-auto mt-8 max-w-2xl">
+              <p className="text-center text-xl font-bold text-white sm:text-2xl">
+                <span className="text-brand-gold">CES</span> clean energy solutions GesmbH
+              </p>
+              <p className="mt-2 text-center text-sm text-white/70">
+                Schönbrunner Straße 297, 1120 Vienna, Austria
+              </p>
+
+              <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+                <div>
+                  <label htmlFor="contact-name" className="mb-1 block text-sm font-medium text-white/70">
+                    Your Name
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Jane Smith"
+                    className="min-h-11 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 focus:border-brand-gold focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-company" className="mb-1 block text-sm font-medium text-white/70">
+                    Company
+                  </label>
+                  <input
+                    id="contact-company"
+                    type="text"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                    placeholder="Acme Corp"
+                    className="min-h-11 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 focus:border-brand-gold focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-message" className="mb-1 block text-sm font-medium text-white/70">
+                    Message
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="How can we help you?"
+                    className="min-h-11 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 focus:border-brand-gold focus:outline-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-brand-gold px-6 py-3 text-sm font-semibold text-brand-black transition-opacity hover:opacity-90"
+                >
+                  <Send className="h-4 w-4" />
+                  Send Email
+                </button>
+              </form>
+
+              <p className="mt-4 text-center text-sm text-white/50">
+                or email us directly at{" "}
+                <a
+                  href="mailto:office@ic-ces.at"
+                  className="text-brand-gold underline underline-offset-2 hover:opacity-80"
+                >
+                  office@ic-ces.at
+                </a>
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

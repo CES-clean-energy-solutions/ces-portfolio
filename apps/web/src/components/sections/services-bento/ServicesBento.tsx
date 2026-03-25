@@ -35,8 +35,7 @@ export function ServicesBento({ innovations }: ServicesBentoProps) {
           className="mb-12 text-center md:mb-16"
         >
           <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-            Innovative Services{" "}
-            <span className="text-brand-gold">at CES</span>
+            Advanced Innovation Services
           </h2>
         </motion.div>
 

@@ -2,7 +2,7 @@
   "id": "microclimate-assessment",
   "slug": "microclimate-assessment",
   "order": 5,
-  "title": "Multi-scale microclimate and multi-physics assessment",
+  "title": "Multi-physics Microclimate Assessment",
   "shortDescription": "Risk-aware investment pressure is driving architects, investors, and engineers to adopt new assessment criteria, covering wind, microclimate, thermal comfort, technical system performance, as an innovative part of project delivery.",
   "longDescription": "Our CFD engineers operate across macro, meso, and micro scales, from regional wind climate downscaling through urban district airflow to room-level interior comfort analysis. We use tools such as ENVI-met, and OpenFOAM with urbanMicroclimateFoam, the coupled multi-physics solver developed at the ETH Zurich Chair of Building Physics. We simultaneously model turbulent airflow, heat and moisture transport, radiation exchange, and vegetation-atmosphere interaction.\n\nUrban wind comfort is assessed against Lawson criteria, supported by velocity ratio mapping, exceedance probability analysis, and 3D streamline visualisation across seasonal wind scenarios. Interior studies couple CFD results with dynamic energy simulation, enabling holistic evaluation of natural ventilation potential, urban heat island exposure, and envelope-system interaction under real climatic boundary conditions. Simulations are scalable using your local compute cluster and cloud platform.",
   "subItems": [
