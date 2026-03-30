@@ -94,6 +94,10 @@ function ImpressumContent() {
             <p><span className="text-white/50">Bildnachweis:</span> iC Archives, CES Archives, iStockPhoto</p>
           </div>
 
+          <div>
+            <p><span className="text-white/50">Stand:</span> 29. März 2026</p>
+          </div>
+
           <div className="border-t border-white/10 pt-4">
             <p className="mb-1 font-medium text-white">Haftungsausschluss</p>
             <p>
@@ -149,6 +153,10 @@ function ImpressumContent() {
 
           <div>
             <p><span className="text-white/50">Photo Credits:</span> iC Archives, CES Archives, iStockPhoto</p>
+          </div>
+
+          <div>
+            <p><span className="text-white/50">Last updated:</span> 29 March 2026</p>
           </div>
 
           <div className="border-t border-white/10 pt-4">

@@ -37,10 +37,9 @@ const LOGO_SVG_WHITE = "/content/ces-logo-full-white.svg";
 
 // ─── Static copy ─────────────────────────────────────────────────────────────
 const CONTACT = {
-  name:     "Klaus Kogler, DI (FH), MSc",
-  role:     "Head of Unit, LEED AP, Estidama PQP",
-  phone:    "+43 664 601 692 32",
-  email:    "k.kogler@ic-ces.at",
+  company:  "CES clean energy solutions GesmbH",
+  address:  "Schönbrunner Straße 297, 1120 Vienna, Austria",
+  email:    "office@ic-ces.at",
   whoWeAre: `CES clean energy solutions is a Vienna-based engineering and consulting firm, founded in 2008. We deliver integrated solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering — from feasibility study through construction supervision and beyond.\n\nWorking with partners within the iC group of companies spanning 850+ professionals across multiple disciplines, our clients get deep specialist knowledge in energy and environment backed by the full breadth of a multidisciplinary engineering organisation. One team, one point of responsibility.\n\nWe work where the transition is happening. Our projects span Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, with further experience in the Caribbean and West Africa. We work with international financial institutions like the World Bank, IFC, EBRD, KfW, the European Union, governments at every level, and private industry.\n\nWithin the Frame of Green Economy Transition our competences cover four interconnected areas: Resource Efficiency & Circular Economy, Environmental & Social Compatibility, Sustainable Buildings, and Sustainable Energy & Plants.`,
   howWeWork: `Complex problems demand integrative thinking. We involve all stakeholders early, map every boundary condition, and work through alternatives systematically before committing to a path. Our approach follows what we call the better way — three principles that guide our delivery.\n\nWe solve systemically: identifying root causes and structural problems rather than applying short-term fixes. We stay ahead: actively tracking and adopting innovations from research, regulation, and market developments. And we deliver what works: feasible processes, methods, and tools that ensure transparency and measurable gain.\n\nOur services span the full project lifecycle — from R&D and project preparation through environmental and social assessment, detailed design, construction supervision, investment programme management, and sustainable urban certification.\n\nWhether supervising large-scale heat pumps in Vienna, managing EU-funded infrastructure reconstruction in Ukraine, or certifying buildings to LEED standards in Tbilisi, the method stays consistent: rigorous engineering, honest assessment, integrated delivery.`,
 };
@@ -413,34 +412,23 @@ function renderContactPage(pdf: jsPDF) {
   pdf.setTextColor(WHITE);
   pdf.text("Contact Us", W / 2, boxY + 12, { align: "center" });
 
-  // Name
+  // Company name
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(11);
   pdf.setTextColor(WHITE);
-  pdf.text(CONTACT.name, W / 2, boxY + 20, { align: "center" });
+  pdf.text(CONTACT.company, W / 2, boxY + 20, { align: "center" });
 
-  // Role
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(8);
-  pdf.setTextColor(GOLD);
-  pdf.text(CONTACT.role, W / 2, boxY + 25, { align: "center" });
-
-  // Department
+  // Address
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(8);
   pdf.setTextColor(...NEAR_WHITE);
-  pdf.text("Innovative Building Services Engineering and RTD Services", W / 2, boxY + 30, { align: "center" });
+  pdf.text(CONTACT.address, W / 2, boxY + 27, { align: "center" });
 
-  // Phone + Email side by side
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(9);
-  pdf.setTextColor(GOLD);
-  pdf.text(CONTACT.phone, W / 2 - 5, boxY + 37, { align: "right" });
-
+  // Email
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(9);
   pdf.setTextColor(GOLD);
-  pdf.text(CONTACT.email, W / 2 + 5, boxY + 37, { align: "left" });
+  pdf.text(CONTACT.email, W / 2, boxY + 34, { align: "center" });
 
   // ── Two-column: Who We Are + How We Work ────────────────────────────────────
   const colGap = COL_GAP;
