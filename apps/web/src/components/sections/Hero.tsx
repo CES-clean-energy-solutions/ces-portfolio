@@ -19,7 +19,7 @@ const ParticlesBackground = dynamic(
   { ssr: false }
 );
 
-const HEADLINE = "Explore the Future of Sustainable Engineering Solutions Today";
+const HEADLINE = "Explore the Future of Sustainable Engineering Today";
 
 export default function Hero() {
   const container = useRef<HTMLElement>(null);
@@ -87,11 +87,7 @@ export default function Hero() {
               },
               "-=0.2"
             )
-            .from(
-              ".hero-cta",
-              { y: 20, opacity: 0, duration: 0.5, ease: "power2.out" },
-              "-=0.2"
-            );
+            ;
 
           // Repeating chevron pulse: ghost copy scales up and fades out
           const pulse = gsap.timeline({
@@ -153,11 +149,7 @@ export default function Hero() {
               },
               "-=0.1"
             )
-            .from(
-              ".hero-cta",
-              { opacity: 0, duration: 0.3, ease: "power2.out" },
-              "-=0.1"
-            );
+            ;
 
           // Chevron pulse for tablet - shorter distance
           const tabletPulse = gsap.timeline({
@@ -218,7 +210,7 @@ export default function Hero() {
     >
       {/* Background still image (z-0) */}
       <Image
-        src="/video/hero-poster.jpg"
+        src="/video/hero-poster.png"
         alt=""
         fill
         priority
@@ -283,14 +275,6 @@ export default function Hero() {
           {HEADLINE}
         </h1>
 
-        <div className="hero-cta mt-10">
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="min-h-11 min-w-11 rounded-md bg-brand-gold px-8 py-3 text-sm font-semibold text-brand-black transition-opacity hover:opacity-90"
-          >
-            Get in Touch
-          </button>
-        </div>
       </div>
     </section>
   );

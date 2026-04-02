@@ -6,6 +6,8 @@ import { Mail, Send } from "lucide-react";
 
 export default function ContactCta() {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
   const [company, setCompany] = useState("");
   const [message, setMessage] = useState("");
 
@@ -13,7 +15,7 @@ export default function ContactCta() {
     e.preventDefault();
     const subject = encodeURIComponent(`Inquiry from ${company} about Innovative Services at CES`);
     const body = encodeURIComponent(
-      `Name: ${name}\nCompany: ${company}\n\n${message}`
+      `Name: ${name}\nE-Mail: ${email}\nMobile: ${mobile}\nCompany: ${company}\n\n${message}`
     );
     window.location.href = `mailto:office@ic-ces.at?subject=${subject}&body=${body}`;
   }
@@ -38,16 +40,16 @@ export default function ContactCta() {
                 Who We Are
               </h3>
               <p className="mt-4 leading-relaxed text-white/80">
-                CES clean energy solutions is a Vienna-based company for technical consulting and engineering solutions, founded in 2008. We deliver integrated advanced solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering.
+                CES clean energy solutions is a Vienna-based company for technical consulting and advanced engineering solutions, founded in 2008. We deliver integrated innovative solutions for energy efficiency, renewable energy, sustainable buildings, and environmental engineering.
                 <br />
                 <br />
-                Being a strong partner within the international network the iC group of companies – well-known for spanning more than 850+ professionals across multiple disciplines, allows our clients to get access to a broad specialist knowledge backed by the full breadth of a multidisciplinary engineering organisation. One team, one point of responsibility.
+                Being a strong partner within the international iC group of companies' networks - well-known for spanning more than 850+ professionals across multiple disciplines, allows our clients to get access to a broad specialist knowledge backed by the full breadth of a multidisciplinary engineering organisation. One team, one vision, one clear responsibility.
                 <br />
                 <br />
-                We work on a global scale by having international project presence in Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, as well as experience in the Caribbean and West Africa. Financial institutions like the World Bank, IFC, EBRD, KfW, the European Union, governments at every level, and private industry belong to our long-term international clients.
+                We work on a global scale by having international project presence in Austria, Germany, Ukraine, the Western Balkans, Central Asia, and Saudi Arabia, as well as experience in the Caribbean and West Africa. International financial institutions like the World Bank, IFC, EBRD, KfW, the European Union, as well as national governments, and private industry belong to our long-term clients.
                 <br />
                 <br />
-                Within the frame of Green Economy Transition our engineering competences cover four interconnected areas: [1] Resource Efficiency &amp; Circular Economy [2] Environmental &amp; Social Compatibility [3] Sustainable Buildings, and [4] Energy &amp; Plants.
+                Our engineering competences cover four interconnected areas within the frame of the Green Economy Transition: [1] Resource Efficiency &amp; Circular Economy [2] Environmental &amp; Social Compatibility [3] Sustainable Buildings, and [4] Energy &amp; Plants.
               </p>
             </motion.div>
 
@@ -63,7 +65,7 @@ export default function ContactCta() {
                 How We Work
               </h3>
               <p className="mt-4 leading-relaxed text-white/80">
-                Complex topics demand an integrative thinking above all. We involve all relevant stakeholders from the beginning, consider every boundary condition, and work systematically through all possible alternatives, before committing to the right path.
+                <strong className="text-white">Systems Thinking:</strong> complex topics demand a strong integrative thinking. We involve all relevant stakeholders from the beginning, consider every boundary condition, and work systematically through all possible alternatives, before committing to the desired path.
                 <br />
                 <br />
                 <strong className="text-white">We work systemically</strong>: by identifying root causes and structural problems rather than just applying short-term fixes. We stay ahead: actively tracking and adopting innovations from research, applying regulations, and current market developments.
@@ -101,7 +103,7 @@ export default function ContactCta() {
               <form onSubmit={handleSubmit} className="mt-8 space-y-4">
                 <div>
                   <label htmlFor="contact-name" className="mb-1 block text-sm font-medium text-white/70">
-                    Your Name
+                    Name
                   </label>
                   <input
                     id="contact-name"
@@ -109,6 +111,32 @@ export default function ContactCta() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Jane Smith"
+                    className="min-h-11 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 focus:border-brand-gold focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-email" className="mb-1 block text-sm font-medium text-white/70">
+                    E-Mail
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="jane@example.com"
+                    className="min-h-11 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 focus:border-brand-gold focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-mobile" className="mb-1 block text-sm font-medium text-white/70">
+                    Mobile
+                  </label>
+                  <input
+                    id="contact-mobile"
+                    type="tel"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                    placeholder="+43 123 456 789"
                     className="min-h-11 w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder:text-white/30 focus:border-brand-gold focus:outline-none"
                   />
                 </div>

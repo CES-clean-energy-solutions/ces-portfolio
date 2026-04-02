@@ -358,13 +358,13 @@ function ContactUsContent() {
 
       {/* Legal Notice */}
       <section className="border-t border-white/10 pt-6">
-        <h3 className="mb-4 text-lg font-semibold text-white">Legal Notice</h3>
+        <h3 className="mb-4 text-2xl font-bold text-white sm:text-3xl">Legal Notice</h3>
         <ImpressumContent />
       </section>
 
       {/* Compliance */}
       <section className="border-t border-white/10 pt-6 text-sm leading-relaxed text-white/80">
-        <h3 className="mb-4 text-lg font-semibold text-white">Compliance</h3>
+        <h3 className="mb-4 text-2xl font-bold text-white sm:text-3xl">Compliance</h3>
         <p className="mb-4">
           CES Clean Energy Solutions pursues the principle of conducting its business activities exclusively in accordance with the applicable laws, rules and regulations. However, this compliance does not only mean adherence to the law, but also the maintenance of corporate principles and ethics.
         </p>

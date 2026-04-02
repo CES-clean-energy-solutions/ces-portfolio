@@ -2,7 +2,7 @@
   "id": "daylight-analysis",
   "slug": "daylight-analysis",
   "order": 4,
-  "title": "Scalable computational daylight analysis",
+  "title": "Scalable Daylight Analysis",
   "shortDescription": "Large-scale, high-resolution simulations and automated in-depth result analysis — cutting turnaround from weeks to hours with scalable computing power.",
   "longDescription": "Our daylight simulation team delivers scalable high-resolution illuminance and radiation analysis using Rhino, Grasshopper, Honeybee, and Radiance, powered by a custom massively parallel job runner built on Prefect, processing over 1 million sensor points per run across any surface geometry. Large-volume simulation datasets are automatically processed and analyzed in a fraction of the time conventional workflows require, enabling rapid iteration and informed design decisions at any project stage. Results cover daylight autonomy, average illuminance, and glare metrics calibrated to EN 17037, LEED, BREEAM, and DGNB requirements, feeding directly into architectural optimization, building physics validation, occupant comfort studies, and biological plant selection for landscaping and interior greening.",
   "subItems": [
