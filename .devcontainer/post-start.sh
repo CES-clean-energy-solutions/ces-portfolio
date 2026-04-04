@@ -1,6 +1,19 @@
 #!/usr/bin/env bash
 set -e
 
+# =============================================================================
+# Agentic Central — Shared Claude Code Config
+# =============================================================================
+#
+# /home/ubuntu/git/agentic-central (WSL) is bind-mounted at /agentic-central.
+# On every start, copy its contents into .claude/ (project-level Claude config).
+# No symlink mount on .claude — flaky with Claude Code.
+#
+# This script:
+#   1. Copies /agentic-central/* → .claude/
+#   2. Sources .env into ~/.bashrc & ~/.profile
+# =============================================================================
+
 export COREPACK_ENABLE_STRICT=0
 export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
@@ -13,12 +26,10 @@ if lsof -Pi :4200 -sTCP:LISTEN -t >/dev/null 2>&1; then
     echo "WARNING: Port 4200 already in use inside container"
 fi
 
-echo "Creating .claude symlink..."
-ln -sfn /agentic-central "${WORKSPACE}/.claude"
-
-mkdir -p ~/.claude
-cp /agentic-central/claude.json ~/.claude.json 2>/dev/null || true
-cp /agentic-central/claude.home.settings.json ~/.claude/settings.json 2>/dev/null || true
+echo "Copyig /agentic-central → .claude/ ..."
+mkdir -p .claude ~/.claude
+rsync -a --exclude='.git' /agentic-central/ .claude/
+cp /agentic-central/settings.json ~/.claude/settings.json
 
 echo "Setting up environment..."
 for rc in ~/.bashrc ~/.profile; do

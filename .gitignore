@@ -1,3 +1,5 @@
+/.env/.devcontainer
+
 # Dependencies
 node_modules/
 .pnpm-store/
