@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     sudo \
     postgresql-client \
     jq \
+    rsync \
     unzip \
     dnsutils \
     && apt-get clean \
