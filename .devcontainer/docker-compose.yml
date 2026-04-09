@@ -1,0 +1,14 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /home/ubuntu/git/agentic-central:/agentic-central:cached
+      # ${WINDOWS_USER} comes from .devcontainer/.env (gitignored, per-user)
+      # Fails loudly if unset or empty — copy .env.example and set your username
+      - /mnt/c/Users/${WINDOWS_USER:?WINDOWS_USER is not set. Copy .devcontainer/.env.example to .devcontainer/.env and set your Windows username.}/Pictures/Screenshots:/screenshots:cached
+      - "/mnt/c/Users/${WINDOWS_USER:?WINDOWS_USER is not set. Copy .devcontainer/.env.example to .devcontainer/.env and set your Windows username.}/gocomp/Innovationsmanagement - General/11 Portfolio/03 Website assets:/workspaces/ces-portfolio/web-assets-link:cached"
+    env_file:
+      - /home/ubuntu/git/agentic-central/.env
+    command: sleep infinity

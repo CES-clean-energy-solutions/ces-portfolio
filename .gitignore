@@ -30,6 +30,7 @@ web-assets-link/
 .env
 .env.local
 .env.*.local
+.devcontainer/.env
 
 # SST
 .sst/
