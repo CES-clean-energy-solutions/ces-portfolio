@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
+      - ..:/workspaces/ces-portfolio:cached
       - /home/ubuntu/git/agentic-central:/agentic-central:cached
       # ${WINDOWS_USER} comes from .devcontainer/.env (gitignored, per-user)
       # Fails loudly if unset or empty — copy .env.example and set your username
